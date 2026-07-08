@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{BRAND}}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1b1712;        /* warm charcoal */
+    --bg:#f1ebdf;         /* warm paper */
+    --accent:#2b41d8;     /* court cobalt */
+    --soft:#e7dfcd;       /* kraft surface */
+    --line:#d3c8ae;       /* taped edge */
+    --ink-70:color-mix(in oklab, var(--ink) 70%, var(--bg));
+    --ink-45:color-mix(in oklab, var(--ink) 45%, var(--bg));
+    --paper-on-ink:color-mix(in oklab, var(--bg) 90%, var(--ink));
+    --accent-soft:color-mix(in oklab, var(--accent) 12%, var(--bg));
+  }
+  body{background:var(--bg);color:var(--ink);font-family:"Archivo",sans-serif;font-size:1.0625rem;line-height:1.6}
+  h1,h2,h3{font-family:"Space Grotesk",sans-serif;color:var(--ink);letter-spacing:-.02em}
+  p{max-width:65ch}
+  .eyebrow{font-family:"Space Grotesk",sans-serif;font-size:.78rem;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  /* NAV */
+  .nav-bar{background:var(--bg);border-bottom:2px solid var(--ink)}
+  .nav-bar .brand{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:1.4rem;color:var(--ink);text-decoration:none;text-transform:uppercase}
+  .nav-bar a.link{color:var(--ink-70);text-decoration:none;font-weight:600;font-size:.92rem;text-transform:uppercase;letter-spacing:.06em}
+  .nav-bar a.link:hover{color:var(--accent)}
+  .btn-cobalt{background:var(--accent);color:var(--bg);border:2px solid var(--accent);border-radius:.35rem;padding:.6rem 1.4rem;font-weight:700;font-family:"Space Grotesk",sans-serif}
+  .btn-cobalt:hover{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+  .btn-ghost{background:transparent;color:var(--ink);border:2px solid var(--ink);border-radius:.35rem;padding:.6rem 1.4rem;font-weight:700;font-family:"Space Grotesk",sans-serif}
+  .btn-ghost:hover{background:var(--ink);color:var(--bg)}
+  /* HERO */
+  .hero{padding:5rem 0 4rem;position:relative;overflow:hidden}
+  .hero h1{font-size:clamp(3.4rem,8vw,6.2rem);font-weight:700;line-height:.98;text-transform:uppercase}
+  .hero h1 .hollow{color:transparent;-webkit-text-stroke:2px var(--ink)}
+  .hero .tagline{color:var(--ink-70);font-size:1.15rem;max-width:42ch}
+  .hero-shot{background:var(--soft);border:2px solid var(--ink);border-radius:1rem;overflow:hidden;position:relative}
+  .hero-shot img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}
+  .sticker{position:absolute;top:1.2rem;right:1.2rem;background:var(--accent);color:var(--bg);font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;padding:.55rem .9rem;border-radius:.35rem;transform:rotate(6deg);box-shadow:0 8px 20px rgba(27,23,18,.25)}
+  .hero-meta{display:flex;gap:1.5rem;border-top:2px solid var(--ink);margin-top:2.5rem;padding-top:1.2rem;font-size:.9rem;color:var(--ink-70);flex-wrap:wrap}
+  .hero-meta b{color:var(--ink);font-family:"Space Grotesk",sans-serif}
+  /* MARQUEE */
+  .marquee{background:var(--ink);overflow:hidden;white-space:nowrap;padding:.85rem 0;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+  .marquee-track{display:inline-block}
+  .marquee span{color:var(--paper-on-ink);font-family:"Space Grotesk",sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.12em;font-size:.95rem;padding:0 1.6rem}
+  .marquee b{color:var(--accent);font-weight:700}
+  @media (prefers-reduced-motion: no-preference){
+    .marquee-track{animation:roll 28s linear infinite}
+    @keyframes roll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .card-lift{transition:transform .22s ease, box-shadow .22s ease}
+    .card-lift:hover{transform:translateY(-6px) rotate(-.4deg);box-shadow:0 16px 36px rgba(27,23,18,.18)}
+    .zoom img{transition:transform .5s ease}
+    .zoom:hover img{transform:scale(1.06)}
+  }
+  /* PRODUCT GRID (signature: oversized spotlight w/ rotated type) */
+  .drop{padding:5.5rem 0}
+  .drop h2{font-size:clamp(2.4rem,5vw,3.8rem);font-weight:700;text-transform:uppercase}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-top:2.5rem}
+  .p-card{background:var(--soft);border:2px solid var(--ink);border-radius:1rem;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:var(--ink)}
+  .p-card img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;border-bottom:2px solid var(--ink)}
+  .p-card .body{padding:1.1rem 1.2rem 1.3rem}
+  .p-card .name{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:1.08rem}
+  .p-card .meta{color:var(--ink-45);font-size:.85rem}
+  .p-card .price{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--accent);font-size:1.1rem}
+  .badge-tag{display:inline-block;background:var(--ink);color:var(--paper-on-ink);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .6rem;border-radius:.3rem;margin-bottom:.6rem}
+  .badge-tag.hot{background:var(--accent);color:var(--bg)}
+  .featured{grid-column:span 2;grid-row:span 2;background:var(--accent);color:var(--bg);position:relative;display:flex;flex-direction:column;justify-content:flex-end}
+  .featured img{aspect-ratio:auto;flex:1;min-height:0;border-bottom:2px solid var(--ink)}
+  .featured .body{background:var(--accent)}
+  .featured .name,.featured .price{color:var(--bg)}
+  .featured .meta{color:color-mix(in oklab, var(--bg) 72%, var(--accent))}
+  .featured .vert{position:absolute;top:1rem;left:1rem;writing-mode:vertical-rl;transform:rotate(180deg);font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:clamp(1.6rem,3vw,2.4rem);letter-spacing:.14em;text-transform:uppercase;color:var(--bg);background:rgba(27,23,18,.55);padding:.9rem .35rem;border-radius:.35rem}
+  @media (max-width: 991px){.grid{grid-template-columns:repeat(2,1fr)}.featured{grid-column:span 2}}
+  @media (max-width: 575px){.grid{grid-template-columns:1fr}.featured{grid-column:span 1}}
+  /* STORY */
+  .story{padding:5rem 0;background:var(--soft);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+  .story h2{font-size:clamp(2rem,4vw,3rem);font-weight:700}
+  .story .lede{color:var(--ink-70)}
+  .story-photo{border:2px solid var(--ink);border-radius:1rem;overflow:hidden}
+  .story-photo img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+  .spec{display:flex;justify-content:space-between;gap:1rem;border-top:1px solid var(--line);padding:.75rem 0;font-size:.95rem}
+  .spec b{font-family:"Space Grotesk",sans-serif}
+  /* QUOTE */
+  .quote{padding:6rem 0}
+  .quote blockquote{font-family:"Space Grotesk",sans-serif;font-size:clamp(1.9rem,4vw,3.2rem);font-weight:700;line-height:1.15;max-width:24ch;margin:0;text-transform:uppercase;color:var(--ink)}
+  .quote blockquote b{color:var(--accent)}
+  .quote .who{color:var(--ink-45);margin-top:1.4rem;font-size:.95rem}
+  .quote .rating{font-family:"Space Grotesk",sans-serif;color:var(--accent);letter-spacing:.2em}
+  /* CTA */
+  .cta{background:var(--ink);padding:5.5rem 0}
+  .cta h2{color:var(--paper-on-ink);font-size:clamp(2.2rem,5vw,3.6rem);font-weight:700;text-transform:uppercase}
+  .cta p{color:color-mix(in oklab, var(--bg) 65%, var(--ink))}
+  .cta .pill{display:inline-block;background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:.35rem .9rem;font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+  /* FOOTER */
+  footer{background:var(--ink);color:color-mix(in oklab, var(--bg) 70%, var(--ink));padding:0 0 2rem}
+  footer .inner{border-top:1px solid color-mix(in oklab, var(--bg) 18%, var(--ink));padding-top:3.5rem}
+  footer .brand{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:1.5rem;color:var(--paper-on-ink);text-transform:uppercase}
+  footer h4{font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  footer a{color:color-mix(in oklab, var(--bg) 76%, var(--ink));text-decoration:none;display:block;padding:.2rem 0;font-size:.95rem}
+  footer a:hover{color:var(--accent)}
+  footer .legal{border-top:1px solid color-mix(in oklab, var(--bg) 15%, var(--ink));margin-top:3rem;padding-top:1.5rem;font-size:.85rem}
+</style>
+</head>
+<body>
+
+<nav class="nav-bar py-3">
+  <div class="container d-flex align-items-center justify-content-between">
+    <a class="brand" href="#">{{BRAND}}</a>
+    <div class="d-none d-md-flex gap-4 align-items-center">
+      <a class="link" href="#drop">The drop</a>
+      <a class="link" href="#story">Built different</a>
+      <a class="link" href="#cta">Restock alerts</a>
+      <a class="btn-cobalt btn" href="#drop">Shop now</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7">
+        <p class="eyebrow mb-3">{{BRAND}} drop 07 is live</p>
+        <h1>Walk in <span class="hollow">loud.</span><br>Leave louder.</h1>
+        <p class="tagline mt-4">{{TAGLINE}}</p>
+        <div class="d-flex gap-3 mt-4 flex-wrap">
+          <a class="btn-cobalt btn" href="#drop">Shop the drop</a>
+          <a class="btn-ghost btn" href="#story">Why they last</a>
+        </div>
+        <div class="hero-meta">
+          <span><b>312</b> pairs in this run</span>
+          <span><b>48h</b> average sellout</span>
+          <span><b>Free</b> returns, 30 days, no forms</span>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="hero-shot zoom">
+          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=900&q=60" alt="Court Cobalt 07 sneaker floating on a warm backdrop">
+          <span class="sticker">Only 41 left</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Drop 07 live now <b>///</b></span><span>Restock Friday 10am <b>///</b></span><span>Free shipping over 90 <b>///</b></span><span>Numbered runs, never reprinted <b>///</b></span><span>Members get 24h early access <b>///</b></span>
+    <span>Drop 07 live now <b>///</b></span><span>Restock Friday 10am <b>///</b></span><span>Free shipping over 90 <b>///</b></span><span>Numbered runs, never reprinted <b>///</b></span><span>Members get 24h early access <b>///</b></span>
+  </div>
+</div>
+
+<section class="drop" id="drop">
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-3">
+      <h2 class="mb-0">The drop, all 6 of it</h2>
+      <p class="mb-1" style="color:var(--ink-45)">Numbered runs. When a size dies, it stays dead.</p>
+    </div>
+    <div class="grid">
+      <a class="p-card featured card-lift zoom" href="#">
+        <span class="vert">Drop 07</span>
+        <img src="https://images.unsplash.com/photo-1552346154-21d32810aba3?w=1100&q=60" alt="Court Cobalt 07, the drop's centerpiece sneaker">
+        <div class="body">
+          <span class="badge-tag">Centerpiece</span>
+          <div class="d-flex justify-content-between align-items-baseline">
+            <span class="name">Court Cobalt 07</span>
+            <span class="price">148.00</span>
+          </div>
+          <span class="meta">Full grain leather, gum sole, run of 312</span>
+        </div>
+      </a>
+      <a class="p-card card-lift zoom" href="#">
+        <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=600&q=60" alt="Paper Runner low top sneaker">
+        <div class="body">
+          <span class="badge-tag hot">Restocked</span>
+          <div class="d-flex justify-content-between align-items-baseline"><span class="name">Paper Runner</span><span class="price">112.00</span></div>
+          <span class="meta">Recycled knit, 289g each</span>
+        </div>
+      </a>
+      <a class="p-card card-lift zoom" href="#">
+        <img src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=600&q=60" alt="Kraft Court white leather sneaker">
+        <div class="body">
+          <span class="badge-tag">Staple</span>
+          <div class="d-flex justify-content-between align-items-baseline"><span class="name">Kraft Court</span><span class="price">98.00</span></div>
+          <span class="meta">The everyday one, resoleable</span>
+        </div>
+      </a>
+      <a class="p-card card-lift zoom" href="#">
+        <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&q=60" alt="Static Mid high top sneaker">
+        <div class="body">
+          <span class="badge-tag hot">Last pairs</span>
+          <div class="d-flex justify-content-between align-items-baseline"><span class="name">Static Mid</span><span class="price">134.00</span></div>
+          <span class="meta">Sizes 8 and 11 only</span>
+        </div>
+      </a>
+      <a class="p-card card-lift zoom" href="#">
+        <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=600&q=60" alt="Volt Slip sneaker in profile">
+        <div class="body">
+          <span class="badge-tag">New</span>
+          <div class="d-flex justify-content-between align-items-baseline"><span class="name">Volt Slip</span><span class="price">89.00</span></div>
+          <span class="meta">Laceless, airport-proof</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="story" id="story">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <p class="eyebrow mb-3">Built different, provably</p>
+        <h2>One factory. Forty-one hands. Zero landfill colorways.</h2>
+        <p class="lede mt-3">Every pair is cut, stitched, and lasted in a single workshop we visit four times a year. We publish the cost sheet for every model: leather, labor, freight, our margin. If a shoe cannot survive a resole, we do not make it.</p>
+        <div class="mt-4">
+          <div class="spec"><span>Upper</span><b>2.2mm full grain, vegetable tanned</b></div>
+          <div class="spec"><span>Sole</span><b>Stitched, not glued, resoleable twice</b></div>
+          <div class="spec"><span>Break-in</span><b>About 9 wears, worth it</b></div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="story-photo zoom card-lift">
+          <img src="https://images.unsplash.com/photo-1449505278894-297fdb3edbc1?w=900&q=60" alt="Cobbler stitching a leather sneaker sole by hand">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote">
+  <div class="container">
+    <blockquote>"Three years, two resoles, <b>still my first pick</b> off the rack every morning."</blockquote>
+    <p class="who"><span class="rating">★★★★★</span> &nbsp; Devon R., verified buyer, Kraft Court in size 10</p>
+  </div>
+</section>
+
+<section class="cta" id="cta">
+  <div class="container text-center">
+    <span class="pill">Drop 08 lands in 12 days</span>
+    <h2 class="mt-3">Miss a drop once, never again.</h2>
+    <p class="mx-auto mt-3" style="max-width:50ch">Members get 24 hour early access, first dibs on restocks, and the cost sheet before anyone else sees the shoe.</p>
+    <a class="btn-cobalt btn mt-3" href="#">Get restock alerts</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="inner row g-4">
+      <div class="col-lg-5">
+        <div class="brand">{{BRAND}}</div>
+        <p class="mt-2" style="max-width:36ch">Numbered sneaker runs, honest cost sheets, soles worth repairing.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4 class="mb-3">Shop</h4>
+        <a href="#drop">The drop</a>
+        <a href="#">Archive sale</a>
+        <a href="#">Gift cards</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4 class="mb-3">Care</h4>
+        <a href="#">Resole program</a>
+        <a href="#">Sizing guide</a>
+        <a href="#">Returns</a>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h4 class="mb-3">Follow</h4>
+        <a href="#">Instagram</a>
+        <a href="#">TikTok</a>
+        <a href="#">The cost sheet newsletter</a>
+      </div>
+    </div>
+    <div class="legal">© {{BRAND}} — draft preview generated by Dharwin Studio</div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="design-label" content="Specialist Grid">
+<title>{{BRAND}}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0f1c1f;
+    --bg:#fbfdfe;
+    --accent:#0a5b64;
+    --soft:#eef4f5;
+    --line:#d3dfe1;
+  }
+  body{background:var(--bg);color:var(--ink);font-family:"Inter Tight",system-ui,sans-serif;font-size:1rem;line-height:1.5;}
+  h1,h2,h3,h4{font-weight:800;letter-spacing:-.02em;}
+  .ovl{font-weight:700;font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);}
+  p{max-width:68ch;}
+  a{color:var(--accent);}
+  .btn{border-radius:0;}
+
+  .site-nav{background:var(--bg);border-bottom:1px solid var(--line);}
+  .site-nav .brand{font-weight:800;font-size:1.25rem;letter-spacing:-.02em;color:var(--ink);text-decoration:none;text-transform:uppercase;}
+  .site-nav .brand small{display:block;font-size:.7rem;font-weight:600;letter-spacing:.14em;color:var(--accent);text-transform:uppercase;}
+  .site-nav .nav-link{color:var(--ink);font-weight:600;font-size:.875rem;padding:0;}
+  .btn-teal{background:var(--accent);color:#fff;border:1px solid var(--accent);font-weight:700;font-size:.875rem;letter-spacing:.04em;padding:.75rem 1.5rem;}
+  .btn-teal:hover{background:var(--ink);border-color:var(--ink);color:#fff;}
+  .btn-line{background:transparent;color:var(--ink);border:1px solid var(--ink);font-weight:700;font-size:.875rem;letter-spacing:.04em;padding:.75rem 1.5rem;}
+  .btn-line:hover{background:var(--ink);color:#fff;}
+
+  .hero{padding:5rem 0 4rem;}
+  .hero h1{font-size:clamp(2.5rem,6vw,4.5rem);line-height:1;}
+  .hero h1 span{color:var(--accent);}
+  .hero .tagline{font-size:1.25rem;line-height:1.5;color:color-mix(in srgb, var(--ink) 74%, var(--bg));max-width:36rem;}
+  .stat-rail{border-top:1px solid var(--line);margin-top:3rem;}
+  .stat-rail .stat{padding:1.5rem 1.5rem 1.5rem 0;border-bottom:1px solid var(--line);}
+  .stat-rail .stat b{display:block;font-size:2rem;font-weight:800;letter-spacing:-.02em;color:var(--accent);line-height:1;}
+  .stat-rail .stat span{font-size:.875rem;color:color-mix(in srgb, var(--ink) 70%, var(--bg));}
+  .hero-img{overflow:hidden;}
+  .hero-img img{width:100%;height:26rem;object-fit:cover;display:block;}
+  .hero-img .cap{background:var(--ink);color:#fff;font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:.5rem 1rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+
+  .directory{padding:4rem 0 5rem;}
+  .dir-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;margin-bottom:2rem;}
+  .dir-board{border:1px solid var(--ink);}
+  .dept{border:1px solid var(--line);margin:-1px 0 0 -1px;padding:1.5rem;height:100%;background:var(--bg);}
+  .dept .dcode{font-weight:700;font-size:.75rem;letter-spacing:.16em;color:var(--accent);}
+  .dept h3{font-size:1.25rem;margin:.5rem 0 1rem;}
+  .dept dl{margin:0;font-size:.875rem;}
+  .dept dl div{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 0;border-top:1px solid var(--line);}
+  .dept dt{font-weight:500;color:color-mix(in srgb, var(--ink) 66%, var(--bg));}
+  .dept dd{margin:0;font-weight:700;text-align:right;}
+  .dept .floor{display:inline-block;background:var(--soft);border:1px solid var(--line);font-weight:700;font-size:.75rem;letter-spacing:.1em;padding:.25rem .75rem;margin-top:1rem;text-transform:uppercase;}
+
+  .diag{background:var(--ink);color:#fff;padding:5rem 0;}
+  .diag .ovl{color:#6fc3cb;}
+  .diag h2{color:#fff;}
+  .diag p{color:#c2d2d5;}
+  .diag-item{border-top:1px solid #2c3d40;padding:1.5rem 0;display:flex;gap:1.5rem;align-items:baseline;}
+  .diag-item .t{font-weight:800;font-size:1.125rem;color:#fff;min-width:11rem;}
+  .diag-item p{margin:0;font-size:.9375rem;}
+  .diag-img{overflow:hidden;height:100%;}
+  .diag-img img{width:100%;height:100%;min-height:20rem;object-fit:cover;display:block;}
+
+  .quality{padding:5rem 0;}
+  .q-cell{border:1px solid var(--line);background:var(--soft);padding:1.5rem;height:100%;}
+  .q-cell b{display:block;font-size:1.75rem;font-weight:800;color:var(--accent);letter-spacing:-.02em;}
+  .q-cell span{font-size:.875rem;color:color-mix(in srgb, var(--ink) 72%, var(--bg));}
+
+  .cta{background:var(--soft);border-top:1px solid var(--line);padding:4rem 0;}
+  .cta h2{font-size:clamp(1.75rem,4vw,2.75rem);}
+  .cta .slot{font-size:.875rem;font-weight:600;color:color-mix(in srgb, var(--ink) 70%, var(--bg));}
+
+  footer{background:var(--bg);border-top:1px solid var(--line);padding:4rem 0 2rem;font-size:.9375rem;}
+  footer .brand{font-weight:800;font-size:1.25rem;text-transform:uppercase;color:var(--ink);}
+  footer h6{font-weight:700;font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;}
+  footer ul{list-style:none;padding:0;margin:0;}
+  footer li{padding:.25rem 0;}
+  footer a{color:var(--ink);text-decoration:none;}
+  footer a:hover{color:var(--accent);}
+  .foot-legal{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1.5rem;font-size:.8125rem;color:color-mix(in srgb, var(--ink) 62%, var(--bg));}
+
+  @media (prefers-reduced-motion: no-preference){
+    .dept,.q-cell{transition:background-color .2s ease,border-color .2s ease,transform .2s ease;}
+    .dept:hover{background:var(--soft);}
+    .q-cell:hover{transform:translateY(-4px);}
+    .hero-img img,.diag-img img{transition:transform .5s ease;}
+    .hero-img:hover img,.diag-img:hover img{transform:scale(1.04);}
+    .btn-teal,.btn-line{transition:background-color .2s ease,color .2s ease,border-color .2s ease;}
+  }
+  @media (max-width:575px){
+    .hero-img img{height:17rem;}
+    .diag-item{flex-direction:column;gap:.5rem;}
+  }
+</style>
+</head>
+<body id="top">
+
+<nav class="site-nav py-3">
+  <div class="container d-flex align-items-center justify-content-between gap-3">
+    <a class="brand" href="#top">{{BRAND}}<small>Multispeciality · Diagnostics</small></a>
+    <div class="d-none d-md-flex align-items-center gap-4">
+      <a class="nav-link" href="#departments">Departments</a>
+      <a class="nav-link" href="#diagnostics">Diagnostics</a>
+      <a class="nav-link" href="#quality">Quality</a>
+      <a class="btn btn-teal" href="#appointments">Book OPD slot</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6">
+        <p class="ovl mb-3">220-bed multispeciality centre</p>
+        <h1 class="mb-3">Nine departments. <span>One standard of evidence.</span></h1>
+        <p class="tagline mt-3">{{TAGLINE}}</p>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <a class="btn btn-teal" href="#appointments">Book OPD slot</a>
+          <a class="btn btn-line" href="#departments">Open the directory</a>
+        </div>
+        <div class="row g-0 stat-rail">
+          <div class="col-4 stat"><b>41</b><span>consultant physicians and surgeons</span></div>
+          <div class="col-4 stat"><b>24/7</b><span>emergency and trauma, door to doctor under 10 min</span></div>
+          <div class="col-4 stat"><b>98.2%</b><span>lab reports delivered within promised time</span></div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="hero-img">
+          <img src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=1200&q=60" alt="Bright modern hospital corridor with clear department signage">
+          <div class="cap"><span>Block A · OPD wing</span><span>Registration at Ground floor, Desk 3</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="directory" id="departments">
+  <div class="container">
+    <div class="dir-head">
+      <div>
+        <p class="ovl mb-2">Department index</p>
+        <h2 class="mb-0" style="font-size:clamp(1.75rem,4vw,2.75rem);">Find your department, doctor and floor</h2>
+      </div>
+      <span class="ovl">OPD hours 9:00 to 17:00</span>
+    </div>
+    <div class="dir-board">
+      <div class="row g-0">
+        <div class="col-lg-4 col-md-6">
+          <div class="dept">
+            <span class="dcode">DEPT 01</span>
+            <h3>Cardiology</h3>
+            <dl>
+              <div><dt>Lead physician</dt><dd>Dr. S. Raghavan, DM</dd></div>
+              <div><dt>OPD days</dt><dd>Mon · Wed · Fri</dd></div>
+            </dl>
+            <span class="floor">Floor 2 · Block A</span>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="dept">
+            <span class="dcode">DEPT 02</span>
+            <h3>Orthopaedics</h3>
+            <dl>
+              <div><dt>Lead physician</dt><dd>Dr. Neha Kulkarni, MS</dd></div>
+              <div><dt>OPD days</dt><dd>Tue · Thu · Sat</dd></div>
+            </dl>
+            <span class="floor">Floor 1 · Block A</span>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="dept">
+            <span class="dcode">DEPT 03</span>
+            <h3>Neurology</h3>
+            <dl>
+              <div><dt>Lead physician</dt><dd>Dr. A. Fernandes, DM</dd></div>
+              <div><dt>OPD days</dt><dd>Mon · Thu</dd></div>
+            </dl>
+            <span class="floor">Floor 3 · Block A</span>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="dept">
+            <span class="dcode">DEPT 04</span>
+            <h3>Obstetrics and gynaecology</h3>
+            <dl>
+              <div><dt>Lead physician</dt><dd>Dr. Priya Nair, MD</dd></div>
+              <div><dt>OPD days</dt><dd>Daily except Sun</dd></div>
+            </dl>
+            <span class="floor">Floor 2 · Block B</span>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="dept">
+            <span class="dcode">DEPT 05</span>
+            <h3>Gastroenterology</h3>
+            <dl>
+              <div><dt>Lead physician</dt><dd>Dr. R. Bhandari, DM</dd></div>
+              <div><dt>OPD days</dt><dd>Wed · Sat</dd></div>
+            </dl>
+            <span class="floor">Floor 3 · Block B</span>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="dept">
+            <span class="dcode">DEPT 06</span>
+            <h3>Paediatrics</h3>
+            <dl>
+              <div><dt>Lead physician</dt><dd>Dr. Meenal Joshi, DCH</dd></div>
+              <div><dt>OPD days</dt><dd>Daily except Sun</dd></div>
+            </dl>
+            <span class="floor">Ground · Block B</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="mt-3 mb-0" style="font-size:.875rem;color:#5a6a6d;">Full directory of nine departments and 41 consultants available at the reception desk and on the appointment line.</p>
+  </div>
+</section>
+
+<section class="diag" id="diagnostics">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-6">
+        <p class="ovl mb-2">Diagnostics</p>
+        <h2 class="mb-3" style="font-size:clamp(1.75rem,4vw,2.75rem);">Reports you can act on, the same day</h2>
+        <p class="mb-4">NABL-accredited laboratory and imaging under one roof, with turnaround times printed on the requisition slip and audited monthly.</p>
+        <div class="diag-item"><span class="t">1.5T MRI</span><p>Reported by in-house radiologists. Routine studies reported within 4 hours.</p></div>
+        <div class="diag-item"><span class="t">128-slice CT</span><p>Trauma protocol scans read within 30 minutes, round the clock.</p></div>
+        <div class="diag-item"><span class="t">Central laboratory</span><p>1,400 samples a day. Routine biochemistry results in 3 hours, on the portal.</p></div>
+        <div class="diag-item"><span class="t">Cath lab</span><p>Primary angioplasty available 24/7 with a door-to-balloon median of 52 minutes.</p></div>
+      </div>
+      <div class="col-lg-6">
+        <div class="diag-img">
+          <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?w=1100&q=60" alt="Laboratory technologist processing samples in the central laboratory">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quality" id="quality">
+  <div class="container">
+    <p class="ovl mb-2">Quality, published</p>
+    <h2 class="mb-4" style="font-size:clamp(1.75rem,4vw,2.75rem);">Numbers we report to the board, shared with you</h2>
+    <div class="row g-3">
+      <div class="col-lg-3 col-sm-6"><div class="q-cell"><b>NABH</b><span>Full accreditation, hospital and blood centre, renewed last cycle</span></div></div>
+      <div class="col-lg-3 col-sm-6"><div class="q-cell"><b>0.8%</b><span>surgical site infection rate, against a national benchmark of 3%</span></div></div>
+      <div class="col-lg-3 col-sm-6"><div class="q-cell"><b>11 min</b><span>median emergency triage to physician time last quarter</span></div></div>
+      <div class="col-lg-3 col-sm-6"><div class="q-cell"><b>96%</b><span>of discharged patients rate care 4 or 5 out of 5</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="appointments">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-8">
+        <h2 class="mb-2">Book an OPD slot with a named consultant</h2>
+        <p class="mb-1">Choose your department and doctor, get a fixed time, and walk past the queue. Teleconsults available for follow-ups.</p>
+        <p class="slot mb-0">Appointment desk: 8:00 to 20:00, all days · Average wait for a slot: under 48 hours</p>
+      </div>
+      <div class="col-lg-4 text-lg-end">
+        <a class="btn btn-teal btn-lg" href="#top">Book OPD slot</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <p class="brand mb-2">{{BRAND}}</p>
+        <p style="max-width:34ch;">A multispeciality hospital and diagnostics centre that publishes its numbers and stands behind them.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Directory</h6>
+        <ul><li><a href="#departments">Departments</a></li><li><a href="#diagnostics">Diagnostics</a></li><li><a href="#quality">Quality</a></li></ul>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h6>Campus</h6>
+        <ul><li>4 Meridian Health Way</li><li>Emergency entrance: Gate 2</li><li>opd@yourdomain.com</li></ul>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h6>Accreditation</h6>
+        <ul><li>NABH accredited hospital</li><li>NABL accredited laboratory</li><li>Empanelled with major insurers</li></ul>
+      </div>
+    </div>
+    <p class="foot-legal mb-0">© {{BRAND}} · draft preview generated by Dharwin Studio</p>
+  </div>
+</footer>
+</body>
+</html>

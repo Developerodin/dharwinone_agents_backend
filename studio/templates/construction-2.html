@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="design-label" content="Blueprint">
+<title>{{BRAND}}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#242e3a;
+    --bg:#e9eef3;
+    --accent:#c8102e;
+    --soft:#f6f9fb;
+    --line:#c3cfda;
+  }
+  body{
+    color:var(--ink);
+    font-family:"Archivo",system-ui,sans-serif;
+    font-size:1.0625rem;line-height:1.6;
+    background-color:var(--bg);
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--line) 55%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--line) 55%, transparent) 1px, transparent 1px);
+    background-size:28px 28px;
+  }
+  .mono{font-family:"IBM Plex Mono",monospace;}
+  .tag-label{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);}
+  h1,h2,h3,h4{font-family:"Archivo",sans-serif;font-weight:800;letter-spacing:-.015em;}
+  p{max-width:66ch;}
+  a{color:var(--accent);}
+
+  .site-nav{background:var(--soft);border-bottom:2px solid var(--ink);}
+  .site-nav .brand{font-family:"Archivo",sans-serif;font-weight:800;font-size:1.35rem;letter-spacing:-.01em;color:var(--ink);text-decoration:none;}
+  .site-nav .brand .rev{font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:.72rem;color:var(--accent);display:block;letter-spacing:.14em;}
+  .site-nav .nav-link{font-family:"IBM Plex Mono",monospace;font-size:.85rem;color:var(--ink);letter-spacing:.06em;}
+  .btn-draw{background:var(--accent);color:#fff;border:2px solid var(--accent);font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;padding:.6rem 1.4rem;border-radius:0;}
+  .btn-draw:hover{background:var(--ink);border-color:var(--ink);color:#fff;}
+  .btn-outline-draw{background:transparent;color:var(--ink);border:2px solid var(--ink);font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;padding:.6rem 1.4rem;border-radius:0;}
+  .btn-outline-draw:hover{background:var(--ink);color:var(--soft);}
+
+  .hero{padding:5.5rem 0 4.5rem;}
+  .hero h1{font-size:clamp(2.7rem,6.6vw,4.8rem);line-height:1.02;}
+  .hero h1 .redline{color:var(--accent);}
+  .hero .tagline{font-size:1.25rem;color:color-mix(in srgb, var(--ink) 78%, var(--bg));max-width:36rem;}
+  .datum{border:2px solid var(--ink);background:var(--soft);}
+  .datum .cell{padding:.9rem 1.1rem;border-top:1px solid var(--line);}
+  .datum .cell:first-child{border-top:0;}
+  .datum .cell .k{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:color-mix(in srgb, var(--ink) 62%, var(--bg));display:block;}
+  .datum .cell .v{font-weight:700;font-size:1.05rem;}
+  .hero-fig{border:2px solid var(--ink);background:var(--soft);}
+  .hero-fig img{width:100%;height:24rem;object-fit:cover;display:block;}
+  .hero-fig figcaption{font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.1em;padding:.65rem 1rem;border-top:2px solid var(--ink);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+  .hero-fig figcaption b{color:var(--accent);font-weight:600;}
+
+  .caps{padding:4.5rem 0;}
+  .caps-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:1rem;margin-bottom:2.5rem;}
+  .cap{border:1px solid var(--line);background:var(--soft);height:100%;padding:1.6rem 1.5rem;}
+  .cap .code{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:.78rem;letter-spacing:.14em;color:var(--accent);}
+  .cap h3{font-size:1.3rem;margin:.55rem 0 .6rem;}
+  .cap p{font-size:.96rem;margin:0;color:color-mix(in srgb, var(--ink) 82%, var(--bg));}
+  .cap ul{list-style:none;margin:1rem 0 0;padding:0;font-family:"IBM Plex Mono",monospace;font-size:.82rem;}
+  .cap ul li{padding:.4rem 0;border-top:1px dashed var(--line);}
+
+  .titleblock{padding:4.5rem 0 5rem;}
+  .sheet{border:2.5px solid var(--ink);background:var(--soft);}
+  .sheet .sheet-img img{width:100%;height:100%;min-height:20rem;object-fit:cover;display:block;}
+  .sheet .sheet-img{border-bottom:2.5px solid var(--ink);}
+  .tb{width:100%;border-collapse:collapse;font-size:.95rem;}
+  .tb th,.tb td{border:1px solid var(--ink);padding:.7rem .9rem;vertical-align:top;}
+  .tb th{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;background:color-mix(in srgb, var(--bg) 70%, var(--soft));width:34%;}
+  .tb td{font-weight:600;}
+  .tb .stamp{font-family:"IBM Plex Mono",monospace;color:var(--accent);font-weight:600;}
+  .sheet-foot{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;border-top:2.5px solid var(--ink);padding:.7rem 1rem;font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.1em;}
+
+  .method{background:var(--ink);color:var(--soft);padding:5rem 0;}
+  .method .tag-label{color:color-mix(in srgb, var(--accent) 70%, #fff);}
+  .method h2{color:#fff;}
+  .m-step{border-top:1px solid color-mix(in srgb, var(--soft) 26%, transparent);padding:1.5rem 0;}
+  .m-step .idx{font-family:"IBM Plex Mono",monospace;font-weight:600;color:color-mix(in srgb, var(--accent) 70%, #fff);font-size:.85rem;letter-spacing:.14em;}
+  .m-step h4{color:#fff;font-size:1.25rem;margin:.35rem 0;}
+  .m-step p{color:color-mix(in srgb, var(--soft) 78%, var(--ink));font-size:.95rem;margin:0;}
+
+  .cta{padding:5rem 0;}
+  .cta-box{border:2.5px solid var(--ink);background:var(--soft);padding:3rem clamp(1.25rem,4vw,3rem);}
+  .cta-box h2{font-size:clamp(1.9rem,4.4vw,3rem);}
+  .cta-note{font-family:"IBM Plex Mono",monospace;font-size:.82rem;letter-spacing:.1em;color:color-mix(in srgb, var(--ink) 66%, var(--bg));}
+
+  footer{background:var(--soft);border-top:2px solid var(--ink);padding:3.5rem 0 2rem;font-size:.93rem;}
+  footer .brand{font-family:"Archivo",sans-serif;font-weight:800;font-size:1.4rem;color:var(--ink);}
+  footer h6{font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:.9rem;}
+  footer ul{list-style:none;padding:0;margin:0;}
+  footer li{padding:.22rem 0;}
+  footer a{color:var(--ink);text-decoration:none;}
+  footer a:hover{color:var(--accent);}
+  .foot-rule{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1.25rem;font-family:"IBM Plex Mono",monospace;font-size:.76rem;letter-spacing:.08em;color:color-mix(in srgb, var(--ink) 62%, var(--bg));}
+
+  @media (prefers-reduced-motion: no-preference){
+    .cap,.btn-draw,.btn-outline-draw{transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease,color .2s ease,border-color .2s ease;}
+    .cap:hover{transform:translateY(-4px);box-shadow:6px 6px 0 var(--ink);}
+    .hero-fig img,.sheet-img img{transition:transform .55s ease;}
+    .hero-fig:hover img,.sheet-img:hover img{transform:scale(1.04);}
+  }
+  @media (max-width:575px){
+    .tb th{width:42%;}
+    .hero-fig img{height:17rem;}
+  }
+</style>
+</head>
+<body id="top">
+
+<nav class="site-nav py-3">
+  <div class="container d-flex align-items-center justify-content-between gap-3">
+    <a class="brand" href="#top">{{BRAND}}<span class="rev">DWG SET . REV C</span></a>
+    <div class="d-none d-md-flex align-items-center gap-4">
+      <a class="nav-link" href="#capabilities">01 Capabilities</a>
+      <a class="nav-link" href="#specsheet">02 Spec sheet</a>
+      <a class="nav-link" href="#method">03 Method</a>
+      <a class="btn btn-draw" href="#contact">Issue an RFQ</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-7">
+        <p class="tag-label mb-3">Design-build . Structures . Industrial civil</p>
+        <h1 class="mb-3">We build from the drawing, <span class="redline">not around it.</span></h1>
+        <p class="tagline mt-3">{{TAGLINE}}</p>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <a class="btn btn-draw" href="#contact">Issue an RFQ</a>
+          <a class="btn btn-outline-draw" href="#specsheet">Read a spec sheet</a>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <figure class="hero-fig mb-0">
+          <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1100&q=60" alt="Structural drawings and setsquare on an engineer's desk">
+          <figcaption><span>FIG 1.0 . SITE GRID SET-OUT</span><b>SCALE 1:100</b></figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="row g-0 datum mt-5">
+      <div class="col-md-3 cell"><span class="k">Delivered</span><span class="v">86 structures</span></div>
+      <div class="col-md-3 cell"><span class="k">Steel placed</span><span class="v">14,200 tonnes</span></div>
+      <div class="col-md-3 cell"><span class="k">Survey tolerance</span><span class="v">Within 5 mm</span></div>
+      <div class="col-md-3 cell"><span class="k">NCRs open</span><span class="v">Zero, 11 months</span></div>
+    </div>
+  </div>
+</header>
+
+<section class="caps" id="capabilities">
+  <div class="container">
+    <div class="caps-head">
+      <div>
+        <p class="tag-label mb-2">Section 01</p>
+        <h2 class="mb-0">Engineering capabilities</h2>
+      </div>
+      <span class="mono" style="font-size:.8rem;letter-spacing:.12em;">SHEET 2 OF 6</span>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="cap">
+          <span class="code">CAP-01</span>
+          <h3>RCC and PT structures</h3>
+          <p>Raft to roof with pour cards, rebar checklists and post-tension stressing records filed per element.</p>
+          <ul><li>Cube tests at 7 / 28 days</li><li>Cover verified pre-pour</li><li>As-built deviation log</li></ul>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="cap">
+          <span class="code">CAP-02</span>
+          <h3>Structural steel and PEB</h3>
+          <p>Shop drawings, weld procedure specs and bolt torque registers, so erection matches fabrication exactly.</p>
+          <ul><li>WPS and welder quals on file</li><li>DFT readings per member</li><li>Plumb and level survey report</li></ul>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="cap">
+          <span class="code">CAP-03</span>
+          <h3>Heavy foundations</h3>
+          <p>Machine beds, crane rails and press pits cast to millimetre datums with vibration isolation detailing.</p>
+          <ul><li>Anchor bolt templates jigged</li><li>Grout cube records</li><li>Laser level closure certificate</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="titleblock" id="specsheet">
+  <div class="container">
+    <p class="tag-label mb-2">Section 02 . Signature document</p>
+    <h2 class="mb-4">Every project ships with a title block</h2>
+    <p class="mb-4">Before mobilisation you receive a one-page spec sheet, drawn like the title block on our GFC set. This is the sheet for a job we handed over in March.</p>
+    <div class="sheet">
+      <div class="row g-0">
+        <div class="col-lg-5 sheet-img">
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1100&q=60" alt="Tower crane over a steel-frame industrial building under construction">
+        </div>
+        <div class="col-lg-7">
+          <table class="tb mb-0">
+            <tbody>
+              <tr><th scope="row">Project</th><td>Kestrel Forge Works, Unit 4 fabrication bay</td></tr>
+              <tr><th scope="row">Scope</th><td>PEB shed with 5 t EOT crane, QC lab block, yard paving</td></tr>
+              <tr><th scope="row">Plot / built-up area</th><td>4.1 acres / 96,500 sq ft</td></tr>
+              <tr><th scope="row">Contract duration</th><td>11 months, handed over in month 10</td></tr>
+              <tr><th scope="row">Design loads</th><td>Floor 5 kN/m2 . Crane 5 t SWL . Wind 39 m/s basic</td></tr>
+              <tr><th scope="row">Concrete / steel</th><td>M30 and M40 mixes . 610 t of E350 sections</td></tr>
+              <tr><th scope="row">Checked / approved</th><td><span class="stamp">R. MENON, PE</span> . <span class="stamp">ISSUED FOR CONSTRUCTION</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="sheet-foot">
+        <span>DWG NO. KFW-U4-TB-001</span>
+        <span>REV C . 14 MAR</span>
+        <span>DO NOT SCALE. WORK TO FIGURED DIMENSIONS.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="method" id="method">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <p class="tag-label mb-2">Section 03</p>
+        <h2>Method statement, in plain terms</h2>
+        <p class="mt-3" style="color:#c8d2dc;">Four controls run on every site, every week. Ask any of our clients which one saved them money.</p>
+      </div>
+      <div class="col-lg-8">
+        <div class="m-step">
+          <span class="idx">QC-01 . MEASURE FIRST</span>
+          <h4>Digital survey before pricing</h4>
+          <p>Total-station survey and soil report precede the estimate, so the BOQ prices what exists, not what the sketch hoped.</p>
+        </div>
+        <div class="m-step">
+          <span class="idx">QC-02 . FREEZE THE SET</span>
+          <h4>GFC drawings locked before mobilisation</h4>
+          <p>Changes after freeze go through numbered revision clouds and a signed change order. Rev C means two changes, both priced.</p>
+        </div>
+        <div class="m-step">
+          <span class="idx">QC-03 . HOLD POINTS</span>
+          <h4>No pour without a signed checklist</h4>
+          <p>Rebar, cover, shutter line and level are inspected against the drawing at defined hold points. The checklist is photographed and filed.</p>
+        </div>
+        <div class="m-step">
+          <span class="idx">QC-04 . CLOSE THE LOOP</span>
+          <h4>As-built set at handover</h4>
+          <p>You receive red-line as-builts, test certificates and warranty cards as one indexed file, within 15 days of handover.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="container">
+    <div class="cta-box">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+          <p class="tag-label mb-2">Request for quotation</p>
+          <h2 class="mb-2">Send us your drawings. We reply with numbers, not adjectives.</h2>
+          <p class="mb-0">Item-rate BOQ against your set within 10 working days, with assumptions listed on page one where you can see them.</p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <a class="btn btn-draw btn-lg" href="#top">Issue an RFQ</a>
+          <p class="cta-note mt-3 mb-0">TENDERS@YOURDOMAIN.COM</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <p class="brand mb-2">{{BRAND}}</p>
+        <p style="max-width:34ch;">Engineering-first contracting. Every claim on this page is backed by a register you can inspect.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Index</h6>
+        <ul><li><a href="#capabilities">Capabilities</a></li><li><a href="#specsheet">Spec sheet</a></li><li><a href="#method">Method</a></li></ul>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h6>Site office</h6>
+        <ul><li>Shed 9, Engineering Estate</li><li>Mon to Sat, 8:30 to 6</li><li>tenders@yourdomain.com</li></ul>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h6>Registrations</h6>
+        <ul><li>Class A civil licence</li><li>ISO 9001 certified QMS</li><li>EPF and GST compliant</li></ul>
+      </div>
+    </div>
+    <p class="foot-rule mb-0">© {{BRAND}} . SHEET 6 OF 6 . Draft preview generated by Dharwin Studio</p>
+  </div>
+</footer>
+</body>
+</html>

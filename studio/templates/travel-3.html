@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="design-label" content="Resort Serene">
+<title>{{BRAND}}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Karla:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16332f;        /* deep sea glass */
+    --bg:#f4efe6;         /* warm sand */
+    --accent:#2e6157;     /* tide pool */
+    --soft:#ece5d6;       /* shell surface */
+    --line:#d9d0bc;       /* driftwood rule */
+    --ink-70:color-mix(in oklab, var(--ink) 70%, var(--bg));
+    --ink-50:color-mix(in oklab, var(--ink) 50%, var(--bg));
+    --sand-on-ink:color-mix(in oklab, var(--bg) 92%, var(--ink));
+  }
+  body{background:var(--bg);color:var(--ink);font-family:"Karla",sans-serif;font-size:1.0625rem;line-height:1.75}
+  h1,h2,h3{font-family:"Cormorant Garamond",serif;font-weight:500;color:var(--ink);letter-spacing:.005em}
+  p{max-width:62ch}
+  .whisper{font-size:.74rem;letter-spacing:.34em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  /* NAV: airy, centered brand */
+  .calm-nav{padding:1.6rem 0;background:var(--bg)}
+  .calm-nav .brand{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:1.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+  .calm-nav a.link{font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-70);text-decoration:none;font-weight:500}
+  .calm-nav a.link:hover{color:var(--accent)}
+  .btn-tide{background:var(--accent);color:var(--sand-on-ink);border:1px solid var(--accent);border-radius:0;padding:.75rem 2.2rem;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600}
+  .btn-tide:hover{background:var(--ink);border-color:var(--ink);color:var(--sand-on-ink)}
+  .btn-shell{background:transparent;color:var(--ink);border:1px solid var(--ink);border-radius:0;padding:.75rem 2.2rem;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600}
+  .btn-shell:hover{background:var(--ink);color:var(--sand-on-ink)}
+  /* HERO: wide, low, quiet */
+  .hero{position:relative;min-height:88vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+  .hero .bgimg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=1800&q=60') center/cover no-repeat}
+  .hero .veil{position:absolute;inset:0;background:rgba(22,51,47,.44)}
+  .hero .content{position:relative;z-index:2;padding:5rem 1.5rem}
+  .hero .whisper{color:color-mix(in oklab, var(--bg) 88%, var(--accent))}
+  .hero h1{color:var(--sand-on-ink);font-size:clamp(3rem,7.5vw,5.8rem);font-weight:500;line-height:1.06;max-width:16ch;margin:1.2rem auto 0}
+  .hero h1 em{font-style:italic}
+  .hero .tagline{color:color-mix(in oklab, var(--sand-on-ink) 88%, var(--ink));font-size:1.15rem;max-width:44ch;margin:1.6rem auto 0}
+  /* ARRIVAL: quiet manifesto */
+  .arrival{padding:7rem 0 6rem;text-align:center}
+  .arrival h2{font-size:clamp(2rem,4.2vw,3.2rem);max-width:26ch;margin:1rem auto 0}
+  .arrival .facts{display:flex;justify-content:center;gap:0;margin-top:3.5rem;flex-wrap:wrap}
+  .arrival .fact{padding:0 2.6rem;border-right:1px solid var(--line)}
+  .arrival .fact:last-child{border-right:0}
+  .arrival .fact b{font-family:"Cormorant Garamond",serif;font-size:2.1rem;font-weight:600;display:block;line-height:1.1}
+  .arrival .fact span{font-size:.76rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-50)}
+  @media (max-width: 575px){.arrival .fact{border-right:0;padding:.8rem 1rem}}
+  /* SIGNATURE: SUITES AS WIDE PANELS */
+  .suites{padding:5.5rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .suites h2{font-size:clamp(2.1rem,4.5vw,3.3rem)}
+  .suite{background:var(--bg);border:1px solid var(--line);margin-top:2.6rem;overflow:hidden}
+  .suite .row{--bs-gutter-x:0}
+  .suite .photo{min-height:20rem;height:100%}
+  .suite .photo img{width:100%;height:100%;min-height:20rem;object-fit:cover;display:block}
+  .suite .body{padding:2.8rem 2.6rem}
+  .suite h3{font-size:2rem;font-weight:600;margin-bottom:.4rem}
+  .suite .sense{color:var(--ink-70);font-size:1rem;max-width:48ch}
+  .suite .ledger{border-top:1px solid var(--line);margin-top:1.8rem;padding-top:1.4rem;display:flex;gap:2.8rem;flex-wrap:wrap}
+  .suite .ledger div span{display:block;font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-50)}
+  .suite .ledger div b{font-family:"Cormorant Garamond",serif;font-size:1.5rem;font-weight:600}
+  .suite .ledger div small{font-size:.8rem;color:var(--ink-50)}
+  @media (prefers-reduced-motion: no-preference){
+    .suite{transition:box-shadow .35s ease,transform .35s ease}
+    .suite:hover{box-shadow:0 22px 50px rgba(22,51,47,.14);transform:translateY(-4px)}
+    .drift img{transition:transform .8s ease}
+    .drift:hover img{transform:scale(1.045)}
+    .btn-tide,.btn-shell{transition:background .25s ease,color .25s ease,border-color .25s ease}
+  }
+  /* DAYS: rituals */
+  .days{padding:6.5rem 0}
+  .days h2{font-size:clamp(2rem,4.2vw,3.1rem)}
+  .ritual{border-top:1px solid var(--line);padding:2rem 0}
+  .ritual:last-of-type{border-bottom:1px solid var(--line)}
+  .ritual .hour{font-family:"Cormorant Garamond",serif;font-size:1.7rem;font-weight:600;font-style:italic}
+  .ritual h3{font-size:1.35rem;font-weight:600;font-family:"Karla",sans-serif;letter-spacing:0}
+  .ritual p{color:var(--ink-70);font-size:.98rem;margin:0;max-width:52ch}
+  /* WIDE IMAGE BAND */
+  .band{position:relative;min-height:56vh;overflow:hidden}
+  .band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .band .cap{position:absolute;left:0;right:0;bottom:0;padding:1.4rem 0;background:linear-gradient(180deg, rgba(22,51,47,0), rgba(22,51,47,.7))}
+  .band .cap p{color:var(--sand-on-ink);font-size:.85rem;letter-spacing:.18em;text-transform:uppercase;margin:0;max-width:none;text-align:center}
+  /* RESERVE */
+  .reserve{padding:6.5rem 0;background:var(--ink)}
+  .reserve .whisper{color:color-mix(in oklab, var(--accent) 55%, var(--sand-on-ink))}
+  .reserve h2{color:var(--sand-on-ink);font-size:clamp(2.2rem,5vw,3.8rem);max-width:22ch}
+  .reserve p{color:color-mix(in oklab, var(--sand-on-ink) 80%, var(--ink))}
+  .reserve .btn-sand{background:var(--sand-on-ink);color:var(--ink);border:1px solid var(--sand-on-ink);border-radius:0;padding:.8rem 2.4rem;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600}
+  .reserve .btn-sand:hover{background:transparent;color:var(--sand-on-ink)}
+  .reserve .line{display:flex;justify-content:space-between;gap:1rem;border-top:1px solid color-mix(in oklab, var(--sand-on-ink) 24%, var(--ink));padding:.9rem 0;font-size:.92rem;color:color-mix(in oklab, var(--sand-on-ink) 82%, var(--ink))}
+  .reserve .line b{color:var(--sand-on-ink);font-weight:600}
+  /* FOOTER */
+  footer{background:var(--bg);padding:3.5rem 0 2rem;border-top:1px solid var(--line);color:var(--ink-70);font-size:.94rem}
+  footer .brand{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:1.5rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+  footer h4{font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  footer a{color:var(--ink-70);text-decoration:none;display:block;padding:.2rem 0}
+  footer a:hover{color:var(--accent)}
+  footer .legal{border-top:1px solid var(--line);margin-top:2.6rem;padding-top:1.3rem;font-size:.82rem;color:var(--ink-50)}
+</style>
+</head>
+<body>
+
+<nav class="calm-nav">
+  <div class="container d-flex align-items-center justify-content-between">
+    <a class="brand" href="#top">{{BRAND}}</a>
+    <div class="d-none d-md-flex gap-4 align-items-center">
+      <a class="link" href="#suites">Suites</a>
+      <a class="link" href="#days">Days here</a>
+      <a class="link" href="#reserve">Contact</a>
+      <a class="btn btn-tide" href="#reserve">Reserve</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="bgimg" role="img" aria-label="Still lake at dusk with mountains fading into mist"></div>
+  <div class="veil"></div>
+  <div class="content">
+    <p class="whisper">A quiet shore, forty minutes from the airstrip</p>
+    <h1>Arrive with plans. <em>Lose them by morning.</em></h1>
+    <p class="tagline">{{TAGLINE}}</p>
+    <div class="d-flex gap-3 justify-content-center mt-4 flex-wrap">
+      <a class="btn btn-tide" href="#suites">View the suites</a>
+    </div>
+  </div>
+</header>
+
+<section class="arrival">
+  <div class="container">
+    <p class="whisper">The idea of this place</p>
+    <h2>Eleven suites on a private cove. No lobby music, no schedule, no key cards jangling at dinner. The loudest thing here is the tide.</h2>
+    <div class="facts">
+      <div class="fact"><b>11</b><span>Suites only</span></div>
+      <div class="fact"><b>1.2 km</b><span>Private shoreline</span></div>
+      <div class="fact"><b>3:1</b><span>Staff to guests</span></div>
+      <div class="fact"><b>7 pm</b><span>Phones off in the pavilion</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="suites" id="suites">
+  <div class="container">
+    <p class="whisper mb-2">The suites</p>
+    <h2>Three ways to sleep beside the water.</h2>
+
+    <article class="suite drift">
+      <div class="row g-0 align-items-stretch">
+        <div class="col-lg-7 photo"><img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=1400&q=60" alt="Overwater villa deck with steps down to clear shallow sea"></div>
+        <div class="col-lg-5 body">
+          <p class="whisper mb-2">No. 01 to 04</p>
+          <h3>The Tide Line Suites</h3>
+          <p class="sense">Built over the shallows on stilts of reclaimed teak. You fall asleep to water moving under the floor and wake to it turning silver through the slatted blinds. Steps from your deck straight into the lagoon.</p>
+          <div class="ledger">
+            <div><span>Nightly rate</span><b>from 780</b></div>
+            <div><span>Sleeps</span><b>2</b></div>
+            <div><span>Size</span><b>68 m²</b><small> plus deck</small></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="suite drift">
+      <div class="row g-0 align-items-stretch flex-lg-row-reverse">
+        <div class="col-lg-7 photo"><img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1400&q=60" alt="Resort pool terrace framed by palms at golden hour"></div>
+        <div class="col-lg-5 body">
+          <p class="whisper mb-2">No. 05 to 09</p>
+          <h3>The Garden Pool Suites</h3>
+          <p class="sense">Set back among frangipani and old mango trees, each with its own plunge pool warmed to skin temperature. Breakfast arrives through a garden hatch, so mornings stay unwitnessed until you decide otherwise.</p>
+          <div class="ledger">
+            <div><span>Nightly rate</span><b>from 640</b></div>
+            <div><span>Sleeps</span><b>2 to 3</b></div>
+            <div><span>Size</span><b>84 m²</b><small> with pool court</small></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="suite drift">
+      <div class="row g-0 align-items-stretch">
+        <div class="col-lg-7 photo"><img src="https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=1400&q=60" alt="Bedroom with linen curtains opening onto a sea view balcony"></div>
+        <div class="col-lg-5 body">
+          <p class="whisper mb-2">No. 10 and 11</p>
+          <h3>The Headland Residences</h3>
+          <p class="sense">Two houses on the high point of the cove, each with a stone bath facing open water and a private chef on request. Salt on the breeze, gulls below you, nobody above. Most guests book for four nights and stay six.</p>
+          <div class="ledger">
+            <div><span>Nightly rate</span><b>from 1,450</b></div>
+            <div><span>Sleeps</span><b>4</b></div>
+            <div><span>Size</span><b>140 m²</b><small> two bedrooms</small></div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="days" id="days">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <p class="whisper mb-2">Days here</p>
+        <h2>Nothing is scheduled. Everything is ready.</h2>
+        <p class="mt-3" style="color:var(--ink-70)">A loose shape of a day, in case you want one. Every item can find you wherever you happen to be sitting.</p>
+      </div>
+      <div class="col-lg-8">
+        <div class="ritual row g-3">
+          <div class="col-sm-3"><span class="hour">6:30 am</span></div>
+          <div class="col-sm-9"><h3>Swim before the wind</h3><p>The lagoon is glass until nine. A guide waits by the kayaks for anyone who wants the reef instead.</p></div>
+        </div>
+        <div class="ritual row g-3">
+          <div class="col-sm-3"><span class="hour">Midday</span></div>
+          <div class="col-sm-9"><h3>Lunch under the almond tree</h3><p>Whatever the boats brought in at dawn, grilled whole, with limes from the garden. No menu, one question about allergies.</p></div>
+        </div>
+        <div class="ritual row g-3">
+          <div class="col-sm-3"><span class="hour">4 pm</span></div>
+          <div class="col-sm-9"><h3>The spa pavilion</h3><p>Two treatment rooms open to the sea breeze. The signature massage uses warmed coconut oil pressed on the island, ninety minutes, no clock in the room.</p></div>
+        </div>
+        <div class="ritual row g-3">
+          <div class="col-sm-3"><span class="hour">Sundown</span></div>
+          <div class="col-sm-9"><h3>The headland fire</h3><p>Drinks poured as the light drops, then dinner at whichever table calls to you. On clear nights the staff carry telescopes up the point.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="band">
+  <img src="https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?w=1800&q=60" alt="Turquoise sea meeting pale sand seen from above">
+  <div class="cap"><p>The cove at low tide, photographed from the headland residences</p></div>
+</div>
+
+<section class="reserve" id="reserve">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-7">
+        <p class="whisper mb-3">Reservations</p>
+        <h2>We hold eleven keys. One of them can be yours.</h2>
+        <p class="mt-3" style="max-width:50ch">Write to us with your dates and who is coming. A real person replies within a day with availability, the boat schedule, and an honest answer about the weather.</p>
+        <a class="btn btn-sand mt-3" href="#">Begin a reservation</a>
+      </div>
+      <div class="col-lg-5">
+        <div class="line"><span>Write</span><b>stay@example.com</b></div>
+        <div class="line"><span>Call</span><b>+1 555 022 7180</b></div>
+        <div class="line"><span>Season</span><b>Open October through May</b></div>
+        <div class="line"><span>Minimum stay</span><b>Three nights, gladly longer</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-5">
+        <div class="brand">{{BRAND}}</div>
+        <p class="mt-2" style="max-width:36ch">Eleven suites on a private cove, kept deliberately small and deliberately quiet.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4 class="mb-3">Stay</h4>
+        <a href="#suites">Tide Line Suites</a>
+        <a href="#suites">Garden Pool Suites</a>
+        <a href="#suites">Headland Residences</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4 class="mb-3">The resort</h4>
+        <a href="#days">Days here</a>
+        <a href="#reserve">Reservations</a>
+        <a href="#">Getting here</a>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h4 class="mb-3">Contact</h4>
+        <a href="#">stay@example.com</a>
+        <a href="#">+1 555 022 7180</a>
+        <a href="#">Instagram</a>
+      </div>
+    </div>
+    <div class="legal">© {{BRAND}} · draft preview generated by Dharwin Studio</div>
+  </div>
+</footer>
+
+</body>
+</html>

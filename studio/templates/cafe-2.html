@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="design-label" content="Noir Espresso">
+<title>{{BRAND}}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#f2e8d8;        /* candlelit cream */
+    --bg:#161009;         /* near-black roasted brown */
+    --accent:#e2a655;     /* candle amber */
+    --soft:#221810;       /* velvet surface */
+    --line:#3b2d1d;       /* low-light border */
+    --ink-70:color-mix(in oklab, var(--ink) 72%, var(--bg));
+    --ink-50:color-mix(in oklab, var(--ink) 52%, var(--bg));
+    --glow:color-mix(in oklab, var(--accent) 14%, var(--bg));
+  }
+  body{background:var(--bg);color:var(--ink);font-family:"Manrope",sans-serif;font-size:1.0625rem;line-height:1.7}
+  h1,h2,h3{font-family:"Cormorant Garamond",serif;color:var(--ink);font-weight:500}
+  p{max-width:64ch}
+  a{color:var(--accent)}
+  .kicker{font-size:.78rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  .hairline{height:1px;background:var(--line);border:0}
+  /* NAV */
+  .nav-noir{border-bottom:1px solid var(--line);background:var(--bg)}
+  .nav-noir .brand{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:1.5rem;letter-spacing:.06em;color:var(--ink);text-decoration:none}
+  .nav-noir a.link{color:var(--ink-70);text-decoration:none;font-size:.9rem;letter-spacing:.14em;text-transform:uppercase}
+  .nav-noir a.link:hover{color:var(--accent)}
+  .nav-noir .open-pill{border:1px solid var(--accent);color:var(--accent);border-radius:0;padding:.5rem 1.2rem;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none}
+  .nav-noir .open-pill:hover{background:var(--accent);color:var(--bg)}
+  /* HERO */
+  .hero{padding:7rem 0 5.5rem;text-align:center;background:radial-gradient(ellipse 70% 55% at 50% 0%, var(--glow), var(--bg) 75%)}
+  .hero h1{font-size:clamp(3.4rem,9vw,7rem);line-height:1.02;letter-spacing:.01em}
+  .hero h1 em{font-style:italic;color:var(--accent)}
+  .hero .tagline{color:var(--ink-70);font-size:1.2rem;max-width:46ch;margin:1.75rem auto 0}
+  .hero .hours-line{color:var(--ink-50);font-size:.9rem;letter-spacing:.22em;text-transform:uppercase;margin-top:2.5rem}
+  .btn-amber{background:var(--accent);color:var(--bg);border:1px solid var(--accent);border-radius:0;padding:.8rem 2.2rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.85rem}
+  .btn-amber:hover{background:transparent;color:var(--accent)}
+  .btn-line{background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:0;padding:.8rem 2.2rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.85rem}
+  .btn-line:hover{border-color:var(--ink);color:var(--ink)}
+  /* THE LIST (signature: wine-list drinks menu) */
+  .list-wrap{padding:5.5rem 0;border-top:1px solid var(--line)}
+  .list-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:3rem}
+  .list-head h2{font-size:clamp(2.4rem,5vw,4rem);margin:0}
+  .list-head .note{font-family:"Cormorant Garamond",serif;font-style:italic;color:var(--ink-50);font-size:1.15rem}
+  .list-section{margin-bottom:3.25rem}
+  .list-section h3{font-family:"Manrope",sans-serif;font-size:.8rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:1.6rem}
+  .pour{display:flex;align-items:baseline;gap:.75rem;padding:.55rem 0}
+  .pour .name{font-family:"Cormorant Garamond",serif;font-size:1.45rem;font-weight:500;white-space:nowrap}
+  .pour .origin{color:var(--ink-50);font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+  .pour .leader{flex:1;min-width:2rem;border-bottom:1px dotted color-mix(in oklab, var(--ink) 32%, var(--bg));transform:translateY(-5px)}
+  .pour .price{font-family:"Cormorant Garamond",serif;font-size:1.3rem;color:var(--accent)}
+  .pour-note{color:var(--ink-50);font-size:.92rem;margin:-.2rem 0 .4rem;font-style:italic;font-family:"Cormorant Garamond",serif}
+  @media (max-width: 575.98px){
+    .pour{flex-wrap:wrap;row-gap:.1rem}
+    .pour .origin{order:3;flex-basis:100%}
+    .pour .name{white-space:normal}
+  }
+  /* PHOTO BAND */
+  .band{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .band figure{margin:0;position:relative;overflow:hidden;background:var(--soft)}
+  .band img{width:100%;height:100%;aspect-ratio:4/5;object-fit:cover;display:block;filter:saturate(.82) contrast(1.05)}
+  .band figcaption{position:absolute;left:0;right:0;bottom:0;padding:1rem 1.2rem;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);background:linear-gradient(to top, rgba(12,8,4,.85), transparent)}
+  /* RITUAL */
+  .ritual{padding:6rem 0}
+  .ritual h2{font-size:clamp(2.2rem,4.5vw,3.6rem)}
+  .ritual .lede{color:var(--ink-70)}
+  .ritual-card{background:var(--soft);border:1px solid var(--line);padding:2rem}
+  .ritual-card .num{font-family:"Cormorant Garamond",serif;font-size:2.4rem;color:var(--accent);line-height:1}
+  .ritual-card h3{font-size:1.5rem;margin:.9rem 0 .5rem}
+  .ritual-card p{color:var(--ink-70);font-size:.98rem;margin:0}
+  /* HOUSE RULES */
+  .rules{padding:5.5rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .rules blockquote{font-family:"Cormorant Garamond",serif;font-size:clamp(1.9rem,4vw,3rem);font-style:italic;line-height:1.3;max-width:24ch;margin:0}
+  .rules blockquote b{color:var(--accent);font-weight:500}
+  .rule-row{display:flex;justify-content:space-between;gap:1rem;border-bottom:1px solid var(--line);padding:.9rem 0;font-size:.98rem}
+  .rule-row:last-child{border-bottom:0}
+  .rule-row .k{color:var(--ink-50);letter-spacing:.1em;text-transform:uppercase;font-size:.8rem;padding-top:.2rem}
+  .rule-row .v{font-family:"Cormorant Garamond",serif;font-size:1.25rem;text-align:right}
+  /* VISIT / CTA */
+  .visit{padding:6.5rem 0;text-align:center;background:radial-gradient(ellipse 60% 70% at 50% 100%, var(--glow), var(--bg) 78%)}
+  .visit h2{font-size:clamp(2.6rem,6vw,4.6rem)}
+  .visit .addr{color:var(--ink-70);font-size:1.05rem;margin-top:1rem}
+  .visit .late{color:var(--accent);letter-spacing:.24em;text-transform:uppercase;font-size:.82rem;font-weight:700;margin-top:2rem}
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);padding:3.5rem 0 2rem;color:var(--ink-50)}
+  footer .brand{font-family:"Cormorant Garamond",serif;font-size:1.6rem;color:var(--ink);letter-spacing:.06em}
+  footer a{color:var(--ink-70);text-decoration:none;display:block;padding:.18rem 0;font-size:.92rem}
+  footer a:hover{color:var(--accent)}
+  footer h4{font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);font-weight:700;font-family:"Manrope",sans-serif}
+  footer .legal{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1.4rem;font-size:.82rem}
+  @media (prefers-reduced-motion: no-preference){
+    .btn-amber,.btn-line,.nav-noir .open-pill,footer a,.nav-noir a.link{transition:all .25s ease}
+    .band img{transition:transform .8s ease, filter .8s ease}
+    .band figure:hover img{transform:scale(1.04);filter:saturate(1) contrast(1.05)}
+    .pour{transition:padding-left .25s ease}
+    .pour:hover{padding-left:.5rem}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav-noir py-3">
+  <div class="container d-flex align-items-center justify-content-between">
+    <a class="brand" href="#">{{BRAND}}</a>
+    <div class="d-none d-md-flex gap-4 align-items-center">
+      <a class="link" href="#list">The list</a>
+      <a class="link" href="#ritual">The ritual</a>
+      <a class="link" href="#visit">Find us</a>
+      <a class="open-pill" href="#visit">Open till 1 a.m.</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <p class="kicker mb-4">A late-night espresso bar</p>
+    <h1>Coffee for the <em>hours nobody else keeps.</em></h1>
+    <p class="tagline">{{TAGLINE}}</p>
+    <div class="d-flex gap-3 justify-content-center flex-wrap mt-5">
+      <a class="btn-amber btn" href="#list">Read the list</a>
+      <a class="btn-line btn" href="#visit">Tonight's hours</a>
+    </div>
+    <p class="hours-line">Six till one, seven nights, candles lit at dusk</p>
+  </div>
+</header>
+
+<section class="list-wrap" id="list">
+  <div class="container">
+    <div class="list-head">
+      <h2>The list</h2>
+      <span class="note">set like a cellar list, poured like one too</span>
+    </div>
+    <div class="row gx-5">
+      <div class="col-lg-6">
+        <div class="list-section">
+          <h3>Espresso, after dark</h3>
+          <div class="pour"><span class="name">Midnight blend</span><span class="origin">Brazil and Sumatra</span><span class="leader"></span><span class="price">3.40</span></div>
+          <p class="pour-note">bitter chocolate, black fig, built for the last train home</p>
+          <div class="pour"><span class="name">Single origin shot</span><span class="origin">Yirgacheffe, natural</span><span class="leader"></span><span class="price">4.20</span></div>
+          <div class="pour"><span class="name">Ristretto, one sip</span><span class="origin">House roast</span><span class="leader"></span><span class="price">3.20</span></div>
+          <div class="pour"><span class="name">Cortado at close</span><span class="origin">With sheep's milk</span><span class="leader"></span><span class="price">4.60</span></div>
+        </div>
+        <div class="list-section">
+          <h3>Slow bar</h3>
+          <div class="pour"><span class="name">Syphon, by candlelight</span><span class="origin">Nyeri, Kenya</span><span class="leader"></span><span class="price">7.00</span></div>
+          <p class="pour-note">blackcurrant and long amber sugar, twenty minutes, worth it</p>
+          <div class="pour"><span class="name">Cold drip, 8 hours</span><span class="origin">Huila, Colombia</span><span class="leader"></span><span class="price">6.00</span></div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="list-section">
+          <h3>Night pours, no alcohol</h3>
+          <div class="pour"><span class="name">Espresso tonic, smoked</span><span class="origin">House</span><span class="leader"></span><span class="price">6.50</span></div>
+          <div class="pour"><span class="name">Amaro-style cascara</span><span class="origin">Coffee cherry</span><span class="leader"></span><span class="price">5.80</span></div>
+          <p class="pour-note">steeped with orange peel and gentian, served over one clear cube</p>
+          <div class="pour"><span class="name">Barley cap, oat foam</span><span class="origin">Caffeine free</span><span class="leader"></span><span class="price">4.40</span></div>
+        </div>
+        <div class="list-section">
+          <h3>To eat, quietly</h3>
+          <div class="pour"><span class="name">Dark rye, salted butter</span><span class="origin">Baked at 5 p.m.</span><span class="leader"></span><span class="price">4.00</span></div>
+          <div class="pour"><span class="name">Basque cheesecake slice</span><span class="origin">Burnt on purpose</span><span class="leader"></span><span class="price">6.20</span></div>
+          <div class="pour"><span class="name">Amaretti, three</span><span class="origin">For the table</span><span class="leader"></span><span class="price">3.00</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="container-fluid px-0">
+    <div class="row g-0">
+      <div class="col-md-4"><figure><img src="https://images.unsplash.com/photo-1442975631115-c4f7b05b8a2c?w=800&q=60" alt="Espresso machine glowing in a dark bar"><figcaption>The bar at 11:40 p.m.</figcaption></figure></div>
+      <div class="col-md-4"><figure><img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=800&q=60" alt="A single espresso cup on a dark counter"><figcaption>One shot, no hurry</figcaption></figure></div>
+      <div class="col-md-4"><figure><img src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=800&q=60" alt="Cafe window seen from the street at night"><figcaption>Seen from the street</figcaption></figure></div>
+    </div>
+  </div>
+</section>
+
+<section class="ritual" id="ritual">
+  <div class="container">
+    <div class="row g-5 align-items-start">
+      <div class="col-lg-5">
+        <p class="kicker mb-3">The ritual</p>
+        <h2>Three rules of the night shift.</h2>
+        <p class="lede mt-3">We opened because the city's best conversations start after the other cafes stack their chairs. Everything here is tuned for the late hour: dimmer lights, quieter grinders, longer welcomes.</p>
+      </div>
+      <div class="col-lg-7">
+        <div class="row g-3">
+          <div class="col-md-4"><div class="ritual-card h-100"><div class="num">I</div><h3>No wifi after ten</h3><p>Laptops sleep, people talk. The router does too.</p></div></div>
+          <div class="col-md-4"><div class="ritual-card h-100"><div class="num">II</div><h3>Decaf with dignity</h3><p>Sugarcane process Colombian on its own grinder, pulled with the same care.</p></div></div>
+          <div class="col-md-4"><div class="ritual-card h-100"><div class="num">III</div><h3>Last pour at 12:40</h3><p>Enough time to finish it slowly. We will never rush your cup.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rules">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-7">
+        <blockquote>"It is the only place in town where <b>midnight tastes deliberate.</b>"</blockquote>
+        <p class="mt-3" style="color:var(--ink-50);font-size:.95rem">Tomas R., night-shift radiographer, in most evenings</p>
+      </div>
+      <div class="col-lg-5">
+        <div class="rule-row"><span class="k">Current espresso</span><span class="v">Midnight blend, batch 41</span></div>
+        <div class="rule-row"><span class="k">Water</span><span class="v">Remineralised, 68 ppm</span></div>
+        <div class="rule-row"><span class="k">Music</span><span class="v">Vinyl only, side B after 11</span></div>
+        <div class="rule-row"><span class="k">Seats</span><span class="v">26, plus the doorstep</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="container">
+    <p class="kicker mb-4">Find us</p>
+    <h2>Down the lane, follow the amber light.</h2>
+    <p class="addr mx-auto">9 Cooper's Lane, behind the bookbinder. Open 18:00 to 01:00, seven nights.</p>
+    <p class="late">Walk-ins only, always</p>
+    <a class="btn-amber btn mt-4" href="#">Get directions</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-5">
+        <div class="brand">{{BRAND}}</div>
+        <p class="mt-2" style="max-width:36ch">An espresso bar for the late hours. Quiet grinders, loud opinions about extraction.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4 class="mb-3">Tonight</h4>
+        <a href="#list">The list</a>
+        <a href="#ritual">The ritual</a>
+        <a href="#visit">Find us</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4 class="mb-3">Beans</h4>
+        <a href="#">Midnight blend</a>
+        <a href="#">Monthly pickup</a>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h4 class="mb-3">Reach us</h4>
+        <a href="#">night@example.com</a>
+        <a href="#">Instagram</a>
+        <a href="#">9 Cooper's Lane</a>
+      </div>
+    </div>
+    <div class="legal">© {{BRAND}}. Draft preview generated by Dharwin Studio.</div>
+  </div>
+</footer>
+
+</body>
+</html>

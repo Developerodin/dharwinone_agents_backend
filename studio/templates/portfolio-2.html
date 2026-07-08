@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="design-label" content="Type Index">
+<title>{{BRAND}}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#101010;        /* letterpress black */
+    --bg:#fdfdf8;         /* paper white */
+    --accent:#1f3bd3;     /* cobalt */
+    --soft:#f2f2ea;       /* pulp surface */
+    --line:#d9d9cd;       /* rule */
+    --ink-60:color-mix(in oklab, var(--ink) 60%, var(--bg));
+    --cobalt-tint:color-mix(in oklab, var(--accent) 8%, var(--bg));
+  }
+  body{background:var(--bg);color:var(--ink);font-family:"Space Mono",monospace;font-size:1.0625rem;line-height:1.65}
+  h1,h2,.disp{font-family:"Archivo Black",sans-serif;letter-spacing:-.02em;color:var(--ink);text-transform:uppercase}
+  p{max-width:60ch}
+  a{color:var(--accent)}
+  .mono-cap{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-60)}
+  .cobalt{color:var(--accent)}
+  /* NAV */
+  .nav-index{border-bottom:2px solid var(--ink);background:var(--bg)}
+  .nav-index .brand{font-family:"Archivo Black",sans-serif;font-size:1.1rem;text-transform:uppercase;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+  .nav-index a.link{color:var(--ink);text-decoration:none;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase}
+  .nav-index a.link:hover{color:var(--accent)}
+  .nav-index .status{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--bg);background:var(--accent);padding:.35rem .7rem}
+  /* HERO */
+  .hero{padding:5rem 0 4rem;border-bottom:1px solid var(--line)}
+  .hero h1{font-size:clamp(3rem,11vw,9rem);line-height:.94;margin:0}
+  .hero h1 .oc{color:var(--accent)}
+  .hero .tagline{max-width:44ch;color:var(--ink-60);font-size:1.05rem;margin-top:2rem}
+  .hero .coords{display:flex;flex-wrap:wrap;gap:2rem;margin-top:2.5rem}
+  .hero .coords span{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-60);border-top:2px solid var(--ink);padding-top:.5rem}
+  .btn-ix{background:var(--ink);color:var(--bg);border:2px solid var(--ink);border-radius:0;padding:.75rem 1.8rem;font-family:"Space Mono",monospace;font-weight:700;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase}
+  .btn-ix:hover{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+  .btn-ix-ghost{background:transparent;color:var(--ink);border:2px solid var(--ink);border-radius:0;padding:.75rem 1.8rem;font-family:"Space Mono",monospace;font-weight:700;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase}
+  .btn-ix-ghost:hover{background:var(--ink);color:var(--bg)}
+  /* INDEX TABLE (signature) */
+  .index{padding:5rem 0}
+  .index-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:1rem;margin-bottom:2.5rem}
+  .index-head h2{font-size:clamp(2rem,5vw,3.6rem);margin:0}
+  .index-head .key{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-60)}
+  .ix-cols{display:grid;grid-template-columns:6rem 1fr 12rem 14rem;gap:1.5rem;padding:.7rem 0;border-bottom:2px solid var(--ink);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-60)}
+  .ix-row{display:grid;grid-template-columns:6rem 1fr 12rem 14rem;gap:1.5rem;align-items:baseline;padding:1.35rem 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink)}
+  .ix-row .yr{font-size:.85rem;color:var(--ink-60)}
+  .ix-row .client{font-family:"Archivo Black",sans-serif;font-size:clamp(1.3rem,3vw,2rem);text-transform:uppercase;letter-spacing:-.01em;line-height:1.05}
+  .ix-row .disc{font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-60)}
+  .ix-row .out{font-size:.85rem;color:var(--ink-60)}
+  .ix-row .out b{color:var(--accent);font-weight:700}
+  .ix-row:hover{background:var(--cobalt-tint)}
+  .ix-row:hover .client{color:var(--accent)}
+  @media (max-width: 767.98px){
+    .ix-cols{display:none}
+    .ix-row{grid-template-columns:4rem 1fr;grid-template-rows:auto auto}
+    .ix-row .client{grid-column:2}
+    .ix-row .disc{grid-column:2}
+    .ix-row .out{grid-column:2}
+  }
+  .index-foot{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-60);padding-top:1.2rem}
+  /* PRACTICE */
+  .practice{padding:5.5rem 0;background:var(--soft);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+  .practice h2{font-size:clamp(1.9rem,4.5vw,3.2rem)}
+  .svc{border-top:1px solid var(--ink);padding:1.4rem 0}
+  .svc .no{color:var(--accent);font-weight:700;font-size:.85rem}
+  .svc h3{font-family:"Archivo Black",sans-serif;text-transform:uppercase;font-size:1.15rem;margin:.5rem 0}
+  .svc p{font-size:.92rem;color:var(--ink-60);margin:0}
+  /* PULL QUOTE */
+  .pull{padding:5.5rem 0;border-bottom:2px solid var(--ink)}
+  .pull blockquote{font-family:"Archivo Black",sans-serif;text-transform:uppercase;font-size:clamp(1.6rem,4.5vw,3rem);line-height:1.15;letter-spacing:-.01em;max-width:24ch;margin:0}
+  .pull blockquote .oc{color:var(--accent)}
+  .pull .who{margin-top:1.5rem;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-60)}
+  /* COLOPHON / NUMBERS */
+  .colophon{padding:5.5rem 0}
+  .colophon .stat{border-top:2px solid var(--ink);padding-top:1rem}
+  .colophon .stat b{font-family:"Archivo Black",sans-serif;font-size:clamp(2.4rem,6vw,4rem);display:block;line-height:1}
+  .colophon .stat b.oc{color:var(--accent)}
+  .colophon .stat span{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-60)}
+  .colophon .about{font-size:1.05rem}
+  /* CONTACT */
+  .contact{padding:6rem 0;background:var(--ink);color:var(--bg)}
+  .contact h2{color:var(--bg);font-size:clamp(2.4rem,7vw,5.5rem);line-height:.98}
+  .contact h2 .oc{color:#8ea0ff}
+  .contact .mail{font-family:"Space Mono",monospace;font-size:clamp(1.05rem,2.6vw,1.5rem);color:var(--bg);text-decoration:underline;text-underline-offset:.35em}
+  .contact .mail:hover{color:#8ea0ff}
+  .contact .small-print{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:color-mix(in oklab, var(--bg) 60%, var(--ink))}
+  /* FOOTER */
+  footer{padding:2.2rem 0;border-top:1px solid var(--line);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-60)}
+  footer .brand{font-family:"Archivo Black",sans-serif;color:var(--ink);text-transform:uppercase}
+  footer a{color:var(--ink-60);text-decoration:none;margin-left:1.4rem}
+  footer a:hover{color:var(--accent)}
+  @media (prefers-reduced-motion: no-preference){
+    a,.btn-ix,.btn-ix-ghost{transition:all .18s ease}
+    .ix-row{transition:background .2s ease, padding-left .2s ease}
+    .ix-row .client{transition:font-size .25s ease, color .2s ease}
+    .ix-row:hover{padding-left:.9rem}
+    .ix-row:hover .client{font-size:clamp(1.6rem,3.6vw,2.5rem)}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav-index py-3">
+  <div class="container d-flex align-items-center justify-content-between">
+    <a class="brand" href="#">{{BRAND}}</a>
+    <div class="d-none d-md-flex gap-4 align-items-center">
+      <a class="link" href="#index">Index</a>
+      <a class="link" href="#practice">Practice</a>
+      <a class="link" href="#colophon">Colophon</a>
+      <span class="status">Booking Q1</span>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <p class="mono-cap mb-4">Independent design practice, est. 2016</p>
+    <h1>Words,<br>grids &amp;<br><span class="oc">stubborn</span> ideas.</h1>
+    <p class="tagline">{{TAGLINE}}</p>
+    <div class="d-flex gap-3 mt-4 flex-wrap">
+      <a class="btn-ix btn" href="#index">Read the index</a>
+      <a class="btn-ix-ghost btn" href="#contact">Start a project</a>
+    </div>
+    <div class="coords">
+      <span>No portfolio images. Ask the clients instead.</span>
+      <span>Identity / editorial / type</span>
+      <span>Two projects at a time, never three</span>
+    </div>
+  </div>
+</header>
+
+<section class="index" id="index">
+  <div class="container">
+    <div class="index-head">
+      <h2>The index</h2>
+      <span class="key">2016 to now / selected / alphabet be damned, newest first</span>
+    </div>
+    <div class="ix-cols"><span>Year</span><span>Client</span><span>Discipline</span><span>Outcome</span></div>
+    <a class="ix-row" href="#contact">
+      <span class="yr">2026</span>
+      <span class="client">Ferrous Works</span>
+      <span class="disc">Identity, signage</span>
+      <span class="out">Rebrand across 3 foundries, <b>zero</b> vinyl wasted</span>
+    </a>
+    <a class="ix-row" href="#contact">
+      <span class="yr">2025</span>
+      <span class="client">The Marginalia Press</span>
+      <span class="disc">Editorial system</span>
+      <span class="out">40-title backlist redesign, sales up <b>31%</b></span>
+    </a>
+    <a class="ix-row" href="#contact">
+      <span class="yr">2025</span>
+      <span class="client">Cobalt Transit Co.</span>
+      <span class="disc">Wayfinding type</span>
+      <span class="out">Custom face, 4 weights, read at <b>90 km/h</b></span>
+    </a>
+    <a class="ix-row" href="#contact">
+      <span class="yr">2024</span>
+      <span class="client">Aldercap Cheese</span>
+      <span class="disc">Packaging</span>
+      <span class="out">Label system, shelf pickup up <b>2.4x</b></span>
+    </a>
+    <a class="ix-row" href="#contact">
+      <span class="yr">2023</span>
+      <span class="client">Hollow Earth Records</span>
+      <span class="disc">Identity, sleeves</span>
+      <span class="out">19 releases, one grid, <b>no</b> two alike</span>
+    </a>
+    <a class="ix-row" href="#contact">
+      <span class="yr">2022</span>
+      <span class="client">Civic Pool Trust</span>
+      <span class="disc">Campaign type</span>
+      <span class="out">Poster program that helped save <b>3</b> public pools</span>
+    </a>
+    <a class="ix-row" href="#contact">
+      <span class="yr">2021</span>
+      <span class="client">Bract &amp; Stem</span>
+      <span class="disc">Packaging, naming</span>
+      <span class="out">Seed packets now in <b>140</b> garden shops</span>
+    </a>
+    <a class="ix-row" href="#contact">
+      <span class="yr">2019</span>
+      <span class="client">The Long Table</span>
+      <span class="disc">Identity, menus</span>
+      <span class="out">One typeface, hand set, <b>7</b> years running</span>
+    </a>
+    <p class="index-foot">+ 21 more rows in the full index, sent on request as a PDF that prints beautifully.</p>
+  </div>
+</section>
+
+<section class="practice" id="practice">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-5">
+        <p class="mono-cap mb-3">The practice</p>
+        <h2>Three things, done slowly, charged fairly.</h2>
+        <p class="mt-3" style="color:var(--ink-60)">Every engagement starts with writing, not sketching. If the idea cannot survive as a sentence, it will not survive as a logo.</p>
+      </div>
+      <div class="col-lg-7">
+        <div class="svc"><span class="no">01</span><h3>Identity systems</h3><p>Name, mark, voice, and the rulebook that keeps them honest for a decade. Eight to twelve weeks.</p></div>
+        <div class="svc"><span class="no">02</span><h3>Editorial design</h3><p>Books, journals, and annual reports with spines worth breaking. Grid first, decoration never.</p></div>
+        <div class="svc"><span class="no">03</span><h3>Custom lettering &amp; type</h3><p>Wordmarks and short alphabets drawn for one job and one job only. No font licenses, it is yours.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pull">
+  <div class="container">
+    <blockquote>"They handed us a rulebook, not a logo. <span class="oc">Five years later we still open it weekly."</span></blockquote>
+    <p class="who">Head of brand, The Marginalia Press</p>
+  </div>
+</section>
+
+<section class="colophon" id="colophon">
+  <div class="container">
+    <div class="row g-5 align-items-start">
+      <div class="col-lg-5">
+        <p class="mono-cap mb-3">Colophon</p>
+        <p class="about">One desk, one printer who answers the phone, and a shelf of specimen books older than the practice. Set in Archivo Black and Space Mono, printed proofs preferred over screens.</p>
+        <p class="about mt-3" style="color:var(--ink-60)">Studio visits by appointment. Bring your worst brief, it is usually the best one.</p>
+      </div>
+      <div class="col-lg-7">
+        <div class="row g-4">
+          <div class="col-6 col-md-3"><div class="stat"><b>29</b><span>Projects shipped</span></div></div>
+          <div class="col-6 col-md-3"><div class="stat"><b class="oc">10</b><span>Years at it</span></div></div>
+          <div class="col-6 col-md-3"><div class="stat"><b>2</b><span>Clients at a time</span></div></div>
+          <div class="col-6 col-md-3"><div class="stat"><b class="oc">0</b><span>Stock images, ever</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="container">
+    <p class="mono-cap mb-4" style="color:#8ea0ff">New commissions</p>
+    <h2>Say it in <span class="oc">one sentence.</span><br>We will take it from there.</h2>
+    <p class="mt-4 mb-2"><a class="mail" href="#">index@example.com</a></p>
+    <p class="small-print mt-4 mb-0">Replies within two working days / projects from $8,000 / worldwide, remotely</p>
+  </div>
+</section>
+
+<footer>
+  <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
+    <span><span class="brand">{{BRAND}}</span> © Draft preview generated by Dharwin Studio</span>
+    <span>
+      <a href="#index">Index</a>
+      <a href="#practice">Practice</a>
+      <a href="#contact">Contact</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="design-label" content="Utility Goods">
+<title>{{BRAND}}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15171a;        /* stamped steel ink */
+    --bg:#f2f3f2;         /* workshop gray-white */
+    --accent:#c74600;     /* safety orange */
+    --soft:#e9eae8;       /* bench surface */
+    --line:#c9ccc8;       /* panel border */
+    --ink-60:color-mix(in oklab, var(--ink) 62%, var(--bg));
+    --stamp:color-mix(in oklab, var(--accent) 10%, var(--bg));
+  }
+  body{background:var(--bg);color:var(--ink);font-family:"Inter",sans-serif;font-size:1.0625rem;line-height:1.6}
+  h1,h2,h3{font-family:"Inter",sans-serif;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+  p{max-width:64ch}
+  a{color:var(--accent)}
+  .mono{font-family:"IBM Plex Mono",monospace}
+  .label{font-family:"IBM Plex Mono",monospace;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  .num{font-variant-numeric:tabular-nums}
+  /* NAV */
+  .nav-util{background:var(--bg);border-bottom:2px solid var(--ink)}
+  .nav-util .brand{font-weight:800;font-size:1.2rem;letter-spacing:-.01em;color:var(--ink);text-decoration:none;text-transform:uppercase}
+  .nav-util .brand .mark{display:inline-block;background:var(--accent);color:#fff;font-family:"IBM Plex Mono",monospace;font-size:.7rem;padding:.2rem .45rem;margin-right:.55rem;vertical-align:2px}
+  .nav-util a.link{color:var(--ink-60);text-decoration:none;font-family:"IBM Plex Mono",monospace;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
+  .nav-util a.link:hover{color:var(--accent)}
+  .btn-safety{background:var(--accent);color:#fff;border:2px solid var(--accent);border-radius:0;padding:.6rem 1.4rem;font-weight:700;font-family:"IBM Plex Mono",monospace;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase}
+  .btn-safety:hover{background:var(--ink);border-color:var(--ink);color:#fff}
+  .btn-plain{background:transparent;color:var(--ink);border:2px solid var(--ink);border-radius:0;padding:.6rem 1.4rem;font-weight:700;font-family:"IBM Plex Mono",monospace;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase}
+  .btn-plain:hover{background:var(--ink);color:var(--bg)}
+  /* TICKER */
+  .ticker{background:var(--ink);color:var(--bg);font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.08em;padding:.5rem 0;text-transform:uppercase;overflow:hidden;white-space:nowrap}
+  .ticker b{color:#ff9a5c;font-weight:600}
+  .ticker span{padding:0 1.6rem}
+  /* HERO */
+  .hero{padding:4.5rem 0;border-bottom:1px solid var(--line)}
+  .hero h1{font-size:clamp(2.7rem,7vw,5.2rem);line-height:1;text-transform:uppercase}
+  .hero h1 .hl{color:var(--accent)}
+  .hero .tagline{color:var(--ink-60);font-size:1.15rem;max-width:46ch}
+  .hero-photo{border:1px solid var(--line);background:var(--soft)}
+  .hero-photo img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+  .hero-photo .plate{display:flex;justify-content:space-between;font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;padding:.55rem .8rem;border-top:1px solid var(--line);color:var(--ink-60)}
+  .spec-strip{display:flex;flex-wrap:wrap;gap:2.25rem;margin-top:2.5rem}
+  .spec-strip .cell b{display:block;font-family:"IBM Plex Mono",monospace;font-size:1.35rem;font-weight:600;font-variant-numeric:tabular-nums}
+  .spec-strip .cell span{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-60)}
+  /* CATALOG (signature: spec-sheet grid) */
+  .catalog{padding:5rem 0}
+  .catalog-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:1rem;margin-bottom:2rem}
+  .catalog-head h2{font-size:clamp(1.9rem,4vw,3rem);text-transform:uppercase;margin:0}
+  .catalog-head .count{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:var(--ink-60)}
+  .cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  @media (max-width: 991.98px){.cat-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width: 575.98px){.cat-grid{grid-template-columns:1fr}}
+  .item{background:var(--bg);padding:1.4rem}
+  .item .sku{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.1em;color:var(--ink-60);display:flex;justify-content:space-between}
+  .item .sku .stock{color:var(--accent);font-weight:600}
+  .item .sku .stock.low{background:var(--stamp);padding:0 .4rem}
+  .item img{width:100%;aspect-ratio:5/4;object-fit:cover;display:block;margin:.9rem 0;border:1px solid var(--line)}
+  .item h3{font-size:1.1rem;font-weight:700;margin:0}
+  .spec{width:100%;font-family:"IBM Plex Mono",monospace;font-size:.78rem;margin-top:.8rem;border-collapse:collapse}
+  .spec td{padding:.32rem 0;border-top:1px dashed var(--line);font-variant-numeric:tabular-nums}
+  .spec td:first-child{color:var(--ink-60);text-transform:uppercase;letter-spacing:.06em;width:42%}
+  .spec td:last-child{text-align:right}
+  .item .buy{display:flex;justify-content:space-between;align-items:center;margin-top:1rem}
+  .item .price{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:1.15rem;font-variant-numeric:tabular-nums}
+  .item .add{font-family:"IBM Plex Mono",monospace;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);text-decoration:none;border:1px solid var(--accent);padding:.4rem .8rem}
+  .item .add:hover{background:var(--accent);color:#fff}
+  /* STANDARDS */
+  .standards{padding:5rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .standards h2{font-size:clamp(1.9rem,4vw,2.8rem);text-transform:uppercase}
+  .std{background:var(--bg);border:1px solid var(--line);padding:1.5rem;height:100%}
+  .std .idx{font-family:"IBM Plex Mono",monospace;color:var(--accent);font-size:.8rem;font-weight:600}
+  .std h3{font-size:1.05rem;margin:.6rem 0 .4rem;text-transform:uppercase;letter-spacing:.02em}
+  .std p{font-size:.95rem;color:var(--ink-60);margin:0}
+  /* FIELD TEST */
+  .field{padding:5rem 0}
+  .field blockquote{font-size:clamp(1.4rem,3vw,2.1rem);font-weight:700;line-height:1.35;max-width:30ch;margin:0}
+  .field blockquote .hl{background:var(--stamp);color:var(--accent);padding:0 .3rem}
+  .field .meta{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:var(--ink-60);text-transform:uppercase;letter-spacing:.08em}
+  .field-photo{border:1px solid var(--line)}
+  .field-photo img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+  /* ORDER CTA */
+  .order{padding:5rem 0;background:var(--ink);color:var(--bg)}
+  .order h2{color:var(--bg);font-size:clamp(2rem,4.5vw,3.4rem);text-transform:uppercase}
+  .order p{color:color-mix(in oklab, var(--bg) 70%, var(--ink))}
+  .order .label{color:#ff9a5c}
+  .order-row{display:flex;justify-content:space-between;gap:1rem;border-top:1px solid color-mix(in oklab, var(--bg) 22%, var(--ink));padding:.8rem 0;font-family:"IBM Plex Mono",monospace;font-size:.85rem}
+  /* FOOTER */
+  footer{padding:3.5rem 0 2rem;border-top:2px solid var(--ink)}
+  footer .brand{font-weight:800;text-transform:uppercase;font-size:1.2rem}
+  footer h4{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  footer a{color:var(--ink-60);text-decoration:none;display:block;padding:.2rem 0;font-size:.92rem}
+  footer a:hover{color:var(--accent)}
+  footer .legal{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1.4rem;font-size:.82rem;color:var(--ink-60);font-family:"IBM Plex Mono",monospace}
+  @media (prefers-reduced-motion: no-preference){
+    a,.btn-safety,.btn-plain,.item .add{transition:all .18s ease}
+    .item{transition:background .18s ease}
+    .item:hover{background:var(--stamp)}
+  }
+</style>
+</head>
+<body>
+
+<div class="ticker" aria-hidden="true">
+  <span>Free carriage over $80 <b>//</b></span><span>Lifetime repairs on all canvas goods <b>//</b></span><span>Batch 22 shipping now <b>//</b></span><span>Made in one factory, audited yearly <b>//</b></span><span>Restocks announced Fridays 09:00 <b>//</b></span>
+</div>
+
+<nav class="nav-util py-3">
+  <div class="container d-flex align-items-center justify-content-between">
+    <a class="brand" href="#"><span class="mark">EST.19</span>{{BRAND}}</a>
+    <div class="d-none d-md-flex gap-4 align-items-center">
+      <a class="link" href="#catalog">Catalog</a>
+      <a class="link" href="#standards">Standards</a>
+      <a class="link" href="#field">Field notes</a>
+      <a class="btn-safety btn" href="#order">Order sheet</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-7">
+        <p class="label mb-3">Catalog no. 22 / hardware and carry goods</p>
+        <h1>Buy it once. <span class="hl">Use it hard.</span> Repair it free.</h1>
+        <p class="tagline mt-4">{{TAGLINE}}</p>
+        <div class="d-flex gap-3 mt-4 flex-wrap">
+          <a class="btn-safety btn" href="#catalog">Browse the catalog</a>
+          <a class="btn-plain btn" href="#standards">Read the standards</a>
+        </div>
+        <div class="spec-strip num">
+          <div class="cell"><b>1,180 g</b><span>Avg. product weight</span></div>
+          <div class="cell"><b>10 yr</b><span>Repair guarantee</span></div>
+          <div class="cell"><b>34</b><span>SKUs, total, ever</span></div>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="hero-photo">
+          <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=900&q=60" alt="Heavy waxed canvas rucksack photographed on a plain background">
+          <div class="plate"><span>UG-201 Field Rucksack</span><span class="num">SCALE 1:6</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="catalog" id="catalog">
+  <div class="container">
+    <div class="catalog-head">
+      <h2>Current catalog</h2>
+      <span class="count num">Showing 06 of 34 SKUs / all in production</span>
+    </div>
+    <div class="cat-grid">
+      <article class="item">
+        <div class="sku"><span>UG-201</span><span class="stock">IN STOCK</span></div>
+        <img src="https://images.unsplash.com/photo-1547949003-9792a18a2601?w=700&q=60" alt="Waxed canvas field rucksack with leather straps">
+        <h3>Field Rucksack</h3>
+        <table class="spec"><tr><td>Material</td><td>18 oz waxed duck</td></tr><tr><td>Weight</td><td>1,420 g</td></tr><tr><td>Volume</td><td>26 L</td></tr></table>
+        <div class="buy"><span class="price num">$188.00</span><a class="add" href="#">Add</a></div>
+      </article>
+      <article class="item">
+        <div class="sku"><span>UG-114</span><span class="stock">IN STOCK</span></div>
+        <img src="https://images.unsplash.com/photo-1473188588951-666fce8e7c68?w=700&q=60" alt="Stainless steel vacuum flask on a workbench">
+        <h3>Crew Flask, 1 L</h3>
+        <table class="spec"><tr><td>Material</td><td>316 stainless</td></tr><tr><td>Weight</td><td>640 g</td></tr><tr><td>Hot hold</td><td>14 h</td></tr></table>
+        <div class="buy"><span class="price num">$64.00</span><a class="add" href="#">Add</a></div>
+      </article>
+      <article class="item">
+        <div class="sku"><span>UG-330</span><span class="stock low">LOW / 12</span></div>
+        <img src="https://images.unsplash.com/photo-1620814923416-8fb2b3d59a10?w=700&q=60" alt="Canvas and leather work apron hanging on a hook">
+        <h3>Shop Apron</h3>
+        <table class="spec"><tr><td>Material</td><td>14 oz duck, brass</td></tr><tr><td>Weight</td><td>820 g</td></tr><tr><td>Pockets</td><td>7</td></tr></table>
+        <div class="buy"><span class="price num">$96.00</span><a class="add" href="#">Add</a></div>
+      </article>
+      <article class="item">
+        <div class="sku"><span>UG-078</span><span class="stock">IN STOCK</span></div>
+        <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?w=700&q=60" alt="Brass and steel pocket tool laid on paper">
+        <h3>Pocket Tool No. 3</h3>
+        <table class="spec"><tr><td>Material</td><td>S35VN, brass</td></tr><tr><td>Weight</td><td>88 g</td></tr><tr><td>Functions</td><td>6</td></tr></table>
+        <div class="buy"><span class="price num">$72.00</span><a class="add" href="#">Add</a></div>
+      </article>
+      <article class="item">
+        <div class="sku"><span>UG-455</span><span class="stock">IN STOCK</span></div>
+        <img src="https://images.unsplash.com/photo-1519219788971-8d9797e0928e?w=700&q=60" alt="Heavy wool blanket folded on a shelf">
+        <h3>Depot Blanket</h3>
+        <table class="spec"><tr><td>Material</td><td>90/10 wool blend</td></tr><tr><td>Weight</td><td>1,950 g</td></tr><tr><td>Size</td><td>200 x 150 cm</td></tr></table>
+        <div class="buy"><span class="price num">$128.00</span><a class="add" href="#">Add</a></div>
+      </article>
+      <article class="item">
+        <div class="sku"><span>UG-509</span><span class="stock low">LOW / 05</span></div>
+        <img src="https://images.unsplash.com/photo-1503602642458-232111445657?w=700&q=60" alt="Powder coated steel desk lamp on a table">
+        <h3>Task Lamp, Clamp</h3>
+        <table class="spec"><tr><td>Material</td><td>Steel, powder coat</td></tr><tr><td>Weight</td><td>1,240 g</td></tr><tr><td>Reach</td><td>84 cm</td></tr></table>
+        <div class="buy"><span class="price num">$142.00</span><a class="add" href="#">Add</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="standards" id="standards">
+  <div class="container">
+    <div class="row g-4 align-items-end mb-4">
+      <div class="col-lg-7"><p class="label mb-2">House standards</p><h2>What every SKU must survive</h2></div>
+      <div class="col-lg-5"><p class="mb-1" style="color:var(--ink-60)">Nothing enters the catalog until it passes all four benches. Most prototypes fail twice before batch one.</p></div>
+    </div>
+    <div class="row g-3">
+      <div class="col-md-3 col-6"><div class="std"><span class="idx">STD-01</span><h3>Drop test</h3><p>Two meters onto concrete, loaded, ten times. No seam failure.</p></div></div>
+      <div class="col-md-3 col-6"><div class="std"><span class="idx">STD-02</span><h3>Weather</h3><p>Forty-eight hours of spray. Contents dry, hardware rust free.</p></div></div>
+      <div class="col-md-3 col-6"><div class="std"><span class="idx">STD-03</span><h3>Abrasion</h3><p>Twenty thousand cycles on the rub wheel before any material scores a pass.</p></div></div>
+      <div class="col-md-3 col-6"><div class="std"><span class="idx">STD-04</span><h3>Repair</h3><p>Every part replaceable with common tools. We publish the diagrams.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="field" id="field">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6">
+        <p class="label mb-3">Field notes / 06</p>
+        <blockquote>"Nine seasons of trail work. One strap swap, one new zipper. <span class="hl">Still my only pack.</span>"</blockquote>
+        <p class="meta mt-4 mb-0">R. Okafor / trail crew lead / UG-201, batch 4</p>
+      </div>
+      <div class="col-lg-6">
+        <div class="field-photo"><img src="https://images.unsplash.com/photo-1501554728187-ce583db33af7?w=900&q=60" alt="Worn rucksack resting against a rock on a mountain trail"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="order" id="order">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-6">
+        <p class="label mb-3">Order sheet</p>
+        <h2>No sales. No seasons. Just the sheet.</h2>
+        <p class="mt-3">Prices change only when materials do. Join the sheet and we will email you exactly twice a year, plus restock notices for anything you watch.</p>
+        <a class="btn-safety btn mt-2" href="#">Join the order sheet</a>
+      </div>
+      <div class="col-lg-6">
+        <div class="order-row num"><span>Carriage, domestic</span><span>$6.00 flat</span></div>
+        <div class="order-row num"><span>Carriage, worldwide</span><span>$18.00 flat</span></div>
+        <div class="order-row num"><span>Returns window</span><span>90 days, used is fine</span></div>
+        <div class="order-row num"><span>Repairs</span><span>Free, forever, both ways paid</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-5">
+        <div class="brand">{{BRAND}}</div>
+        <p class="mt-2" style="max-width:38ch;color:var(--ink-60)">Thirty-four SKUs of hardware and carry goods, built to spec and repaired for life.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4 class="mb-3">Catalog</h4>
+        <a href="#catalog">All SKUs</a>
+        <a href="#standards">Standards</a>
+        <a href="#field">Field notes</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4 class="mb-3">Service</h4>
+        <a href="#">Repairs</a>
+        <a href="#">Spare parts</a>
+        <a href="#">Care guides</a>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h4 class="mb-3">Depot</h4>
+        <a href="#">depot@example.com</a>
+        <a href="#">Unit 4, Ropewalk Industrial</a>
+        <a href="#">Open Fridays 10:00 to 16:00</a>
+      </div>
+    </div>
+    <div class="legal">© {{BRAND}} / Draft preview generated by Dharwin Studio</div>
+  </div>
+</footer>
+
+</body>
+</html>

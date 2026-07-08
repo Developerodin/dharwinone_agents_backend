@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="design-label" content="Prospectus">
+<title>{{BRAND}}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16294d;
+    --bg:#f8f4e9;
+    --accent:#8a6a1c;
+    --soft:#fdfaf1;
+    --line:#ddd3ba;
+  }
+  body{background:var(--bg);color:var(--ink);font-family:"EB Garamond",Georgia,serif;font-size:1.125rem;line-height:1.65;}
+  h1,h2,h3,h4{font-family:"EB Garamond",serif;font-weight:600;letter-spacing:.005em;}
+  .sc{font-variant:small-caps;letter-spacing:.22em;font-weight:600;font-size:1rem;color:var(--accent);}
+  .rule{border:0;border-top:1px solid var(--line);opacity:1;}
+  p{max-width:62ch;}
+  a{color:var(--accent);}
+
+  .site-nav{background:var(--bg);border-bottom:1px solid var(--line);}
+  .site-nav .brand{font-family:"EB Garamond",serif;font-weight:600;font-size:1.55rem;color:var(--ink);text-decoration:none;}
+  .site-nav .brand .est{display:block;font-variant:small-caps;letter-spacing:.24em;font-size:.78rem;color:var(--accent);}
+  .site-nav .nav-link{font-family:"Public Sans",sans-serif;color:var(--ink);font-weight:600;font-size:.9rem;}
+  .btn-oxford{background:var(--ink);color:var(--bg);border:1px solid var(--ink);font-family:"Public Sans",sans-serif;font-weight:700;font-size:.9rem;letter-spacing:.04em;padding:.65rem 1.6rem;border-radius:0;}
+  .btn-oxford:hover{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn-plain{background:transparent;color:var(--ink);border:1px solid var(--ink);font-family:"Public Sans",sans-serif;font-weight:700;font-size:.9rem;letter-spacing:.04em;padding:.65rem 1.6rem;border-radius:0;}
+  .btn-plain:hover{background:var(--ink);color:var(--bg);}
+
+  .hero{padding:5.5rem 0 4.5rem;text-align:center;}
+  .hero .sc{display:block;margin-bottom:1rem;}
+  .hero h1{font-size:clamp(2.8rem,7vw,5.2rem);line-height:1.05;max-width:20ch;margin:0 auto .75rem;}
+  .hero h1 em{font-style:italic;color:var(--accent);}
+  .hero .tagline{font-size:1.35rem;font-style:italic;color:color-mix(in srgb, var(--ink) 76%, var(--bg));max-width:44rem;margin:0 auto;}
+  .hero-orn{display:flex;align-items:center;gap:1rem;justify-content:center;margin:1.75rem 0;color:var(--accent);}
+  .hero-orn::before,.hero-orn::after{content:"";height:1px;width:6rem;background:var(--line);}
+  .hero-photo{margin-top:3rem;border:1px solid var(--line);padding:.6rem;background:var(--soft);}
+  .hero-photo img{width:100%;height:26rem;object-fit:cover;display:block;}
+  .hero-photo figcaption{font-style:italic;font-size:1rem;padding:.8rem .4rem .2rem;color:color-mix(in srgb, var(--ink) 72%, var(--bg));}
+
+  .schools{padding:4.5rem 0;}
+  .school{background:var(--soft);border:1px solid var(--line);padding:2rem 1.8rem;height:100%;}
+  .school .sc{font-size:.88rem;}
+  .school h3{font-size:1.6rem;margin:.6rem 0 .7rem;}
+  .school p{font-size:1.02rem;margin-bottom:1rem;color:color-mix(in srgb, var(--ink) 84%, var(--bg));}
+  .school ul{list-style:none;padding:0;margin:0;font-size:.98rem;}
+  .school li{padding:.45rem 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:1rem;}
+  .school li b{font-weight:600;}
+
+  .calendar{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:5rem 0;}
+  .cal-table{width:100%;border-collapse:collapse;background:var(--bg);border:1px solid var(--ink);font-size:1rem;}
+  .cal-table caption{caption-side:top;font-variant:small-caps;letter-spacing:.2em;font-weight:600;color:var(--accent);padding:0 0 .8rem;text-align:left;}
+  .cal-table th,.cal-table td{border:1px solid var(--line);padding:.9rem 1rem;vertical-align:top;}
+  .cal-table thead th{background:var(--ink);color:var(--bg);font-family:"Public Sans",sans-serif;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;border-color:var(--ink);}
+  .cal-table .stage{font-weight:600;font-size:1.1rem;}
+  .cal-table .date{font-family:"Public Sans",sans-serif;font-weight:700;font-size:.92rem;white-space:nowrap;}
+  .cal-table .note{font-size:.95rem;color:color-mix(in srgb, var(--ink) 78%, var(--bg));}
+  .cal-wrap{overflow-x:auto;}
+  .cal-aside{font-style:italic;font-size:1.02rem;color:color-mix(in srgb, var(--ink) 76%, var(--bg));}
+
+  .life{padding:5rem 0;}
+  .life-photo{border:1px solid var(--line);padding:.5rem;background:var(--soft);height:100%;}
+  .life-photo img{width:100%;height:15rem;object-fit:cover;display:block;}
+  .life-photo figcaption{font-style:italic;font-size:.95rem;padding:.6rem .3rem .1rem;}
+  .fig-nums{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1.5rem;}
+  .fig-nums b{font-size:1.9rem;font-weight:600;display:block;line-height:1.1;}
+  .fig-nums span{font-size:.95rem;color:color-mix(in srgb, var(--ink) 74%, var(--bg));}
+
+  .cta{background:var(--ink);color:var(--bg);padding:4.5rem 0;text-align:center;}
+  .cta .sc{color:color-mix(in srgb, var(--accent) 60%, #fff);}
+  .cta h2{color:var(--bg);font-size:clamp(2rem,4.6vw,3.2rem);max-width:24ch;margin:0 auto .8rem;}
+  .cta p{color:color-mix(in srgb, var(--bg) 82%, var(--ink));margin:0 auto 1.8rem;max-width:52ch;}
+  .btn-gold{background:var(--accent);color:#fff;border:1px solid var(--accent);font-family:"Public Sans",sans-serif;font-weight:700;letter-spacing:.04em;padding:.8rem 2rem;border-radius:0;}
+  .btn-gold:hover{background:var(--bg);border-color:var(--bg);color:var(--ink);}
+
+  footer{background:var(--bg);border-top:1px solid var(--line);padding:4rem 0 2rem;font-size:1rem;}
+  footer .brand{font-family:"EB Garamond",serif;font-weight:600;font-size:1.5rem;color:var(--ink);}
+  footer h6{font-variant:small-caps;letter-spacing:.2em;font-size:.95rem;color:var(--accent);margin-bottom:1rem;font-weight:600;}
+  footer ul{list-style:none;padding:0;margin:0;}
+  footer li{padding:.22rem 0;}
+  footer a{color:var(--ink);text-decoration:none;}
+  footer a:hover{color:var(--accent);}
+  .foot-legal{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1.4rem;font-size:.9rem;color:color-mix(in srgb, var(--ink) 66%, var(--bg));}
+
+  @media (prefers-reduced-motion: no-preference){
+    .school,.life-photo{transition:transform .25s ease,box-shadow .25s ease;}
+    .school:hover,.life-photo:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(22,41,77,.12);}
+    .btn-oxford,.btn-plain,.btn-gold{transition:background-color .2s ease,color .2s ease,border-color .2s ease;}
+  }
+  @media (max-width:575px){
+    .hero-photo img{height:16rem;}
+  }
+</style>
+</head>
+<body id="top">
+
+<nav class="site-nav py-3">
+  <div class="container d-flex align-items-center justify-content-between gap-3">
+    <a class="brand" href="#top">{{BRAND}}<span class="est">est. 1962</span></a>
+    <div class="d-none d-md-flex align-items-center gap-4">
+      <a class="nav-link" href="#schools">Programmes</a>
+      <a class="nav-link" href="#admissions">Admissions calendar</a>
+      <a class="nav-link" href="#life">College life</a>
+      <a class="btn btn-oxford" href="#apply">Request the prospectus</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <span class="sc">A residential institute of the liberal arts and sciences</span>
+    <h1>Read deeply. Argue well. <em>Leave better.</em></h1>
+    <div class="hero-orn" aria-hidden="true">✦</div>
+    <p class="tagline">{{TAGLINE}}</p>
+    <div class="d-flex flex-wrap gap-3 justify-content-center mt-4">
+      <a class="btn btn-oxford" href="#apply">Request the prospectus</a>
+      <a class="btn btn-plain" href="#admissions">See the admissions calendar</a>
+    </div>
+    <figure class="hero-photo mb-0">
+      <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1400&q=60" alt="Stone facade and lawns of the main college building in morning light">
+      <figcaption>The Founders' Building and east lawns, where convocation has been held every March since 1964.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<section class="schools" id="schools">
+  <div class="container">
+    <span class="sc">Chapter I · Programmes of study</span>
+    <h2 class="mt-2 mb-4" style="font-size:clamp(2rem,4.4vw,3rem);">Three schools, taught in seminar</h2>
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="school">
+          <span class="sc">School of Letters</span>
+          <h3>B.A. (Hons) Literature and History</h3>
+          <p>Close reading across four literatures, a history sequence from antiquity to independence, and a senior thesis defended aloud.</p>
+          <ul>
+            <li><span>Seminar size</span><b>14 students</b></li>
+            <li><span>Duration</span><b>3 years + honours year</b></li>
+            <li><span>Intake</span><b>48 seats</b></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="school">
+          <span class="sc">School of Sciences</span>
+          <h3>B.Sc. (Hons) Mathematics and Physics</h3>
+          <p>Proof-first mathematics with a laboratory physics core. Every student completes a supervised research project by third year.</p>
+          <ul>
+            <li><span>Seminar size</span><b>16 students</b></li>
+            <li><span>Duration</span><b>3 years + honours year</b></li>
+            <li><span>Intake</span><b>52 seats</b></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="school">
+          <span class="sc">School of Economics</span>
+          <h3>B.A. (Hons) Economics and Statistics</h3>
+          <p>Theory taught against Indian data. Students run a field study in second year and publish it in the institute's working paper series.</p>
+          <ul>
+            <li><span>Seminar size</span><b>15 students</b></li>
+            <li><span>Duration</span><b>3 years + honours year</b></li>
+            <li><span>Intake</span><b>44 seats</b></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="calendar" id="admissions">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-8">
+        <span class="sc">Chapter II · Admissions</span>
+        <h2 class="mt-2 mb-4" style="font-size:clamp(2rem,4.4vw,3rem);">The academic calendar for entry</h2>
+        <div class="cal-wrap">
+          <table class="cal-table">
+            <caption>Undergraduate admission, next academic year</caption>
+            <thead>
+              <tr><th scope="col">Stage</th><th scope="col">Opens</th><th scope="col">Closes</th><th scope="col">Particulars</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="stage">Application</td>
+                <td class="date">2 December</td>
+                <td class="date">31 January</td>
+                <td class="note">Online form, school transcripts, and two essays of 600 words. Fee waivers on request.</td>
+              </tr>
+              <tr>
+                <td class="stage">Entrance test</td>
+                <td class="date">22 February</td>
+                <td class="date">23 February</td>
+                <td class="note">Three-hour written paper in reasoning and expression, held at 11 city centres.</td>
+              </tr>
+              <tr>
+                <td class="stage">Interview</td>
+                <td class="date">16 March</td>
+                <td class="date">28 March</td>
+                <td class="note">A 25-minute conversation with two faculty members, on campus or by video.</td>
+              </tr>
+              <tr>
+                <td class="stage">Offers and term start</td>
+                <td class="date">10 April</td>
+                <td class="date">Term begins 7 July</td>
+                <td class="note">Rolling offers; scholarship decisions issued with the offer letter itself.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <h3 class="mb-3" style="font-size:1.5rem;">A note on aid</h3>
+        <p class="cal-aside">Admission is need-blind. Last year, 61 of 144 entering students received scholarships covering half fees or more, and no offer was withdrawn for want of funds. The bursar's office publishes its criteria in full inside the prospectus.</p>
+        <hr class="rule my-4">
+        <p class="cal-aside mb-0">Applicants writing from smaller towns may sit the entrance test in their own school under proctorship. Write to the registrar before 15 January.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="life" id="life">
+  <div class="container">
+    <span class="sc">Chapter III · College life</span>
+    <h2 class="mt-2 mb-4" style="font-size:clamp(2rem,4.4vw,3rem);">Four years, fully resident</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <figure class="life-photo mb-0">
+          <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=900&q=60" alt="Open books and notes on a long reading-room table">
+          <figcaption>The Wren Reading Room, open until midnight in term.</figcaption>
+        </figure>
+      </div>
+      <div class="col-md-4">
+        <figure class="life-photo mb-0">
+          <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=900&q=60" alt="Students in a lecture theatre during a morning seminar">
+          <figcaption>Morning seminar in the Radcliffe Theatre.</figcaption>
+        </figure>
+      </div>
+      <div class="col-md-4">
+        <figure class="life-photo mb-0">
+          <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=900&q=60" alt="Graduates in gowns celebrating on convocation day">
+          <figcaption>Convocation on the east lawns, March.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="row fig-nums g-4">
+      <div class="col-6 col-lg-3"><b>9 : 1</b><span>student to faculty ratio across all three schools</span></div>
+      <div class="col-6 col-lg-3"><b>140,000</b><span>volumes in the Wren Library, plus digital archives</span></div>
+      <div class="col-6 col-lg-3"><b>22</b><span>student societies, from debating to hill trekking</span></div>
+      <div class="col-6 col-lg-3"><b>94%</b><span>of last year's honours cohort placed or in graduate study</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="apply">
+  <div class="container">
+    <span class="sc d-block mb-3">Correspondence invited</span>
+    <h2>The prospectus answers what this page cannot.</h2>
+    <p>Sixty pages: every course, every fee, every scholarship criterion, and a term-by-term account of what you will read. Posted free, or download it the same hour.</p>
+    <a class="btn btn-gold btn-lg" href="#top">Request the prospectus</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <p class="brand mb-2">{{BRAND}}</p>
+        <p style="max-width:34ch;">A residential institute of the liberal arts and sciences, founded 1962, governed by an independent academic trust.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Contents</h6>
+        <ul><li><a href="#schools">Programmes</a></li><li><a href="#admissions">Admissions</a></li><li><a href="#life">College life</a></li></ul>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h6>The Registrar</h6>
+        <ul><li>College Road, Post Bag 4</li><li>Office hours 10 to 5, Mon to Fri</li><li>registrar@yourdomain.com</li></ul>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h6>Recognition</h6>
+        <ul><li>UGC recognised, NAAC grade A</li><li>Member, Association of Indian Universities</li><li>Charitable trust regn. on request</li></ul>
+      </div>
+    </div>
+    <p class="foot-legal mb-0">© {{BRAND}} · draft preview generated by Dharwin Studio</p>
+  </div>
+</footer>
+</body>
+</html>

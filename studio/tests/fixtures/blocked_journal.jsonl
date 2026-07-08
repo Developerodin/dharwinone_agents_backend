@@ -1,0 +1,15 @@
+{"ts": 1783331000.0, "seq": 0, "run_id": "r-demo-2", "event": "run_start", "task": "demo-2"}
+{"ts": 1783331001.0, "seq": 1, "run_id": "r-demo-2", "event": "plan_start", "model": "qwen25-coder-14b-harness"}
+{"ts": 1783331020.0, "seq": 2, "run_id": "r-demo-2", "event": "plan_ready"}
+{"ts": 1783331030.0, "seq": 3, "run_id": "r-demo-2", "event": "explain_start"}
+{"ts": 1783331031.0, "seq": 4, "run_id": "r-demo-2", "event": "explain_ready"}
+{"ts": 1783331032.0, "seq": 5, "run_id": "r-demo-2", "event": "simulate_ready"}
+{"ts": 1783331033.0, "seq": 6, "run_id": "r-demo-2", "event": "gate_open", "gate": "plan"}
+{"ts": 1783331095.0, "seq": 7, "run_id": "r-demo-2", "event": "gate_result", "gate": "plan", "decision": "approve"}
+{"ts": 1783331096.0, "seq": 8, "run_id": "r-demo-2", "event": "build_round_start", "round": 1, "model": "qwen25-coder-14b-harness"}
+{"ts": 1783331200.0, "seq": 9, "run_id": "r-demo-2", "event": "verify_done", "round": 1, "exit": 1}
+{"ts": 1783331201.0, "seq": 10, "run_id": "r-demo-2", "event": "build_round_start", "round": 2, "model": "qwen25-coder-14b-harness"}
+{"ts": 1783331300.0, "seq": 11, "run_id": "r-demo-2", "event": "verify_done", "round": 2, "exit": 1}
+{"ts": 1783331301.0, "seq": 12, "run_id": "r-demo-2", "event": "build_round_start", "round": 3, "model": "qwen25-coder-14b-harness"}
+{"ts": 1783331400.0, "seq": 13, "run_id": "r-demo-2", "event": "verify_done", "round": 3, "exit": 1}
+{"ts": 1783331401.0, "seq": 14, "run_id": "r-demo-2", "event": "blocked", "task": "demo-2", "evidence": {"reason": "verify failed after 3 repair rounds", "log_tail": "AssertionError: expected 200 got 500"}}

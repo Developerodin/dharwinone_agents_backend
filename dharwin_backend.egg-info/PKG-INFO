@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: dharwin-backend
+Version: 0.1.0
+Requires-Python: >=3.11
+Requires-Dist: fastapi
+Requires-Dist: uvicorn[standard]
+Requires-Dist: httpx
+Requires-Dist: pymongo
+Requires-Dist: pyyaml
+Requires-Dist: python-dotenv
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: ruff; extra == "dev"

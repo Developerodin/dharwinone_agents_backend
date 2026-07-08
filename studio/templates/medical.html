@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{BRAND}}</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#26332d;
+    --bg:#f6f1e9;
+    --accent:#2e5c4d;
+    --soft:#fbf7ef;
+    --line:#e2d8c8;
+    --accent-deep:color-mix(in srgb, var(--accent) 82%, var(--ink));
+    --accent-tint:color-mix(in srgb, var(--accent) 10%, var(--bg));
+    --ink-soft:color-mix(in srgb, var(--ink) 68%, var(--bg));
+  }
+  body{background:var(--bg);color:var(--ink);font-family:"Instrument Sans",system-ui,sans-serif;line-height:1.65;}
+  ::selection{background:var(--accent);color:var(--soft);}
+  a{color:var(--accent-deep);}
+  .navbar-clinic{background:color-mix(in srgb, var(--soft) 90%, transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  .navbar-clinic .brand{font-family:"Source Serif 4",Georgia,serif;font-size:1.4rem;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:.01em;}
+  .navbar-clinic .nav-link{color:var(--ink-soft);font-weight:500;font-size:.95rem;}
+  .navbar-clinic .nav-link:hover{color:var(--accent-deep);}
+  .btn-pine{background:var(--accent);color:var(--soft);border:1px solid var(--accent);border-radius:999px;padding:.6rem 1.5rem;font-weight:600;}
+  .btn-pine:hover{background:var(--accent-deep);color:var(--soft);border-color:var(--accent-deep);}
+  .btn-quiet{border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:.6rem 1.5rem;font-weight:600;background:var(--soft);}
+  .btn-quiet:hover{border-color:var(--accent);color:var(--accent-deep);background:var(--soft);}
+
+  .hero{padding:5.5rem 0 4.5rem;}
+  .hero h1{font-family:"Source Serif 4",Georgia,serif;font-size:clamp(3rem, 6.2vw, 4.75rem);font-weight:700;line-height:1.04;letter-spacing:-.015em;}
+  .hero .tagline{color:var(--accent-deep);font-weight:600;letter-spacing:.14em;text-transform:uppercase;font-size:.85rem;}
+  .hero .lede{font-size:1.15rem;color:var(--ink-soft);max-width:34rem;}
+  .slot-panel{background:var(--soft);border:1px solid var(--line);border-radius:1.25rem;overflow:hidden;box-shadow:0 24px 48px -32px color-mix(in srgb, var(--ink) 40%, transparent);}
+  .slot-panel .panel-head{background:var(--accent);color:var(--soft);padding:1.1rem 1.5rem;}
+  .slot-panel .panel-head small{color:color-mix(in srgb, var(--soft) 75%, var(--accent));letter-spacing:.12em;text-transform:uppercase;font-weight:600;}
+  .hours-row{display:flex;justify-content:space-between;gap:1rem;padding:.7rem 0;border-bottom:1px dashed var(--line);font-size:.95rem;}
+  .hours-row:last-child{border-bottom:0;}
+  .hours-row .day{color:var(--ink-soft);}
+  .hours-row .time{font-weight:600;font-variant-numeric:tabular-nums;}
+  .open-now{display:inline-flex;align-items:center;gap:.5rem;background:color-mix(in srgb, var(--soft) 22%, var(--accent));color:var(--soft);border-radius:999px;padding:.3rem .9rem;font-size:.85rem;font-weight:600;}
+  .open-now::before{content:"";width:.55rem;height:.55rem;border-radius:50%;background:var(--soft);}
+
+  .dept-rows{border-top:1px solid var(--line);}
+  .dept-row{display:grid;grid-template-columns:1fr;gap:.35rem 3rem;padding:1.6rem 0;border-bottom:1px solid var(--line);}
+  @media(min-width:768px){.dept-row{grid-template-columns:15rem 1fr auto;align-items:baseline;}}
+  .dept-row dt{font-family:"Source Serif 4",Georgia,serif;font-size:1.45rem;font-weight:600;}
+  .dept-row dd{margin:0;color:var(--ink-soft);max-width:60ch;}
+  .dept-row .opd{font-size:.85rem;font-weight:600;color:var(--accent-deep);white-space:nowrap;font-variant-numeric:tabular-nums;}
+
+  .quote-band{background:var(--accent-deep);color:var(--soft);padding:6rem 0;}
+  .quote-band .big-quote{font-family:"Source Serif 4",Georgia,serif;font-size:clamp(1.7rem, 3.4vw, 2.6rem);line-height:1.3;font-weight:400;max-width:24ch;}
+  .quote-band .attrib{color:color-mix(in srgb, var(--soft) 70%, var(--accent-deep));}
+  .quote-band .mark{color:color-mix(in srgb, var(--soft) 45%, var(--accent-deep));font-size:5rem;line-height:0;font-family:Georgia,serif;}
+
+  .diag-item{padding:1.35rem 0;border-bottom:1px solid var(--line);display:flex;gap:1.25rem;align-items:baseline;}
+  .diag-item .idx{font-family:"Source Serif 4",Georgia,serif;color:var(--accent);font-size:1.1rem;font-weight:600;min-width:2.2rem;}
+  .diag-item h3{font-size:1.15rem;font-weight:600;margin-bottom:.2rem;font-family:"Instrument Sans",sans-serif;}
+  .diag-item p{color:var(--ink-soft);margin:0;max-width:52ch;font-size:.97rem;}
+  .photo-frame{border-radius:1.25rem;overflow:hidden;border:1px solid var(--line);}
+  .photo-frame img{width:100%;height:100%;object-fit:cover;display:block;}
+
+  .doc-row{display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;padding:1.75rem 0;border-bottom:1px solid var(--line);}
+  .doc-row img{width:76px;height:76px;object-fit:cover;border-radius:50%;border:2px solid var(--soft);box-shadow:0 0 0 1px var(--line);}
+  .doc-row .who{flex:1 1 16rem;}
+  .doc-row .who h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.3rem;margin:0;}
+  .doc-row .who span{color:var(--ink-soft);font-size:.95rem;}
+  .doc-row .sits{font-size:.9rem;color:var(--accent-deep);font-weight:600;font-variant-numeric:tabular-nums;}
+
+  .faq details{background:var(--soft);border:1px solid var(--line);border-radius:.9rem;margin-bottom:.8rem;}
+  .faq summary{cursor:pointer;list-style:none;padding:1.15rem 1.4rem;font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq summary::after{content:"+";font-family:"Source Serif 4",Georgia,serif;font-size:1.5rem;color:var(--accent);line-height:1;}
+  .faq details[open] summary::after{content:"\2212";}
+  .faq details[open] summary{border-bottom:1px dashed var(--line);}
+  .faq .ans{padding:1rem 1.4rem 1.3rem;color:var(--ink-soft);max-width:70ch;}
+
+  footer{background:var(--ink);color:color-mix(in srgb, var(--bg) 78%, var(--ink));}
+  footer a{color:color-mix(in srgb, var(--bg) 90%, var(--ink));text-decoration:none;}
+  footer a:hover{color:var(--bg);}
+  footer .foot-brand{font-family:"Source Serif 4",Georgia,serif;font-size:1.5rem;color:var(--bg);}
+  .eyebrow{letter-spacing:.14em;text-transform:uppercase;font-size:.8rem;font-weight:600;color:var(--accent-deep);}
+  .section-title{font-family:"Source Serif 4",Georgia,serif;font-size:clamp(2rem, 3.6vw, 2.75rem);font-weight:700;letter-spacing:-.01em;}
+  .muted{color:var(--ink-soft);}
+
+  @media (prefers-reduced-motion: no-preference){
+    .slot-panel,.faq details,.btn-pine,.btn-quiet{transition:transform .25s ease, box-shadow .25s ease, background .2s ease, border-color .2s ease;}
+    .slot-panel:hover{transform:translateY(-4px);}
+    .btn-pine:hover,.btn-quiet:hover{transform:translateY(-2px);}
+    .photo-frame img{transition:transform .6s ease;}
+    .photo-frame:hover img{transform:scale(1.045);}
+    .doc-row img{transition:transform .3s ease;}
+    .doc-row:hover img{transform:scale(1.07);}
+    .hero h1,.hero .lede{animation:rise .7s ease both;}
+    .hero .lede{animation-delay:.12s;}
+    @keyframes rise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+  }
+</style>
+</head>
+<body id="top">
+
+<nav class="navbar navbar-expand-md navbar-clinic sticky-top py-3">
+  <div class="container">
+    <a class="brand" href="#top">{{BRAND}}</a>
+    <div class="d-none d-md-flex align-items-center gap-4">
+      <a class="nav-link" href="#departments">Departments</a>
+      <a class="nav-link" href="#diagnostics">Diagnostics</a>
+      <a class="nav-link" href="#doctors">Doctors</a>
+      <a class="nav-link" href="#faq">Patient FAQ</a>
+      <a class="btn btn-pine btn-sm px-4" href="#book">Book a slot</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-7">
+        <p class="tagline mb-3">{{TAGLINE}}</p>
+        <h1>Walk in unwell.<br>Walk out with answers, the same day.</h1>
+        <p class="lede mt-4">{{BRAND}} is a family clinic with in-house diagnostics: OPD consultations, a NABL-accredited lab, and pharmacy under one roof. Most blood reports are ready by 6 pm, and follow-up reviews within 7 days are free.</p>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <a class="btn btn-pine" href="#book">Book a slot</a>
+          <a class="btn btn-quiet" href="#departments">Browse departments</a>
+        </div>
+      </div>
+      <div class="col-lg-5" id="book">
+        <div class="slot-panel">
+          <div class="panel-head d-flex justify-content-between align-items-center">
+            <div>
+              <small>Clinic hours</small>
+              <div class="fw-semibold fs-5">Visit or call ahead</div>
+            </div>
+            <span class="open-now">Open today</span>
+          </div>
+          <div class="p-4">
+            <div class="hours-row"><span class="day">Mon to Sat, morning OPD</span><span class="time">8:30 am to 1:00 pm</span></div>
+            <div class="hours-row"><span class="day">Mon to Sat, evening OPD</span><span class="time">5:00 pm to 9:00 pm</span></div>
+            <div class="hours-row"><span class="day">Sunday</span><span class="time">9:00 am to 12:30 pm</span></div>
+            <div class="hours-row"><span class="day">Sample collection</span><span class="time">from 7:00 am</span></div>
+            <a class="btn btn-pine w-100 mt-3" href="tel:+910000000000">Call 000 000 0000 to book</a>
+            <p class="text-center mt-3 mb-0 muted" style="font-size:.85rem;">Walk-ins welcome. Senior citizens and expectant mothers are seen on priority.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="py-5 my-4" id="departments">
+  <div class="container">
+    <p class="eyebrow mb-2">Departments</p>
+    <h2 class="section-title mb-2">One clinic, six specialities</h2>
+    <p class="muted mb-5" style="max-width:60ch;">Each department runs its own OPD schedule. Bring previous prescriptions and reports, our doctors read your history before they write anything new.</p>
+    <dl class="dept-rows mb-0">
+      <div class="dept-row">
+        <dt>General Medicine</dt>
+        <dd>Fevers, infections, diabetes and blood pressure management, annual health reviews for the whole family.</dd>
+        <div class="opd">Daily, both OPDs</div>
+      </div>
+      <div class="dept-row">
+        <dt>Paediatrics</dt>
+        <dd>Newborn care, vaccination on the national schedule, growth tracking with a chart you can keep.</dd>
+        <div class="opd">Mon, Wed, Fri, 5 to 8 pm</div>
+      </div>
+      <div class="dept-row">
+        <dt>Obstetrics &amp; Gynaecology</dt>
+        <dd>Antenatal checkups, ultrasound referrals, PCOS and menstrual health consultations in a private consulting room.</dd>
+        <div class="opd">Tue, Thu, Sat, 10 am to 1 pm</div>
+      </div>
+      <div class="dept-row">
+        <dt>Orthopaedics</dt>
+        <dd>Joint pain, sports injuries, fracture follow-ups, with digital X-ray on the premises.</dd>
+        <div class="opd">Wed and Sat, 6 to 9 pm</div>
+      </div>
+      <div class="dept-row">
+        <dt>Dermatology</dt>
+        <dd>Skin, hair and nail conditions, allergy patch testing, and honest advice on what does not need treatment.</dd>
+        <div class="opd">Tue and Fri, 5 to 8 pm</div>
+      </div>
+      <div class="dept-row">
+        <dt>Dental</dt>
+        <dd>Cleaning, fillings, root canal treatment over two sittings, and a dedicated children's chair.</dd>
+        <div class="opd">Daily except Sunday</div>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<section class="quote-band">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-9 text-center">
+        <div class="mark mb-4">&ldquo;</div>
+        <p class="big-quote mx-auto">The doctor spent twenty minutes with my father, explained every line of his report, and did not order a single unnecessary test.</p>
+        <p class="attrib mt-4 mb-0">A patient's son, from our visitor register, March this year</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 my-4" id="diagnostics">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-5">
+        <div class="photo-frame" style="aspect-ratio:4/5;">
+          <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?w=900&q=60" alt="Laboratory technician preparing samples">
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <p class="eyebrow mb-2">Diagnostics and admin, minus the run-around</p>
+        <h2 class="section-title mb-4">The boring parts, handled properly</h2>
+        <div class="diag-item">
+          <span class="idx">01</span>
+          <div>
+            <h3>Same-day reports</h3>
+            <p>Samples collected before 11 am are reported by 6 pm. Reports arrive as a PDF on WhatsApp and stay in your patient file here.</p>
+          </div>
+        </div>
+        <div class="diag-item">
+          <span class="idx">02</span>
+          <div>
+            <h3>Empanelled insurers</h3>
+            <p>Cashless OPD packages with major insurers and TPAs. Carry your policy card, our front desk handles pre-authorisation while you wait.</p>
+          </div>
+        </div>
+        <div class="diag-item">
+          <span class="idx">03</span>
+          <div>
+            <h3>Home sample collection</h3>
+            <p>A phlebotomist visits within a 5 km radius, 7 to 10 am slots, no extra charge for senior citizens.</p>
+          </div>
+        </div>
+        <div class="diag-item" style="border-bottom:0;">
+          <span class="idx">04</span>
+          <div>
+            <h3>Transparent pricing</h3>
+            <p>Consultation and test rates are printed at reception and on your bill. No surprise line items, ever.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5" id="doctors" style="background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="container py-3">
+    <p class="eyebrow mb-2">Consultants</p>
+    <h2 class="section-title mb-4">Doctors who sit here, not visiting cards</h2>
+    <div class="doc-row">
+      <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&q=60" alt="Portrait of consultant physician">
+      <div class="who"><h3>Dr. A. Menon, MD</h3><span>General Medicine, 14 years of practice</span></div>
+      <div class="sits">Mon to Sat, both OPDs</div>
+    </div>
+    <div class="doc-row">
+      <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=300&q=60" alt="Portrait of paediatrician">
+      <div class="who"><h3>Dr. R. Kulkarni, DCH</h3><span>Paediatrics, vaccination clinic in-charge</span></div>
+      <div class="sits">Mon, Wed, Fri evenings</div>
+    </div>
+    <div class="doc-row" style="border-bottom:0;">
+      <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=300&q=60" alt="Portrait of gynaecologist">
+      <div class="who"><h3>Dr. S. Iyer, MS (OBG)</h3><span>Obstetrics and Gynaecology, antenatal clinic</span></div>
+      <div class="sits">Tue, Thu, Sat mornings</div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 my-4 faq" id="faq">
+  <div class="container" style="max-width:820px;">
+    <p class="eyebrow mb-2 text-center">Patient FAQ</p>
+    <h2 class="section-title mb-5 text-center">Things patients ask at the front desk</h2>
+    <details open>
+      <summary>Do I need an appointment, or can I walk in?</summary>
+      <div class="ans">Walk-ins are seen in order of arrival during OPD hours. Booking a slot by phone holds your place in the queue, useful for evening OPD which is busiest between 6 and 8 pm.</div>
+    </details>
+    <details>
+      <summary>How do I collect my lab reports?</summary>
+      <div class="ans">Reports are sent as a PDF to the mobile number you register. Printed copies can be collected from reception after 6 pm the same day, or the next morning for samples given after 11 am.</div>
+    </details>
+    <details>
+      <summary>Is a follow-up visit charged?</summary>
+      <div class="ans">A review with the same doctor within 7 days of your consultation is free. Bring your prescription slip, it carries your visit number.</div>
+    </details>
+    <details>
+      <summary>Which insurance policies do you accept?</summary>
+      <div class="ans">We are empanelled with major insurers and TPAs for cashless OPD packages. For reimbursement claims, the front desk provides itemised bills and stamped reports on request, at no charge.</div>
+    </details>
+    <details>
+      <summary>What should I bring for a first visit?</summary>
+      <div class="ans">Any previous prescriptions, recent reports, and a list of medicines you take daily. If you track sugar or blood pressure at home, bring those readings too.</div>
+    </details>
+  </div>
+</section>
+
+<footer class="py-5 mt-4">
+  <div class="container">
+    <div class="row g-4 align-items-start">
+      <div class="col-md-5">
+        <div class="foot-brand mb-2">{{BRAND}}</div>
+        <p class="mb-0" style="max-width:40ch;">A neighbourhood clinic with hospital-grade diagnostics. Come early, carry your old files, and ask us anything twice.</p>
+      </div>
+      <div class="col-md-4">
+        <p class="fw-semibold mb-2" style="color:var(--bg);">Visit</p>
+        <p class="mb-1">Ground floor, Health Square, Main Road</p>
+        <p class="mb-1">OPD: 8:30 am to 9 pm, Mon to Sat</p>
+        <p class="mb-0">Sunday: 9 am to 12:30 pm</p>
+      </div>
+      <div class="col-md-3">
+        <p class="fw-semibold mb-2" style="color:var(--bg);">Reach us</p>
+        <p class="mb-1"><a href="tel:+910000000000">000 000 0000</a></p>
+        <p class="mb-1"><a href="#book">Book a slot</a></p>
+        <p class="mb-0"><a href="#faq">Patient FAQ</a></p>
+      </div>
+    </div>
+    <hr style="border-color:color-mix(in srgb, var(--bg) 25%, var(--ink));">
+    <p class="mb-0 text-center" style="font-size:.9rem;">© {{BRAND}} — draft preview generated by Dharwin Studio</p>
+  </div>
+</footer>
+
+</body>
+</html>

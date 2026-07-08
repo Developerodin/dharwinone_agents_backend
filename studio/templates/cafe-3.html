@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="design-label" content="Morning Light">
+<title>{{BRAND}}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#333d36;        /* pine ink */
+    --bg:#faf8f3;         /* morning off-white */
+    --accent:#5f7d54;     /* soft sage */
+    --soft:#f1ecdf;       /* butter surface */
+    --line:#e4ddcc;       /* linen border */
+    --ink-65:color-mix(in oklab, var(--ink) 65%, var(--bg));
+    --sage-tint:color-mix(in oklab, var(--accent) 10%, var(--bg));
+    --butter:color-mix(in oklab, #e9c46a 22%, var(--bg));
+  }
+  body{background:var(--bg);color:var(--ink);font-family:"Nunito Sans",sans-serif;font-size:1.0625rem;line-height:1.7}
+  h1,h2,h3{font-family:"Outfit",sans-serif;font-weight:600;letter-spacing:-.015em;color:var(--ink)}
+  p{max-width:62ch}
+  a{color:var(--accent)}
+  .tag{display:inline-block;background:var(--sage-tint);color:var(--accent);border-radius:999px;padding:.35rem 1rem;font-size:.85rem;font-weight:700}
+  /* NAV */
+  .nav-air{background:var(--bg)}
+  .nav-air .brand{font-family:"Outfit",sans-serif;font-weight:700;font-size:1.4rem;color:var(--ink);text-decoration:none}
+  .nav-air .brand span{color:var(--accent)}
+  .nav-air a.link{color:var(--ink-65);text-decoration:none;font-weight:600;font-size:.95rem}
+  .nav-air a.link:hover{color:var(--accent)}
+  .btn-sage{background:var(--accent);color:var(--bg);border:none;border-radius:999px;padding:.7rem 1.6rem;font-weight:700;font-family:"Outfit",sans-serif}
+  .btn-sage:hover{background:color-mix(in oklab, var(--accent) 80%, var(--ink));color:var(--bg)}
+  .btn-soft{background:var(--soft);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:.7rem 1.6rem;font-weight:700;font-family:"Outfit",sans-serif}
+  .btn-soft:hover{border-color:var(--accent);color:var(--accent)}
+  /* HERO */
+  .hero{padding:5rem 0 4rem}
+  .hero h1{font-size:clamp(2.9rem,6.5vw,4.8rem);line-height:1.06}
+  .hero .tagline{color:var(--ink-65);font-size:1.2rem;max-width:42ch}
+  .hero-img{border-radius:2.5rem;overflow:hidden;aspect-ratio:4/5}
+  .hero-img img{width:100%;height:100%;object-fit:cover;display:block}
+  .hero-chip{background:var(--bg);border:1px solid var(--line);border-radius:1.5rem;padding:1rem 1.3rem;box-shadow:0 14px 34px rgba(51,61,54,.1);max-width:16rem}
+  .hero-chip b{font-family:"Outfit",sans-serif}
+  .hero-chip .time{color:var(--accent);font-weight:700;font-size:.9rem}
+  /* BAKE RAIL (signature) */
+  .rail-wrap{padding:4.5rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .rail-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:1rem;margin-bottom:2rem}
+  .rail-head h2{font-size:clamp(1.9rem,4vw,2.8rem);margin:0}
+  .rail-head .hint{color:var(--ink-65);font-size:.95rem}
+  .rail{display:flex;gap:1.25rem;overflow-x:auto;padding:.25rem .25rem 1.25rem;scroll-snap-type:x mandatory}
+  .rail::-webkit-scrollbar{height:8px}
+  .rail::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px}
+  .bake-card{flex:0 0 15.5rem;scroll-snap-align:start;background:var(--bg);border:1px solid var(--line);border-radius:1.75rem;overflow:hidden}
+  .bake-card img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
+  .bake-card .body{padding:1.1rem 1.25rem 1.35rem}
+  .bake-card h3{font-size:1.15rem;margin:0}
+  .bake-card .price{color:var(--ink-65);font-weight:700;font-size:.95rem;margin-top:.15rem}
+  .bake-out{display:inline-flex;align-items:center;gap:.4rem;margin-top:.7rem;background:var(--butter);border-radius:999px;padding:.3rem .85rem;font-size:.82rem;font-weight:700;color:var(--ink)}
+  .bake-out .dot{width:.5rem;height:.5rem;border-radius:50%;background:var(--accent)}
+  .bake-out.gone{background:var(--soft);color:var(--ink-65)}
+  .bake-out.gone .dot{background:var(--line)}
+  /* WHY MORNINGS */
+  .why{padding:5.5rem 0}
+  .why h2{font-size:clamp(2rem,4.2vw,3rem)}
+  .why-card{background:var(--sage-tint);border-radius:2rem;padding:2rem;height:100%}
+  .why-card.alt{background:var(--butter)}
+  .why-card.plain{background:var(--soft)}
+  .why-card h3{font-size:1.3rem}
+  .why-card p{color:var(--ink-65);font-size:.98rem;margin:0}
+  .why-card .big{font-family:"Outfit",sans-serif;font-size:2.4rem;font-weight:700;color:var(--accent);line-height:1}
+  /* TABLE PHOTOS */
+  .table-band{padding:1rem 0 5rem}
+  .table-band .photo{border-radius:2rem;overflow:hidden}
+  .table-band img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:4/3}
+  .table-band .tallphoto img{aspect-ratio:3/4}
+  .caption{color:var(--ink-65);font-size:.9rem;margin-top:.6rem}
+  /* GOOD WORDS */
+  .words{padding:5rem 0;background:var(--sage-tint);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .word-card{background:var(--bg);border-radius:1.75rem;padding:1.75rem;height:100%;border:1px solid var(--line)}
+  .word-card p{font-size:1.02rem;margin:0 0 1rem}
+  .word-card .who{color:var(--accent);font-weight:700;font-size:.9rem}
+  /* VISIT */
+  .visit{padding:5.5rem 0}
+  .visit h2{font-size:clamp(2rem,4.2vw,3rem)}
+  .hours{background:var(--soft);border-radius:2rem;padding:2rem;border:1px solid var(--line)}
+  .hours .row-line{display:flex;justify-content:space-between;padding:.65rem 0;border-bottom:1px solid var(--line);font-size:1rem}
+  .hours .row-line:last-child{border-bottom:0}
+  .hours .day{font-weight:700;font-family:"Outfit",sans-serif}
+  /* FOOTER */
+  footer{background:var(--soft);border-top:1px solid var(--line);padding:3.5rem 0 2rem;color:var(--ink-65)}
+  footer .brand{font-family:"Outfit",sans-serif;font-weight:700;font-size:1.4rem;color:var(--ink)}
+  footer h4{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  footer a{color:var(--ink-65);text-decoration:none;display:block;padding:.2rem 0;font-size:.95rem}
+  footer a:hover{color:var(--accent)}
+  footer .legal{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1.4rem;font-size:.85rem}
+  @media (prefers-reduced-motion: no-preference){
+    .btn-sage,.btn-soft,footer a,.nav-air a.link{transition:all .22s ease}
+    .bake-card{transition:transform .3s ease, box-shadow .3s ease}
+    .bake-card:hover{transform:translateY(-6px);box-shadow:0 20px 44px rgba(51,61,54,.12)}
+    .hero-img img,.table-band img{transition:transform .6s ease}
+    .hero-img:hover img,.table-band .photo:hover img{transform:scale(1.04)}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav-air py-3">
+  <div class="container d-flex align-items-center justify-content-between">
+    <a class="brand" href="#">{{BRAND}}<span>.</span></a>
+    <div class="d-none d-md-flex gap-4 align-items-center">
+      <a class="link" href="#bakes">Today's bake</a>
+      <a class="link" href="#why">Our mornings</a>
+      <a class="link" href="#visit">Visit</a>
+      <a class="btn-sage btn" href="#bakes">Reserve a loaf</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <span class="tag mb-3">Bakery and daylight cafe</span>
+        <h1 class="mt-3">Soft light, warm crumb, no rush at all.</h1>
+        <p class="tagline mt-4">{{TAGLINE}}</p>
+        <div class="d-flex gap-3 mt-4 flex-wrap">
+          <a class="btn-sage btn" href="#bakes">See today's bake</a>
+          <a class="btn-soft btn" href="#visit">Hours and address</a>
+        </div>
+      </div>
+      <div class="col-lg-6 position-relative">
+        <div class="hero-img"><img src="https://images.unsplash.com/photo-1517093602195-b40af9688b46?w=900&q=60" alt="Sunlit bakery counter with fresh bread and pastries"></div>
+        <div class="hero-chip position-absolute bottom-0 start-0 ms-lg-n3 mb-4 ms-3">
+          <b>Cinnamon buns</b><br><span class="time">Next tray out at 9:40</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="rail-wrap" id="bakes">
+  <div class="container">
+    <div class="rail-head">
+      <h2>Today's bake, in order of appearance</h2>
+      <span class="hint">Scroll along the counter, times update each morning</span>
+    </div>
+    <div class="rail">
+      <article class="bake-card">
+        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&q=60" alt="Golden sourdough loaves on a wooden shelf">
+        <div class="body"><h3>Overnight sourdough</h3><div class="price">6.50 a loaf</div><span class="bake-out gone"><span class="dot"></span>First bake 7:00, sold</span></div>
+      </article>
+      <article class="bake-card">
+        <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&q=60" alt="Butter croissants cooling on a rack">
+        <div class="body"><h3>Butter croissant</h3><div class="price">3.20 each</div><span class="bake-out"><span class="dot"></span>Out of the oven 8:15</span></div>
+      </article>
+      <article class="bake-card">
+        <img src="https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=600&q=60" alt="Swirled cinnamon buns with glaze">
+        <div class="body"><h3>Cardamom bun</h3><div class="price">3.60 each</div><span class="bake-out"><span class="dot"></span>Out of the oven 9:40</span></div>
+      </article>
+      <article class="bake-card">
+        <img src="https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?w=600&q=60" alt="Rustic fruit galette dusted with sugar">
+        <div class="body"><h3>Plum galette</h3><div class="price">4.80 a slice</div><span class="bake-out"><span class="dot"></span>Out of the oven 10:30</span></div>
+      </article>
+      <article class="bake-card">
+        <img src="https://images.unsplash.com/photo-1486887396153-fa416526c108?w=600&q=60" alt="Seeded rye bread sliced on a board">
+        <div class="body"><h3>Seeded rye</h3><div class="price">7.00 a loaf</div><span class="bake-out"><span class="dot"></span>Out of the oven 11:15</span></div>
+      </article>
+      <article class="bake-card">
+        <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=600&q=60" alt="Chocolate chip cookies stacked on parchment">
+        <div class="body"><h3>Rye chocolate cookie</h3><div class="price">2.80 each</div><span class="bake-out"><span class="dot"></span>Out of the oven 12:00</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="why" id="why">
+  <div class="container">
+    <div class="row g-4 align-items-end mb-4">
+      <div class="col-lg-7"><h2>Mornings are the whole point.</h2></div>
+      <div class="col-lg-5"><p class="mb-1" style="color:var(--ink-65)">We close at two in the afternoon, on purpose. Everything is baked, poured and plated for the gentlest part of the day.</p></div>
+    </div>
+    <div class="row g-3">
+      <div class="col-md-3 col-6"><div class="why-card"><div class="big">4:30</div><p class="mt-2">The ovens wake before we do. First dough in by five.</p></div></div>
+      <div class="col-md-3 col-6"><div class="why-card alt"><div class="big">2</div><p class="mt-2">Coffees on the menu. A filter and a flat white, both done properly.</p></div></div>
+      <div class="col-md-3 col-6"><div class="why-card plain"><div class="big">0</div><p class="mt-2">Freezers in the building. What you see was mixed yesterday.</p></div></div>
+      <div class="col-md-3 col-6"><div class="why-card"><div class="big">14:00</div><p class="mt-2">Chairs up, lights off, tomorrow's levain already fed.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="table-band">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="photo tallphoto"><img src="https://images.unsplash.com/photo-1522992319-0365e5f11656?w=800&q=60" alt="Cafe table by a bright window with coffee and pastry"></div>
+        <p class="caption">The window table, first come first served</p>
+      </div>
+      <div class="col-md-7">
+        <div class="photo"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&q=60" alt="Barista handing a coffee across the counter"></div>
+        <p class="caption">Order at the counter, we bring it over</p>
+        <h2 class="mt-4" style="font-size:clamp(1.7rem,3vw,2.3rem)">Milk from Havredal farm, flour from the old mill, honey from three streets away.</h2>
+        <p class="mt-3" style="color:var(--ink-65)">Short supply lines make better breakfasts. Every producer is listed on the board above the till, and most of them eat here on Saturdays.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="words">
+  <div class="container">
+    <div class="row g-3">
+      <div class="col-md-4"><div class="word-card"><p>"I plan my whole week around the 9:40 cardamom tray. It has never once let me down."</p><span class="who">Elin S., Tuesdays and Fridays</span></div></div>
+      <div class="col-md-4"><div class="word-card"><p>"The quietest, brightest hour of my day. Filter coffee, rye toast, window seat, done."</p><span class="who">Marcus T., most mornings</span></div></div>
+      <div class="col-md-4"><div class="word-card"><p>"They reserved a loaf for my mum every Saturday for a year. That is the whole review."</p><span class="who">Priya K., Saturday regular</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6">
+        <span class="tag mb-3">Visit</span>
+        <h2 class="mt-3">Open with the sun, gone by two.</h2>
+        <p class="mt-3" style="color:var(--ink-65)">Find us at 3 Weaver's Yard, the corner with the yellow awning. Loaf reservations close at 8 p.m. the night before, just call or message.</p>
+        <a class="btn-sage btn mt-2" href="#">Reserve tomorrow's loaf</a>
+      </div>
+      <div class="col-lg-6">
+        <div class="hours">
+          <div class="row-line"><span class="day">Monday to Friday</span><span>7:00 to 14:00</span></div>
+          <div class="row-line"><span class="day">Saturday</span><span>7:30 to 14:00</span></div>
+          <div class="row-line"><span class="day">Sunday</span><span>Closed, dough rests too</span></div>
+          <div class="row-line"><span class="day">Address</span><span>3 Weaver's Yard</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-5">
+        <div class="brand">{{BRAND}}</div>
+        <p class="mt-2" style="max-width:36ch">A daylight bakery-cafe. Everything baked this morning, nothing held overnight.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4 class="mb-3">Bakery</h4>
+        <a href="#bakes">Today's bake</a>
+        <a href="#why">Our mornings</a>
+        <a href="#visit">Visit</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4 class="mb-3">Orders</h4>
+        <a href="#">Loaf reservations</a>
+        <a href="#">Whole cakes</a>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h4 class="mb-3">Say hej</h4>
+        <a href="#">morning@example.com</a>
+        <a href="#">Instagram</a>
+        <a href="#">3 Weaver's Yard</a>
+      </div>
+    </div>
+    <div class="legal">© {{BRAND}}. Draft preview generated by Dharwin Studio.</div>
+  </div>
+</footer>
+
+</body>
+</html>

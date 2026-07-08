@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{BRAND}}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2e1f13;        /* deep espresso */
+    --bg:#f3ebdf;         /* milk foam */
+    --accent:#a9631b;     /* burnt honey */
+    --soft:#eadfcd;       /* steamed surface */
+    --line:#d8c6ac;       /* crema border */
+    --ink-70:color-mix(in oklab, var(--ink) 70%, var(--bg));
+    --ink-45:color-mix(in oklab, var(--ink) 45%, var(--bg));
+    --foam:color-mix(in oklab, var(--bg) 88%, var(--ink));
+    --board-text:color-mix(in oklab, var(--bg) 92%, var(--accent));
+  }
+  body{background:var(--bg);color:var(--ink);font-family:"Karla",sans-serif;font-size:1.0625rem;line-height:1.65}
+  h1,h2,h3,.display-face{font-family:"Fraunces",serif;color:var(--ink)}
+  p{max-width:68ch}
+  a{color:var(--accent)}
+  .eyebrow{font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  /* NAV */
+  .nav-bar{border-bottom:1px solid var(--line);background:var(--bg)}
+  .nav-bar .brand{font-family:"Fraunces",serif;font-weight:900;font-size:1.35rem;color:var(--ink);text-decoration:none}
+  .nav-bar a.link{color:var(--ink-70);text-decoration:none;font-weight:500;font-size:.95rem}
+  .nav-bar a.link:hover{color:var(--accent)}
+  .btn-honey{background:var(--accent);color:var(--bg);border:none;border-radius:999px;padding:.65rem 1.5rem;font-weight:700}
+  .btn-honey:hover{background:color-mix(in oklab, var(--accent) 82%, var(--ink));color:var(--bg)}
+  .btn-outline-ink{border:1.5px solid var(--ink);color:var(--ink);border-radius:999px;padding:.6rem 1.5rem;font-weight:700;background:transparent}
+  .btn-outline-ink:hover{background:var(--ink);color:var(--bg)}
+  /* HERO */
+  .hero{padding:5.5rem 0 4.5rem}
+  .hero h1{font-size:clamp(3.2rem,7vw,5.4rem);font-weight:900;line-height:1.02;letter-spacing:-.02em}
+  .hero h1 em{font-style:italic;color:var(--accent)}
+  .hero .tagline{color:var(--ink-70);font-size:1.2rem;max-width:44ch}
+  .hero-photo{border-radius:1.25rem;overflow:hidden;border:1px solid var(--line)}
+  .hero-photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .hero-photo.tall{aspect-ratio:3/4}
+  .hero-photo.short{aspect-ratio:4/3;margin-top:2.5rem}
+  .hero-note{background:var(--soft);border:1px solid var(--line);border-radius:1rem;padding:1rem 1.25rem;font-size:.95rem;color:var(--ink-70);max-width:34rem}
+  /* MARQUEE */
+  .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;background:var(--soft);padding:.9rem 0;white-space:nowrap}
+  .marquee-track{display:inline-block}
+  .marquee span{font-family:"Fraunces",serif;font-size:1.05rem;font-weight:600;color:var(--ink-70);padding:0 1.4rem}
+  .marquee b{color:var(--accent)}
+  @media (prefers-reduced-motion: no-preference){
+    .marquee-track{animation:slide 34s linear infinite}
+    @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .lift{transition:transform .25s ease, box-shadow .25s ease}
+    .lift:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(46,31,19,.14)}
+    .zoom img{transition:transform .6s ease}
+    .zoom:hover img{transform:scale(1.05)}
+  }
+  /* CHALKBOARD MENU (signature) */
+  .board-wrap{padding:5.5rem 0}
+  .board{background:var(--ink);color:var(--board-text);border-radius:1.5rem;padding:clamp(2rem,5vw,4rem);box-shadow:0 30px 60px rgba(46,31,19,.22)}
+  .board h2{color:var(--board-text);font-size:clamp(2.2rem,4vw,3.2rem);font-weight:900}
+  .board .rule{height:1px;background:color-mix(in oklab, var(--board-text) 30%, transparent);margin:1.5rem 0 2rem}
+  .board h3{color:var(--accent);font-size:1rem;letter-spacing:.2em;text-transform:uppercase;font-family:"Karla",sans-serif;font-weight:700;margin-bottom:1.25rem}
+  .menu-item{display:flex;align-items:baseline;gap:.6rem;margin-bottom:1.05rem}
+  .menu-item .name{font-family:"Fraunces",serif;font-size:1.15rem;font-weight:600}
+  .menu-item .dots{flex:1;border-bottom:2px dotted color-mix(in oklab, var(--board-text) 35%, transparent);transform:translateY(-4px)}
+  .menu-item .price{font-weight:700;color:var(--accent)}
+  .menu-desc{font-size:.9rem;color:color-mix(in oklab, var(--board-text) 70%, var(--ink));margin:-0.8rem 0 1rem;display:block}
+  .chalk-note{font-style:italic;color:color-mix(in oklab, var(--board-text) 70%, var(--ink));font-family:"Fraunces",serif}
+  /* STORY ROWS */
+  .story{padding:5rem 0 3rem}
+  .story .row+.row{margin-top:4.5rem}
+  .story-photo{border-radius:1.25rem;overflow:hidden;border:1px solid var(--line);aspect-ratio:5/4}
+  .story-photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .story h2{font-size:clamp(2rem,3.5vw,2.9rem);font-weight:900;letter-spacing:-.01em}
+  .story .lede{color:var(--ink-70)}
+  .fact{border-top:1px solid var(--line);padding:.8rem 0;display:flex;justify-content:space-between;gap:1rem;font-size:.95rem}
+  .fact b{font-family:"Fraunces",serif}
+  /* GALLERY BAND */
+  .band{padding:4rem 0}
+  .band figure{margin:0;border-radius:1rem;overflow:hidden;border:1px solid var(--line);background:var(--foam)}
+  .band img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
+  .band figcaption{font-size:.85rem;color:var(--ink-45);padding:.6rem .9rem .8rem}
+  /* QUOTE */
+  .quote{padding:6rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .quote blockquote{font-family:"Fraunces",serif;font-size:clamp(1.8rem,3.6vw,3rem);font-weight:600;line-height:1.25;font-style:italic;max-width:22ch;margin:0 auto;text-align:center;color:var(--ink)}
+  .quote blockquote b{color:var(--accent);font-style:normal}
+  .quote .who{text-align:center;margin-top:1.5rem;color:var(--ink-70);font-size:.95rem}
+  /* HOURS + FAQ */
+  .visit{padding:5.5rem 0}
+  .hours-card{background:var(--foam);border:1px solid var(--line);border-radius:1.25rem;padding:2rem}
+  .hours-row{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding:.7rem 0;font-size:.98rem}
+  .hours-row:last-child{border-bottom:none}
+  .hours-row .day{font-weight:700}
+  details{border-bottom:1px solid var(--line);padding:1.1rem 0}
+  details summary{font-family:"Fraunces",serif;font-weight:600;font-size:1.15rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;color:var(--ink)}
+  details summary::-webkit-details-marker{display:none}
+  details summary::after{content:"+";color:var(--accent);font-size:1.5rem;font-family:"Karla",sans-serif;line-height:1}
+  details[open] summary::after{content:"×"}
+  details p{color:var(--ink-70);margin:.7rem 0 0;font-size:.98rem}
+  /* CTA */
+  .cta{padding:5.5rem 0;background:var(--ink)}
+  .cta h2{color:var(--bg);font-size:clamp(2.2rem,4.5vw,3.6rem);font-weight:900}
+  .cta p{color:color-mix(in oklab, var(--bg) 70%, var(--ink))}
+  /* FOOTER */
+  footer{background:var(--ink);color:color-mix(in oklab, var(--bg) 72%, var(--ink));padding:4rem 0 2rem;border-top:1px solid color-mix(in oklab, var(--bg) 20%, var(--ink))}
+  footer .brand{font-family:"Fraunces",serif;font-weight:900;font-size:1.5rem;color:var(--bg)}
+  footer h4{font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-family:"Karla",sans-serif;font-weight:700}
+  footer a{color:color-mix(in oklab, var(--bg) 78%, var(--ink));text-decoration:none;display:block;padding:.2rem 0;font-size:.95rem}
+  footer a:hover{color:var(--accent)}
+  footer .legal{border-top:1px solid color-mix(in oklab, var(--bg) 18%, var(--ink));margin-top:3rem;padding-top:1.5rem;font-size:.85rem}
+</style>
+</head>
+<body>
+
+<nav class="nav-bar py-3">
+  <div class="container d-flex align-items-center justify-content-between">
+    <a class="brand" href="#">{{BRAND}}</a>
+    <div class="d-none d-md-flex gap-4 align-items-center">
+      <a class="link" href="#menu">Today's board</a>
+      <a class="link" href="#story">The roastery</a>
+      <a class="link" href="#visit">Hours</a>
+      <a class="btn-honey btn" href="#visit">Order ahead</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <p class="eyebrow mb-3">{{BRAND}}, neighborhood roastery and bakery</p>
+        <h1>The first sip should <em>slow the whole street down.</em></h1>
+        <p class="tagline mt-4">{{TAGLINE}}</p>
+        <div class="d-flex gap-3 mt-4 flex-wrap">
+          <a class="btn-honey btn" href="#menu">See today's board</a>
+          <a class="btn-outline-ink btn" href="#story">How we roast</a>
+        </div>
+        <div class="hero-note mt-5">Doors open 7:00. The cardamom knots sell out by 9:30, we are sorry in advance.</div>
+      </div>
+      <div class="col-lg-6">
+        <div class="row g-3">
+          <div class="col-7">
+            <div class="hero-photo tall zoom"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=60" alt="Espresso being poured into a ceramic cup"></div>
+          </div>
+          <div class="col-5">
+            <div class="hero-photo short zoom"><img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&q=60" alt="Fresh croissants on a cooling rack"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Single origin espresso <b>•</b></span><span>Sourdough proofed 36 hours <b>•</b></span><span>Roasted in-house every Tuesday <b>•</b></span><span>Oat milk from a farm we can name <b>•</b></span><span>Filter changes daily <b>•</b></span><span>Dogs welcome, obviously <b>•</b></span>
+    <span>Single origin espresso <b>•</b></span><span>Sourdough proofed 36 hours <b>•</b></span><span>Roasted in-house every Tuesday <b>•</b></span><span>Oat milk from a farm we can name <b>•</b></span><span>Filter changes daily <b>•</b></span><span>Dogs welcome, obviously <b>•</b></span>
+  </div>
+</div>
+
+<section class="board-wrap" id="menu">
+  <div class="container">
+    <div class="board">
+      <div class="d-flex flex-wrap justify-content-between align-items-end gap-3">
+        <h2 class="mb-0">Today's board</h2>
+        <p class="chalk-note mb-1">chalked fresh this morning</p>
+      </div>
+      <div class="rule"></div>
+      <div class="row g-5">
+        <div class="col-md-6">
+          <h3>Espresso and filter</h3>
+          <div class="menu-item"><span class="name">House espresso, Huila Colombia</span><span class="dots"></span><span class="price">3.20</span></div>
+          <span class="menu-desc">dark cherry, panela, a long cocoa finish</span>
+          <div class="menu-item"><span class="name">Flat white</span><span class="dots"></span><span class="price">4.10</span></div>
+          <div class="menu-item"><span class="name">Cardamom honey latte</span><span class="dots"></span><span class="price">4.80</span></div>
+          <div class="menu-item"><span class="name">V60 pourover, Sidamo Ethiopia</span><span class="dots"></span><span class="price">5.50</span></div>
+          <span class="menu-desc">jasmine, apricot, brewed to order in six minutes</span>
+          <div class="menu-item"><span class="name">Cold brew tonic</span><span class="dots"></span><span class="price">5.00</span></div>
+        </div>
+        <div class="col-md-6">
+          <h3>From the oven</h3>
+          <div class="menu-item"><span class="name">Cardamom knot</span><span class="dots"></span><span class="price">3.60</span></div>
+          <span class="menu-desc">the famous one, limited to two per person</span>
+          <div class="menu-item"><span class="name">Brown butter croissant</span><span class="dots"></span><span class="price">3.40</span></div>
+          <div class="menu-item"><span class="name">Sourdough toast, whipped ricotta</span><span class="dots"></span><span class="price">7.50</span></div>
+          <div class="menu-item"><span class="name">Fig and hazelnut galette</span><span class="dots"></span><span class="price">5.20</span></div>
+          <div class="menu-item"><span class="name">Seeded rye loaf to take home</span><span class="dots"></span><span class="price">8.00</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="story" id="story">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <div class="story-photo zoom lift"><img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=900&q=60" alt="Barista brewing coffee by hand"></div>
+      </div>
+      <div class="col-lg-6">
+        <p class="eyebrow mb-3">The roastery</p>
+        <h2>Roasted eleven meters from where you drink it.</h2>
+        <p class="lede mt-3">Our 12 kilo Probat sits behind the counter, not in a warehouse. We roast every Tuesday, rest the beans five days, and pull the first shots the following Sunday. If a batch tastes flat, it goes to compost, not to your cup.</p>
+        <div class="mt-4">
+          <div class="fact"><span>Current espresso</span><b>Finca El Paraiso, washed</b></div>
+          <div class="fact"><span>Rest period</span><b>5 to 9 days off roast</b></div>
+          <div class="fact"><span>Grind adjusted</span><b>Every morning at 6:40</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="row align-items-center g-5 flex-lg-row-reverse">
+      <div class="col-lg-6">
+        <div class="story-photo zoom lift"><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=900&q=60" alt="Sourdough loaves fresh from the oven"></div>
+      </div>
+      <div class="col-lg-6">
+        <p class="eyebrow mb-3">The bakery</p>
+        <h2>Bread that kept us up all night, so it never keeps you waiting.</h2>
+        <p class="lede mt-3">The levain is older than the shop. Every loaf proofs for 36 hours in the cold room, gets scored by hand at 4 a.m., and lands on the shelf with the crust still ticking as it cools. Saturday is rye day. Set an alarm.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="container">
+    <div class="row g-3">
+      <div class="col-md-4"><figure class="zoom lift"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=700&q=60" alt="Morning light across the cafe counter"><figcaption>The counter at 7:04, before the rush</figcaption></figure></div>
+      <div class="col-md-4"><figure class="zoom lift"><img src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=700&q=60" alt="Stacked loaves of fresh bread"><figcaption>Saturday rye, still warm</figcaption></figure></div>
+      <div class="col-md-4"><figure class="zoom lift"><img src="https://images.unsplash.com/photo-1521302080334-4bebac2763a6?w=700&q=60" alt="Latte art poured into a cup"><figcaption>A rosetta that took Priya two years</figcaption></figure></div>
+    </div>
+  </div>
+</section>
+
+<section class="quote">
+  <div class="container">
+    <blockquote>"I moved two suburbs over and I still drive back <b>every single Saturday.</b>"</blockquote>
+    <p class="who">Amara O., regular since opening week</p>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-5">
+        <p class="eyebrow mb-3">Find us</p>
+        <h2 class="mb-4">Open early, gone when the bread is.</h2>
+        <div class="hours-card">
+          <div class="hours-row"><span class="day">Mon to Fri</span><span>7:00 to 15:00</span></div>
+          <div class="hours-row"><span class="day">Saturday</span><span>7:30 to 16:00</span></div>
+          <div class="hours-row"><span class="day">Sunday</span><span>8:00 to 14:00</span></div>
+          <div class="hours-row"><span class="day">Address</span><span>14 Alder Lane, on the corner</span></div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <p class="eyebrow mb-3">Questions we hear at the counter</p>
+        <details open>
+          <summary>Do you take reservations?</summary>
+          <p>No, and we like it that way. Seats turn over fast in the morning. Groups of six or more can email us for the long table by the window after 11.</p>
+        </details>
+        <details>
+          <summary>Can I buy your beans?</summary>
+          <p>Yes. Whole bean 250g bags of whatever is on the grinder, roasted that week. We will grind for your brewer if you tell us what you use at home.</p>
+        </details>
+        <details>
+          <summary>Is there decaf, and is it actually good?</summary>
+          <p>A sugarcane process Colombian that regulars order without whispering. We pull it on its own grinder so it never tastes like an apology.</p>
+        </details>
+        <details>
+          <summary>Do you do wholesale for other cafes?</summary>
+          <p>A small list, capped so quality holds. Ask for Jonah on a Tuesday and bring your favorite cup.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta text-center">
+  <div class="container">
+    <h2>Skip the queue, not the ritual.</h2>
+    <p class="mx-auto mt-3" style="max-width:52ch">Order ahead and your flat white will be resting on the pickup shelf, exactly 62 degrees, with your name on the lid.</p>
+    <a class="btn-honey btn mt-3" href="#">Order ahead</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-5">
+        <div class="brand">{{BRAND}}</div>
+        <p class="mt-2" style="max-width:38ch">Coffee roasted in the room you drink it in. Bread that never meets a freezer.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4 class="mb-3">Visit</h4>
+        <a href="#menu">Today's board</a>
+        <a href="#story">The roastery</a>
+        <a href="#visit">Hours</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4 class="mb-3">Beans</h4>
+        <a href="#">Current roasts</a>
+        <a href="#">Subscriptions</a>
+        <a href="#">Wholesale</a>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h4 class="mb-3">Say hello</h4>
+        <a href="#">hello@example.com</a>
+        <a href="#">Instagram</a>
+        <a href="#">14 Alder Lane</a>
+      </div>
+    </div>
+    <div class="legal">© {{BRAND}} — draft preview generated by Dharwin Studio</div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="design-label" content="Open Course">
+<title>{{BRAND}}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1d1730;
+    --bg:#fbfaff;
+    --accent:#6427c9;
+    --soft:#f2eefb;
+    --line:#e3dcf3;
+  }
+  body{background:var(--bg);color:var(--ink);font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:1.0625rem;line-height:1.6;}
+  h1,h2,h3,h4{font-weight:800;letter-spacing:-.02em;}
+  .kick{font-weight:700;font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);}
+  p{max-width:64ch;}
+  a{color:var(--accent);}
+
+  .site-nav{background:var(--bg);border-bottom:1px solid var(--line);}
+  .site-nav .brand{font-weight:800;font-size:1.4rem;letter-spacing:-.02em;color:var(--ink);text-decoration:none;}
+  .site-nav .brand .cursor{color:var(--accent);}
+  .site-nav .nav-link{color:var(--ink);font-weight:600;font-size:.93rem;}
+  .btn-vio{background:var(--accent);color:#fff;border:2px solid var(--accent);font-weight:700;padding:.6rem 1.5rem;border-radius:.75rem;}
+  .btn-vio:hover{background:var(--ink);border-color:var(--ink);color:#fff;}
+  .btn-ghosty{background:var(--soft);color:var(--ink);border:2px solid var(--line);font-weight:700;padding:.6rem 1.5rem;border-radius:.75rem;}
+  .btn-ghosty:hover{border-color:var(--accent);color:var(--accent);background:var(--soft);}
+
+  .hero{padding:5.5rem 0 4.5rem;}
+  .hero h1{font-size:clamp(2.8rem,7vw,5.4rem);line-height:.98;}
+  .hero h1 .box{background:var(--accent);color:#fff;padding:0 .25em;border-radius:.75rem;display:inline-block;}
+  .hero .tagline{font-size:1.3rem;color:color-mix(in srgb, var(--ink) 76%, var(--bg));max-width:35rem;}
+  .cohort-strip{display:inline-flex;flex-wrap:wrap;gap:.6rem 1.6rem;background:var(--soft);border:1px solid var(--line);border-radius:1rem;padding:1rem 1.4rem;font-size:.95rem;margin-top:1.9rem;}
+  .cohort-strip b{font-weight:800;color:var(--accent);}
+  .hero-img{border-radius:1.5rem;overflow:hidden;border:1px solid var(--line);}
+  .hero-img img{width:100%;height:26rem;object-fit:cover;display:block;}
+  .hero-chip{background:var(--ink);color:#fff;border-radius:1rem;padding:1rem 1.3rem;margin-top:-2.4rem;margin-left:1.25rem;position:relative;display:inline-block;font-weight:700;font-size:.95rem;}
+  .hero-chip span{color:#c9b6f2;font-weight:600;display:block;font-size:.82rem;}
+
+  .tracks{padding:4.5rem 0;}
+  .track{background:var(--soft);border:1px solid var(--line);border-radius:1.25rem;padding:1.8rem 1.7rem;height:100%;}
+  .track .lvl{display:inline-block;background:var(--accent);color:#fff;font-weight:700;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;border-radius:2rem;padding:.28rem .9rem;margin-bottom:.9rem;}
+  .track .lvl.alt{background:var(--ink);}
+  .track h3{font-size:1.4rem;}
+  .track p{font-size:.96rem;color:color-mix(in srgb, var(--ink) 80%, var(--bg));margin-bottom:1rem;}
+  .track .meta{display:flex;justify-content:space-between;gap:1rem;border-top:1px solid var(--line);padding-top:.9rem;font-size:.88rem;font-weight:700;}
+
+  .curriculum{background:var(--ink);color:#fff;padding:5rem 0;}
+  .curriculum .kick{color:#c9b6f2;}
+  .curriculum h2{color:#fff;}
+  .curriculum .lede{color:#bfb3da;}
+  .mod{border:1px solid #383052;border-radius:1rem;background:color-mix(in srgb, #fff 4%, var(--ink));margin-bottom:.9rem;overflow:hidden;}
+  .mod .head{display:flex;align-items:baseline;gap:1.2rem;padding:1.2rem 1.4rem;}
+  .mod .num{font-weight:800;font-size:1.5rem;color:var(--accent);min-width:2.6rem;}
+  .mod h4{color:#fff;font-size:1.2rem;margin:0;flex:1;}
+  .mod .dur{font-weight:700;font-size:.85rem;color:#c9b6f2;white-space:nowrap;}
+  .mod .lessons{display:grid;grid-template-rows:0fr;}
+  .mod:hover .lessons,.mod:focus-within .lessons{grid-template-rows:1fr;}
+  .mod:hover,.mod:focus-within{border-color:var(--accent);}
+  .mod .lessons > div{overflow:hidden;}
+  .mod ol{list-style:none;counter-reset:lesson;margin:0;padding:0 1.4rem;}
+  .mod ol li{counter-increment:lesson;display:flex;justify-content:space-between;gap:1rem;padding:.65rem 0;border-top:1px dashed #383052;font-size:.94rem;color:#d9d1ec;}
+  .mod ol li::before{content:counter(lesson,decimal-leading-zero);font-weight:700;color:#8f7cc0;margin-right:.9rem;}
+  .mod ol li span:first-of-type{flex:1;}
+  .mod ol li b{color:#fff;font-weight:700;white-space:nowrap;}
+  .mod .peek{display:block;padding:.4rem 1.4rem 1.1rem;font-weight:700;font-size:.85rem;color:#c9b6f2;text-decoration:none;}
+  .mod .peek:hover{color:#fff;}
+  .cur-note{font-size:.9rem;color:#8f7cc0;font-weight:600;}
+
+  .outcomes{padding:5rem 0;}
+  .out-card{border:1px solid var(--line);border-radius:1.25rem;padding:1.7rem 1.6rem;height:100%;background:var(--bg);}
+  .out-card b{display:block;font-size:2.1rem;font-weight:800;color:var(--accent);letter-spacing:-.02em;line-height:1.1;}
+  .out-card span{font-size:.95rem;color:color-mix(in srgb, var(--ink) 76%, var(--bg));}
+  .mentor-quote{background:var(--soft);border:1px solid var(--line);border-radius:1.5rem;padding:2.2rem 2rem;}
+  .mentor-quote blockquote{font-weight:600;font-size:1.35rem;line-height:1.45;letter-spacing:-.01em;}
+  .mentor-quote figcaption{font-size:.92rem;color:color-mix(in srgb, var(--ink) 72%, var(--bg));font-weight:600;}
+
+  .cta{padding:0 0 5.5rem;}
+  .cta-inner{background:var(--accent);color:#fff;border-radius:1.75rem;padding:3.4rem clamp(1.5rem,5vw,3.6rem);}
+  .cta-inner h2{font-size:clamp(2rem,4.8vw,3.2rem);letter-spacing:-.02em;}
+  .cta-inner p{color:#e6dcf9;}
+  .btn-white{background:#fff;color:var(--accent);border:2px solid #fff;font-weight:800;padding:.75rem 1.9rem;border-radius:.75rem;}
+  .btn-white:hover{background:var(--ink);border-color:var(--ink);color:#fff;}
+
+  footer{background:var(--bg);border-top:1px solid var(--line);padding:3.8rem 0 2rem;font-size:.94rem;}
+  footer .brand{font-weight:800;font-size:1.4rem;color:var(--ink);}
+  footer h6{font-weight:700;font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;}
+  footer ul{list-style:none;padding:0;margin:0;}
+  footer li{padding:.24rem 0;}
+  footer a{color:var(--ink);text-decoration:none;}
+  footer a:hover{color:var(--accent);}
+  .foot-legal{border-top:1px solid var(--line);margin-top:2.6rem;padding-top:1.4rem;font-size:.85rem;color:color-mix(in srgb, var(--ink) 64%, var(--bg));}
+
+  @media (prefers-reduced-motion: no-preference){
+    .mod .lessons{transition:grid-template-rows .35s ease;}
+    .mod{transition:border-color .25s ease;}
+    .track,.out-card{transition:transform .25s ease,box-shadow .25s ease;}
+    .track:hover,.out-card:hover{transform:translateY(-5px);box-shadow:0 18px 38px rgba(29,23,48,.12);}
+    .hero-img img{transition:transform .55s ease;}
+    .hero-img:hover img{transform:scale(1.04);}
+    .btn-vio,.btn-ghosty,.btn-white{transition:background-color .2s ease,color .2s ease,border-color .2s ease;}
+  }
+  @media (max-width:575px){
+    .hero-img img{height:17rem;}
+    .mod .head{flex-wrap:wrap;gap:.4rem .9rem;}
+  }
+</style>
+</head>
+<body id="top">
+
+<nav class="site-nav py-3">
+  <div class="container d-flex align-items-center justify-content-between gap-3">
+    <a class="brand" href="#top">{{BRAND}}<span class="cursor">_</span></a>
+    <div class="d-none d-md-flex align-items-center gap-4">
+      <a class="nav-link" href="#tracks">Tracks</a>
+      <a class="nav-link" href="#curriculum">Curriculum</a>
+      <a class="nav-link" href="#outcomes">Outcomes</a>
+      <a class="btn btn-vio" href="#enrol">Join the next cohort</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6">
+        <p class="kick mb-3">Live online academy · Cohorts, not recordings</p>
+        <h1 class="mb-3">Learn to ship, <span class="box">not just watch.</span></h1>
+        <p class="tagline mt-3">{{TAGLINE}}</p>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <a class="btn btn-vio" href="#enrol">Join the next cohort</a>
+          <a class="btn btn-ghosty" href="#curriculum">Browse the curriculum</a>
+        </div>
+        <div class="cohort-strip">
+          <span><b>Cohort 14</b> starts 4 August</span>
+          <span><b>30 seats</b> per cohort, capped</span>
+          <span><b>2 evenings</b> a week, live</span>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="hero-img">
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=60" alt="Learners collaborating on laptops during a live online build session">
+        </div>
+        <div class="hero-chip">4,120 graduates<span>since our first cohort in 2021</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="tracks" id="tracks">
+  <div class="container">
+    <p class="kick mb-2">Pick a track</p>
+    <h2 class="mb-4" style="font-size:clamp(2rem,4.6vw,3.1rem);">Three tracks. Every one ends with real work.</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="track">
+          <span class="lvl">Beginner friendly</span>
+          <h3>Frontend Foundations</h3>
+          <p>HTML, CSS and JavaScript taught by building four sites that go live on your own domain by week three.</p>
+          <div class="meta"><span>8 weeks</span><span>4 projects</span></div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="track">
+          <span class="lvl alt">Intermediate</span>
+          <h3>Full-Stack with TypeScript</h3>
+          <p>React, Node and Postgres, then deploy, monitor and fix your own production bug in the final fortnight.</p>
+          <div class="meta"><span>12 weeks</span><span>3 projects + capstone</span></div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="track">
+          <span class="lvl">Career switch</span>
+          <h3>Data Analytics Sprint</h3>
+          <p>SQL, spreadsheets and dashboarding on messy real datasets from three partner startups. Portfolio-first from day one.</p>
+          <div class="meta"><span>10 weeks</span><span>5 case studies</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="curriculum" id="curriculum">
+  <div class="container">
+    <div class="row g-4 align-items-end mb-4">
+      <div class="col-lg-8">
+        <p class="kick mb-2">Curriculum outline · Full-Stack with TypeScript</p>
+        <h2 class="mb-2" style="font-size:clamp(2rem,4.6vw,3.1rem);">Every module, every lesson, no mystery</h2>
+        <p class="lede mb-0">Hover or tab through a module to open its lesson list. What you see here is exactly what Cohort 14 will build.</p>
+      </div>
+      <div class="col-lg-4 text-lg-end"><span class="cur-note">6 modules · 42 live hours · 1 capstone</span></div>
+    </div>
+
+    <div class="mod">
+      <div class="head"><span class="num">01</span><h4>TypeScript from zero</h4><span class="dur">Week 1 to 2 · 7 hrs live</span></div>
+      <div class="lessons"><div>
+        <ol>
+          <li><span>Types, narrowing and the compiler as a teammate</span><b>90 min</b></li>
+          <li><span>Modelling real data: a ticketing domain in types</span><b>2 hrs</b></li>
+          <li><span>Project: type-safe CLI expense splitter</span><b>3.5 hrs</b></li>
+        </ol>
+        <a class="peek" href="#enrol">Preview this module in the syllabus</a>
+      </div></div>
+    </div>
+    <div class="mod">
+      <div class="head"><span class="num">02</span><h4>React that scales past the tutorial</h4><span class="dur">Week 3 to 5 · 10 hrs live</span></div>
+      <div class="lessons"><div>
+        <ol>
+          <li><span>Components, state and data flow without the folklore</span><b>2 hrs</b></li>
+          <li><span>Forms, optimistic updates and error boundaries</span><b>2.5 hrs</b></li>
+          <li><span>Project: kanban board with drag, drop and undo</span><b>5.5 hrs</b></li>
+        </ol>
+        <a class="peek" href="#enrol">Preview this module in the syllabus</a>
+      </div></div>
+    </div>
+    <div class="mod">
+      <div class="head"><span class="num">03</span><h4>APIs with Node and Postgres</h4><span class="dur">Week 6 to 8 · 10 hrs live</span></div>
+      <div class="lessons"><div>
+        <ol>
+          <li><span>REST design, validation and honest error responses</span><b>2 hrs</b></li>
+          <li><span>Postgres schema design, migrations and indexes</span><b>3 hrs</b></li>
+          <li><span>Project: bookings API with auth and rate limits</span><b>5 hrs</b></li>
+        </ol>
+        <a class="peek" href="#enrol">Preview this module in the syllabus</a>
+      </div></div>
+    </div>
+    <div class="mod">
+      <div class="head"><span class="num">04</span><h4>Ship it: deploys, logs, monitoring</h4><span class="dur">Week 9 to 10 · 7 hrs live</span></div>
+      <div class="lessons"><div>
+        <ol>
+          <li><span>CI, environments and zero-downtime deploys</span><b>2.5 hrs</b></li>
+          <li><span>Reading logs and traces when things break at 2 am</span><b>2 hrs</b></li>
+          <li><span>Drill: we break your app, you find out why</span><b>2.5 hrs</b></li>
+        </ol>
+        <a class="peek" href="#enrol">Preview this module in the syllabus</a>
+      </div></div>
+    </div>
+    <div class="mod">
+      <div class="head"><span class="num">05</span><h4>Capstone: build for a real client</h4><span class="dur">Week 11 to 12 · 8 hrs live</span></div>
+      <div class="lessons"><div>
+        <ol>
+          <li><span>Scoping a brief from one of our partner startups</span><b>2 hrs</b></li>
+          <li><span>Build week with daily mentor code review</span><b>4 hrs</b></li>
+          <li><span>Demo day: present to the client and the cohort</span><b>2 hrs</b></li>
+        </ol>
+        <a class="peek" href="#enrol">Preview this module in the syllabus</a>
+      </div></div>
+    </div>
+    <div class="mod">
+      <div class="head"><span class="num">06</span><h4>Career module: portfolio and interviews</h4><span class="dur">Ongoing · self-paced</span></div>
+      <div class="lessons"><div>
+        <ol>
+          <li><span>Portfolio teardown, one-on-one with a mentor</span><b>45 min</b></li>
+          <li><span>Two mock technical interviews with written feedback</span><b>2 hrs</b></li>
+          <li><span>Alumni referral network and hiring partner intros</span><b>Lifetime</b></li>
+        </ol>
+        <a class="peek" href="#enrol">Preview this module in the syllabus</a>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section class="outcomes" id="outcomes">
+  <div class="container">
+    <div class="row g-4 align-items-stretch">
+      <div class="col-lg-7">
+        <p class="kick mb-2">Outcomes we publish</p>
+        <h2 class="mb-4" style="font-size:clamp(2rem,4.6vw,3.1rem);">Graduates, counted honestly</h2>
+        <div class="row g-3">
+          <div class="col-sm-6"><div class="out-card"><b>71%</b><span>of job-seeking graduates hired within 6 months, verified by offer letters</span></div></div>
+          <div class="col-sm-6"><div class="out-card"><b>87%</b><span>cohort completion rate across the last four cohorts</span></div></div>
+          <div class="col-sm-6"><div class="out-card"><b>1 : 10</b><span>mentor to learner ratio in every live build session</span></div></div>
+          <div class="col-sm-6"><div class="out-card"><b>38</b><span>hiring partners who interviewed our graduates last year</span></div></div>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <figure class="mentor-quote h-100 mb-0">
+          <blockquote class="mb-4">"I failed the module 4 drill twice. Then a production alert went off at my new job in month one, and I knew exactly what to do. That drill paid my rent."</blockquote>
+          <figcaption>Sana Iqbal, Cohort 9 · now a full-stack developer at a logistics startup</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="enrol">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+          <h2 class="mb-2">Cohort 14 starts 4 August. Seats are capped at 30.</h2>
+          <p class="mb-0">Pay after a free first week. If the first two sessions are not for you, walk away owing nothing and keep the module 1 materials.</p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <a class="btn btn-white btn-lg" href="#top">Join the next cohort</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <p class="brand mb-2">{{BRAND}}</p>
+        <p style="max-width:32ch;">A live online academy where every course ends in shipped work, and every stat we publish can be audited.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Academy</h6>
+        <ul><li><a href="#tracks">Tracks</a></li><li><a href="#curriculum">Curriculum</a></li><li><a href="#outcomes">Outcomes</a></li></ul>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h6>Learners</h6>
+        <ul><li>Scholarships: 4 full seats per cohort</li><li>Alumni community, lifetime access</li><li>hello@yourdomain.com</li></ul>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h6>Fine print</h6>
+        <ul><li>Free first week, no card required</li><li>Full refund before session 3</li><li>Outcomes report published yearly</li></ul>
+      </div>
+    </div>
+    <p class="foot-legal mb-0">© {{BRAND}} · draft preview generated by Dharwin Studio</p>
+  </div>
+</footer>
+</body>
+</html>

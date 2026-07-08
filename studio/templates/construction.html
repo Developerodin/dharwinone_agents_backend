@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{BRAND}}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#26231c;
+    --bg:#e9e5db;
+    --accent:#38586e;
+    --soft:#f3f0e8;
+    --line:#d3ccbd;
+  }
+  body{background:var(--bg);color:var(--ink);font-family:"Barlow",system-ui,sans-serif;font-size:1.0625rem;line-height:1.6;}
+  .display-face{font-family:"Barlow Condensed",sans-serif;font-weight:700;letter-spacing:.01em;line-height:.95;text-transform:uppercase;}
+  .kicker{font-family:"Barlow Condensed",sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.22em;font-size:.85rem;color:var(--accent);}
+  p{max-width:68ch;}
+  a{color:var(--accent);}
+
+  .site-nav{border-bottom:1px solid var(--line);background:var(--bg);}
+  .site-nav .brand{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:1.5rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink);text-decoration:none;}
+  .site-nav .nav-link{color:var(--ink);font-weight:500;font-size:.95rem;}
+  .btn-site{background:var(--accent);color:var(--soft);border:1px solid var(--accent);font-family:"Barlow Condensed",sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.12em;padding:.6rem 1.5rem;border-radius:0;}
+  .btn-site:hover{background:var(--ink);border-color:var(--ink);color:var(--soft);}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--ink);font-family:"Barlow Condensed",sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.12em;padding:.6rem 1.5rem;border-radius:0;}
+  .btn-ghost:hover{background:var(--ink);color:var(--soft);}
+
+  .hero{padding:5.5rem 0 4.5rem;}
+  .hero h1{font-size:clamp(3.4rem,8vw,6.2rem);color:var(--ink);}
+  .hero h1 .site-accent{color:var(--accent);}
+  .hero .tagline{font-size:1.3rem;color:rgba(38,35,28,.78);max-width:34rem;}
+  .hero-meta{border-top:1px solid var(--line);padding-top:1.25rem;font-size:.92rem;}
+  .hero-meta strong{font-family:"Barlow Condensed",sans-serif;font-size:1.15rem;letter-spacing:.05em;text-transform:uppercase;display:block;}
+  .hero-photo{position:relative;overflow:hidden;min-height:26rem;}
+  .hero-photo img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;}
+  .hero-photo .plate{position:absolute;left:0;bottom:0;background:var(--ink);color:var(--soft);padding:.7rem 1.2rem;font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.14em;font-size:.85rem;z-index:2;}
+
+  .strip{background:var(--ink);color:var(--soft);overflow:hidden;padding:1rem 0;}
+  .strip-track{display:flex;gap:3.5rem;white-space:nowrap;font-family:"Barlow Condensed",sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.14em;font-size:1.05rem;}
+  .strip-track span::after{content:"//";color:var(--accent);margin-left:3.5rem;font-weight:700;}
+  @media (prefers-reduced-motion: no-preference){
+    .strip-track{animation:crawl 34s linear infinite;}
+    @keyframes crawl{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .lift{transition:transform .25s ease,box-shadow .25s ease;}
+    .lift:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(38,35,28,.14);}
+    .zoom img{transition:transform .6s ease;}
+    .zoom:hover img{transform:scale(1.05);}
+  }
+
+  .rows{padding:5.5rem 0 2.5rem;}
+  .build-row{align-items:center;margin-bottom:4.5rem;}
+  .build-row .photo{overflow:hidden;min-height:20rem;position:relative;}
+  .build-row .photo img{width:100%;height:100%;min-height:20rem;object-fit:cover;display:block;}
+  .build-row h3{font-family:"Barlow Condensed",sans-serif;font-weight:600;text-transform:uppercase;font-size:2.1rem;letter-spacing:.02em;}
+  .spec-list{list-style:none;padding:0;margin:1rem 0 0;font-size:.95rem;}
+  .spec-list li{padding:.5rem 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+  .spec-list li b{font-weight:600;}
+
+  .process{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:5.5rem 0;}
+  .step{position:relative;padding:1.8rem 0 1.8rem 6.5rem;border-bottom:1px solid var(--line);}
+  .step:last-child{border-bottom:0;}
+  .step .num{position:absolute;left:0;top:1.4rem;font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:3rem;line-height:1;color:var(--accent);}
+  .step h4{font-family:"Barlow Condensed",sans-serif;font-weight:600;text-transform:uppercase;font-size:1.5rem;margin-bottom:.35rem;}
+  .step .dur{font-size:.85rem;text-transform:uppercase;letter-spacing:.14em;color:rgba(38,35,28,.6);margin-bottom:.4rem;}
+  .step p{margin:0;font-size:.98rem;color:rgba(38,35,28,.85);}
+
+  .projects{padding:5.5rem 0;}
+  .proj{background:var(--soft);border:1px solid var(--line);height:100%;}
+  .proj .ph{overflow:hidden;height:15rem;}
+  .proj .ph img{width:100%;height:100%;object-fit:cover;display:block;}
+  .proj .meta{padding:1.25rem 1.4rem 1.5rem;}
+  .proj .meta h5{font-family:"Barlow Condensed",sans-serif;font-weight:600;text-transform:uppercase;font-size:1.35rem;margin:.5rem 0;}
+  .proj table{width:100%;font-size:.88rem;}
+  .proj td{padding:.3rem 0;border-bottom:1px solid var(--line);}
+  .proj td:last-child{text-align:right;font-weight:600;}
+  .status{display:inline-block;font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;padding:.2rem .7rem;background:var(--accent);color:var(--soft);}
+  .status.done{background:var(--ink);}
+
+  .safety{padding:5rem 0;}
+  .safety h3{font-family:"Barlow Condensed",sans-serif;font-weight:600;text-transform:uppercase;font-size:2rem;}
+  .safety details{border-bottom:1px solid var(--line);}
+  .safety summary{cursor:pointer;padding:1rem 0;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:1rem;}
+  .safety summary::-webkit-details-marker{display:none;}
+  .safety summary::after{content:"+";font-family:"Barlow Condensed",sans-serif;font-size:1.4rem;line-height:1;color:var(--accent);}
+  .safety details[open] summary::after{content:"\2013";}
+  .safety details p{font-size:.96rem;padding-bottom:1rem;margin:0;color:rgba(38,35,28,.85);}
+
+  .cta{background:var(--accent);color:var(--soft);padding:5rem 0;}
+  .cta h2{font-family:"Barlow Condensed",sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(2.4rem,5vw,4rem);line-height:.95;}
+  .cta p{color:rgba(243,240,232,.85);max-width:52ch;}
+  .cta .btn-invert{background:var(--soft);color:var(--ink);border:1px solid var(--soft);font-family:"Barlow Condensed",sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.12em;padding:.75rem 2rem;border-radius:0;}
+  .cta .btn-invert:hover{background:var(--ink);border-color:var(--ink);color:var(--soft);}
+
+  footer{background:var(--ink);color:rgba(233,229,219,.82);padding:4rem 0 2rem;font-size:.92rem;}
+  footer .brand{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:1.6rem;text-transform:uppercase;color:var(--soft);}
+  footer h6{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.16em;font-size:.8rem;color:var(--soft);margin-bottom:1rem;}
+  footer ul{list-style:none;padding:0;margin:0;}
+  footer li{padding:.25rem 0;}
+  footer a{color:rgba(233,229,219,.82);text-decoration:none;}
+  footer a:hover{color:var(--soft);}
+  .foot-legal{border-top:1px solid rgba(233,229,219,.18);margin-top:3rem;padding-top:1.5rem;font-size:.85rem;color:rgba(233,229,219,.6);}
+</style>
+</head>
+<body id="top">
+
+<nav class="site-nav py-3">
+  <div class="container d-flex align-items-center justify-content-between">
+    <a class="brand" href="#top">{{BRAND}}</a>
+    <div class="d-none d-md-flex align-items-center gap-4">
+      <a class="nav-link" href="#build">What we build</a>
+      <a class="nav-link" href="#process">Process</a>
+      <a class="nav-link" href="#projects">Projects</a>
+      <a class="nav-link" href="#safety">Safety</a>
+      <a class="btn btn-site" href="#contact">Request a site visit</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6">
+        <p class="kicker mb-3">Civil contracting, turnkey delivery</p>
+        <h1 class="display-face mb-3">Built to drawing.<br>Handed over <span class="site-accent">on date.</span></h1>
+        <p class="tagline mt-3">{{TAGLINE}}</p>
+        <div class="d-flex flex-wrap gap-3 mt-4 mb-5">
+          <a class="btn btn-site" href="#contact">Get a BOQ estimate</a>
+          <a class="btn btn-ghost" href="#projects">See live sites</a>
+        </div>
+        <div class="row hero-meta g-3">
+          <div class="col-4"><strong>RERA registered</strong>Promoter and agent compliant</div>
+          <div class="col-4"><strong>1.2M sq ft</strong>Delivered across 34 projects</div>
+          <div class="col-4"><strong>Zero LTI</strong>Last 640 days on active sites</div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="hero-photo lift zoom">
+          <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1200&q=60" alt="Active construction site with crew at work">
+          <span class="plate">Site 12, Tower B, structure at L14</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="strip" aria-hidden="true">
+  <div class="strip-track">
+    <span>Residential towers</span><span>Villas and row houses</span><span>Commercial interiors</span><span>Industrial sheds</span><span>Structural retrofits</span><span>Turnkey handover</span>
+    <span>Residential towers</span><span>Villas and row houses</span><span>Commercial interiors</span><span>Industrial sheds</span><span>Structural retrofits</span><span>Turnkey handover</span>
+  </div>
+</div>
+
+<section class="rows" id="build">
+  <div class="container">
+    <p class="kicker mb-2">What we build</p>
+    <h2 class="display-face mb-5" style="font-size:clamp(2.2rem,4.5vw,3.4rem);">Two crews. One standard.</h2>
+    <div class="row g-5 build-row">
+      <div class="col-lg-6"><div class="photo lift zoom"><img src="https://images.unsplash.com/photo-1460317442991-0ec209397118?w=1100&q=60" alt="Mid-rise residential building exterior"></div></div>
+      <div class="col-lg-6">
+        <h3>Residential, plotted and high-rise</h3>
+        <p>From soil test to occupancy certificate. Our site engineers hold daily pour logs, cube test registers and bar bending schedules that your structural consultant can audit any week, unannounced.</p>
+        <ul class="spec-list">
+          <li><span>Concrete grade verification</span><b>Third-party cube tests, 7 and 28 day</b></li>
+          <li><span>Waterproofing warranty</span><b>10 years, terrace and wet areas</b></li>
+          <li><span>Snag list closure before handover</span><b>100 percent, jointly signed</b></li>
+        </ul>
+      </div>
+    </div>
+    <div class="row g-5 build-row flex-lg-row-reverse">
+      <div class="col-lg-6"><div class="photo lift zoom"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1100&q=60" alt="Tower crane over commercial construction site"></div></div>
+      <div class="col-lg-6">
+        <h3>Commercial and industrial</h3>
+        <p>Warehouses, PEB sheds and office fit-outs delivered on compressed timelines without shortcuts on MEP coordination. One project manager owns your schedule and answers the phone at 7 am.</p>
+        <ul class="spec-list">
+          <li><span>Schedule tracking</span><b>Weekly lookahead, shared every Monday</b></li>
+          <li><span>MEP clash review</span><b>Before slab, not after chipping</b></li>
+          <li><span>Fire NOC and statutory clearances</span><b>Handled in-house</b></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <p class="kicker mb-2">The build sequence</p>
+        <h2 class="display-face" style="font-size:clamp(2.2rem,4.5vw,3.2rem);">Five stages. No surprises at stage four.</h2>
+        <p class="mt-3">A building is a sequence, so we run it as one. Each stage closes with a signed checklist before the next mobilises. You always know which stage your money is standing in.</p>
+      </div>
+      <div class="col-lg-8">
+        <div class="step">
+          <span class="num">01</span>
+          <h4>Survey, soil and sanction</h4>
+          <p class="dur">Weeks 1 to 6</p>
+          <p>Contour survey, geotechnical report, and drawings taken through sanction. We do not price what we have not measured.</p>
+        </div>
+        <div class="step">
+          <span class="num">02</span>
+          <h4>Design freeze and BOQ</h4>
+          <p class="dur">Weeks 6 to 10</p>
+          <p>Item-rate BOQ against frozen GFC drawings. Every rate is traceable, every deviation goes through a written change order.</p>
+        </div>
+        <div class="step">
+          <span class="num">03</span>
+          <h4>Structure</h4>
+          <p class="dur">Month 3 onward</p>
+          <p>Footings to terrace slab with pour cards, cube tests and a weekly photo log sent to your phone. Slab cycles published in advance.</p>
+        </div>
+        <div class="step">
+          <span class="num">04</span>
+          <h4>MEP and finishes</h4>
+          <p class="dur">Overlapped with structure</p>
+          <p>Conduiting, plumbing pressure tests, then finishes in one direction, top floor down. A mock-up flat is approved before bulk work begins.</p>
+        </div>
+        <div class="step">
+          <span class="num">05</span>
+          <h4>Snag list and handover</h4>
+          <p class="dur">Final 30 days</p>
+          <p>Joint inspection, a numbered snag list, closure within 21 days, then keys, warranties, as-built drawings and the completion file.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="projects" id="projects">
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-between align-items-end mb-5 gap-3">
+      <div>
+        <p class="kicker mb-2">On the board now</p>
+        <h2 class="display-face mb-0" style="font-size:clamp(2.2rem,4.5vw,3.4rem);">Projects, with their status</h2>
+      </div>
+      <a class="btn btn-ghost" href="#contact">Ask for the full project register</a>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <article class="proj lift zoom">
+          <div class="ph"><img src="https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?w=900&q=60" alt="Low-rise apartment block"></div>
+          <div class="meta">
+            <span class="status">Structure at L9</span>
+            <h5>Northfield Residences</h5>
+            <table><tbody>
+              <tr><td>Scope</td><td>2B+G+14, two towers</td></tr>
+              <tr><td>Built-up</td><td>2.4 lakh sq ft</td></tr>
+              <tr><td>Handover</td><td>Q3 next year</td></tr>
+            </tbody></table>
+          </div>
+        </article>
+      </div>
+      <div class="col-md-4">
+        <article class="proj lift zoom">
+          <div class="ph"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&q=60" alt="Completed villa exterior at dusk"></div>
+          <div class="meta">
+            <span class="status done">Handed over</span>
+            <h5>Stonebridge Villas</h5>
+            <table><tbody>
+              <tr><td>Scope</td><td>18 villas, clubhouse</td></tr>
+              <tr><td>Snags at handover</td><td>Closed in 14 days</td></tr>
+              <tr><td>Delivered</td><td>11 days early</td></tr>
+            </tbody></table>
+          </div>
+        </article>
+      </div>
+      <div class="col-md-4">
+        <article class="proj lift zoom">
+          <div class="ph"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&q=60" alt="Commercial building facade"></div>
+          <div class="meta">
+            <span class="status">Fit-out, 60 percent</span>
+            <h5>Meridian Trade Centre</h5>
+            <table><tbody>
+              <tr><td>Scope</td><td>Office interiors, 5 floors</td></tr>
+              <tr><td>Crew on site</td><td>140, double shift</td></tr>
+              <tr><td>Handover</td><td>March</td></tr>
+            </tbody></table>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="safety" id="safety">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-5">
+        <p class="kicker mb-2">Safety and warranty</p>
+        <h3>The boring paperwork that protects you</h3>
+        <p class="mt-3">A dedicated EHS officer on every active site, toolbox talks each morning, and a warranty file you receive at handover, not a promise you chase later.</p>
+      </div>
+      <div class="col-lg-7">
+        <details open>
+          <summary>What does the structural warranty cover?</summary>
+          <p>10 years on the structural frame and waterproofing, 1 year comprehensive on finishes and MEP. Terms are printed in the handover file with named contacts for warranty calls.</p>
+        </details>
+        <details>
+          <summary>How do you control material quality?</summary>
+          <p>Steel and cement only from approved makes listed in the contract. Concrete cubes tested at a NABL-accredited lab, results filed against each pour card.</p>
+        </details>
+        <details>
+          <summary>What happens if the schedule slips?</summary>
+          <p>The weekly lookahead flags slippage early. If a delay is ours, liquidated damages apply as written in the agreement. No renegotiation at stage four.</p>
+        </details>
+        <details>
+          <summary>Are your sites RERA compliant?</summary>
+          <p>Yes. Registration numbers, quarterly progress uploads and escrow discipline are handled by our compliance desk and shared with buyers on request.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-8">
+        <h2>Walk a live site before you sign anything.</h2>
+        <p class="mb-0 mt-2">Bring your drawings, or just the plot papers. We will show you pour logs, snag registers and a handover file from a finished project.</p>
+      </div>
+      <div class="col-lg-4 text-lg-end">
+        <a class="btn btn-invert btn-lg" href="#top">Book a site visit</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <p class="brand mb-2">{{BRAND}}</p>
+        <p style="max-width:32ch;">Contracting and development, delivered stage by stage with paperwork you can audit.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Company</h6>
+        <ul><li><a href="#build">What we build</a></li><li><a href="#process">Process</a></li><li><a href="#projects">Projects</a></li><li><a href="#safety">Safety</a></li></ul>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h6>Site office</h6>
+        <ul><li>Plot 7, Industrial Estate</li><li>Open Mon to Sat, 9 to 6</li><li>site@yourdomain.com</li></ul>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h6>Registrations</h6>
+        <ul><li>RERA regn. no. on request</li><li>GST and PF compliant</li><li>ISO 45001 aligned practices</li></ul>
+      </div>
+    </div>
+    <p class="foot-legal mb-0">© {{BRAND}} — draft preview generated by Dharwin Studio</p>
+  </div>
+</footer>
+</body>
+</html>

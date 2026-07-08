@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="design-label" content="Field Journal">
+<title>{{BRAND}}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#26211a;        /* pencil lead */
+    --bg:#ede3d0;         /* kraft paper */
+    --accent:#a8470a;     /* compass orange */
+    --soft:#e3d7c0;       /* worn card */
+    --line:#c9baa0;       /* faded rule */
+    --ink-72:color-mix(in oklab, var(--ink) 72%, var(--bg));
+    --ink-55:color-mix(in oklab, var(--ink) 55%, var(--bg));
+    --paper-on-ink:color-mix(in oklab, var(--bg) 92%, var(--ink));
+  }
+  body{background:var(--bg);color:var(--ink);font-family:"Bitter",serif;font-size:1.0625rem;line-height:1.7}
+  h1,h2,h3{font-family:"Bitter",serif;font-weight:800;letter-spacing:-.015em;color:var(--ink)}
+  p{max-width:64ch}
+  .mono{font-family:"Space Mono",monospace}
+  .stamp{font-family:"Space Mono",monospace;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  /* NAV */
+  .log-nav{border-bottom:2px solid var(--ink);padding:1rem 0;background:var(--bg)}
+  .log-nav .brand{font-family:"Space Mono",monospace;font-weight:700;font-size:1.1rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+  .log-nav a.link{font-family:"Space Mono",monospace;font-size:.82rem;color:var(--ink-72);text-decoration:none;letter-spacing:.06em}
+  .log-nav a.link:hover{color:var(--accent)}
+  .btn-compass{background:var(--accent);color:var(--paper-on-ink);border:2px solid var(--accent);border-radius:0;padding:.5rem 1.3rem;font-family:"Space Mono",monospace;font-size:.85rem;font-weight:700;letter-spacing:.05em}
+  .btn-compass:hover{background:var(--ink);border-color:var(--ink);color:var(--paper-on-ink)}
+  .btn-pencil{background:transparent;color:var(--ink);border:2px solid var(--ink);border-radius:0;padding:.5rem 1.3rem;font-family:"Space Mono",monospace;font-size:.85rem;font-weight:700;letter-spacing:.05em}
+  .btn-pencil:hover{background:var(--ink);color:var(--paper-on-ink)}
+  /* HERO: journal opening page */
+  .hero{padding:5rem 0 4.5rem;border-bottom:1px dashed var(--line)}
+  .hero h1{font-size:clamp(2.8rem,6.5vw,5rem);line-height:1.04;max-width:15ch}
+  .hero .tagline{font-size:1.2rem;color:var(--ink-72);max-width:44ch}
+  .hero .margin-note{font-family:"Space Mono",monospace;font-size:.8rem;color:var(--ink-55);border-top:1px dashed var(--line);padding-top:1rem;margin-top:2.2rem;display:flex;gap:2rem;flex-wrap:wrap}
+  .hero .margin-note b{color:var(--ink);font-weight:700}
+  .photo-plate{background:var(--soft);border:1px solid var(--line);padding:.85rem .85rem 1rem;box-shadow:6px 6px 0 var(--line)}
+  .photo-plate img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;filter:sepia(.12) contrast(1.02)}
+  .photo-plate figcaption{font-family:"Space Mono",monospace;font-size:.74rem;color:var(--ink-55);margin-top:.7rem;letter-spacing:.04em}
+  /* SIGNATURE: EXPEDITION LOG */
+  .log{padding:5.5rem 0}
+  .log h2{font-size:clamp(2rem,4.5vw,3.1rem)}
+  .log .head-row{display:none}
+  .entry{display:grid;grid-template-columns:8.5rem 1fr 7rem 7rem 6rem;gap:1.4rem;align-items:baseline;border-top:1px solid var(--line);padding:1.7rem 0}
+  .entry:last-of-type{border-bottom:2px solid var(--ink)}
+  .entry .date{font-family:"Space Mono",monospace;font-size:.8rem;font-weight:700;color:var(--ink);border:1.5px solid var(--ink);display:inline-block;padding:.15rem .5rem;background:var(--soft);white-space:nowrap;justify-self:start}
+  .entry h3{font-size:1.3rem;font-weight:800;margin:0 0 .3rem}
+  .entry .note{font-size:.95rem;color:var(--ink-72);max-width:52ch;margin:0}
+  .entry .fig{font-family:"Space Mono",monospace;font-size:.86rem;color:var(--ink)}
+  .entry .fig small{display:block;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-55)}
+  .entry .grade{font-family:"Space Mono",monospace;font-weight:700;color:var(--accent)}
+  .log .legend{font-family:"Space Mono",monospace;font-size:.76rem;color:var(--ink-55);margin-top:1rem}
+  @media (min-width: 992px){
+    .log .head-row{display:grid;grid-template-columns:8.5rem 1fr 7rem 7rem 6rem;gap:1.4rem;font-family:"Space Mono",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-55);padding-bottom:.6rem}
+  }
+  @media (max-width: 991px){
+    .entry{grid-template-columns:1fr 1fr;grid-template-rows:auto auto auto}
+    .entry .date{grid-column:1/-1}
+    .entry .body-cell{grid-column:1/-1}
+  }
+  @media (prefers-reduced-motion: no-preference){
+    .entry{transition:background .25s ease}
+    .entry:hover{background:var(--soft)}
+    .photo-plate,.plate-sm{transition:transform .3s ease,box-shadow .3s ease}
+    .photo-plate:hover,.plate-sm:hover{transform:translateY(-5px) rotate(-.4deg);box-shadow:8px 10px 0 var(--line)}
+    .btn-compass,.btn-pencil{transition:background .2s ease,color .2s ease,border-color .2s ease}
+  }
+  /* FIELD PLATES */
+  .plates{padding:5rem 0;background:var(--soft);border-top:1px dashed var(--line);border-bottom:1px dashed var(--line)}
+  .plates h2{font-size:clamp(1.9rem,4vw,2.8rem)}
+  .plate-sm{background:var(--bg);border:1px solid var(--line);padding:.7rem .7rem .85rem;box-shadow:5px 5px 0 var(--line);height:100%}
+  .plate-sm img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:sepia(.1)}
+  .plate-sm figcaption{font-family:"Space Mono",monospace;font-size:.73rem;color:var(--ink-55);margin-top:.6rem}
+  .plate-sm figcaption b{color:var(--accent)}
+  /* OUTFITTER NOTES */
+  .notes{padding:5.5rem 0}
+  .notes h2{font-size:clamp(2rem,4vw,2.9rem)}
+  .notes .lede{color:var(--ink-72)}
+  .kit{border-top:2px solid var(--ink);margin-top:1.8rem}
+  .kit .row-item{display:flex;justify-content:space-between;gap:1.5rem;border-bottom:1px dashed var(--line);padding:.85rem 0;font-size:.95rem}
+  .kit .row-item span:first-child{font-family:"Space Mono",monospace;font-size:.82rem;color:var(--ink-72)}
+  .kit .row-item b{font-family:"Bitter",serif;text-align:right}
+  .notes .guide-card{background:var(--soft);border:1px solid var(--line);padding:1.8rem;box-shadow:6px 6px 0 var(--line)}
+  .notes .guide-card p{font-size:.98rem;color:var(--ink-72)}
+  .notes .sig{font-family:"Space Mono",monospace;font-size:.8rem;color:var(--accent);font-weight:700;letter-spacing:.06em}
+  /* CTA */
+  .cta{padding:5.5rem 0;background:var(--ink);color:var(--paper-on-ink)}
+  .cta h2{color:var(--paper-on-ink);font-size:clamp(2rem,4.8vw,3.4rem);max-width:20ch}
+  .cta p{color:color-mix(in oklab, var(--paper-on-ink) 78%, var(--ink))}
+  .cta .stamp{color:color-mix(in oklab, var(--accent) 65%, var(--paper-on-ink))}
+  .cta .contact-line{font-family:"Space Mono",monospace;font-size:.92rem;border-top:1px dashed color-mix(in oklab, var(--paper-on-ink) 35%, var(--ink));padding:.9rem 0;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .cta .contact-line a{color:var(--paper-on-ink);text-decoration:none}
+  .cta .contact-line a:hover{color:color-mix(in oklab, var(--accent) 70%, var(--paper-on-ink))}
+  /* FOOTER */
+  footer{background:var(--bg);border-top:2px solid var(--ink);padding:3rem 0 1.8rem;font-size:.92rem;color:var(--ink-72)}
+  footer .brand{font-family:"Space Mono",monospace;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:1.05rem;color:var(--ink)}
+  footer a{color:var(--ink-72);text-decoration:none;display:block;padding:.18rem 0}
+  footer a:hover{color:var(--accent)}
+  footer h4{font-family:"Space Mono",monospace;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  footer .legal{border-top:1px dashed var(--line);margin-top:2.4rem;padding-top:1.2rem;font-family:"Space Mono",monospace;font-size:.76rem;color:var(--ink-55)}
+</style>
+</head>
+<body>
+
+<nav class="log-nav">
+  <div class="container d-flex align-items-center justify-content-between">
+    <a class="brand" href="#top">{{BRAND}}</a>
+    <div class="d-none d-md-flex gap-4 align-items-center">
+      <a class="link" href="#log">Expedition log</a>
+      <a class="link" href="#plates">Field plates</a>
+      <a class="link" href="#outfitting">Outfitting</a>
+      <a class="btn btn-compass" href="#book">Reserve a spot</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-7">
+        <p class="stamp mb-3">Field journal · entry 001 · outfitting since 2011</p>
+        <h1>Every trip we sell, we walked first.</h1>
+        <p class="tagline mt-4">{{TAGLINE}}</p>
+        <div class="d-flex gap-3 mt-4 flex-wrap">
+          <a class="btn btn-compass" href="#log">Read the log</a>
+          <a class="btn btn-pencil" href="#book">Reserve a spot</a>
+        </div>
+        <div class="margin-note">
+          <span><b>8</b> routes this season</span>
+          <span><b>10</b> trekkers max per rope</span>
+          <span><b>0</b> helicopters, ever</span>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <figure class="photo-plate mb-0">
+          <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=900&q=60" alt="Trekkers crossing a high mountain ridge with packs">
+          <figcaption>PLATE 00 · Annapurna approach, 4,120 m, second week of October. Shot by our lead guide Pasang on the recce.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="log" id="log">
+  <div class="container">
+    <p class="stamp mb-2">The expedition log</p>
+    <h2 class="mb-2">This season, dated and graded.</h2>
+    <p class="mb-4" style="color:var(--ink-72)">Each entry below is a departure you can join. Altitude is the highest sleeping point, distance is trail total, and the grade is ours, earned the hard way.</p>
+    <div class="head-row"><span>Departs</span><span>Route</span><span>Altitude</span><span>Distance</span><span>Grade</span></div>
+    <div class="entry">
+      <span class="date">14 SEP</span>
+      <div class="body-cell">
+        <h3>Annapurna Sanctuary, the long way in</h3>
+        <p class="note">Twelve days through Gurung villages to the glacier basin. Teahouse nights, dal bhat twice a day, one rest day at Chhomrong. From 1,940 per person.</p>
+      </div>
+      <span class="fig"><small>Altitude</small>4,130 m</span>
+      <span class="fig"><small>Distance</small>115 km</span>
+      <span class="fig grade"><small style="color:var(--ink-55)">Grade</small>III</span>
+    </div>
+    <div class="entry">
+      <span class="date">02 OCT</span>
+      <div class="body-cell">
+        <h3>Tour du Mont Blanc, hut to hut</h3>
+        <p class="note">Eleven days, three countries, blueberry tarts at Rifugio Bonatti. Bags portered, legs not. From 2,650 per person.</p>
+      </div>
+      <span class="fig"><small>Altitude</small>2,665 m</span>
+      <span class="fig"><small>Distance</small>170 km</span>
+      <span class="fig grade"><small style="color:var(--ink-55)">Grade</small>II</span>
+    </div>
+    <div class="entry">
+      <span class="date">19 OCT</span>
+      <div class="body-cell">
+        <h3>Everest region, the quiet Gokyo line</h3>
+        <p class="note">Fifteen days up the valley the crowds skip, five turquoise lakes, Renjo La at dawn with Everest full in the frame. From 2,890 per person.</p>
+      </div>
+      <span class="fig"><small>Altitude</small>5,360 m</span>
+      <span class="fig"><small>Distance</small>92 km</span>
+      <span class="fig grade"><small style="color:var(--ink-55)">Grade</small>IV</span>
+    </div>
+    <div class="entry">
+      <span class="date">08 MAR</span>
+      <div class="body-cell">
+        <h3>Torres del Paine O Circuit</h3>
+        <p class="note">Nine days around the whole massif, including the backside nobody photographs. Wind you will talk about for years. From 3,150 per person.</p>
+      </div>
+      <span class="fig"><small>Altitude</small>1,200 m</span>
+      <span class="fig"><small>Distance</small>130 km</span>
+      <span class="fig grade"><small style="color:var(--ink-55)">Grade</small>III</span>
+    </div>
+    <p class="legend">GRADING: I easy walking · II steady days, some climb · III long days, real elevation · IV high altitude, prior trek required. We will talk you out of the wrong grade for free.</p>
+  </div>
+</section>
+
+<section class="plates" id="plates">
+  <div class="container">
+    <p class="stamp mb-2">Field plates</p>
+    <h2 class="mb-4">Pulled from the guides' own rolls.</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <figure class="plate-sm mb-0">
+          <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=60" alt="Suspension bridge strung across a Himalayan gorge">
+          <figcaption><b>PLATE 07</b> · Hillary bridge, day 2 of the Gokyo line. Yaks have right of way.</figcaption>
+        </figure>
+      </div>
+      <div class="col-md-4">
+        <figure class="plate-sm mb-0">
+          <img src="https://images.unsplash.com/photo-1522163182402-834f871fd851?w=800&q=60" alt="Hiker resting above a cloud filled alpine valley">
+          <figcaption><b>PLATE 12</b> · Col de la Seigne, France behind, Italy ahead, lunch in between.</figcaption>
+        </figure>
+      </div>
+      <div class="col-md-4">
+        <figure class="plate-sm mb-0">
+          <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=60" alt="Starry night sky over snow covered peaks">
+          <figcaption><b>PLATE 19</b> · Camp below the towers, 5:40 am. Worth every shivering minute.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="notes" id="outfitting">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-6">
+        <p class="stamp mb-2">Outfitting notes</p>
+        <h2>What the price covers, line by line.</h2>
+        <p class="lede mt-3">No brochure fog. This is the same sheet we hand you on the first call, and the number at the bottom is the number you pay.</p>
+        <div class="kit">
+          <div class="row-item"><span>GUIDES</span><b>Two per group, both certified, both local</b></div>
+          <div class="row-item"><span>NIGHTS</span><b>Every teahouse, hut, and camp on the route</b></div>
+          <div class="row-item"><span>MEALS</span><b>Three a day on trail, first and last dinner in town</b></div>
+          <div class="row-item"><span>PERMITS</span><b>All park and trekking permits, filed before you land</b></div>
+          <div class="row-item"><span>NOT COVERED</span><b>Flights, insurance, and your summit chocolate habit</b></div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="guide-card h-100">
+          <p class="stamp mb-3">Note from the head guide</p>
+          <p>"People ask why we cap groups at ten. Because at eleven, someone walks alone. I have led the Sanctuary route 61 times and I still stop at the same bend above Bamboo to watch first light hit Machapuchare. If that bend gets crowded, we have failed at our one job."</p>
+          <p class="sig mb-0">PASANG T. · HEAD GUIDE, 14 SEASONS</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="book">
+  <div class="container">
+    <p class="stamp mb-3">Entry pending: yours</p>
+    <h2>Tell us your dates. We will mail back a real day sheet, not a pitch.</h2>
+    <p class="mt-3" style="max-width:56ch">Most departures fill three months out. A 300 deposit holds your place, fully refundable for 30 days while you check the grade against your knees.</p>
+    <a class="btn btn-compass mt-2 mb-4" href="#">Request the season logbook</a>
+    <div class="contact-line"><span>WRITE</span><a href="#">basecamp@example.com</a></div>
+    <div class="contact-line"><span>CALL</span><a href="#">+1 555 019 4402, weekdays 9 to 6</a></div>
+    <div class="contact-line"><span>VISIT</span><span>12 Mule Track Lane, by the old suspension bridge</span></div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-5">
+        <div class="brand">{{BRAND}}</div>
+        <p class="mt-2" style="max-width:38ch">A small trekking outfit that keeps a paper logbook and a shorter client list than our accountant would like.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4 class="mb-3">Routes</h4>
+        <a href="#log">Annapurna Sanctuary</a>
+        <a href="#log">Mont Blanc</a>
+        <a href="#log">Gokyo line</a>
+        <a href="#log">Paine O Circuit</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4 class="mb-3">The outfit</h4>
+        <a href="#outfitting">What is included</a>
+        <a href="#plates">Field plates</a>
+        <a href="#book">Reserve</a>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h4 class="mb-3">Basecamp</h4>
+        <a href="#">basecamp@example.com</a>
+        <a href="#">+1 555 019 4402</a>
+        <a href="#">Instagram</a>
+      </div>
+    </div>
+    <div class="legal">© {{BRAND}} · draft preview generated by Dharwin Studio</div>
+  </div>
+</footer>
+
+</body>
+</html>

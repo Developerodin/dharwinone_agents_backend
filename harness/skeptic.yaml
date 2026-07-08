@@ -1,0 +1,14 @@
+all:
+  - Did the change modify or skip any test instead of fixing the code under test?
+  - Are errors swallowed silently (empty catch, ignored return codes)?
+  - Does the diff do MORE than the task asked (scope creep, drive-by refactors)?
+feature:
+  - Is user input validated at every new endpoint or public function?
+  - Are secrets, keys, or connection strings hardcoded anywhere?
+  - Will this break on Windows paths (hardcoded / separators, /tmp)?
+fix:
+  - Does the fix address the root cause or just mask the symptom?
+  - Could the fix regress the behaviour the failing output referred to?
+scaffold:
+  - Are all declared dependencies actually used?
+  - Do the scripts in package.json run non-interactively (CI-safe)?

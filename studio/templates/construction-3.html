@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="design-label" content="Warm Craft">
+<title>{{BRAND}}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#3a2d22;
+    --bg:#f3ecdf;
+    --accent:#7c5433;
+    --soft:#fbf7ef;
+    --line:#ddd0ba;
+  }
+  body{background:var(--bg);color:var(--ink);font-family:"Quicksand",system-ui,sans-serif;font-size:1.0625rem;line-height:1.65;}
+  h1,h2,h3{font-family:"Lora",Georgia,serif;font-weight:600;letter-spacing:-.01em;}
+  .eyebrow{font-family:"Quicksand",sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);}
+  p{max-width:64ch;}
+  a{color:var(--accent);}
+  img{max-width:100%;}
+
+  .site-nav{background:var(--bg);border-bottom:1px solid var(--line);}
+  .site-nav .brand{font-family:"Lora",serif;font-weight:600;font-size:1.5rem;color:var(--ink);text-decoration:none;}
+  .site-nav .nav-link{color:var(--ink);font-weight:600;font-size:.95rem;}
+  .btn-warm{background:var(--accent);color:var(--soft);border:1px solid var(--accent);font-weight:700;letter-spacing:.04em;padding:.65rem 1.6rem;border-radius:2rem;}
+  .btn-warm:hover{background:var(--ink);border-color:var(--ink);color:var(--soft);}
+  .btn-quiet{background:transparent;color:var(--ink);border:1.5px solid var(--ink);font-weight:700;letter-spacing:.04em;padding:.65rem 1.6rem;border-radius:2rem;}
+  .btn-quiet:hover{background:var(--ink);color:var(--soft);}
+
+  .hero{padding:5rem 0 4.5rem;}
+  .hero h1{font-size:clamp(2.6rem,6.2vw,4.4rem);line-height:1.08;}
+  .hero h1 em{font-style:italic;color:var(--accent);}
+  .hero .tagline{font-size:1.28rem;color:color-mix(in srgb, var(--ink) 76%, var(--bg));max-width:33rem;}
+  .hero-photo{border-radius:1.5rem;overflow:hidden;box-shadow:0 24px 60px rgba(58,45,34,.18);}
+  .hero-photo img{width:100%;height:28rem;object-fit:cover;display:block;}
+  .hero-badge{background:var(--soft);border:1px solid var(--line);border-radius:1rem;padding:1rem 1.25rem;display:inline-flex;gap:1rem;align-items:center;margin-top:-2.6rem;position:relative;margin-left:1.25rem;box-shadow:0 12px 30px rgba(58,45,34,.12);}
+  .hero-badge b{font-family:"Lora",serif;font-size:1.35rem;display:block;line-height:1.1;}
+  .hero-badge span{font-size:.85rem;color:color-mix(in srgb, var(--ink) 70%, var(--bg));}
+
+  .services{padding:4.5rem 0;}
+  .svc{background:var(--soft);border:1px solid var(--line);border-radius:1.25rem;padding:1.8rem 1.7rem;height:100%;}
+  .svc .ic{width:3rem;height:3rem;border-radius:50%;background:color-mix(in srgb, var(--accent) 16%, var(--soft));display:flex;align-items:center;justify-content:center;font-family:"Lora",serif;font-size:1.3rem;color:var(--accent);margin-bottom:1rem;}
+  .svc h3{font-size:1.35rem;}
+  .svc p{font-size:.97rem;margin-bottom:.8rem;color:color-mix(in srgb, var(--ink) 82%, var(--bg));}
+  .svc .from{font-weight:700;font-size:.9rem;color:var(--accent);letter-spacing:.04em;}
+
+  .transform{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:5rem 0;}
+  .ba-photo{border-radius:1.25rem;overflow:hidden;position:relative;}
+  .ba-photo img{width:100%;height:22rem;object-fit:cover;display:block;}
+  .ba-photo .flag{position:absolute;top:1rem;left:1rem;background:var(--ink);color:var(--soft);font-weight:700;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;padding:.35rem .9rem;border-radius:2rem;}
+  .ba-photo .flag.after{background:var(--accent);}
+  .materials{background:var(--bg);border:1px solid var(--line);border-radius:1.25rem;padding:1.6rem 1.5rem;height:100%;}
+  .materials h4{font-family:"Lora",serif;font-size:1.2rem;margin-bottom:1rem;}
+  .materials ul{list-style:none;margin:0;padding:0;font-size:.93rem;}
+  .materials li{display:flex;justify-content:space-between;gap:.8rem;padding:.55rem 0;border-bottom:1px dashed var(--line);}
+  .materials li:last-child{border-bottom:0;}
+  .materials li b{font-weight:700;text-align:right;}
+  .materials .dur{margin-top:1rem;background:color-mix(in srgb, var(--accent) 14%, var(--bg));border-radius:.8rem;padding:.7rem 1rem;font-size:.9rem;font-weight:700;color:var(--accent);text-align:center;}
+
+  .promise{padding:5rem 0;}
+  .prom{border-top:1px solid var(--line);padding:1.5rem 0;display:flex;gap:1.4rem;align-items:baseline;}
+  .prom .n{font-family:"Lora",serif;font-size:2rem;color:var(--accent);min-width:3rem;}
+  .prom h4{font-family:"Lora",serif;font-size:1.25rem;margin-bottom:.3rem;}
+  .prom p{margin:0;font-size:.97rem;color:color-mix(in srgb, var(--ink) 80%, var(--bg));}
+  .quote-card{background:var(--ink);color:var(--bg);border-radius:1.5rem;padding:2.4rem 2.2rem;height:100%;}
+  .quote-card blockquote{font-family:"Lora",serif;font-style:italic;font-size:1.3rem;line-height:1.5;}
+  .quote-card figcaption{font-size:.9rem;color:color-mix(in srgb, var(--bg) 75%, var(--ink));}
+
+  .cta{padding:0 0 5rem;}
+  .cta-inner{background:var(--accent);color:var(--soft);border-radius:1.75rem;padding:3.2rem clamp(1.5rem,5vw,3.5rem);}
+  .cta-inner h2{color:#fff;font-size:clamp(1.9rem,4.4vw,3rem);}
+  .cta-inner p{color:color-mix(in srgb, var(--soft) 88%, var(--accent));}
+  .btn-cream{background:var(--soft);color:var(--ink);border:1px solid var(--soft);font-weight:700;padding:.75rem 1.9rem;border-radius:2rem;}
+  .btn-cream:hover{background:var(--ink);border-color:var(--ink);color:var(--soft);}
+
+  footer{background:var(--ink);color:color-mix(in srgb, var(--bg) 82%, var(--ink));padding:3.8rem 0 2rem;font-size:.93rem;}
+  footer .brand{font-family:"Lora",serif;font-weight:600;font-size:1.5rem;color:var(--bg);}
+  footer h6{font-weight:700;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--bg);margin-bottom:1rem;}
+  footer ul{list-style:none;padding:0;margin:0;}
+  footer li{padding:.24rem 0;}
+  footer a{color:color-mix(in srgb, var(--bg) 82%, var(--ink));text-decoration:none;}
+  footer a:hover{color:var(--bg);}
+  .foot-legal{border-top:1px solid color-mix(in srgb, var(--bg) 20%, transparent);margin-top:2.6rem;padding-top:1.4rem;font-size:.85rem;}
+
+  @media (prefers-reduced-motion: no-preference){
+    .svc,.materials,.ba-photo{transition:transform .25s ease,box-shadow .25s ease;}
+    .svc:hover{transform:translateY(-5px);box-shadow:0 18px 36px rgba(58,45,34,.14);}
+    .ba-photo img{transition:transform .6s ease;}
+    .ba-photo:hover img{transform:scale(1.05);}
+    .btn-warm,.btn-quiet,.btn-cream{transition:background-color .2s ease,color .2s ease,border-color .2s ease;}
+  }
+  @media (max-width:575px){
+    .hero-photo img{height:19rem;}
+    .ba-photo img{height:15rem;}
+  }
+</style>
+</head>
+<body id="top">
+
+<nav class="site-nav py-3">
+  <div class="container d-flex align-items-center justify-content-between gap-3">
+    <a class="brand" href="#top">{{BRAND}}</a>
+    <div class="d-none d-md-flex align-items-center gap-4">
+      <a class="nav-link" href="#services">What we make</a>
+      <a class="nav-link" href="#transformations">Before and after</a>
+      <a class="nav-link" href="#promise">Our promise</a>
+      <a class="btn btn-warm" href="#contact">Book a home visit</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6">
+        <p class="eyebrow mb-3">Interior renovation and bespoke carpentry</p>
+        <h1 class="mb-3">Rooms that feel like <em>they were always yours.</em></h1>
+        <p class="tagline mt-3">{{TAGLINE}}</p>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <a class="btn btn-warm" href="#contact">Book a home visit</a>
+          <a class="btn btn-quiet" href="#transformations">See a transformation</a>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="hero-photo">
+          <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&q=60" alt="Warm living room with built-in walnut shelving and soft afternoon light">
+        </div>
+        <div class="hero-badge">
+          <div><b>214 homes</b><span>renovated in 12 years</span></div>
+          <div><b>4.9 / 5</b><span>average client rating</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="services" id="services">
+  <div class="container">
+    <p class="eyebrow mb-2">What we make</p>
+    <h2 class="mb-4" style="font-size:clamp(1.9rem,4.2vw,2.8rem);">Three ways we work on a home</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="svc">
+          <div class="ic">K</div>
+          <h3>Kitchens that cook</h3>
+          <p>Marine-ply carcasses, soft-close hardware and counters planned around how you actually move between hob, sink and fridge.</p>
+          <span class="from">Typically 6 to 8 weeks</span>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="svc">
+          <div class="ic">W</div>
+          <h3>Wardrobes and storage</h3>
+          <p>Floor-to-ceiling wardrobes, window seats with hidden drawers, and lofts that stop being a place things go to disappear.</p>
+          <span class="from">Typically 3 to 4 weeks</span>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="svc">
+          <div class="ic">H</div>
+          <h3>Full-home renovation</h3>
+          <p>Flooring, lighting, painting and carpentry run by one site lead, with a weekly photo update and a dust-sealed work zone.</p>
+          <span class="from">Typically 10 to 14 weeks</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="transform" id="transformations">
+  <div class="container">
+    <p class="eyebrow mb-2">Before and after</p>
+    <h2 class="mb-2" style="font-size:clamp(1.9rem,4.2vw,2.8rem);">The Arbor Lane living room</h2>
+    <p class="mb-4">A dim 1990s hall with boxed-in windows became the room this family now argues over. Everything between the two photos is listed on the card.</p>
+    <div class="row g-4 align-items-stretch">
+      <div class="col-lg-4">
+        <div class="ba-photo">
+          <span class="flag">Before</span>
+          <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=1000&q=60" alt="Older living room with dated furniture before renovation">
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="materials">
+          <h4>Materials and scope</h4>
+          <ul>
+            <li><span>Flooring</span><b>Engineered oak, herringbone</b></li>
+            <li><span>Wall panelling</span><b>Fluted walnut veneer</b></li>
+            <li><span>Shelving</span><b>19 mm ply, hand-finished</b></li>
+            <li><span>Paint</span><b>Low-VOC, warm white</b></li>
+            <li><span>Lighting</span><b>Layered, 2700K throughout</b></li>
+            <li><span>Hardware</span><b>Brushed brass, soft-close</b></li>
+          </ul>
+          <div class="dur">Completed in 7 weeks, family in residence</div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="ba-photo">
+          <span class="flag after">After</span>
+          <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1000&q=60" alt="Renovated living room with oak floor, walnut panelling and warm lighting">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="promise" id="promise">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-7">
+        <p class="eyebrow mb-2">Our promise</p>
+        <h2 class="mb-4" style="font-size:clamp(1.9rem,4.2vw,2.8rem);">Renovation without the horror stories</h2>
+        <div class="prom">
+          <span class="n">1</span>
+          <div>
+            <h4>A fixed quote, itemised to the hinge</h4>
+            <p>Every board, laminate and fitting is named and priced before we start. If we missed it, we absorb it.</p>
+          </div>
+        </div>
+        <div class="prom">
+          <span class="n">2</span>
+          <div>
+            <h4>Your home stays liveable</h4>
+            <p>Dust barriers, floor protection and a daily 6 pm clean-down. Most clients stay home through the entire project.</p>
+          </div>
+        </div>
+        <div class="prom">
+          <span class="n">3</span>
+          <div>
+            <h4>Five-year workmanship warranty</h4>
+            <p>Hinges, joints, polish and alignment covered in writing. One call, and a carpenter is at your door within the week.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <figure class="quote-card mb-0">
+          <blockquote class="mb-4">"They quoted in October, finished in December, and the number never moved. Our kitchen island is now where every guest ends up standing."</blockquote>
+          <figcaption>Meera and Ashwin T., full-home renovation, Rosewood Enclave</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+          <h2 class="mb-2">Walk us through your home. Tea is on us.</h2>
+          <p class="mb-0">A 45-minute visit, honest advice on what is worth doing, and a written estimate within five days. No obligation, no follow-up calls unless you ask.</p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <a class="btn btn-cream btn-lg" href="#top">Book a home visit</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <p class="brand mb-2">{{BRAND}}</p>
+        <p style="max-width:32ch;">A small studio of carpenters and site leads who treat your home like the only one on the books.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Studio</h6>
+        <ul><li><a href="#services">What we make</a></li><li><a href="#transformations">Before and after</a></li><li><a href="#promise">Our promise</a></li></ul>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h6>Workshop</h6>
+        <ul><li>Unit 3, Timber Yard Lane</li><li>Visits by appointment</li><li>hello@yourdomain.com</li></ul>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h6>Good to know</h6>
+        <ul><li>Five-year workmanship warranty</li><li>Fixed quotes, itemised</li><li>Insured crews, background checked</li></ul>
+      </div>
+    </div>
+    <p class="foot-legal mb-0">© {{BRAND}} · draft preview generated by Dharwin Studio</p>
+  </div>
+</footer>
+</body>
+</html>

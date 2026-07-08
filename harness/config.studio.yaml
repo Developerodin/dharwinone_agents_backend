@@ -1,0 +1,34 @@
+ollama_url: http://localhost:11434
+repo_root: C:/Users/INTEL/Desktop/DharwinOne
+worktree_root: C:/wt
+integration_branch: harness/integration
+skeptic_path: harness/skeptic.yaml
+tasks_path: harness/ui_queue.yaml
+generated_tasks_path: harness/generated_tasks.yaml
+journal_path: harness/journal.jsonl
+stats_path: harness/stats.json
+packets_dir: harness/packets
+report_path: harness/report.md
+models:
+  feature: qwen3-coder-30b-harness
+  fix: qwen25-coder-14b-harness
+  planner: qwen3-coder-30b-harness
+  reviewer_for:
+    qwen3-coder-30b-harness: qwen25-coder-14b-harness
+    qwen25-coder-14b-harness: qwen3-coder-30b-harness
+edit_format:
+  qwen3-coder-30b-harness: diff
+  qwen25-coder-14b-harness: whole
+limits:
+  repair_rounds: 3
+  review_rounds: 2
+  task_timeout_min: 30
+  run_cap_hours: 8
+  min_disk_gb: 30
+  max_diff_kb: 64
+  error_tail_lines: 100
+  infra_failure_breaker: 3
+  weak_winrate: 0.5
+  weak_min_attempts: 4
+  max_plan_files: 8
+  health_deadline_s: 60

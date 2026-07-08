@@ -1,0 +1,14 @@
+{
+  "ollama_chat/qwen3-coder-30b-harness": {
+    "max_input_tokens": 16384,
+    "max_output_tokens": 8192,
+    "input_cost_per_token": 0,
+    "output_cost_per_token": 0
+  },
+  "ollama_chat/qwen25-coder-14b-harness": {
+    "max_input_tokens": 16384,
+    "max_output_tokens": 8192,
+    "input_cost_per_token": 0,
+    "output_cost_per_token": 0
+  }
+}

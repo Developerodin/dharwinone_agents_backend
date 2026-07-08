@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="design-label" content="Ledger Enterprise">
+<title>{{BRAND}}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#20303f;
+    --bg:#faf7f1;
+    --accent:#8a6320;
+    --soft:#f1ebe0;
+    --line:#ddd4c3;
+    --muted:color-mix(in srgb, var(--ink) 68%, var(--bg) 32%);
+    --accent-deep:color-mix(in srgb, var(--accent) 78%, var(--ink) 22%);
+    --ink-band:color-mix(in srgb, var(--ink) 94%, var(--bg) 6%);
+    --on-ink:color-mix(in srgb, var(--bg) 96%, var(--ink) 4%);
+    --on-ink-dim:color-mix(in srgb, var(--bg) 74%, var(--ink) 26%);
+  }
+  body{font-family:'Public Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:1.0625rem;line-height:1.65;}
+  h1,h2,h3,.serif-face{font-family:'Source Serif 4',serif;letter-spacing:-.01em;}
+  p{max-width:68ch;}
+  a{color:var(--accent-deep);}
+  .eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-deep);}
+  .sec-title{font-size:clamp(1.9rem,3.2vw,2.7rem);font-weight:700;}
+  .muted{color:var(--muted);}
+  .num{font-variant-numeric:tabular-nums;}
+  .btn-main{background:var(--ink);color:var(--on-ink);border:1px solid var(--ink);padding:.85rem 1.8rem;font-weight:600;border-radius:4px;display:inline-block;text-decoration:none;}
+  .btn-main:hover{background:var(--accent-deep);border-color:var(--accent-deep);color:var(--on-ink);}
+  .btn-quiet{background:transparent;color:var(--ink);border:1px solid var(--ink);padding:.85rem 1.8rem;font-weight:600;border-radius:4px;display:inline-block;text-decoration:none;}
+  .btn-quiet:hover{background:var(--soft);color:var(--ink);}
+  /* nav */
+  .topnav{background:var(--bg);border-bottom:2px solid var(--ink);padding:1.05rem 0;}
+  .topnav .brand{font-family:'Source Serif 4',serif;font-weight:700;font-size:1.35rem;color:var(--ink);text-decoration:none;}
+  .topnav a.navlink{color:var(--muted);text-decoration:none;font-weight:500;font-size:.94rem;}
+  .topnav a.navlink:hover{color:var(--ink);}
+  /* hero */
+  .hero{padding:6rem 0 5.5rem;border-bottom:1px solid var(--line);}
+  .hero h1{font-size:clamp(2.4rem,5vw,4rem);font-weight:700;line-height:1.08;}
+  .hero .tagline{color:var(--muted);font-size:1.22rem;max-width:52ch;}
+  .hero .assurance{border-top:1px solid var(--line);margin-top:2.6rem;padding-top:1.2rem;display:flex;gap:2.5rem;flex-wrap:wrap;font-size:.9rem;color:var(--muted);}
+  .hero .assurance b{display:block;color:var(--ink);font-weight:600;font-size:.95rem;}
+  .hero img{width:100%;height:420px;object-fit:cover;border-radius:6px;border:1px solid var(--line);}
+  /* commitments */
+  .commit{border-top:1px solid var(--line);padding:1.6rem 0;display:grid;grid-template-columns:64px 1fr 2fr;gap:1.6rem;align-items:baseline;}
+  .commit:last-child{border-bottom:1px solid var(--line);}
+  .commit .idx{font-family:'Source Serif 4',serif;font-weight:700;color:var(--accent);font-size:1.1rem;}
+  .commit h3{font-size:1.25rem;font-weight:700;margin:0;}
+  .commit p{margin:0;color:var(--muted);font-size:.97rem;}
+  /* proof band */
+  .proof-band{background:var(--soft);border-block:1px solid var(--line);padding:5.5rem 0;}
+  .proof-band img{width:100%;height:300px;object-fit:cover;border-radius:6px;border:1px solid var(--line);}
+  blockquote.ledger-quote{font-family:'Source Serif 4',serif;font-size:1.35rem;line-height:1.5;font-weight:400;margin:0;}
+  blockquote.ledger-quote footer{font-family:'Public Sans',sans-serif;font-size:.92rem;color:var(--muted);margin-top:1.1rem;}
+  /* signature: annual-report pricing ledger */
+  .ledger-wrap{border:1px solid var(--ink);border-radius:4px;overflow-x:auto;background:var(--bg);}
+  table.ledger{width:100%;border-collapse:collapse;min-width:720px;margin:0;font-size:.95rem;}
+  table.ledger caption{caption-side:top;text-align:left;font-family:'Source Serif 4',serif;font-size:.95rem;color:var(--muted);padding:.9rem 1.3rem;border-bottom:1px solid var(--line);font-style:italic;}
+  table.ledger th{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;text-align:left;padding:.9rem 1.3rem;border-bottom:2px solid var(--ink);}
+  table.ledger th.fig, table.ledger td.fig{text-align:right;font-variant-numeric:tabular-nums;}
+  table.ledger td{padding:.95rem 1.3rem;border-bottom:1px solid var(--line);vertical-align:baseline;color:var(--muted);}
+  table.ledger td:first-child{color:var(--ink);font-weight:500;}
+  table.ledger tr.total td{border-bottom:none;border-top:2px solid var(--ink);font-weight:600;color:var(--ink);padding-top:1.05rem;}
+  table.ledger .price{font-family:'Source Serif 4',serif;font-weight:700;font-size:1.15rem;color:var(--ink);}
+  table.ledger .price small{font-family:'Public Sans',sans-serif;font-weight:500;font-size:.78rem;color:var(--muted);}
+  table.ledger .incl{color:var(--accent-deep);font-weight:600;}
+  .ledger-note{font-size:.88rem;color:var(--muted);margin-top:1rem;max-width:70ch;}
+  /* cta */
+  .cta-band{background:var(--ink-band);color:var(--on-ink);padding:5.5rem 0;}
+  .cta-band h2{font-family:'Source Serif 4',serif;font-size:clamp(2rem,3.4vw,2.9rem);font-weight:700;color:var(--on-ink);}
+  .cta-band p{color:var(--on-ink-dim);}
+  .cta-band .btn-inverse{background:var(--bg);color:var(--ink);border:1px solid var(--bg);padding:.9rem 2rem;font-weight:600;border-radius:4px;display:inline-block;text-decoration:none;}
+  .cta-band .btn-inverse:hover{background:var(--soft);color:var(--ink);}
+  footer.site{padding:3rem 0 2.6rem;color:var(--muted);font-size:.92rem;border-top:1px solid var(--line);}
+  footer.site a{color:var(--muted);text-decoration:none;}
+  footer.site a:hover{color:var(--ink);}
+  @media (prefers-reduced-motion: no-preference){
+    .commit,.btn-main,.btn-quiet{transition:background-color .2s ease, color .2s ease, transform .22s ease;}
+    .commit:hover{transform:translateX(6px);}
+  }
+  @media (max-width: 767px){
+    .commit{grid-template-columns:44px 1fr;}
+    .commit p{grid-column:2;}
+    .hero img{height:260px;}
+    .hero{padding:4rem 0;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="container d-flex align-items-center justify-content-between">
+    <a class="brand" href="#">{{BRAND}}</a>
+    <div class="d-none d-md-flex gap-4 align-items-center">
+      <a class="navlink" href="#commitments">Platform</a>
+      <a class="navlink" href="#proof">Customers</a>
+      <a class="navlink" href="#pricing">Pricing</a>
+      <a class="navlink" href="#contact">Contact</a>
+    </div>
+    <a class="btn-main" style="padding:.55rem 1.2rem;font-size:.92rem;" href="#contact">Request a briefing</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <p class="eyebrow">Procurement and vendor risk, in one system of record</p>
+        <h1>Every supplier decision, documented like it will be audited.</h1>
+        <p class="tagline mt-3">{{TAGLINE}}</p>
+        <p class="muted">Because one day it will be. {{BRAND}} keeps contracts, risk reviews, renewals, and spend in a single ledger your auditors, your CFO, and your legal team all read the same way.</p>
+        <div class="d-flex gap-3 flex-wrap mt-4">
+          <a class="btn-main" href="#contact">Request a briefing</a>
+          <a class="btn-quiet" href="#pricing">See plain pricing</a>
+        </div>
+        <div class="assurance">
+          <div><b>SOC 2 Type II</b>audited annually</div>
+          <div><b>ISO 27001</b>certified since 2021</div>
+          <div><b>EU + US residency</b>you choose the region</div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1100&q=70" alt="Reviewing printed financial reports and charts at a desk">
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="commitments" class="container" style="padding:5.5rem 0;">
+  <p class="eyebrow">What the platform holds</p>
+  <h2 class="sec-title mb-4" style="max-width:22ch;">Four registers, one authoritative record</h2>
+  <div class="commit">
+    <span class="idx num">01</span>
+    <h3>Contract register</h3>
+    <p>Every agreement with its owner, renewal date, notice period, and negotiated terms. Renewal alerts go out at 120, 90, and 30 days, to a person, not a shared inbox.</p>
+  </div>
+  <div class="commit">
+    <span class="idx num">02</span>
+    <h3>Risk register</h3>
+    <p>Vendor security reviews on a fixed cadence, scored against your own framework. Expired attestations block new spend automatically until reviewed.</p>
+  </div>
+  <div class="commit">
+    <span class="idx num">03</span>
+    <h3>Spend register</h3>
+    <p>Committed spend against actual invoices, per vendor and per cost centre, reconciled nightly from your ERP. Variances above threshold open a task, not a surprise.</p>
+  </div>
+  <div class="commit">
+    <span class="idx num">04</span>
+    <h3>Decision register</h3>
+    <p>Who approved what, when, and on what evidence. Every approval carries its supporting documents, so an audit request is an export, not an archaeology project.</p>
+  </div>
+</section>
+
+<section id="proof" class="proof-band">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5">
+        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=1000&q=70" alt="Glass office towers of a financial district against the sky">
+      </div>
+      <div class="col-lg-7">
+        <p class="eyebrow">In production at regulated firms</p>
+        <blockquote class="ledger-quote">
+          "Our last SOC 2 audit asked for evidence on 41 vendor decisions. The export took eleven minutes, and the auditor accepted it without a single follow-up. That has never happened before."
+          <footer>Head of Vendor Management, mid-market insurance carrier, 3,400 employees</footer>
+        </blockquote>
+        <p class="muted mt-4" style="font-size:.97rem;">Teams in insurance, healthcare, and logistics run their vendor programmes on {{BRAND}}. Median rollout is six weeks, including ERP reconciliation and historical contract import.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" class="container" style="padding:6rem 0;">
+  <p class="eyebrow">Pricing</p>
+  <h2 class="sec-title mb-2">Priced like a line item, stated like one</h2>
+  <p class="muted" style="margin-bottom:2.2rem;">Annual billing, no per-seat arithmetic, no usage meters. The table below is the whole pricing page.</p>
+  <div class="ledger-wrap">
+    <table class="ledger">
+      <caption>Schedule A. Subscription plans, effective for the current fiscal year. All figures in USD.</caption>
+      <thead>
+        <tr><th>Provision</th><th class="fig">Foundation</th><th class="fig">Corporate</th><th class="fig">Regulated</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Vendors under management</td><td class="fig num">up to 150</td><td class="fig num">up to 600</td><td class="fig num">unlimited</td></tr>
+        <tr><td>Users, all roles</td><td class="fig num">unlimited</td><td class="fig num">unlimited</td><td class="fig num">unlimited</td></tr>
+        <tr><td>ERP reconciliation (NetSuite, SAP, Dynamics)</td><td class="fig">nightly</td><td class="fig">nightly</td><td class="fig">hourly</td></tr>
+        <tr><td>Security review workflows</td><td class="fig incl">included</td><td class="fig incl">included</td><td class="fig incl">included</td></tr>
+        <tr><td>Audit evidence export</td><td class="fig incl">included</td><td class="fig incl">included</td><td class="fig incl">included</td></tr>
+        <tr><td>SSO and SCIM provisioning</td><td class="fig">SSO only</td><td class="fig incl">included</td><td class="fig incl">included</td></tr>
+        <tr><td>Data residency choice, EU or US</td><td class="fig">US</td><td class="fig">EU or US</td><td class="fig">EU or US</td></tr>
+        <tr><td>Dedicated environment, private VPC</td><td class="fig">no</td><td class="fig">no</td><td class="fig incl">included</td></tr>
+        <tr><td>Support response, business hours</td><td class="fig num">8 hours</td><td class="fig num">4 hours</td><td class="fig num">1 hour</td></tr>
+        <tr class="total"><td>Annual subscription</td><td class="fig"><span class="price num">$9,600 <small>/ year</small></span></td><td class="fig"><span class="price num">$28,800 <small>/ year</small></span></td><td class="fig"><span class="price num">$72,000 <small>/ year</small></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="ledger-note">Figures are list prices. Multi-year agreements carry a stated discount schedule, in writing, before signature. Implementation is a fixed fee quoted after a scoping call, never time and materials.</p>
+</section>
+
+<section id="rollout" style="background:var(--soft);border-top:1px solid var(--line);padding:5.5rem 0;">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <p class="eyebrow">Implementation</p>
+        <h2 class="sec-title">Six weeks, stated in writing</h2>
+        <p class="muted mt-3">Rollout follows the same plan every time, run by our team, with your named counterpart on each phase. The plan is an appendix to the order form, so slippage is our problem, not yours.</p>
+      </div>
+      <div class="col-lg-8">
+        <div class="commit" style="background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:1.6rem 1.8rem;grid-template-columns:110px 1fr 2fr;">
+          <span class="idx num">Wk 1–2</span>
+          <h3>Import</h3>
+          <p>Historical contracts, owners, and renewal dates loaded from your existing spreadsheets and drives. We have imported worse than yours.</p>
+        </div>
+        <div class="commit" style="background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:1.6rem 1.8rem;grid-template-columns:110px 1fr 2fr;margin-top:1rem;">
+          <span class="idx num">Wk 3–4</span>
+          <h3>Reconcile</h3>
+          <p>ERP connection goes live and the spend register reconciles against your last two closed quarters until the variances are explained.</p>
+        </div>
+        <div class="commit" style="background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:1.6rem 1.8rem;grid-template-columns:110px 1fr 2fr;margin-top:1rem;">
+          <span class="idx num">Wk 5–6</span>
+          <h3>Cut over</h3>
+          <p>Approvers trained in two 45-minute sessions, legacy trackers frozen read-only, and the decision register becomes the only door.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="cta-band">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-8">
+        <h2>Bring your messiest vendor file to the first call.</h2>
+        <p style="max-width:56ch;">A 45-minute briefing with a solutions engineer, not a rep. We will load a sample of your real contracts and show you the ledger your auditors would see.</p>
+      </div>
+      <div class="col-lg-4 text-lg-end">
+        <a class="btn-inverse" href="#">Schedule the briefing</a>
+        <p class="mt-3 mb-0" style="font-size:.9rem;">or write to procurement@{{BRAND}}.example</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="container d-flex flex-wrap justify-content-between gap-3">
+    <div>
+      <div class="serif-face" style="font-weight:700;color:var(--ink);font-size:1.15rem;">{{BRAND}}</div>
+      <div class="mt-1">© {{BRAND}} · draft preview generated by Dharwin Studio</div>
+    </div>
+    <div class="d-flex gap-4">
+      <a href="#commitments">Platform</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+      <a href="#">Security</a>
+      <a href="#">Legal</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

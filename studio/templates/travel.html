@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{BRAND}}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14282e;        /* deep petrol */
+    --bg:#edf0e9;         /* morning mist */
+    --accent:#c9631f;     /* sunset amber */
+    --soft:#e0e6dc;       /* fog surface */
+    --line:#c9d2c5;       /* trail edge */
+    --ink-70:color-mix(in oklab, var(--ink) 70%, var(--bg));
+    --ink-45:color-mix(in oklab, var(--ink) 45%, var(--bg));
+    --mist-on-ink:color-mix(in oklab, var(--bg) 88%, var(--ink));
+  }
+  body{background:var(--bg);color:var(--ink);font-family:"Instrument Sans",sans-serif;font-size:1.0625rem;line-height:1.65}
+  h1,h2,h3{font-family:"Bricolage Grotesque",sans-serif;color:var(--ink);letter-spacing:-.02em}
+  p{max-width:66ch}
+  .eyebrow{font-size:.78rem;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  /* NAV over hero */
+  .nav-bar{position:absolute;top:0;left:0;right:0;z-index:5;padding:1.25rem 0}
+  .nav-bar .brand{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.4rem;color:var(--mist-on-ink);text-decoration:none}
+  .nav-bar a.link{color:rgba(237,240,233,.82);text-decoration:none;font-weight:500;font-size:.95rem}
+  .nav-bar a.link:hover{color:var(--accent)}
+  .btn-amber{background:var(--accent);color:var(--bg);border:none;border-radius:999px;padding:.6rem 1.5rem;font-weight:600}
+  .btn-amber:hover{background:color-mix(in oklab, var(--accent) 80%, var(--ink));color:var(--bg)}
+  .btn-mist{background:transparent;color:var(--ink);border:1.5px solid var(--ink);border-radius:999px;padding:.55rem 1.5rem;font-weight:600}
+  .btn-mist:hover{background:var(--ink);color:var(--bg)}
+  /* FULL-BLEED HERO */
+  .hero{position:relative;min-height:92vh;display:flex;align-items:flex-end;overflow:hidden}
+  .hero .bgimg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1800&q=60') center/cover no-repeat}
+  .hero .veil{position:absolute;inset:0;background:linear-gradient(180deg, rgba(20,40,46,.35) 0%, rgba(20,40,46,.15) 40%, rgba(20,40,46,.78) 100%)}
+  .hero .content{position:relative;z-index:2;padding:7rem 0 4.5rem;width:100%}
+  .hero h1{color:var(--mist-on-ink);font-size:clamp(3.4rem,8vw,6.4rem);font-weight:800;line-height:1;max-width:14ch}
+  .hero h1 em{font-style:italic;color:var(--accent)}
+  .hero .tagline{color:rgba(237,240,233,.85);font-size:1.2rem;max-width:46ch}
+  .hero .strip{border-top:1px solid rgba(237,240,233,.28);margin-top:2.5rem;padding-top:1.2rem;display:flex;gap:2rem;flex-wrap:wrap;color:rgba(237,240,233,.8);font-size:.92rem}
+  .hero .strip b{color:var(--mist-on-ink);font-family:"Bricolage Grotesque",sans-serif}
+  /* DESTINATION MARQUEE */
+  .marquee{background:var(--ink);overflow:hidden;white-space:nowrap;padding:.95rem 0}
+  .marquee-track{display:inline-block}
+  .marquee span{color:var(--mist-on-ink);font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:1rem;letter-spacing:.1em;text-transform:uppercase;padding:0 1.6rem}
+  .marquee b{color:var(--accent)}
+  @media (prefers-reduced-motion: no-preference){
+    .marquee-track{animation:drift 36s linear infinite}
+    @keyframes drift{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .lift{transition:transform .25s ease, box-shadow .25s ease}
+    .lift:hover{transform:translateY(-6px);box-shadow:0 18px 42px rgba(20,40,46,.18)}
+    .zoom img{transition:transform .6s ease}
+    .zoom:hover img{transform:scale(1.05)}
+  }
+  /* SIGNATURE: ITINERARY RAIL */
+  .itin{padding:6rem 0}
+  .itin h2{font-size:clamp(2.2rem,4.5vw,3.4rem);font-weight:800}
+  .itin .sub{color:var(--ink-70)}
+  .rail{position:relative;margin-top:3rem;padding-left:2.5rem}
+  .rail::before{content:"";position:absolute;left:.55rem;top:.4rem;bottom:.4rem;width:2px;background:var(--line)}
+  .day{position:relative;padding-bottom:2.6rem}
+  .day:last-child{padding-bottom:0}
+  .day::before{content:"";position:absolute;left:-2.5rem;top:.35rem;width:1.15rem;height:1.15rem;border-radius:50%;background:var(--bg);border:3px solid var(--accent)}
+  .day .label{font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  .day h3{font-size:1.4rem;font-weight:700;margin:.25rem 0 .4rem}
+  .day p{color:var(--ink-70);font-size:.98rem;max-width:58ch;margin:0}
+  .day .tag{display:inline-block;background:var(--soft);border:1px solid var(--line);border-radius:999px;font-size:.78rem;padding:.2rem .7rem;color:var(--ink-70);margin-top:.6rem;margin-right:.4rem}
+  .itin-photo{border-radius:1.25rem;overflow:hidden;position:relative}
+  .itin-photo img{width:100%;height:100%;min-height:420px;object-fit:cover;display:block}
+  .itin-photo .cap{position:absolute;left:1rem;right:1rem;bottom:1rem;background:rgba(20,40,46,.72);color:var(--mist-on-ink);border-radius:.8rem;padding:.9rem 1.1rem;font-size:.9rem}
+  .itin-photo .cap b{font-family:"Bricolage Grotesque",sans-serif;display:block;font-size:1.05rem}
+  /* DESTINATIONS (asymmetric) */
+  .dest{padding:5.5rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .dest h2{font-size:clamp(2.2rem,4.5vw,3.4rem);font-weight:800}
+  .dcard{position:relative;border-radius:1.25rem;overflow:hidden;display:block;text-decoration:none;color:var(--mist-on-ink)}
+  .dcard img{width:100%;height:100%;object-fit:cover;display:block}
+  .dcard .shade{position:absolute;inset:0;background:linear-gradient(180deg, rgba(20,40,46,0) 40%, rgba(20,40,46,.82) 100%)}
+  .dcard .info{position:absolute;left:1.4rem;right:1.4rem;bottom:1.2rem}
+  .dcard .info h3{color:var(--mist-on-ink);font-weight:800;font-size:1.6rem;margin:0}
+  .dcard .meta{color:rgba(237,240,233,.85);font-size:.9rem}
+  .dcard .meta b{color:var(--accent)}
+  .dcard.wide img{aspect-ratio:16/8}
+  .dcard.tall img{aspect-ratio:4/4.6}
+  /* GUIDE STORY */
+  .guide{padding:6rem 0}
+  .guide h2{font-size:clamp(2rem,4vw,3rem);font-weight:800}
+  .guide .lede{color:var(--ink-70)}
+  .guide-photo{border-radius:1.25rem;overflow:hidden}
+  .guide-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}
+  .cred{border-top:1px solid var(--line);padding:.8rem 0;display:flex;justify-content:space-between;gap:1rem;font-size:.95rem}
+  .cred b{font-family:"Bricolage Grotesque",sans-serif}
+  /* QUOTE */
+  .quote{padding:5.5rem 0;background:var(--ink)}
+  .quote blockquote{font-family:"Bricolage Grotesque",sans-serif;font-size:clamp(1.8rem,3.8vw,3rem);font-weight:700;line-height:1.2;color:var(--mist-on-ink);max-width:24ch;margin:0 auto;text-align:center}
+  .quote blockquote em{color:var(--accent);font-style:italic}
+  .quote .who{text-align:center;color:rgba(237,240,233,.65);margin-top:1.4rem;font-size:.95rem}
+  /* FAQ + CTA */
+  .faq{padding:5.5rem 0}
+  details{border-bottom:1px solid var(--line);padding:1.1rem 0}
+  details summary{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:1.15rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;color:var(--ink)}
+  details summary::-webkit-details-marker{display:none}
+  details summary::after{content:"+";color:var(--accent);font-size:1.5rem;line-height:1;font-family:"Instrument Sans",sans-serif}
+  details[open] summary::after{content:"×"}
+  details p{color:var(--ink-70);margin:.7rem 0 0;font-size:.98rem}
+  .cta{padding:6rem 0;position:relative;overflow:hidden}
+  .cta .bgimg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&q=60') center/cover no-repeat}
+  .cta .veil{position:absolute;inset:0;background:rgba(20,40,46,.72)}
+  .cta .content{position:relative;z-index:2;text-align:center}
+  .cta h2{color:var(--mist-on-ink);font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800}
+  .cta p{color:rgba(237,240,233,.85);margin-left:auto;margin-right:auto}
+  /* FOOTER */
+  footer{background:var(--ink);color:rgba(237,240,233,.7);padding:4rem 0 2rem;border-top:1px solid color-mix(in oklab, var(--bg) 16%, var(--ink))}
+  footer .brand{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.5rem;color:var(--mist-on-ink)}
+  footer h4{font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  footer a{color:rgba(237,240,233,.78);text-decoration:none;display:block;padding:.2rem 0;font-size:.95rem}
+  footer a:hover{color:var(--accent)}
+  footer .legal{border-top:1px solid color-mix(in oklab, var(--bg) 14%, var(--ink));margin-top:3rem;padding-top:1.5rem;font-size:.85rem}
+</style>
+</head>
+<body>
+
+<nav class="nav-bar">
+  <div class="container d-flex align-items-center justify-content-between">
+    <a class="brand" href="#">{{BRAND}}</a>
+    <div class="d-none d-md-flex gap-4 align-items-center">
+      <a class="link" href="#itinerary">Sample itinerary</a>
+      <a class="link" href="#destinations">Destinations</a>
+      <a class="link" href="#guides">Your guides</a>
+      <a class="btn-amber btn" href="#plan">Plan my trip</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="bgimg" role="img" aria-label="Sunrise over a mountain valley"></div>
+  <div class="veil"></div>
+  <div class="content">
+    <div class="container">
+      <p class="eyebrow mb-3">{{BRAND}} small group expeditions, 12 travelers max</p>
+      <h1>Go where the <em>map creases.</em></h1>
+      <p class="tagline mt-4">{{TAGLINE}}</p>
+      <div class="d-flex gap-3 mt-4 flex-wrap">
+        <a class="btn-amber btn" href="#itinerary">See a real itinerary</a>
+      </div>
+      <div class="strip">
+        <span><b>23</b> routes across 6 continents</span>
+        <span><b>Local guides</b> on every departure</span>
+        <span><b>No hidden fees</b>, the quote is the price</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Patagonia <b>→</b></span><span>Kyoto backstreets <b>→</b></span><span>Zanzibar spice coast <b>→</b></span><span>Atlas Mountains <b>→</b></span><span>Faroe Islands <b>→</b></span><span>Sacred Valley <b>→</b></span>
+    <span>Patagonia <b>→</b></span><span>Kyoto backstreets <b>→</b></span><span>Zanzibar spice coast <b>→</b></span><span>Atlas Mountains <b>→</b></span><span>Faroe Islands <b>→</b></span><span>Sacred Valley <b>→</b></span>
+  </div>
+</div>
+
+<section class="itin" id="itinerary">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-6">
+        <p class="eyebrow mb-2">Signature route, Patagonia</p>
+        <h2>Five days in Torres del Paine, hour by honest hour.</h2>
+        <p class="sub mt-3">This is the actual day sheet your guide carries, not a brochure version. Weather moves things around, dinner never gets cancelled.</p>
+        <div class="rail">
+          <div class="day">
+            <span class="label">Day 1</span>
+            <h3>Puerto Natales, boots and pisco</h3>
+            <p>Land by 14:00, gear check with Elena at the lodge, then king crab at Cangrejo Rojo while she walks you through the wind forecast.</p>
+            <span class="tag">Lodge night</span><span class="tag">Welcome dinner included</span>
+          </div>
+          <div class="day">
+            <span class="label">Day 2</span>
+            <h3>Into the park, Lago Grey shoreline</h3>
+            <p>Two hour transfer at dawn, then a 11 km shoreline walk to the glacier viewpoint. Icebergs the size of houses, lunch on the moraine.</p>
+            <span class="tag">11 km, moderate</span><span class="tag">Packed lunch</span>
+          </div>
+          <div class="day">
+            <span class="label">Day 3</span>
+            <h3>The towers, the whole reason</h3>
+            <p>Alpine start at 5:30. Eight hours round trip to the base of the granite towers. Elena times the last climb so you arrive as the light turns them red.</p>
+            <span class="tag">19 km, demanding</span><span class="tag">Sunrise summit</span>
+          </div>
+          <div class="day">
+            <span class="label">Day 4</span>
+            <h3>Horses with the Baqueano family</h3>
+            <p>Recovery day in the saddle. Ride estancia land with third generation gauchos, lamb asado at their homestead, no other tourists for 40 km.</p>
+            <span class="tag">Half day ride</span><span class="tag">Asado included</span>
+          </div>
+          <div class="day">
+            <span class="label">Day 5</span>
+            <h3>Slow morning, fly out</h3>
+            <p>Late breakfast, a last mate by the lake, transfer to the airstrip by noon. You will book the return flight before you land.</p>
+            <span class="tag">Departure day</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="itin-photo zoom lift h-100">
+          <img src="https://images.unsplash.com/photo-1531794506397-9f1a4c4b3ea4?w=1000&q=60" alt="Granite towers of Torres del Paine at dawn">
+          <div class="cap"><b>From 2,890 per person</b>5 days, 4 nights, guide, park fees, and every meal on the sheet</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dest" id="destinations">
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+      <h2 class="mb-0">Where next season points</h2>
+      <p class="mb-1" style="color:var(--ink-45)">Every route capped at 12 travelers, most sell out a season ahead.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-12">
+        <a class="dcard wide zoom lift" href="#">
+          <img src="https://images.unsplash.com/photo-1526392060635-9d6019884377?w=1600&q=60" alt="Machu Picchu ruins above the Sacred Valley clouds">
+          <div class="shade"></div>
+          <div class="info">
+            <h3>Sacred Valley and the quiet route to Machu Picchu</h3>
+            <p class="meta mb-0">9 days · Cusco to Aguas Calientes · <b>from 3,450</b> · departs May, September</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a class="dcard tall zoom lift" href="#">
+          <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=900&q=60" alt="Lantern lit street in Kyoto at dusk">
+          <div class="shade"></div>
+          <div class="info">
+            <h3>Kyoto backstreets and mountain onsen</h3>
+            <p class="meta mb-0">7 days · <b>from 2,780</b> · departs October</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a class="dcard tall zoom lift" href="#">
+          <img src="https://images.unsplash.com/photo-1489493585363-d69421e0edd3?w=900&q=60" alt="Sand dunes of the Sahara at golden hour">
+          <div class="shade"></div>
+          <div class="info">
+            <h3>Atlas Mountains to Sahara camp</h3>
+            <p class="meta mb-0">8 days · <b>from 2,190</b> · departs March, November</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="guide" id="guides">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5">
+        <div class="guide-photo zoom lift">
+          <img src="https://images.unsplash.com/photo-1503457574462-bd27054394c1?w=800&q=60" alt="Guide looking out over a mountain trail">
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <p class="eyebrow mb-3">Your guides</p>
+        <h2>Elena has crossed the Paine massif 214 times. She still packs extra chocolate for day three.</h2>
+        <p class="lede mt-3">We do not hire seasonal staff from an agency. Our 17 guides live where they lead, hold wilderness first responder certification, and take the same salary in low season so nobody ever rushes your trip to fit a schedule.</p>
+        <div class="mt-4">
+          <div class="cred"><span>Average guiding experience</span><b>12 years</b></div>
+          <div class="cred"><span>Guides per departure</span><b>2, always</b></div>
+          <div class="cred"><span>Languages across the team</span><b>14</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote">
+  <div class="container">
+    <blockquote>"I have taken four trips with them. Each one ended with me <em>booking the next</em> from the airport gate."</blockquote>
+    <p class="who">Meera S., Sacred Valley 2024, Faroes 2025</p>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <p class="eyebrow mb-2">Before you pack</p>
+        <h2 style="font-size:clamp(1.9rem,3.5vw,2.6rem);font-weight:800">The questions everyone asks on the first call.</h2>
+      </div>
+      <div class="col-lg-8">
+        <details open>
+          <summary>How fit do I need to be?</summary>
+          <p>Every route has an honest grading on its day sheet. If a day says demanding, it means 8 hours and real elevation. We will talk it through before you pay a deposit, and we have turned people toward easier routes plenty of times.</p>
+        </details>
+        <details>
+          <summary>What exactly is included in the price?</summary>
+          <p>Everything on the day sheet: guides, park fees, transfers, lodging, and every listed meal. Not included: international flights, tips, and the bottle of wine you will insist on buying Elena.</p>
+        </details>
+        <details>
+          <summary>Can I book a private departure?</summary>
+          <p>Yes, any route can run privately for groups of 4 or more. Families do this often for the Kyoto and Zanzibar routes. Pricing lands about 15 percent above the group rate.</p>
+        </details>
+        <details>
+          <summary>What happens if weather closes a trail?</summary>
+          <p>The guide swaps in the alternate day, which is planned in advance for every single route. In nine years we have refunded two trips and rerouted hundreds. Nobody sits in a hotel lobby.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="plan">
+  <div class="bgimg" role="img" aria-label="Calm turquoise water meeting a pale sand beach"></div>
+  <div class="veil"></div>
+  <div class="content container">
+    <h2>The best departures sell out a season early.</h2>
+    <p class="mt-3" style="max-width:52ch">Tell us the month you can get away and we will send three routes that fit, with real day sheets, within 24 hours.</p>
+    <a class="btn-amber btn mt-3" href="#">Plan my trip</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-5">
+        <div class="brand">{{BRAND}}</div>
+        <p class="mt-2" style="max-width:38ch">Small group expeditions led by people who live on the route. The quote is the price.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4 class="mb-3">Routes</h4>
+        <a href="#itinerary">Patagonia</a>
+        <a href="#destinations">Sacred Valley</a>
+        <a href="#destinations">Kyoto</a>
+        <a href="#destinations">Atlas and Sahara</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4 class="mb-3">Company</h4>
+        <a href="#guides">Our guides</a>
+        <a href="#">How we price</a>
+        <a href="#">Field notes</a>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h4 class="mb-3">Talk to a human</h4>
+        <a href="#">hello@example.com</a>
+        <a href="#">+1 555 014 2210, weekdays</a>
+        <a href="#">Instagram</a>
+      </div>
+    </div>
+    <div class="legal">© {{BRAND}} — draft preview generated by Dharwin Studio</div>
+  </div>
+</footer>
+
+</body>
+</html>

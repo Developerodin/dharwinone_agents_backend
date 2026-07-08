@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{BRAND}}</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1e2742;
+    --bg:#f5efe1;
+    --accent:#c8860f;
+    --soft:#faf5e9;
+    --line:#ddd2b9;
+    --ink-band:color-mix(in srgb, var(--ink) 96%, var(--accent));
+    --ink-soft:color-mix(in srgb, var(--ink) 66%, var(--bg));
+    --accent-deep:color-mix(in srgb, var(--accent) 72%, var(--ink));
+    --accent-wash:color-mix(in srgb, var(--accent) 12%, var(--bg));
+  }
+  body{background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,sans-serif;line-height:1.65;}
+  ::selection{background:var(--accent);color:var(--ink);}
+  a{color:var(--accent-deep);}
+  .serif{font-family:"Fraunces",Georgia,serif;}
+
+  .nav-academy{background:color-mix(in srgb, var(--soft) 92%, transparent);backdrop-filter:blur(6px);border-bottom:2px solid var(--ink);}
+  .nav-academy .brand{font-family:"Fraunces",Georgia,serif;font-weight:700;font-size:1.45rem;color:var(--ink);text-decoration:none;}
+  .nav-academy .nav-link{color:var(--ink-soft);font-weight:600;font-size:.92rem;letter-spacing:.02em;}
+  .nav-academy .nav-link:hover{color:var(--ink);}
+  .btn-marigold{background:var(--accent);color:var(--ink);border:1px solid var(--accent-deep);border-radius:.4rem;padding:.6rem 1.4rem;font-weight:700;}
+  .btn-marigold:hover{background:var(--accent-deep);color:var(--soft);}
+  .btn-outline-ink{border:1px solid var(--ink);color:var(--ink);border-radius:.4rem;padding:.6rem 1.4rem;font-weight:600;background:transparent;}
+  .btn-outline-ink:hover{background:var(--ink);color:var(--soft);}
+
+  .hero{padding:5.5rem 0 4rem;}
+  .hero h1{font-family:"Fraunces",Georgia,serif;font-size:clamp(3rem, 6.5vw, 4.9rem);font-weight:700;line-height:1.02;letter-spacing:-.02em;max-width:16ch;}
+  .hero h1 em{font-style:italic;color:var(--accent-deep);}
+  .hero .tagline{font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:.8rem;color:var(--accent-deep);}
+  .hero .lede{font-size:1.15rem;color:var(--ink-soft);max-width:36rem;}
+  .hero .fact{border-top:1px solid var(--line);padding:1rem 0 0;margin-top:1rem;font-size:.95rem;color:var(--ink-soft);}
+  .hero .fact strong{color:var(--ink);}
+
+  .term-table-wrap{background:var(--soft);border:2px solid var(--ink);border-radius:1rem;overflow:hidden;box-shadow:8px 8px 0 color-mix(in srgb, var(--ink) 14%, var(--bg));}
+  .term-table-wrap .table-head{padding:1.3rem 1.6rem;border-bottom:2px solid var(--ink);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.5rem;}
+  .term-table{width:100%;border-collapse:collapse;font-size:.95rem;}
+  .term-table th{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);padding:.9rem 1.6rem;border-bottom:1px solid var(--line);white-space:nowrap;}
+  .term-table td{padding:1rem 1.6rem;border-bottom:1px solid var(--line);vertical-align:middle;}
+  .term-table tr:last-child td{border-bottom:0;}
+  .term-table .course{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:1.1rem;}
+  .term-table .sched{color:var(--ink-soft);font-size:.88rem;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .pill{display:inline-block;border-radius:999px;padding:.28rem .85rem;font-size:.78rem;font-weight:700;letter-spacing:.04em;white-space:nowrap;}
+  .pill.open{background:var(--accent-wash);color:var(--accent-deep);border:1px solid color-mix(in srgb, var(--accent) 40%, var(--bg));}
+  .pill.few{background:color-mix(in srgb, var(--accent) 85%, var(--ink));color:var(--soft);}
+  .pill.wait{background:color-mix(in srgb, var(--ink) 10%, var(--bg));color:var(--ink-soft);border:1px solid var(--line);}
+
+  .results-band{background:var(--ink-band);color:color-mix(in srgb, var(--bg) 88%, var(--ink));padding:5.5rem 0;}
+  .results-band .serif-lg{font-family:"Fraunces",Georgia,serif;font-size:clamp(1.6rem, 3.2vw, 2.4rem);line-height:1.35;font-weight:400;max-width:30ch;}
+  .results-band .serif-lg strong{color:var(--accent);font-weight:600;}
+  .results-band .foot-note{color:color-mix(in srgb, var(--bg) 55%, var(--ink-band));font-size:.9rem;}
+
+  .method-row{display:grid;grid-template-columns:1fr;gap:.4rem 3rem;padding:1.7rem 0;border-bottom:1px solid var(--line);}
+  @media(min-width:768px){.method-row{grid-template-columns:4rem 17rem 1fr;align-items:baseline;}}
+  .method-row .step{font-family:"Fraunces",Georgia,serif;color:var(--accent-deep);font-size:1.3rem;font-weight:600;}
+  .method-row h3{font-family:"Fraunces",Georgia,serif;font-size:1.35rem;font-weight:600;margin:0;}
+  .method-row p{margin:0;color:var(--ink-soft);max-width:58ch;}
+
+  .faculty-strip{background:var(--soft);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);}
+  .faculty-card{display:flex;gap:1.1rem;align-items:center;padding:1.25rem 0;}
+  .faculty-card img{width:72px;height:72px;border-radius:.6rem;object-fit:cover;border:1px solid var(--line);}
+  .faculty-card h3{font-family:"Fraunces",Georgia,serif;font-size:1.15rem;margin:0;}
+  .faculty-card span{color:var(--ink-soft);font-size:.88rem;display:block;max-width:26ch;}
+
+  .syllabus details{border-bottom:1px solid var(--line);}
+  .syllabus details:first-of-type{border-top:1px solid var(--line);}
+  .syllabus summary{cursor:pointer;list-style:none;padding:1.3rem .25rem;font-family:"Fraunces",Georgia,serif;font-size:1.25rem;font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+  .syllabus summary::-webkit-details-marker{display:none;}
+  .syllabus summary::after{content:"+";color:var(--accent-deep);font-size:1.6rem;line-height:1;font-weight:400;}
+  .syllabus details[open] summary::after{content:"\2212";}
+  .syllabus .body{padding:0 .25rem 1.5rem;color:var(--ink-soft);max-width:70ch;}
+  .syllabus .body ul{margin:.5rem 0 0;padding-left:1.2rem;}
+  .syllabus .body li{margin-bottom:.35rem;}
+
+  .cta-panel{background:var(--accent-wash);border:2px solid var(--ink);border-radius:1rem;padding:3rem 2rem;}
+  footer{background:var(--ink-band);color:color-mix(in srgb, var(--bg) 75%, var(--ink-band));}
+  footer a{color:color-mix(in srgb, var(--bg) 88%, var(--ink-band));text-decoration:none;}
+  footer a:hover{color:var(--accent);}
+  footer .foot-brand{font-family:"Fraunces",Georgia,serif;font-size:1.5rem;color:var(--bg);}
+  .eyebrow{letter-spacing:.16em;text-transform:uppercase;font-size:.78rem;font-weight:700;color:var(--accent-deep);}
+  .section-title{font-family:"Fraunces",Georgia,serif;font-size:clamp(2rem, 3.8vw, 2.8rem);font-weight:700;letter-spacing:-.015em;}
+  .muted{color:var(--ink-soft);}
+
+  @media (prefers-reduced-motion: no-preference){
+    .btn-marigold,.btn-outline-ink,.term-table-wrap{transition:transform .25s ease, box-shadow .25s ease, background .2s ease, color .2s ease;}
+    .btn-marigold:hover,.btn-outline-ink:hover{transform:translateY(-2px);}
+    .term-table tr{transition:background .2s ease;}
+    .term-table tbody tr:hover{background:var(--accent-wash);}
+    .faculty-card img{transition:transform .35s ease;}
+    .faculty-card:hover img{transform:scale(1.06) rotate(-1.5deg);}
+    .hero h1,.hero .lede{animation:settle .7s ease both;}
+    .hero .lede{animation-delay:.14s;}
+    @keyframes settle{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+  }
+</style>
+</head>
+<body id="top">
+
+<nav class="navbar navbar-expand-md nav-academy sticky-top py-3">
+  <div class="container">
+    <a class="brand" href="#top">{{BRAND}}</a>
+    <div class="d-none d-md-flex align-items-center gap-4">
+      <a class="nav-link" href="#term">This term</a>
+      <a class="nav-link" href="#method">How we teach</a>
+      <a class="nav-link" href="#faculty">Faculty</a>
+      <a class="nav-link" href="#syllabus">Syllabi</a>
+      <a class="btn btn-marigold btn-sm px-4" href="#admission">Book a demo class</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <p class="tagline mb-3">{{TAGLINE}}</p>
+        <h1>Small batches. Real teachers. <em>Marks follow.</em></h1>
+        <p class="lede mt-4">{{BRAND}} runs classroom coaching the old-fashioned way: 24 students to a batch, a printed study plan on day one, and a fortnightly progress report your parents can actually read. No recorded lectures pretending to be teaching.</p>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <a class="btn btn-marigold" href="#term">See this term's batches</a>
+          <a class="btn btn-outline-ink" href="#admission">Sit in a free demo class</a>
+        </div>
+      </div>
+      <div class="col-lg-4 d-flex flex-column justify-content-end">
+        <div class="fact"><strong>Batch size capped at 24.</strong> When a batch fills, we open a waitlist, we do not add chairs.</div>
+        <div class="fact"><strong>Weekly doubt hour,</strong> Saturday 4 pm, open to every enrolled student at no charge.</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="pb-5 pt-4" id="term">
+  <div class="container">
+    <div class="term-table-wrap">
+      <div class="table-head">
+        <div>
+          <p class="eyebrow mb-1">Admissions open</p>
+          <h2 class="serif mb-0" style="font-size:1.6rem;font-weight:700;">Batches starting this term</h2>
+        </div>
+        <span class="muted" style="font-size:.9rem;">Fees include study material and test series</span>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="term-table">
+          <thead>
+            <tr><th>Course</th><th>Schedule</th><th>Duration</th><th>Seats</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="course">Class 10 Board Booster</div><div class="sched">Maths + Science, full syllabus</div></td>
+              <td class="sched">Mon, Wed, Fri, 5 to 7 pm</td>
+              <td class="sched">9 months</td>
+              <td><span class="pill open">Seats open</span></td>
+            </tr>
+            <tr>
+              <td><div class="course">Class 12 PCM Intensive</div><div class="sched">Boards + JEE Main foundation</div></td>
+              <td class="sched">Tue, Thu, Sat, 6 to 8:30 pm</td>
+              <td class="sched">11 months</td>
+              <td><span class="pill few">3 seats left</span></td>
+            </tr>
+            <tr>
+              <td><div class="course">NEET Repeater Batch</div><div class="sched">Full-day programme with hostel tie-up</div></td>
+              <td class="sched">Mon to Sat, 9 am to 4 pm</td>
+              <td class="sched">10 months</td>
+              <td><span class="pill wait">Waitlist</span></td>
+            </tr>
+            <tr>
+              <td><div class="course">Foundation, Class 8 &amp; 9</div><div class="sched">Maths olympiad + school syllabus</div></td>
+              <td class="sched">Sat and Sun, 10 am to 1 pm</td>
+              <td class="sched">Full year</td>
+              <td><span class="pill open">Seats open</span></td>
+            </tr>
+            <tr>
+              <td><div class="course">Spoken English, evening</div><div class="sched">Working professionals welcome</div></td>
+              <td class="sched">Mon to Fri, 7:30 to 8:30 pm</td>
+              <td class="sched">12 weeks</td>
+              <td><span class="pill few">5 seats left</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="results-band">
+  <div class="container">
+    <div class="row justify-content-center text-center">
+      <div class="col-lg-10">
+        <p class="serif-lg mx-auto mb-4">Last board season, <strong>41 of our 48 Class 10 students scored above 90 percent</strong> in Maths, and every NEET repeater improved on their previous attempt. We publish the full result sheet at reception, names and all, because averages hide more than they show.</p>
+        <p class="foot-note mb-0">Result registers for the past 5 years are available for any parent to inspect during office hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 my-4" id="method">
+  <div class="container">
+    <p class="eyebrow mb-2">How we teach</p>
+    <h2 class="section-title mb-2">A term at {{BRAND}}, step by step</h2>
+    <p class="muted mb-4" style="max-width:62ch;">Nothing here is a secret method. It is the ordinary things, done every single fortnight without fail.</p>
+    <div class="method-row">
+      <span class="step">01</span>
+      <h3>Diagnostic test, week one</h3>
+      <p>Before teaching a single chapter, we test what the student already knows. The study plan is adjusted to close their specific gaps, not the average student's.</p>
+    </div>
+    <div class="method-row">
+      <span class="step">02</span>
+      <h3>Fortnightly progress reports</h3>
+      <p>Every two weeks, parents receive a one-page report: chapters covered, test scores, attendance, and one line from the class teacher. Signed, on paper.</p>
+    </div>
+    <div class="method-row">
+      <span class="step">03</span>
+      <h3>Saturday doubt hour</h3>
+      <p>An open hour where any student can bring any question, from this week's homework to last year's board paper. Faculty sit with students one on one.</p>
+    </div>
+    <div class="method-row" style="border-bottom:0;">
+      <span class="step">04</span>
+      <h3>Full-length mock series</h3>
+      <p>Six mocks on the actual board and entrance patterns, held on Sunday mornings under exam conditions, with answer scripts returned and discussed within 3 days.</p>
+    </div>
+  </div>
+</section>
+
+<section class="faculty-strip py-5" id="faculty">
+  <div class="container">
+    <p class="eyebrow mb-2">Faculty</p>
+    <h2 class="section-title mb-4">The people at the blackboard</h2>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3">
+        <div class="faculty-card">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&q=60" alt="Portrait of mathematics faculty">
+          <div><h3>Mrs. N. Rao</h3><span>Mathematics, 18 years, ex school HOD</span></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="faculty-card">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&q=60" alt="Portrait of physics faculty">
+          <div><h3>Mr. V. Deshpande</h3><span>Physics, JEE mentor since 2012</span></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="faculty-card">
+          <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=300&q=60" alt="Portrait of chemistry faculty">
+          <div><h3>Ms. F. Khan</h3><span>Chemistry, NEET batch in-charge</span></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="faculty-card">
+          <img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=300&q=60" alt="Portrait of biology faculty">
+          <div><h3>Dr. P. Sen</h3><span>Biology, PhD, question-bank author</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="muted mt-3 mb-0" style="font-size:.92rem;">Every faculty member teaches at least one demo class each month. Come watch one before you enrol.</p>
+  </div>
+</section>
+
+<section class="py-5 my-4 syllabus" id="syllabus">
+  <div class="container" style="max-width:860px;">
+    <p class="eyebrow mb-2">Course syllabi</p>
+    <h2 class="section-title mb-4">What each course actually covers</h2>
+    <details open>
+      <summary>Class 10 Board Booster</summary>
+      <div class="body">
+        Full CBSE and state board syllabus for Maths and Science, finished by December so the last three months are pure revision.
+        <ul>
+          <li>Chapter-wise tests every fortnight, 3 full pre-boards in January</li>
+          <li>Handwritten-style notes for every chapter, no photocopied guides</li>
+          <li>Board answer-writing workshop: how to earn stepwise marks</li>
+        </ul>
+      </div>
+    </details>
+    <details>
+      <summary>Class 12 PCM Intensive</summary>
+      <div class="body">
+        Boards and JEE Main prepared together, with clearly separated problem sets so students always know which level they are practising.
+        <ul>
+          <li>Physics and Maths daily practice sheets, 20 problems each</li>
+          <li>Previous 10 years of board and JEE Main papers, solved in class</li>
+          <li>College counselling session for parents in February</li>
+        </ul>
+      </div>
+    </details>
+    <details>
+      <summary>NEET Repeater Batch</summary>
+      <div class="body">
+        A full-day programme for students taking a second attempt, built around fixing last year's weak areas rather than repeating the whole syllabus blindly.
+        <ul>
+          <li>Personal error-log notebook reviewed weekly by faculty</li>
+          <li>NCERT line-by-line reading sessions for Biology</li>
+          <li>Fortnightly full syllabus mocks from November onward</li>
+        </ul>
+      </div>
+    </details>
+    <details>
+      <summary>Foundation, Class 8 and 9</summary>
+      <div class="body">
+        Weekend-only batches that stay ahead of school by two chapters and build olympiad-level problem solving without pressure.
+        <ul>
+          <li>Mental maths drills, 10 minutes at the start of every class</li>
+          <li>NTSE and olympiad question exposure from day one</li>
+          <li>No homework beyond one practice sheet per week, by design</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section class="py-5" id="admission">
+  <div class="container">
+    <div class="cta-panel text-center">
+      <h2 class="section-title mb-3">Sit in a class before you pay for one</h2>
+      <p class="muted mx-auto mb-4" style="max-width:56ch;">Every course offers a free demo class. Attend one, talk to the faculty, look at the result registers, then decide. Admissions close when batches fill, not on a marketing deadline.</p>
+      <div class="d-flex flex-wrap gap-3 justify-content-center">
+        <a class="btn btn-marigold" href="tel:+910000000000">Call 000 000 0000</a>
+        <a class="btn btn-outline-ink" href="#term">Check seat status</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="py-5 mt-4">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="foot-brand mb-2">{{BRAND}}</div>
+        <p class="mb-0" style="max-width:38ch;">A coaching academy that publishes its results, caps its batches, and answers the phone during office hours.</p>
+      </div>
+      <div class="col-md-4">
+        <p class="fw-bold mb-2" style="color:var(--bg);">Office hours</p>
+        <p class="mb-1">Mon to Sat, 10 am to 7 pm</p>
+        <p class="mb-1">First floor, Scholars Lane, Near City Library</p>
+        <p class="mb-0">Demo classes every week, call to reserve</p>
+      </div>
+      <div class="col-md-3">
+        <p class="fw-bold mb-2" style="color:var(--bg);">Quick links</p>
+        <p class="mb-1"><a href="#term">This term's batches</a></p>
+        <p class="mb-1"><a href="#syllabus">Course syllabi</a></p>
+        <p class="mb-0"><a href="#admission">Book a demo class</a></p>
+      </div>
+    </div>
+    <hr style="border-color:color-mix(in srgb, var(--bg) 22%, var(--ink-band));">
+    <p class="mb-0 text-center" style="font-size:.9rem;">© {{BRAND}} — draft preview generated by Dharwin Studio</p>
+  </div>
+</footer>
+
+</body>
+</html>

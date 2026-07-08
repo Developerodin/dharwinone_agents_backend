@@ -1,0 +1,32 @@
+# Human-written task queue. The harness never invents top-level tasks.
+# categories: fix -> 14B fast lane | feature -> 30B lane | scaffold -> manual
+- id: LIVE-SMOKE-1
+  category: fix
+  title: Live smoke - add a comment line
+  prompt: |
+    In scripts/smoke_target.py, add the comment line "# harness was here"
+    at the top of the file. Change nothing else.
+  accept: py -c "assert '# harness was here' in open('scripts/smoke_target.py').read()"
+  allow_paths: ["scripts/"]
+
+- id: A0-000
+  category: scaffold
+  title: Scaffold backend workspace (MANUAL - OpenHands or human)
+  prompt: |
+    Create backend/ with pnpm + Fastify + TypeScript + Vitest:
+    src/server.ts with GET /health returning {"status":"ok"},
+    src/server.test.ts covering it, package.json scripts
+    "build": "tsc", "test": "vitest run". Non-interactive scripts only.
+  accept: pnpm -C backend vitest run
+  allow_paths: ["backend/"]
+
+- id: A0-001
+  category: feature
+  title: Add GET /version endpoint to backend
+  prompt: |
+    In backend/, add GET /version returning {"version": "<version from
+    package.json>"}. Add a Vitest test that asserts the response matches
+    package.json. Follow the existing patterns in src/server.ts.
+  accept: pnpm -C backend vitest run
+  allow_paths: ["backend/"]
+  requires: []

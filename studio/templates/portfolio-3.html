@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="design-label" content="Dark Gallery">
+<title>{{BRAND}}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#f5f5f4;        /* gallery white */
+    --bg:#0e0e0f;         /* lights-off black */
+    --accent:#d9d9d6;     /* bone, for links and rules */
+    --soft:#17171a;       /* plinth surface */
+    --line:#2a2a2e;       /* frame border */
+    --ink-55:color-mix(in oklab, var(--ink) 55%, var(--bg))
+  }
+  body{background:var(--bg);color:var(--ink);font-family:"Sora",sans-serif;font-weight:300;font-size:1.0625rem;line-height:1.7}
+  h1,h2,h3{font-family:"Sora",sans-serif;font-weight:200;color:var(--ink);letter-spacing:-.01em}
+  p{max-width:60ch}
+  a{color:var(--accent)}
+  .cap{font-size:.75rem;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-55);font-weight:400}
+  /* NAV */
+  .nav-gal{background:color-mix(in oklab, var(--bg) 92%, transparent);border-bottom:1px solid var(--line)}
+  .nav-gal .brand{font-weight:600;letter-spacing:.24em;text-transform:uppercase;font-size:.95rem;color:var(--ink);text-decoration:none}
+  .nav-gal a.link{color:var(--ink-55);text-decoration:none;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase}
+  .nav-gal a.link:hover{color:var(--ink)}
+  .btn-bone{background:transparent;color:var(--ink);border:1px solid var(--accent);border-radius:0;padding:.75rem 2rem;font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;font-weight:400}
+  .btn-bone:hover{background:var(--accent);color:var(--bg)}
+  /* HERO */
+  .hero{padding:7.5rem 0 5rem}
+  .hero h1{font-size:clamp(2.6rem,7vw,5.6rem);line-height:1.08}
+  .hero .tagline{color:var(--ink-55);font-size:1.1rem;max-width:44ch;margin-top:1.75rem}
+  .hero .scroll-cue{margin-top:4rem;font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-55)}
+  /* GALLERY SEQUENCE (signature) */
+  .seq{padding:2rem 0 4rem}
+  .work{position:relative;margin-bottom:6.5rem}
+  .work .numeral{font-weight:200;font-size:clamp(5.5rem,16vw,13rem);line-height:1;color:transparent;-webkit-text-stroke:1px var(--ink-55);position:absolute;top:-3.2rem;left:1rem;z-index:2;pointer-events:none}
+  .work figure{margin:0;overflow:hidden;background:var(--soft);border:1px solid var(--line)}
+  .work img{width:100%;height:100%;object-fit:cover;display:block}
+  .work.full img{aspect-ratio:21/10}
+  .work.duo img{aspect-ratio:4/5}
+  .work .meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.75rem;padding:1.2rem .2rem 0;align-items:baseline}
+  .work .meta h3{font-size:1.35rem;font-weight:400;margin:0}
+  .work .meta .role{font-size:.75rem;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-55)}
+  .work .duo-note{color:var(--ink-55);font-size:.95rem;max-width:34ch;padding-top:1.2rem}
+  /* QUIET WORDS */
+  .press{padding:5.5rem 0;border-top:1px solid var(--line)}
+  .press blockquote{font-weight:200;font-size:clamp(1.6rem,3.6vw,2.6rem);line-height:1.4;max-width:26ch;margin:0 auto;text-align:center}
+  .press .who{text-align:center;color:var(--ink-55);font-size:.78rem;letter-spacing:.28em;text-transform:uppercase;margin-top:1.75rem}
+  /* EDITIONS */
+  .editions{padding:6rem 0}
+  .editions h2{font-size:clamp(1.9rem,4.5vw,3rem)}
+  .ed-card{background:var(--soft);border:1px solid var(--line);padding:1.75rem;height:100%}
+  .ed-card .size{font-size:.75rem;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-55)}
+  .ed-card h3{font-size:1.2rem;font-weight:400;margin:.7rem 0 .3rem}
+  .ed-card .spec-line{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:.6rem 0;font-size:.9rem}
+  .ed-card .spec-line span:first-child{color:var(--ink-55)}
+  .ed-card .price{font-weight:400;font-size:1.2rem;margin-top:.8rem}
+  /* APPROACH */
+  .approach{padding:6rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .approach h2{font-size:clamp(1.9rem,4.5vw,3.2rem);max-width:22ch}
+  .approach .fact{border-top:1px solid var(--line);padding:1.1rem 0;display:flex;justify-content:space-between;gap:1rem;font-size:.95rem}
+  .approach .fact .k{color:var(--ink-55);letter-spacing:.18em;text-transform:uppercase;font-size:.75rem;padding-top:.25rem}
+  .approach .fact .v{text-align:right;font-weight:400}
+  /* PRINTS / SHOWS */
+  .shows{padding:6rem 0}
+  .show-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.75rem;border-bottom:1px solid var(--line);padding:1.3rem .2rem;align-items:baseline;text-decoration:none;color:var(--ink)}
+  .show-row:first-of-type{border-top:1px solid var(--line)}
+  .show-row .t{font-weight:400;font-size:1.15rem}
+  .show-row .w{color:var(--ink-55);font-size:.9rem}
+  .show-row .y{color:var(--ink-55);font-size:.85rem;letter-spacing:.2em}
+  .show-row:hover .t{color:var(--accent);text-decoration:underline;text-underline-offset:.3em}
+  /* CONTACT */
+  .contact{padding:7rem 0;text-align:center}
+  .contact h2{font-size:clamp(2.2rem,6vw,4.6rem)}
+  .contact .mail{font-size:clamp(1rem,2.4vw,1.35rem);letter-spacing:.06em;color:var(--ink);text-decoration:underline;text-underline-offset:.4em}
+  .contact .mail:hover{color:var(--accent)}
+  .contact .avail{color:var(--ink-55);font-size:.8rem;letter-spacing:.26em;text-transform:uppercase;margin-top:2.25rem}
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);padding:2.4rem 0;color:var(--ink-55);font-size:.82rem;letter-spacing:.1em}
+  footer .brand{letter-spacing:.24em;text-transform:uppercase;color:var(--ink);font-weight:600;font-size:.9rem}
+  footer a{color:var(--ink-55);text-decoration:none;margin-left:1.5rem;text-transform:uppercase;font-size:.75rem;letter-spacing:.2em}
+  footer a:hover{color:var(--ink)}
+  @media (prefers-reduced-motion: no-preference){
+    a,.btn-bone,.nav-gal a.link{transition:all .25s ease}
+    .work img{transition:transform 1s ease, opacity 1s ease}
+    .work figure:hover img{transform:scale(1.03)}
+    .show-row .t{transition:color .25s ease}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav-gal py-3">
+  <div class="container d-flex align-items-center justify-content-between">
+    <a class="brand" href="#">{{BRAND}}</a>
+    <div class="d-none d-md-flex gap-4 align-items-center">
+      <a class="link" href="#work">Selected work</a>
+      <a class="link" href="#approach">Approach</a>
+      <a class="link" href="#shows">Exhibitions</a>
+      <a class="link" href="#contact">Commissions</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <p class="cap mb-4">Photographer, large format and patient</p>
+    <h1>Pictures made slowly,<br>in places that empty out at dusk.</h1>
+    <p class="tagline">{{TAGLINE}}</p>
+    <p class="scroll-cue">Scroll, the work speaks from here</p>
+  </div>
+</header>
+
+<section class="seq" id="work">
+  <div class="container">
+
+    <article class="work full">
+      <span class="numeral" aria-hidden="true">01</span>
+      <figure><img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1600&q=60" alt="Wide night view of a city under low cloud, streetlights tracing the grid"></figure>
+      <div class="meta"><h3>Grid at Rest</h3><span class="role">Series of 22 / commissioned by the City Archive</span></div>
+    </article>
+
+    <article class="work duo">
+      <span class="numeral" aria-hidden="true">02</span>
+      <div class="row g-4">
+        <div class="col-md-6"><figure><img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=900&q=60" alt="Mountain lake at first light with mist over the water"></figure></div>
+        <div class="col-md-6"><figure><img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=900&q=60" alt="Ridge line dissolving into fog at dawn"></figure></div>
+      </div>
+      <div class="meta"><h3>Two Hours Before Anyone</h3><span class="role">Ongoing / alpine dawns, 4x5 film</span></div>
+      <p class="duo-note">Shot in pairs on purpose. One frame for the place, one for the weather passing through it.</p>
+    </article>
+
+    <article class="work full">
+      <span class="numeral" aria-hidden="true">03</span>
+      <figure><img src="https://images.unsplash.com/photo-1504198458649-3128b932f49e?w=1600&q=60" alt="Empty swimming pool hall in flat even light"></figure>
+      <div class="meta"><h3>Municipal</h3><span class="role">Book, 96 pages / second printing</span></div>
+    </article>
+
+    <article class="work duo">
+      <span class="numeral" aria-hidden="true">04</span>
+      <div class="row g-4">
+        <div class="col-md-6"><figure><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=900&q=60" alt="Snowbound valley under a starry night sky"></figure></div>
+        <div class="col-md-6"><figure><img src="https://images.unsplash.com/photo-1444080748397-f442aa95c3e5?w=900&q=60" alt="Long exposure of stars turning above a dark horizon"></figure></div>
+      </div>
+      <div class="meta"><h3>What the Cold Keeps</h3><span class="role">Winter residencies, 2023 to 2025</span></div>
+    </article>
+
+    <article class="work full">
+      <span class="numeral" aria-hidden="true">05</span>
+      <figure><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=60" alt="Lone peak above a sea of clouds in fading evening light"></figure>
+      <div class="meta"><h3>The Last Blue Hour</h3><span class="role">New work / first shown winter 2026</span></div>
+    </article>
+
+  </div>
+</section>
+
+<section class="press">
+  <div class="container">
+    <blockquote>"Photographs that hold their breath. You leave the room walking more quietly than you entered it."</blockquote>
+    <p class="who">The Weekend Review, on Municipal</p>
+  </div>
+</section>
+
+<section class="editions" id="editions">
+  <div class="container">
+    <div class="row g-4 align-items-end mb-4">
+      <div class="col-lg-7"><p class="cap mb-3">Print editions</p><h2>Seven prints per negative, then it rests.</h2></div>
+      <div class="col-lg-5"><p class="mb-1" style="color:var(--ink-55)">Every edition is printed by hand in the studio darkroom, numbered in pencil, and delivered flat with a signed certificate.</p></div>
+    </div>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="ed-card">
+          <span class="size">Small / 8 x 10 in</span>
+          <h3>Study print</h3>
+          <div class="spec-line"><span>Paper</span><span>Fibre silver gelatin</span></div>
+          <div class="spec-line"><span>Edition</span><span>7 + 1 artist proof</span></div>
+          <div class="price">$420</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="ed-card">
+          <span class="size">Medium / 16 x 20 in</span>
+          <h3>Gallery print</h3>
+          <div class="spec-line"><span>Paper</span><span>Fibre silver gelatin</span></div>
+          <div class="spec-line"><span>Edition</span><span>7 + 1 artist proof</span></div>
+          <div class="price">$1,150</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="ed-card">
+          <span class="size">Large / 30 x 40 in</span>
+          <h3>Exhibition print</h3>
+          <div class="spec-line"><span>Paper</span><span>Selenium toned, mounted</span></div>
+          <div class="spec-line"><span>Edition</span><span>3 only</span></div>
+          <div class="price">$3,400</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="approach" id="approach">
+  <div class="container">
+    <div class="row g-5 align-items-start">
+      <div class="col-lg-7">
+        <p class="cap mb-4">Approach</p>
+        <h2>One camera, one lens, and the discipline to wait for the light instead of fixing it later.</h2>
+        <p class="mt-4" style="color:var(--ink-55)">Everything here is made on large format film, printed by hand, and edited down hard. A commission usually yields ten final frames. They are the right ten.</p>
+      </div>
+      <div class="col-lg-5">
+        <div class="fact"><span class="k">Format</span><span class="v">4x5 sheet film</span></div>
+        <div class="fact"><span class="k">Editions</span><span class="v">Seven prints, then the negative rests</span></div>
+        <div class="fact"><span class="k">Turnaround</span><span class="v">Six weeks, hand printed</span></div>
+        <div class="fact"><span class="k">Travel</span><span class="v">Anywhere reachable by train first</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="shows" id="shows">
+  <div class="container">
+    <p class="cap mb-4">Exhibitions and print sales</p>
+    <a class="show-row" href="#contact"><span class="t">Grid at Rest</span><span class="w">City Archive Gallery, main hall</span><span class="y">2026</span></a>
+    <a class="show-row" href="#contact"><span class="t">Municipal, the book show</span><span class="w">Paper Room, group show</span><span class="y">2025</span></a>
+    <a class="show-row" href="#contact"><span class="t">What the Cold Keeps</span><span class="w">Northern Light Biennale</span><span class="y">2024</span></a>
+    <a class="show-row" href="#contact"><span class="t">Open studio, print viewing</span><span class="w">By appointment, editions on the wall</span><span class="y">Monthly</span></a>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="container">
+    <p class="cap mb-4">Commissions and editions</p>
+    <h2>The darkroom light is on.</h2>
+    <p class="mt-4 mb-0"><a class="mail" href="#">prints@example.com</a></p>
+    <p class="avail">Booking two commissions for next winter</p>
+    <a class="btn-bone btn mt-4" href="#">Request the print catalogue</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
+    <span><span class="brand">{{BRAND}}</span> © Draft preview generated by Dharwin Studio</span>
+    <span>
+      <a href="#work">Work</a>
+      <a href="#shows">Shows</a>
+      <a href="#contact">Contact</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>

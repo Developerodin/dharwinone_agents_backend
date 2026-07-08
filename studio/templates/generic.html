@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{BRAND}}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#24272e;
+    --bg:#f0f0ec;
+    --accent:#31509b;
+    --soft:#f9f9f5;
+    --line:#dbdbd2;
+  }
+  body{background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;font-size:1.0625rem;line-height:1.65;}
+  .display-face{font-family:"Sora",sans-serif;font-weight:600;letter-spacing:-.02em;line-height:1.05;}
+  .kicker{font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.2em;color:var(--accent);}
+  p{max-width:66ch;}
+  a{color:var(--accent);}
+
+  .site-nav{background:var(--bg);border-bottom:1px solid var(--line);}
+  .site-nav .brand{font-family:"Sora",sans-serif;font-weight:700;font-size:1.25rem;letter-spacing:-.01em;color:var(--ink);text-decoration:none;}
+  .site-nav .nav-link{color:var(--ink);font-size:.93rem;font-weight:500;}
+  .btn-site{background:var(--accent);color:var(--soft);border:1px solid var(--accent);padding:.65rem 1.5rem;font-weight:600;font-size:.93rem;border-radius:.4rem;}
+  .btn-site:hover{background:var(--ink);border-color:var(--ink);color:var(--soft);}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--ink);padding:.65rem 1.5rem;font-weight:600;font-size:.93rem;border-radius:.4rem;}
+  .btn-ghost:hover{background:var(--ink);color:var(--soft);}
+
+  .hero{padding:6rem 0 5rem;}
+  .hero h1{font-size:clamp(3rem,6.5vw,4.8rem);}
+  .hero h1 .site-accent{color:var(--accent);}
+  .hero .tagline{font-size:1.25rem;color:rgba(36,39,46,.72);max-width:34rem;}
+  .contact-panel{background:var(--ink);color:rgba(249,249,245,.85);border-radius:.75rem;padding:2.2rem;}
+  .contact-panel h3{font-family:"Sora",sans-serif;font-weight:600;font-size:1.35rem;color:var(--soft);}
+  .contact-panel .row-line{display:flex;justify-content:space-between;gap:1rem;padding:.8rem 0;border-bottom:1px solid rgba(249,249,245,.16);font-size:.94rem;}
+  .contact-panel .row-line:last-of-type{border-bottom:0;}
+  .contact-panel .row-line span:first-child{color:rgba(249,249,245,.55);}
+  .contact-panel .row-line span:last-child{font-weight:500;color:var(--soft);text-align:right;}
+  .contact-panel .btn-panel{display:block;text-align:center;background:var(--accent);color:var(--soft);border:1px solid var(--accent);padding:.75rem 1rem;border-radius:.4rem;font-weight:600;text-decoration:none;margin-top:1.4rem;}
+  .contact-panel .btn-panel:hover{background:var(--soft);border-color:var(--soft);color:var(--ink);}
+  .contact-panel .hint{font-size:.8rem;color:rgba(249,249,245,.45);margin:1rem 0 0;}
+
+  .proofline{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--soft);padding:1.5rem 0;}
+  .proofline .item{font-size:.95rem;color:rgba(36,39,46,.75);}
+  .proofline .item b{font-family:"Sora",sans-serif;color:var(--ink);font-weight:600;}
+  .proofline .dot{color:var(--accent);font-weight:700;}
+
+  .services{padding:6rem 0;}
+  .def-row{display:grid;grid-template-columns:1fr 1.4fr;gap:2.5rem;padding:2.2rem 0;border-top:1px solid var(--line);}
+  .def-row:last-of-type{border-bottom:1px solid var(--line);}
+  .def-row h3{font-family:"Sora",sans-serif;font-weight:600;font-size:1.55rem;margin:0;letter-spacing:-.01em;}
+  .def-row .tag{font-size:.8rem;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);display:block;margin-bottom:.4rem;}
+  .def-row p{margin:0;font-size:.98rem;color:rgba(36,39,46,.82);}
+  .def-row .aside{font-size:.86rem;color:rgba(36,39,46,.55);margin-top:.6rem;}
+  @media (max-width: 767px){.def-row{grid-template-columns:1fr;gap:.8rem;}}
+  @media (prefers-reduced-motion: no-preference){
+    .def-row{transition:background .25s ease,padding-left .25s ease;}
+    .def-row:hover{background:var(--soft);padding-left:1rem;}
+    .lift{transition:transform .25s ease,box-shadow .25s ease;}
+    .lift:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(36,39,46,.12);}
+    .zoom img{transition:transform .7s ease;}
+    .zoom:hover img{transform:scale(1.04);}
+  }
+
+  .story{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:6rem 0;}
+  .story .photo{overflow:hidden;border-radius:.75rem;min-height:22rem;position:relative;}
+  .story .photo img{width:100%;height:100%;min-height:22rem;object-fit:cover;display:block;}
+  .story blockquote{font-family:"Sora",sans-serif;font-weight:500;font-size:1.35rem;line-height:1.4;color:var(--ink);border-top:1px solid var(--line);padding-top:1.4rem;margin:2rem 0 0;max-width:34rem;}
+  .story blockquote footer{font-family:"Inter",sans-serif;font-size:.88rem;color:rgba(36,39,46,.6);margin-top:.8rem;background:none;padding:0;}
+
+  .faq{padding:6rem 0;}
+  .faq details{border-bottom:1px solid var(--line);}
+  .faq details:first-of-type{border-top:1px solid var(--line);}
+  .faq summary{cursor:pointer;padding:1.2rem 0;font-weight:600;font-family:"Sora",sans-serif;font-size:1.05rem;list-style:none;display:flex;justify-content:space-between;gap:1rem;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq summary::after{content:"+";color:var(--accent);font-size:1.3rem;line-height:1;font-weight:600;}
+  .faq details[open] summary::after{content:"\2013";}
+  .faq details p{font-size:.96rem;color:rgba(36,39,46,.82);padding-bottom:1.2rem;margin:0;}
+
+  .cta{background:var(--accent);color:var(--soft);padding:5.5rem 0;}
+  .cta h2{font-family:"Sora",sans-serif;font-weight:600;font-size:clamp(2.2rem,5vw,3.4rem);letter-spacing:-.02em;line-height:1.05;}
+  .cta p{color:rgba(249,249,245,.82);}
+  .cta .btn-invert{background:var(--soft);color:var(--ink);border:1px solid var(--soft);padding:.8rem 2rem;border-radius:.4rem;font-weight:600;}
+  .cta .btn-invert:hover{background:var(--ink);border-color:var(--ink);color:var(--soft);}
+
+  footer{background:var(--ink);color:rgba(240,240,236,.78);padding:4rem 0 2rem;font-size:.92rem;}
+  footer .brand{font-family:"Sora",sans-serif;font-weight:700;font-size:1.3rem;color:var(--soft);}
+  footer h6{font-size:.78rem;text-transform:uppercase;letter-spacing:.18em;color:var(--soft);margin-bottom:1rem;}
+  footer ul{list-style:none;padding:0;margin:0;}
+  footer li{padding:.25rem 0;}
+  footer a{color:rgba(240,240,236,.78);text-decoration:none;}
+  footer a:hover{color:var(--soft);}
+  .foot-legal{border-top:1px solid rgba(240,240,236,.16);margin-top:3rem;padding-top:1.5rem;font-size:.85rem;color:rgba(240,240,236,.55);}
+</style>
+</head>
+<body id="top">
+
+<nav class="site-nav py-3">
+  <div class="container d-flex align-items-center justify-content-between">
+    <a class="brand" href="#top">{{BRAND}}</a>
+    <div class="d-none d-md-flex align-items-center gap-4">
+      <a class="nav-link" href="#services">What we do</a>
+      <a class="nav-link" href="#story">Why us</a>
+      <a class="nav-link" href="#faq">Questions</a>
+      <a class="btn btn-site" href="#contact">Get in touch</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-7">
+        <p class="kicker mb-3">Local, established, accountable</p>
+        <h1 class="display-face mb-3">The work done properly, <span class="site-accent">the first time.</span></h1>
+        <p class="tagline mt-3">{{TAGLINE}}</p>
+        <p class="mt-3" style="color:rgba(36,39,46,.72);">Put your one unbreakable promise here: the thing you always do that competitors only claim. One sentence. If a customer repeated it to a friend, it should still sound true.</p>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <a class="btn btn-site" href="#contact">Request a quote</a>
+          <a class="btn btn-ghost" href="#services">See what we do</a>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <aside class="contact-panel lift">
+          <h3 class="mb-3">Reach us today</h3>
+          <div class="row-line"><span>Phone</span><span>Add your number here</span></div>
+          <div class="row-line"><span>Email</span><span>hello@yourdomain.com</span></div>
+          <div class="row-line"><span>Hours</span><span>Mon to Sat, 9 to 6</span></div>
+          <div class="row-line"><span>Find us</span><span>Your street, your city</span></div>
+          <a class="btn-panel" href="#contact">Send an enquiry</a>
+          <p class="hint">We reply within one working day. Replace these details with your real ones, they are the most-read lines on this page.</p>
+        </aside>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="proofline">
+  <div class="container d-flex flex-wrap gap-3 align-items-center justify-content-between">
+    <span class="item"><b>Serving the area since your founding year.</b> Write the real year, age builds trust.</span>
+    <span class="dot">&bull;</span>
+    <span class="item"><b>Hundreds of customers helped.</b> Use your real count, even if it is small.</span>
+    <span class="dot">&bull;</span>
+    <span class="item"><b>Recommended by people nearby.</b> Name the neighbourhoods you actually serve.</span>
+  </div>
+</div>
+
+<section class="services" id="services">
+  <div class="container">
+    <p class="kicker mb-2">What we do</p>
+    <h2 class="display-face mb-5" style="font-size:clamp(2.2rem,4.5vw,3.2rem);">Three things, done well</h2>
+    <div class="def-row">
+      <div>
+        <span class="tag">Service one</span>
+        <h3>Your main offering</h3>
+      </div>
+      <div>
+        <p>Describe the service most customers come to you for. Say who it is for, what they walk away with, and how long it usually takes. Specifics beat adjectives: a timeline, a price range, a guarantee.</p>
+        <p class="aside">Example shape: "Full kitchen deep clean, two cleaners, done in under three hours, satisfaction rechecked before we leave."</p>
+      </div>
+    </div>
+    <div class="def-row">
+      <div>
+        <span class="tag">Service two</span>
+        <h3>Your second strength</h3>
+      </div>
+      <div>
+        <p>The thing customers discover once they trust you. Explain how it connects to the first service, and why buying both together works out better for them.</p>
+        <p class="aside">If you only do one thing, delete this row. A short honest list beats a padded one.</p>
+      </div>
+    </div>
+    <div class="def-row">
+      <div>
+        <span class="tag">Service three</span>
+        <h3>The specialist request</h3>
+      </div>
+      <div>
+        <p>The unusual job you handle that most others turn away. This row often wins the customers who searched the longest, so be precise about what qualifies.</p>
+        <p class="aside">State plainly what you do not do. Saying no to the wrong work reads as confidence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="story" id="story">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6">
+        <div class="photo zoom lift"><img src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=1100&q=60" alt="Team at work in their own space"></div>
+      </div>
+      <div class="col-lg-6">
+        <p class="kicker mb-2">Why people choose us</p>
+        <h2 class="display-face" style="font-size:clamp(2rem,4vw,2.9rem);">A short, true story about how you work</h2>
+        <p class="mt-3">Tell one real story here instead of listing values. The customer who called at an awkward hour, the job you redid at your own cost, the detail you refuse to skip. One concrete story does more than five paragraphs of "quality and commitment".</p>
+        <blockquote>
+          "Put your best customer's exact words here. Ask them today, most happy customers say yes."
+          <footer>A real name and place make this ten times stronger.</footer>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <p class="kicker mb-2">Common questions</p>
+        <h2 class="display-face" style="font-size:clamp(2rem,4vw,2.8rem);">Answer the questions you hear every week</h2>
+        <p class="mt-3">Every answered question here is one less hesitant phone call, and one more confident one.</p>
+      </div>
+      <div class="col-lg-8">
+        <details open>
+          <summary>How much does it cost?</summary>
+          <p>Give a starting price or a typical range, even a rough one. Pages that name a number get more enquiries than pages that hide it. Add what changes the price so quotes feel fair, not arbitrary.</p>
+        </details>
+        <details>
+          <summary>How soon can you start?</summary>
+          <p>State your honest lead time. "Usually within a week, urgent jobs sooner" beats silence. If you keep an emergency slot, say so here.</p>
+        </details>
+        <details>
+          <summary>Which areas do you cover?</summary>
+          <p>Name the localities you actually serve. Being specific helps the right people find you and stops the wrong calls before they happen.</p>
+        </details>
+        <details>
+          <summary>What if something goes wrong?</summary>
+          <p>Describe your make-it-right policy in plain words: what you fix, how fast, and at whose cost. This single answer wins more trust than any award badge.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-8">
+        <h2>Ready when you are.</h2>
+        <p class="mb-0 mt-2" style="max-width:52ch;">One call or one message is enough to get started. Tell us what you need, and we will tell you honestly whether we are the right people for it.</p>
+      </div>
+      <div class="col-lg-4 text-lg-end">
+        <a class="btn btn-invert btn-lg" href="#top">Send an enquiry</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <p class="brand mb-2">{{BRAND}}</p>
+        <p style="max-width:32ch;">One line about who you serve and where. Keep it plain, this is the line search engines quote.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Explore</h6>
+        <ul><li><a href="#services">What we do</a></li><li><a href="#story">Why us</a></li><li><a href="#faq">Questions</a></li><li><a href="#contact">Contact</a></li></ul>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h6>Visit</h6>
+        <ul><li>Your street address</li><li>Your city and pincode</li><li>Mon to Sat, 9 to 6</li></ul>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h6>Contact</h6>
+        <ul><li>Add your phone number</li><li>hello@yourdomain.com</li><li>Replies within one working day</li></ul>
+      </div>
+    </div>
+    <p class="foot-legal mb-0">© {{BRAND}} — draft preview generated by Dharwin Studio</p>
+  </div>
+</footer>
+</body>
+</html>

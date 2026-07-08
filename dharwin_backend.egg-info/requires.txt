@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+httpx
+pymongo
+pyyaml
+python-dotenv
+
+[dev]
+pytest
+ruff

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="design-label" content="Lookbook">
+<title>{{BRAND}}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Mulish:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#221c16;        /* archive ink */
+    --bg:#f6f2ec;         /* unbleached cotton */
+    --accent:#5e1224;     /* deep oxblood */
+    --soft:#ede6db;       /* raw silk surface */
+    --line:#dcd2c3;       /* seam border */
+    --ink-65:color-mix(in oklab, var(--ink) 65%, var(--bg));
+    --ink-45:color-mix(in oklab, var(--ink) 45%, var(--bg));
+  }
+  body{background:var(--bg);color:var(--ink);font-family:"Mulish",sans-serif;font-size:1.0625rem;line-height:1.7}
+  h1,h2,h3,.serif{font-family:"Libre Caslon Display",serif;font-weight:400;color:var(--ink)}
+  p{max-width:64ch}
+  a{color:var(--accent)}
+  .folio{font-size:.75rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  /* MASTHEAD */
+  .masthead{border-bottom:1px solid var(--ink);background:var(--bg)}
+  .masthead .brand{font-family:"Libre Caslon Display",serif;font-size:1.6rem;color:var(--ink);text-decoration:none;letter-spacing:.04em}
+  .masthead a.link{color:var(--ink-65);text-decoration:none;font-size:.85rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+  .masthead a.link:hover{color:var(--accent)}
+  .masthead .issue{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-45)}
+  .btn-ox{background:var(--accent);color:var(--bg);border:1px solid var(--accent);border-radius:0;padding:.7rem 1.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.82rem}
+  .btn-ox:hover{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+  .btn-rule{background:transparent;color:var(--ink);border:1px solid var(--ink);border-radius:0;padding:.7rem 1.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.82rem}
+  .btn-rule:hover{background:var(--ink);color:var(--bg)}
+  /* HERO */
+  .hero{padding:4.5rem 0 3.5rem;border-bottom:1px solid var(--line)}
+  .hero h1{font-size:clamp(3rem,8vw,6.4rem);line-height:1.03;letter-spacing:-.01em}
+  .hero h1 i{color:var(--accent)}
+  .hero .tagline{font-family:"Libre Caslon Text",serif;font-style:italic;color:var(--ink-65);font-size:1.25rem;max-width:44ch}
+  .hero .dek{color:var(--ink-65);font-size:.95rem;letter-spacing:.14em;text-transform:uppercase}
+  /* COLLAGE */
+  .collage{padding:4rem 0}
+  .collage .cell{overflow:hidden;background:var(--soft)}
+  .collage img{width:100%;height:100%;object-fit:cover;display:block}
+  .cell.a img{aspect-ratio:3/4}
+  .cell.b img{aspect-ratio:1/1}
+  .cell.c img{aspect-ratio:4/5}
+  .cell.d img{aspect-ratio:16/10}
+  .cap{display:flex;justify-content:space-between;gap:1rem;font-size:.82rem;color:var(--ink-45);letter-spacing:.1em;text-transform:uppercase;padding:.6rem 0}
+  .cap b{color:var(--ink);font-weight:700}
+  .collage .pull{font-family:"Libre Caslon Display",serif;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.25;max-width:18ch}
+  /* LOOKBOOK SPREAD (signature) */
+  .spread{border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+  .spread .plate{min-height:100%;position:relative}
+  .spread .plate img{width:100%;height:100%;object-fit:cover;display:block;min-height:26rem}
+  .spread .plate .plate-no{position:absolute;top:1.2rem;left:1.4rem;background:var(--bg);color:var(--ink);font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;font-weight:700;padding:.45rem .9rem}
+  .credits{padding:3.5rem clamp(1.5rem,4vw,4rem)}
+  .credits h2{font-size:clamp(2rem,3.6vw,3rem)}
+  .credit{display:flex;gap:1.4rem;padding:1.3rem 0;border-bottom:1px solid var(--line);align-items:baseline}
+  .credit:last-of-type{border-bottom:0}
+  .credit .no{font-family:"Libre Caslon Display",serif;font-size:1.5rem;color:var(--accent);min-width:2.4rem}
+  .credit .what b{font-family:"Libre Caslon Text",serif;font-weight:700;font-size:1.1rem;display:block}
+  .credit .what span{color:var(--ink-65);font-size:.95rem}
+  .credit .price{margin-left:auto;font-weight:700;white-space:nowrap}
+  /* COLLECTION LIST */
+  .collection{padding:5.5rem 0}
+  .collection h2{font-size:clamp(2.2rem,4.5vw,3.4rem)}
+  .piece{border-top:1px solid var(--line);padding:1.6rem 0;display:flex;flex-wrap:wrap;gap:1rem;align-items:baseline}
+  .piece:last-child{border-bottom:1px solid var(--line)}
+  .piece .name{font-family:"Libre Caslon Display",serif;font-size:clamp(1.4rem,2.6vw,2rem)}
+  .piece .fabric{color:var(--ink-65);font-size:.92rem;letter-spacing:.08em;text-transform:uppercase}
+  .piece .price{margin-left:auto;font-weight:700;font-size:1.05rem}
+  .piece .sold{margin-left:auto;color:var(--accent);font-weight:700;font-size:.85rem;letter-spacing:.16em;text-transform:uppercase}
+  /* NOTE / QUOTE */
+  .note{padding:5.5rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .note blockquote{font-family:"Libre Caslon Display",serif;font-size:clamp(1.9rem,4vw,3.1rem);line-height:1.3;max-width:26ch;margin:0 auto;text-align:center}
+  .note blockquote i{color:var(--accent)}
+  .note .who{text-align:center;color:var(--ink-65);margin-top:1.4rem;font-size:.88rem;letter-spacing:.16em;text-transform:uppercase}
+  /* ATELIER CTA */
+  .atelier{padding:6rem 0;background:var(--ink);color:var(--bg)}
+  .atelier h2{color:var(--bg);font-size:clamp(2.2rem,5vw,3.8rem)}
+  .atelier p{color:color-mix(in oklab, var(--bg) 72%, var(--ink))}
+  .atelier .folio{color:color-mix(in oklab, var(--accent) 55%, var(--bg))}
+  /* PARTICULARS */
+  .particulars{padding:4.5rem 0;border-top:1px solid var(--line)}
+  .part h3{font-family:"Libre Caslon Text",serif;font-weight:700;font-size:1.1rem;margin:.4rem 0 .5rem}
+  .part .no{font-family:"Libre Caslon Display",serif;color:var(--accent);font-size:1.3rem}
+  .part p{font-size:.95rem;color:var(--ink-65);margin:0}
+  /* FOOTER */
+  footer{padding:3.5rem 0 2rem;border-top:1px solid var(--ink)}
+  footer .brand{font-family:"Libre Caslon Display",serif;font-size:1.5rem}
+  footer h4{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  footer a{color:var(--ink-65);text-decoration:none;display:block;padding:.2rem 0;font-size:.95rem}
+  footer a:hover{color:var(--accent)}
+  footer .legal{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1.4rem;font-size:.85rem;color:var(--ink-45)}
+  @media (prefers-reduced-motion: no-preference){
+    a,.btn-ox,.btn-rule{transition:all .22s ease}
+    .collage img,.spread .plate img{transition:transform .7s ease}
+    .collage .cell:hover img{transform:scale(1.035)}
+    .piece{transition:padding-left .25s ease}
+    .piece:hover{padding-left:.75rem}
+  }
+</style>
+</head>
+<body>
+
+<nav class="masthead py-3">
+  <div class="container d-flex align-items-center justify-content-between">
+    <span class="issue d-none d-lg-inline">Vol. 04, Autumn</span>
+    <a class="brand" href="#">{{BRAND}}</a>
+    <div class="d-none d-md-flex gap-4 align-items-center">
+      <a class="link" href="#collage">Editorial</a>
+      <a class="link" href="#look">The look</a>
+      <a class="link" href="#collection">Collection</a>
+      <a class="link" href="#atelier">Appointments</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="row g-4 align-items-end">
+      <div class="col-lg-8">
+        <p class="folio mb-3">The autumn issue</p>
+        <h1>Clothes cut for <i>long light</i> and longer dinners.</h1>
+      </div>
+      <div class="col-lg-4">
+        <p class="tagline">{{TAGLINE}}</p>
+        <p class="dek mt-4 mb-0">Twelve pieces. One atelier. No restocks.</p>
+      </div>
+    </div>
+    <div class="d-flex gap-3 mt-4 flex-wrap">
+      <a class="btn-ox btn" href="#collection">Shop the twelve</a>
+      <a class="btn-rule btn" href="#look">Open the lookbook</a>
+    </div>
+  </div>
+</header>
+
+<section class="collage" id="collage">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="cell a"><img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=60" alt="Model in a camel wool coat against a plain wall"></div>
+        <div class="cap"><span>Plate 01</span><b>The Weekend Coat</b></div>
+      </div>
+      <div class="col-md-4">
+        <div class="cell b"><img src="https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=700&q=60" alt="Draped linen shirt on a wooden hanger"></div>
+        <div class="cap"><span>Plate 02</span><b>Linen No. 9</b></div>
+        <p class="pull mt-4">Shot in the studio above the shop, on people who actually wear the clothes.</p>
+      </div>
+      <div class="col-md-3">
+        <div class="cell c"><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=60" alt="Close detail of pleated skirt fabric"></div>
+        <div class="cap"><span>Plate 03</span><b>Pleat study</b></div>
+      </div>
+      <div class="col-md-7 offset-md-5">
+        <div class="cell d"><img src="https://images.unsplash.com/photo-1445205170230-053b83016050?w=1000&q=60" alt="Two coats hanging on a garment rail in soft light"></div>
+        <div class="cap"><span>Plate 04</span><b>The rail, Thursday morning</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="spread" id="look">
+  <div class="container-fluid px-0">
+    <div class="row g-0">
+      <div class="col-lg-7 plate">
+        <span class="plate-no">Look 07</span>
+        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200&q=60" alt="Full-length editorial photo of a styled autumn outfit">
+      </div>
+      <div class="col-lg-5 credits">
+        <p class="folio mb-3">In this look</p>
+        <h2>Look seven, worn to a gallery opening and then the night bus.</h2>
+        <div class="mt-4">
+          <div class="credit"><span class="no">01</span><span class="what"><b>The Weekend Coat</b><span>Undyed lambswool, Donegal spun</span></span><span class="price">$420</span></div>
+          <div class="credit"><span class="no">02</span><span class="what"><b>Linen shirt No. 9</b><span>Belgian flax, corozo buttons</span></span><span class="price">$140</span></div>
+          <div class="credit"><span class="no">03</span><span class="what"><b>High-rise trouser</b><span>Brushed cotton twill, oxblood</span></span><span class="price">$185</span></div>
+          <div class="credit"><span class="no">04</span><span class="what"><b>The everyday tote</b><span>Vegetable-tanned bridle leather</span></span><span class="price">$260</span></div>
+        </div>
+        <a class="btn-ox btn mt-4" href="#collection">Shop look seven</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="collection" id="collection">
+  <div class="container">
+    <div class="row g-4 align-items-end mb-4">
+      <div class="col-lg-7"><p class="folio mb-2">The collection</p><h2>Twelve pieces, made once.</h2></div>
+      <div class="col-lg-5"><p class="mb-1" style="color:var(--ink-65)">Each run is cut in a single batch in our own atelier. When a size sells through, it is gone until next autumn, so the pieces you keep stay rare.</p></div>
+    </div>
+    <div class="piece"><span class="name">The Weekend Coat</span><span class="fabric">Lambswool</span><span class="price">$420</span></div>
+    <div class="piece"><span class="name">Linen shirt No. 9</span><span class="fabric">Belgian flax</span><span class="price">$140</span></div>
+    <div class="piece"><span class="name">High-rise trouser</span><span class="fabric">Cotton twill</span><span class="price">$185</span></div>
+    <div class="piece"><span class="name">The gallery dress</span><span class="fabric">Sandwashed silk</span><span class="sold">Sold through</span></div>
+    <div class="piece"><span class="name">Everyday tote</span><span class="fabric">Bridle leather</span><span class="price">$260</span></div>
+    <div class="piece"><span class="name">Merino roll neck</span><span class="fabric">Extra-fine merino</span><span class="price">$165</span></div>
+  </div>
+</section>
+
+<section class="note">
+  <div class="container">
+    <blockquote>"A shop that edits like a magazine and <i>sews like a tailor.</i>"</blockquote>
+    <p class="who">Threadbare Review, issue 31</p>
+  </div>
+</section>
+
+<section class="atelier text-center" id="atelier">
+  <div class="container">
+    <p class="folio mb-3">The atelier upstairs</p>
+    <h2>Try the whole issue on, by appointment.</h2>
+    <p class="mx-auto mt-3" style="max-width:52ch">Book a forty minute fitting above the shop. Coffee poured, pins at the ready, alterations included in the price of any piece.</p>
+    <a class="btn-ox btn mt-3" href="#">Book a fitting</a>
+  </div>
+</section>
+
+<section class="particulars">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="part"><span class="no">i.</span><h3>Provenance printed inside</h3><p>Every garment carries its mill, cutter and sewing date on the inner label. Ask us anything about any seam.</p></div>
+      </div>
+      <div class="col-md-4">
+        <div class="part"><span class="no">ii.</span><h3>Delivery, wrapped in paper</h3><p>Dispatched within two days in tissue and twine, never plastic. Carriage is $9 flat, free over $300.</p></div>
+      </div>
+      <div class="col-md-4">
+        <div class="part"><span class="no">iii.</span><h3>Returns, without a sigh</h3><p>Thirty days, worn indoors is fine. If the fit is close, book the atelier and we will alter it instead.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-5">
+        <div class="brand">{{BRAND}}</div>
+        <p class="mt-2" style="max-width:38ch;color:var(--ink-65)">A small clothing house publishing one collection a season, photographed and sewn under the same roof.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4 class="mb-3">Issue</h4>
+        <a href="#collage">Editorial</a>
+        <a href="#look">The look</a>
+        <a href="#collection">Collection</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4 class="mb-3">House</h4>
+        <a href="#atelier">Fittings</a>
+        <a href="#">Alterations</a>
+        <a href="#">Past issues</a>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h4 class="mb-3">Write to us</h4>
+        <a href="#">studio@example.com</a>
+        <a href="#">Instagram</a>
+        <a href="#">22 Foundry Row, first floor</a>
+      </div>
+    </div>
+    <div class="legal">© {{BRAND}}. Draft preview generated by Dharwin Studio.</div>
+  </div>
+</footer>
+
+</body>
+</html>

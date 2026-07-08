@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="design-label" content="Vivid Block">
+<title>{{BRAND}}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#26130e;        /* scorched umber */
+    --bg:#b5341c;         /* deep persimmon, the committed color */
+    --accent:#ffd23f;     /* signal yellow */
+    --soft:#f8f2e7;       /* warm off-white surface */
+    --line:#e2d7c2;       /* sand rule */
+    --paper-80:color-mix(in oklab, var(--soft) 82%, var(--bg));
+    --ink-70:color-mix(in oklab, var(--ink) 70%, var(--soft));
+    --bg-deep:color-mix(in oklab, var(--bg) 82%, var(--ink));
+  }
+  body{background:var(--bg);color:var(--ink);font-family:"Archivo",sans-serif;font-size:1.0625rem;line-height:1.6}
+  h1,h2,h3{font-family:"Archivo",sans-serif;font-weight:800;letter-spacing:-.03em;color:var(--ink)}
+  p{max-width:62ch}
+  .tab{font-size:.76rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+  /* NAV: sits on the persimmon block */
+  .block-nav{padding:1.3rem 0;background:var(--bg)}
+  .block-nav .brand{font-weight:900;font-size:1.35rem;letter-spacing:-.02em;color:var(--soft);text-decoration:none;text-transform:uppercase}
+  .block-nav a.link{color:var(--paper-80);text-decoration:none;font-weight:600;font-size:.92rem}
+  .block-nav a.link:hover{color:var(--accent)}
+  .btn-signal{background:var(--accent);color:var(--ink);border:none;border-radius:0;padding:.7rem 1.7rem;font-weight:800;font-size:.92rem;text-transform:uppercase;letter-spacing:.04em}
+  .btn-signal:hover{background:var(--soft);color:var(--ink)}
+  .btn-hollow{background:transparent;color:var(--soft);border:2px solid var(--soft);border-radius:0;padding:.62rem 1.7rem;font-weight:800;font-size:.92rem;text-transform:uppercase;letter-spacing:.04em}
+  .btn-hollow:hover{background:var(--soft);color:var(--bg)}
+  /* HERO: the big persimmon block */
+  .hero{background:var(--bg);padding:5.5rem 0 6rem;color:var(--soft)}
+  .hero .tab{color:var(--accent)}
+  .hero h1{color:var(--soft);font-weight:900;font-size:clamp(3rem,9vw,6.8rem);line-height:.96;text-transform:uppercase;max-width:12ch}
+  .hero .tagline{color:var(--paper-80);font-size:1.25rem;max-width:42ch}
+  .hero .fact-row{border-top:2px solid var(--paper-80);margin-top:3rem;padding-top:1.3rem;display:flex;gap:2.5rem;flex-wrap:wrap}
+  .hero .fact-row div b{display:block;font-size:1.7rem;font-weight:900;color:var(--accent);line-height:1.1}
+  .hero .fact-row div span{font-size:.85rem;color:var(--paper-80)}
+  /* OFFER: off-white middle begins */
+  .offer{background:var(--soft);padding:5.5rem 0}
+  .offer h2{font-size:clamp(2.2rem,5.5vw,4rem);text-transform:uppercase;font-weight:900}
+  .offer h2 .hit{color:var(--bg)}
+  .offer .cell{border:2px solid var(--ink);padding:1.8rem;height:100%;background:var(--soft)}
+  .offer .cell .tab{color:var(--bg)}
+  .offer .cell h3{font-size:1.4rem;font-weight:800;margin:.6rem 0 .6rem;text-transform:uppercase}
+  .offer .cell p{font-size:.96rem;color:var(--ink-70);margin:0}
+  .offer .cell .foot{margin-top:1.2rem;font-weight:700;font-size:.85rem;background:var(--accent);display:inline-block;padding:.25rem .6rem}
+  .offer .note{font-size:.9rem;color:var(--ink-70);margin-top:1.6rem;border-top:1px solid var(--line);padding-top:1rem;max-width:none}
+  .proof .who{border-bottom:1px solid var(--line);padding-bottom:1.2rem}
+  @media (prefers-reduced-motion: no-preference){
+    .offer .cell{transition:transform .2s ease,box-shadow .2s ease}
+    .offer .cell:hover{transform:translate(-4px,-4px);box-shadow:6px 6px 0 var(--ink)}
+    .btn-signal,.btn-hollow{transition:background .2s ease,color .2s ease}
+    .photo-block img{transition:transform .6s ease}
+    .photo-block:hover img{transform:scale(1.05)}
+    .step-block .n{transition:transform .3s ease}
+    .step-block:hover .n{transform:translateX(.6rem)}
+  }
+  /* SIGNATURE: THREE-STEP ALTERNATING BLOCKS */
+  .steps .step-block{padding:4.5rem 0}
+  .steps .step-block.on-color{background:var(--bg);color:var(--soft)}
+  .steps .step-block.on-paper{background:var(--soft);color:var(--ink)}
+  .steps .n{font-weight:900;font-size:clamp(4.5rem,14vw,10rem);line-height:.85;display:block}
+  .steps .on-color .n{color:var(--accent)}
+  .steps .on-paper .n{color:var(--bg)}
+  .steps h3{font-size:clamp(1.6rem,3.8vw,2.6rem);font-weight:900;text-transform:uppercase;margin:0 0 .7rem}
+  .steps .on-color h3{color:var(--soft)}
+  .steps .on-paper h3{color:var(--ink)}
+  .steps p{margin:0;font-size:1.02rem;max-width:52ch}
+  .steps .on-color p{color:var(--paper-80)}
+  .steps .on-paper p{color:var(--ink-70)}
+  .steps .meta{font-weight:700;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;margin-top:1.1rem;display:inline-block;padding:.3rem .7rem}
+  .steps .on-color .meta{background:var(--accent);color:var(--ink)}
+  .steps .on-paper .meta{background:var(--ink);color:var(--soft)}
+  /* PROOF */
+  .proof{background:var(--soft);padding:5.5rem 0;border-top:2px solid var(--ink)}
+  .proof h2{font-size:clamp(2rem,4.8vw,3.4rem);text-transform:uppercase;font-weight:900}
+  .photo-block{border:2px solid var(--ink);overflow:hidden}
+  .photo-block img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+  .proof blockquote{font-size:clamp(1.3rem,2.6vw,1.8rem);font-weight:700;line-height:1.35;margin:0;max-width:26ch}
+  .proof blockquote .hit{background:var(--accent);padding:0 .25rem;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+  .proof .who{font-size:.9rem;color:var(--ink-70);margin-top:1.2rem}
+  .proof .tally{border-top:2px solid var(--ink);margin-top:2.2rem;padding-top:1.2rem;display:flex;gap:2.5rem;flex-wrap:wrap}
+  .proof .tally div b{display:block;font-size:1.9rem;font-weight:900;color:var(--bg)}
+  .proof .tally div span{font-size:.85rem;color:var(--ink-70)}
+  /* CTA: back to the committed color */
+  .cta{background:var(--bg);padding:6rem 0;color:var(--soft)}
+  .cta h2{color:var(--soft);font-weight:900;font-size:clamp(2.4rem,7vw,5rem);text-transform:uppercase;line-height:.98;max-width:14ch}
+  .cta p{color:var(--paper-80)}
+  .cta .contact-slab{background:var(--bg-deep);padding:2rem}
+  .cta .contact-slab div{display:flex;justify-content:space-between;gap:1rem;padding:.75rem 0;border-top:1px solid color-mix(in oklab, var(--soft) 25%, var(--bg-deep));font-size:.95rem}
+  .cta .contact-slab div:first-of-type{border-top:0;padding-top:0}
+  .cta .contact-slab span:first-child{color:var(--paper-80)}
+  .cta .contact-slab span:last-child{font-weight:700;color:var(--soft);text-align:right}
+  /* FOOTER: same block as CTA */
+  footer{background:var(--bg);color:var(--paper-80);padding:0 0 2rem}
+  footer .inner{border-top:2px solid var(--paper-80);padding-top:2.6rem}
+  footer .brand{font-weight:900;font-size:1.4rem;color:var(--soft);text-transform:uppercase}
+  footer h4{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  footer a{color:var(--paper-80);text-decoration:none;display:block;padding:.2rem 0;font-size:.95rem}
+  footer a:hover{color:var(--accent)}
+  footer .legal{border-top:1px solid color-mix(in oklab, var(--soft) 30%, var(--bg));margin-top:2.4rem;padding-top:1.3rem;font-size:.83rem}
+</style>
+</head>
+<body id="top">
+
+<nav class="block-nav">
+  <div class="container d-flex align-items-center justify-content-between">
+    <a class="brand" href="#top">{{BRAND}}</a>
+    <div class="d-none d-md-flex gap-4 align-items-center">
+      <a class="link" href="#offer">What we do</a>
+      <a class="link" href="#how">How it goes</a>
+      <a class="link" href="#proof">Proof</a>
+      <a class="btn btn-signal" href="#start">Start now</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <p class="tab mb-3">Straight answers, real dates, one number</p>
+    <h1>Done. Like you meant it.</h1>
+    <p class="tagline mt-4">{{TAGLINE}}</p>
+    <div class="d-flex gap-3 mt-4 flex-wrap">
+      <a class="btn btn-signal" href="#start">Get a quote today</a>
+      <a class="btn btn-hollow" href="#how">See how it goes</a>
+    </div>
+    <div class="fact-row">
+      <div><b>Since day one</b><span>Put your founding year here, age is proof</span></div>
+      <div><b>1 working day</b><span>The longest you wait for a reply</span></div>
+      <div><b>0 surprises</b><span>The quote is the invoice, in writing</span></div>
+    </div>
+  </div>
+</header>
+
+<section class="offer" id="offer">
+  <div class="container">
+    <p class="tab mb-2" style="color:var(--bg)">What we do</p>
+    <h2 class="mb-4">Three things. <span class="hit">Done properly.</span></h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="cell">
+          <span class="tab">One</span>
+          <h3>Your main service</h3>
+          <p>Name the job most customers call about, in their words. Say what they walk away with and how long it takes. A timeline and a price range beat any adjective.</p>
+          <span class="foot">Most booked</span>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="cell">
+          <span class="tab">Two</span>
+          <h3>The add-on that pays off</h3>
+          <p>The service people add once they trust you. Explain in one line why doing both together costs them less than two separate vendors.</p>
+          <span class="foot">Best value</span>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="cell">
+          <span class="tab">Three</span>
+          <h3>The job others turn away</h3>
+          <p>Your specialist request. Be precise about what qualifies, and say plainly what you do not do. Saying no to the wrong work reads as confidence.</p>
+          <span class="foot">By assessment</span>
+        </div>
+      </div>
+    </div>
+    <p class="note">Only do one thing? Delete two boxes. A short honest list always beats a padded one.</p>
+  </div>
+</section>
+
+<div class="steps" id="how">
+  <section class="step-block on-color">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-md-3"><span class="n">1</span></div>
+        <div class="col-md-9">
+          <h3>You tell us the job</h3>
+          <p>One call or one message, no forms with twelve fields. We ask the two or three questions that actually change the price, then we stop asking.</p>
+          <span class="meta">Takes 10 minutes, costs nothing</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="step-block on-paper">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-md-3"><span class="n">2</span></div>
+        <div class="col-md-9">
+          <h3>You get one number and one date</h3>
+          <p>A written quote, valid for 30 days. The scope says where the work stops, so nothing creeps and nothing gets renegotiated halfway through.</p>
+          <span class="meta">In writing, within one working day</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="step-block on-color">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-md-3"><span class="n">3</span></div>
+        <div class="col-md-9">
+          <h3>We do it, you check it, then you pay</h3>
+          <p>A named person shows up when we said. At the end we walk the result against the quote together. If something is off, we make it right at our cost.</p>
+          <span class="meta">You pay when it matches, not before</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="proof" id="proof">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-5">
+        <div class="photo-block"><img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1000&q=60" alt="Two people shaking hands over a finished piece of work"></div>
+      </div>
+      <div class="col-lg-7">
+        <p class="tab mb-2" style="color:var(--bg)">Proof, not promises</p>
+        <h2>The line customers repeat</h2>
+        <blockquote class="mt-3">"Put your best customer's exact words here. <span class="hit">Ask them today,</span> most happy customers say yes."</blockquote>
+        <p class="who">A real first name and a real place make this ten times stronger.</p>
+        <div class="tally">
+          <div><b>Your count</b><span>Jobs completed, even if the number is small</span></div>
+          <div><b>Your area</b><span>The neighbourhoods you actually serve</span></div>
+          <div><b>Your window</b><span>How long you stand behind the work</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="start">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-7">
+        <p class="tab mb-3" style="color:var(--accent)">Start now</p>
+        <h2>Say the word.</h2>
+        <p class="mt-3" style="max-width:46ch">Describe the job in three sentences. You get a written quote or an honest "not our thing" within one working day. Either answer saves you time.</p>
+        <a class="btn btn-signal mt-3" href="#">Get my quote</a>
+      </div>
+      <div class="col-lg-5">
+        <div class="contact-slab">
+          <div><span>Phone</span><span>Add your number here</span></div>
+          <div><span>Email</span><span>hello@yourdomain.com</span></div>
+          <div><span>Hours</span><span>Mon to Sat, 9 to 6</span></div>
+          <div><span>Find us</span><span>Your street, your city</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="inner row g-4">
+      <div class="col-lg-5">
+        <div class="brand">{{BRAND}}</div>
+        <p class="mt-2" style="max-width:34ch">One plain line about who you serve and where. Keep it factual, it is the line search engines quote.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4 class="mb-3">Explore</h4>
+        <a href="#offer">What we do</a>
+        <a href="#how">How it goes</a>
+        <a href="#proof">Proof</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4 class="mb-3">Contact</h4>
+        <a href="#start">Get a quote</a>
+        <a href="#">hello@yourdomain.com</a>
+        <a href="#">Add your phone</a>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h4 class="mb-3">Visit</h4>
+        <a href="#">Your street address</a>
+        <a href="#">Your city and pincode</a>
+        <a href="#">Mon to Sat, 9 to 6</a>
+      </div>
+    </div>
+    <div class="legal">© {{BRAND}} · draft preview generated by Dharwin Studio</div>
+  </div>
+</footer>
+
+</body>
+</html>

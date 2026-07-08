@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="design-label" content="Family Care">
+<title>{{BRAND}}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#40313f;
+    --bg:#fbf6ec;
+    --accent:#7b4874;
+    --soft:#fffdf7;
+    --line:#e9dcc8;
+  }
+  body{background:var(--bg);color:var(--ink);font-family:"Nunito",system-ui,sans-serif;font-size:1.0625rem;line-height:1.65;}
+  h1,h2,h3,h4{font-weight:800;letter-spacing:-.01em;}
+  .eyebrow{font-weight:800;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);}
+  p{max-width:64ch;}
+  a{color:var(--accent);}
+
+  .site-nav{background:var(--soft);border-bottom:1px solid var(--line);}
+  .site-nav .brand{font-weight:800;font-size:1.45rem;color:var(--ink);text-decoration:none;}
+  .site-nav .brand span{color:var(--accent);}
+  .site-nav .nav-link{color:var(--ink);font-weight:700;font-size:.95rem;}
+  .btn-plum{background:var(--accent);color:#fff;border:2px solid var(--accent);font-weight:800;padding:.6rem 1.5rem;border-radius:2rem;}
+  .btn-plum:hover{background:var(--ink);border-color:var(--ink);color:#fff;}
+  .btn-sand{background:color-mix(in srgb, var(--line) 55%, var(--soft));color:var(--ink);border:2px solid var(--line);font-weight:800;padding:.6rem 1.5rem;border-radius:2rem;}
+  .btn-sand:hover{background:var(--ink);border-color:var(--ink);color:#fff;}
+
+  .hero{padding:5rem 0 4.5rem;}
+  .hero h1{font-size:clamp(2.5rem,6vw,4.2rem);line-height:1.1;}
+  .hero h1 .hl{color:var(--accent);}
+  .hero .tagline{font-size:1.25rem;color:color-mix(in srgb, var(--ink) 78%, var(--bg));max-width:33rem;}
+  .hours-pill{display:inline-flex;flex-wrap:wrap;gap:.5rem 1.5rem;background:var(--soft);border:1px solid var(--line);border-radius:1.25rem;padding:1rem 1.4rem;font-size:.95rem;margin-top:1.8rem;}
+  .hours-pill b{font-weight:800;}
+  .hero-photo{border-radius:2rem;overflow:hidden;box-shadow:0 22px 55px rgba(64,49,63,.16);}
+  .hero-photo img{width:100%;height:27rem;object-fit:cover;display:block;}
+
+  .stages{padding:4.5rem 0 5rem;}
+  .stage{background:var(--soft);border:1px solid var(--line);border-radius:1.5rem;padding:1.9rem clamp(1.25rem,3vw,2.4rem);margin-bottom:1.25rem;}
+  .stage.tint{background:color-mix(in srgb, var(--accent) 7%, var(--soft));border-color:color-mix(in srgb, var(--accent) 22%, var(--line));}
+  .stage .age{display:inline-block;background:var(--accent);color:#fff;font-weight:800;font-size:.8rem;letter-spacing:.08em;border-radius:2rem;padding:.3rem 1rem;margin-bottom:.6rem;}
+  .stage.tint .age{background:var(--ink);}
+  .stage h3{font-size:1.5rem;margin-bottom:.4rem;}
+  .stage p{font-size:.98rem;margin-bottom:0;color:color-mix(in srgb, var(--ink) 82%, var(--bg));}
+  .stage .covers{font-weight:800;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.6rem;}
+  .stage ul{list-style:none;margin:0;padding:0;font-size:.93rem;}
+  .stage ul li{padding:.32rem 0 .32rem 1.5rem;position:relative;}
+  .stage ul li::before{content:"";position:absolute;left:0;top:.78rem;width:.55rem;height:.55rem;border-radius:50%;background:var(--accent);}
+
+  .doctors{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:5rem 0;}
+  .doc{background:var(--bg);border:1px solid var(--line);border-radius:1.5rem;overflow:hidden;height:100%;}
+  .doc img{width:100%;height:16rem;object-fit:cover;display:block;}
+  .doc .body{padding:1.3rem 1.4rem 1.5rem;}
+  .doc h4{font-size:1.2rem;margin-bottom:.15rem;}
+  .doc .role{color:var(--accent);font-weight:800;font-size:.88rem;margin-bottom:.5rem;}
+  .doc p{font-size:.92rem;margin:0;color:color-mix(in srgb, var(--ink) 80%, var(--bg));}
+
+  .visit{padding:5rem 0;}
+  .v-card{background:var(--soft);border:1px solid var(--line);border-radius:1.5rem;padding:1.7rem 1.6rem;height:100%;}
+  .v-card h4{font-size:1.15rem;margin-bottom:.5rem;}
+  .v-card h4 .dot{color:var(--accent);}
+  .v-card p{font-size:.95rem;margin:0;color:color-mix(in srgb, var(--ink) 82%, var(--bg));}
+
+  .cta{padding:0 0 5rem;}
+  .cta-inner{background:var(--accent);color:#fff;border-radius:2rem;padding:3.2rem clamp(1.5rem,5vw,3.5rem);}
+  .cta-inner h2{font-size:clamp(1.9rem,4.4vw,3rem);}
+  .cta-inner p{color:color-mix(in srgb, #fff 88%, var(--accent));}
+  .btn-cream{background:var(--soft);color:var(--ink);border:2px solid var(--soft);font-weight:800;padding:.75rem 1.9rem;border-radius:2rem;}
+  .btn-cream:hover{background:var(--ink);border-color:var(--ink);color:#fff;}
+
+  footer{background:var(--ink);color:color-mix(in srgb, var(--bg) 84%, var(--ink));padding:3.8rem 0 2rem;font-size:.93rem;}
+  footer .brand{font-weight:800;font-size:1.45rem;color:var(--bg);}
+  footer h6{font-weight:800;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--bg);margin-bottom:1rem;}
+  footer ul{list-style:none;padding:0;margin:0;}
+  footer li{padding:.24rem 0;}
+  footer a{color:color-mix(in srgb, var(--bg) 84%, var(--ink));text-decoration:none;}
+  footer a:hover{color:var(--bg);}
+  .foot-legal{border-top:1px solid color-mix(in srgb, var(--bg) 20%, transparent);margin-top:2.6rem;padding-top:1.4rem;font-size:.85rem;}
+
+  @media (prefers-reduced-motion: no-preference){
+    .stage,.doc,.v-card{transition:transform .25s ease,box-shadow .25s ease;}
+    .stage:hover,.v-card:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(64,49,63,.12);}
+    .doc img{transition:transform .55s ease;}
+    .doc:hover img{transform:scale(1.05);}
+    .btn-plum,.btn-sand,.btn-cream{transition:background-color .2s ease,color .2s ease,border-color .2s ease;}
+  }
+  @media (max-width:575px){
+    .hero-photo img{height:18rem;}
+  }
+</style>
+</head>
+<body id="top">
+
+<nav class="site-nav py-3">
+  <div class="container d-flex align-items-center justify-content-between gap-3">
+    <a class="brand" href="#top">{{BRAND}}<span>.</span></a>
+    <div class="d-none d-md-flex align-items-center gap-4">
+      <a class="nav-link" href="#stages">Who we see</a>
+      <a class="nav-link" href="#doctors">Our doctors</a>
+      <a class="nav-link" href="#visit">Your visit</a>
+      <a class="btn btn-plum" href="#contact">Book an appointment</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6">
+        <p class="eyebrow mb-3">Neighbourhood family clinic</p>
+        <h1 class="mb-3">One clinic for <span class="hl">every age</span> under your roof.</h1>
+        <p class="tagline mt-3">{{TAGLINE}}</p>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <a class="btn btn-plum" href="#contact">Book an appointment</a>
+          <a class="btn btn-sand" href="#stages">See who we care for</a>
+        </div>
+        <div class="hours-pill">
+          <span><b>Mon to Sat</b> 8 am to 8 pm</span>
+          <span><b>Sunday</b> 9 am to 1 pm</span>
+          <span><b>Same-day slots</b> held daily until 11 am</span>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="hero-photo">
+          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=1200&q=60" alt="Smiling family physician in consultation room welcoming a patient">
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="stages" id="stages">
+  <div class="container">
+    <p class="eyebrow mb-2">Who we see</p>
+    <h2 class="mb-2" style="font-size:clamp(1.9rem,4.2vw,2.9rem);">From first vaccines to golden years</h2>
+    <p class="mb-4">The same three doctors, so your file and your history stay in one place for decades, not one visit.</p>
+
+    <div class="stage">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6">
+          <span class="age">Infants · birth to 2 years</span>
+          <h3>Little ones</h3>
+          <p>Gentle, unhurried visits with a separate well-baby waiting corner so newborns never share a bench with flu season.</p>
+        </div>
+        <div class="col-lg-6">
+          <p class="covers">A typical visit covers</p>
+          <ul>
+            <li>Growth tracking on WHO charts, explained plainly</li>
+            <li>Immunisations on the national schedule, with reminders</li>
+            <li>Feeding, sleep and teething guidance for parents</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage tint">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6">
+          <span class="age">Kids and teens · 2 to 17</span>
+          <h3>Growing up</h3>
+          <p>School-age checkups that respect a teenager's privacy and a parent's questions, in the right order.</p>
+        </div>
+        <div class="col-lg-6">
+          <p class="covers">A typical visit covers</p>
+          <ul>
+            <li>Annual school health checks and fitness certificates</li>
+            <li>Allergies, asthma and recurring infections</li>
+            <li>Nutrition, screen habits and adolescent wellbeing</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6">
+          <span class="age">Adults · 18 to 59</span>
+          <h3>The busy years</h3>
+          <p>Working-age care built around your calendar, with evening slots and reports on your phone by the next morning.</p>
+        </div>
+        <div class="col-lg-6">
+          <p class="covers">A typical visit covers</p>
+          <ul>
+            <li>Annual health screens: sugar, lipids, thyroid, BP</li>
+            <li>Diabetes and hypertension management plans</li>
+            <li>Women's health, travel vaccines and minor procedures</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage tint">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6">
+          <span class="age">Seniors · 60 and beyond</span>
+          <h3>Elder care</h3>
+          <p>Longer appointment slots, a ground-floor consulting room, and one doctor who reads the whole medicine list together.</p>
+        </div>
+        <div class="col-lg-6">
+          <p class="covers">A typical visit covers</p>
+          <ul>
+            <li>Medication review to cut duplicate prescriptions</li>
+            <li>Joint pain, memory and fall-risk assessment</li>
+            <li>Home visits within 3 km for housebound patients</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="doctors" id="doctors">
+  <div class="container">
+    <p class="eyebrow mb-2">Our doctors</p>
+    <h2 class="mb-4" style="font-size:clamp(1.9rem,4.2vw,2.9rem);">Three doctors. One family file.</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <article class="doc">
+          <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=900&q=60" alt="Portrait of Dr. Anita Rao, family physician">
+          <div class="body">
+            <h4>Dr. Anita Rao</h4>
+            <p class="role">Family medicine · 18 years</p>
+            <p>MD in family medicine. Leads our chronic-care clinic and still remembers whose grandmother prefers the window seat.</p>
+          </div>
+        </article>
+      </div>
+      <div class="col-md-4">
+        <article class="doc">
+          <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=900&q=60" alt="Portrait of Dr. Vikram Shetty, paediatrician">
+          <div class="body">
+            <h4>Dr. Vikram Shetty</h4>
+            <p class="role">Paediatrics · 12 years</p>
+            <p>DCH, DNB. Runs the vaccination programme and the Saturday well-baby clinic. Known for painless injection technique.</p>
+          </div>
+        </article>
+      </div>
+      <div class="col-md-4">
+        <article class="doc">
+          <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=900&q=60" alt="Doctor listening to an elderly patient with a stethoscope">
+          <div class="body">
+            <h4>Dr. Farah Kazi</h4>
+            <p class="role">Geriatrics and internal medicine · 15 years</p>
+            <p>MD, fellowship in geriatric care. Handles senior clinics, home visits and end-of-life care conversations with patience.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="container">
+    <p class="eyebrow mb-2">Your visit</p>
+    <h2 class="mb-4" style="font-size:clamp(1.9rem,4.2vw,2.9rem);">Small things that make visits easier</h2>
+    <div class="row g-4">
+      <div class="col-md-3 col-sm-6">
+        <div class="v-card"><h4><span class="dot">●</span> On-time promise</h4><p>If we run more than 20 minutes late, your consultation fee is waived. It has happened four times this year.</p></div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="v-card"><h4><span class="dot">●</span> Reports by morning</h4><p>In-house lab for the common panels. Samples before noon, results on WhatsApp and the portal by 9 am next day.</p></div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="v-card"><h4><span class="dot">●</span> Fair, printed prices</h4><p>Consultation, vaccine and lab prices printed at reception. Follow-ups within 7 days are free.</p></div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="v-card"><h4><span class="dot">●</span> Insurance friendly</h4><p>Cashless OPD with the four major insurers, and itemised bills your employer's plan will accept the first time.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+          <h2 class="mb-2">New to the neighbourhood? First visit is half price.</h2>
+          <p class="mb-0">Bring your old prescriptions and reports. We will set up one family file, and from then on you only ever tell your story once.</p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <a class="btn btn-cream btn-lg" href="#top">Book an appointment</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <p class="brand mb-2">{{BRAND}}</p>
+        <p style="max-width:32ch;">A neighbourhood family clinic where the doctor knows your name before reading the file.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Clinic</h6>
+        <ul><li><a href="#stages">Who we see</a></li><li><a href="#doctors">Our doctors</a></li><li><a href="#visit">Your visit</a></li></ul>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h6>Find us</h6>
+        <ul><li>14 Maple Cross Road</li><li>Opposite the community park</li><li>care@yourdomain.com</li></ul>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h6>Hours</h6>
+        <ul><li>Mon to Sat, 8 am to 8 pm</li><li>Sunday, 9 am to 1 pm</li><li>Emergencies: call our duty line</li></ul>
+      </div>
+    </div>
+    <p class="foot-legal mb-0">© {{BRAND}} · draft preview generated by Dharwin Studio</p>
+  </div>
+</footer>
+</body>
+</html>

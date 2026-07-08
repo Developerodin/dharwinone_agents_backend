@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="design-label" content="Mono Sheet">
+<title>{{BRAND}}</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#141414;        /* print black */
+    --bg:#fbfaf6;         /* paper white */
+    --accent:#f2c200;     /* industrial yellow */
+    --soft:#f1efe7;       /* recycled stock */
+    --line:#d9d6ca;       /* rule grey */
+    --ink-70:color-mix(in oklab, var(--ink) 70%, var(--bg));
+    --ink-50:color-mix(in oklab, var(--ink) 50%, var(--bg));
+  }
+  body{background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;font-size:1.0625rem;line-height:1.65}
+  h1,h2,h3{font-family:"Inter",sans-serif;font-weight:800;letter-spacing:-.025em;color:var(--ink)}
+  p{max-width:64ch}
+  .spec{font-family:"Fragment Mono",monospace;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-70)}
+  .mark{background:var(--accent);color:var(--ink);padding:0 .3rem;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+  /* NAV: document header */
+  .sheet-nav{border-bottom:2px solid var(--ink);background:var(--bg);padding:.9rem 0}
+  .sheet-nav .brand{font-family:"Fragment Mono",monospace;font-size:1.05rem;font-weight:400;letter-spacing:.04em;color:var(--ink);text-decoration:none;text-transform:uppercase}
+  .sheet-nav .docref{font-family:"Fragment Mono",monospace;font-size:.72rem;color:var(--ink-50)}
+  .sheet-nav a.link{font-family:"Fragment Mono",monospace;font-size:.8rem;color:var(--ink-70);text-decoration:none}
+  .sheet-nav a.link:hover{color:var(--ink);background:var(--accent)}
+  .btn-stamp{background:var(--ink);color:var(--bg);border:2px solid var(--ink);border-radius:0;padding:.55rem 1.4rem;font-family:"Fragment Mono",monospace;font-size:.82rem}
+  .btn-stamp:hover{background:var(--accent);color:var(--ink);border-color:var(--ink)}
+  .btn-outline-stamp{background:transparent;color:var(--ink);border:2px solid var(--ink);border-radius:0;padding:.55rem 1.4rem;font-family:"Fragment Mono",monospace;font-size:.82rem}
+  .btn-outline-stamp:hover{background:var(--ink);color:var(--bg)}
+  /* HERO: sheet head */
+  .hero{padding:4.5rem 0 4rem;border-bottom:1px solid var(--line)}
+  .hero .fileline{font-family:"Fragment Mono",monospace;font-size:.74rem;color:var(--ink-50);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:.9rem;margin-bottom:2.6rem}
+  .hero h1{font-size:clamp(2.6rem,6.5vw,4.6rem);line-height:1.02;max-width:18ch}
+  .hero .tagline{font-size:1.2rem;color:var(--ink-70);max-width:46ch;margin-top:1.4rem}
+  .hero .index{border:1px solid var(--line);background:var(--soft);padding:1.5rem 1.6rem}
+  .hero .index h3{font-family:"Fragment Mono",monospace;font-size:.74rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-70);margin-bottom:1rem}
+  .hero .index a{display:flex;justify-content:space-between;gap:1rem;font-family:"Fragment Mono",monospace;font-size:.88rem;color:var(--ink);text-decoration:none;padding:.55rem 0;border-top:1px solid var(--line)}
+  .hero .index a:hover{background:var(--accent)}
+  .hero .index a span:last-child{color:var(--ink-50)}
+  /* SIGNATURE: CAPABILITY TABLE */
+  .capab{padding:5.5rem 0}
+  .capab h2{font-size:clamp(2rem,4.5vw,3.2rem)}
+  .cap-table{margin-top:2.6rem;border-top:2px solid var(--ink)}
+  .cap-head{display:grid;grid-template-columns:4rem 1.3fr 1fr 9rem;gap:1.6rem;font-family:"Fragment Mono",monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-50);padding:.8rem 0}
+  .cap-row{display:grid;grid-template-columns:4rem 1.3fr 1fr 9rem;gap:1.6rem;border-top:1px solid var(--line);padding:1.9rem 0;align-items:start}
+  .cap-row:last-of-type{border-bottom:2px solid var(--ink)}
+  .cap-row .no{font-family:"Fragment Mono",monospace;font-size:1.5rem;color:var(--ink);background:var(--accent);width:3.2rem;text-align:center;padding:.2rem 0}
+  .cap-row h3{font-size:1.35rem;font-weight:700;margin:0 0 .4rem}
+  .cap-row p{font-size:.95rem;color:var(--ink-70);margin:0;max-width:44ch}
+  .cap-row .scope{font-size:.92rem;color:var(--ink-70)}
+  .cap-row .scope b{display:block;font-family:"Fragment Mono",monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-50);font-weight:400;margin-bottom:.3rem}
+  .cap-row .turn{font-family:"Fragment Mono",monospace;font-size:.92rem;color:var(--ink)}
+  .cap-row .turn b{display:block;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-50);font-weight:400;margin-bottom:.3rem}
+  .capab .footnote{font-family:"Fragment Mono",monospace;font-size:.76rem;color:var(--ink-50);margin-top:1rem}
+  @media (max-width: 991px){
+    .cap-head{display:none}
+    .cap-row{grid-template-columns:4rem 1fr;grid-template-rows:auto auto auto}
+    .cap-row .scope,.cap-row .turn{grid-column:2}
+  }
+  @media (prefers-reduced-motion: no-preference){
+    .cap-row{transition:background .2s ease}
+    .cap-row:hover{background:var(--soft)}
+    .btn-stamp,.btn-outline-stamp,.sheet-nav a.link,.hero .index a{transition:background .15s ease,color .15s ease}
+    .photo-frame img{transition:transform .6s ease}
+    .photo-frame:hover img{transform:scale(1.04)}
+  }
+  /* METHOD */
+  .method{padding:5.5rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .method h2{font-size:clamp(1.9rem,4vw,2.8rem)}
+  .step{border:1px solid var(--line);background:var(--bg);padding:1.6rem;height:100%}
+  .step .k{font-family:"Fragment Mono",monospace;font-size:.72rem;letter-spacing:.14em;color:var(--ink-50);text-transform:uppercase}
+  .step h3{font-size:1.15rem;font-weight:700;margin:.5rem 0 .5rem}
+  .step p{font-size:.93rem;color:var(--ink-70);margin:0}
+  .photo-frame{border:1px solid var(--line);overflow:hidden;margin-top:2.5rem}
+  .photo-frame img{width:100%;aspect-ratio:21/8;object-fit:cover;display:block;filter:grayscale(.35)}
+  .photo-frame figcaption{font-family:"Fragment Mono",monospace;font-size:.74rem;color:var(--ink-50);padding:.7rem 1rem;border-top:1px solid var(--line);background:var(--bg)}
+  /* ASSURANCES */
+  .assure{padding:5.5rem 0}
+  .assure h2{font-size:clamp(1.9rem,4vw,2.8rem)}
+  .assure .item{border-top:1px solid var(--line);padding:1.3rem 0;display:grid;grid-template-columns:9rem 1fr;gap:1.6rem}
+  .assure .item:last-of-type{border-bottom:2px solid var(--ink)}
+  .assure .item .label{font-family:"Fragment Mono",monospace;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-50);padding-top:.2rem}
+  .assure .item p{margin:0;font-size:.98rem;color:var(--ink-70)}
+  .assure .item p b{color:var(--ink)}
+  @media (max-width: 575px){.assure .item{grid-template-columns:1fr;gap:.4rem}}
+  /* CONTACT */
+  .contact{padding:5.5rem 0;background:var(--accent)}
+  .contact h2{font-size:clamp(2.1rem,5vw,3.4rem);max-width:20ch}
+  .contact p{color:color-mix(in oklab, var(--ink) 82%, var(--accent))}
+  .contact .lines{font-family:"Fragment Mono",monospace;font-size:.92rem}
+  .contact .lines div{border-top:1.5px solid var(--ink);padding:.85rem 0;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .contact .lines span:first-child{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;padding-top:.2rem}
+  .contact .btn-stamp:hover{background:var(--bg);color:var(--ink)}
+  /* FOOTER */
+  footer{background:var(--ink);color:color-mix(in oklab, var(--bg) 75%, var(--ink));padding:3.5rem 0 1.8rem;font-size:.92rem}
+  footer .brand{font-family:"Fragment Mono",monospace;font-size:1.1rem;color:var(--bg);text-transform:uppercase;letter-spacing:.04em}
+  footer h4{font-family:"Fragment Mono",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:400}
+  footer a{color:color-mix(in oklab, var(--bg) 75%, var(--ink));text-decoration:none;display:block;padding:.18rem 0}
+  footer a:hover{color:var(--accent)}
+  footer .legal{border-top:1px solid color-mix(in oklab, var(--bg) 18%, var(--ink));margin-top:2.6rem;padding-top:1.2rem;font-family:"Fragment Mono",monospace;font-size:.74rem;color:color-mix(in oklab, var(--bg) 55%, var(--ink))}
+</style>
+</head>
+<body id="top">
+
+<nav class="sheet-nav">
+  <div class="container d-flex align-items-center justify-content-between gap-3">
+    <div class="d-flex align-items-baseline gap-3">
+      <a class="brand" href="#top">{{BRAND}}</a>
+      <span class="docref d-none d-lg-inline">/ CAPABILITY SHEET / REV 04</span>
+    </div>
+    <div class="d-none d-md-flex gap-4 align-items-center">
+      <a class="link" href="#capabilities">01 Capabilities</a>
+      <a class="link" href="#method">02 Method</a>
+      <a class="link" href="#assurances">03 Assurances</a>
+      <a class="btn btn-stamp" href="#contact">Request a quote</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="fileline">
+      <span>PREPARED FOR: whoever is comparing three quotes right now</span>
+      <span class="d-none d-sm-inline">STATUS: taking new work</span>
+    </div>
+    <div class="row g-5 align-items-start">
+      <div class="col-lg-7">
+        <h1>Plain scope. Fixed price. <span class="mark">Dates we actually hit.</span></h1>
+        <p class="tagline">{{TAGLINE}}</p>
+        <p class="mt-3" style="color:var(--ink-70);font-size:.98rem">This page reads like a spec sheet on purpose. If what we promise here is not what happens, you should not pay the invoice. That is the whole pitch.</p>
+        <div class="d-flex gap-3 mt-4 flex-wrap">
+          <a class="btn btn-stamp" href="#capabilities">See the capability table</a>
+          <a class="btn btn-outline-stamp" href="#contact">Talk to us first</a>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <nav class="index" aria-label="Page index">
+          <h3>Sheet index</h3>
+          <a href="#capabilities"><span>01 What we do, scoped</span><span>p.1</span></a>
+          <a href="#method"><span>02 How a job runs</span><span>p.2</span></a>
+          <a href="#assurances"><span>03 What we guarantee</span><span>p.3</span></a>
+          <a href="#contact"><span>04 Start a job</span><span>p.4</span></a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="capab" id="capabilities">
+  <div class="container">
+    <p class="spec mb-2">Section 01 / Capabilities</p>
+    <h2>What we do, in the words a customer would use.</h2>
+    <div class="cap-table">
+      <div class="cap-head"><span>No.</span><span>Capability</span><span>Scope</span><span>Turnaround</span></div>
+      <div class="cap-row">
+        <span class="no">01</span>
+        <div>
+          <h3>The core job</h3>
+          <p>Name your main service the way a customer asks for it on the phone, not the way your industry labels it. One sentence on what they get, one on what it costs to get wrong.</p>
+        </div>
+        <div class="scope"><b>Scope</b>State what a standard job includes and where it stops. The stop line is what prevents disputes later.</div>
+        <div class="turn"><b>Turnaround</b>e.g. 3 to 5 working days</div>
+      </div>
+      <div class="cap-row">
+        <span class="no">02</span>
+        <div>
+          <h3>The follow-on work</h3>
+          <p>The service customers add once the first job goes well. Explain why bundling it with the core job saves them a second call-out or a second vendor.</p>
+        </div>
+        <div class="scope"><b>Scope</b>List the two or three concrete deliverables. If a deliverable needs a third party, say so here, not on the invoice.</div>
+        <div class="turn"><b>Turnaround</b>e.g. within 2 weeks</div>
+      </div>
+      <div class="cap-row">
+        <span class="no">03</span>
+        <div>
+          <h3>The odd request</h3>
+          <p>The job most competitors decline. Be precise about what qualifies, because the customer who needs this has already been turned away twice today.</p>
+        </div>
+        <div class="scope"><b>Scope</b>Quoted case by case after a short assessment. Name the assessment fee if there is one, it filters tyre kickers.</div>
+        <div class="turn"><b>Turnaround</b>e.g. quoted in 48 hours</div>
+      </div>
+    </div>
+    <p class="footnote">NOTE: a shorter honest table beats a padded one. If you only do one thing, delete rows 02 and 03 and let row 01 breathe.</p>
+  </div>
+</section>
+
+<section class="method" id="method">
+  <div class="container">
+    <p class="spec mb-2">Section 02 / Method</p>
+    <h2 class="mb-4">Every job runs the same four steps.</h2>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3">
+        <div class="step">
+          <span class="k">Step 1 / Free</span>
+          <h3>You describe it</h3>
+          <p>One call or one message. We ask the questions that change the price up front, so the quote is real.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="step">
+          <span class="k">Step 2 / Fixed</span>
+          <h3>We quote in writing</h3>
+          <p>A one-page quote with the scope, the price, and the date. It is valid for 30 days and it does not creep.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="step">
+          <span class="k">Step 3 / Scheduled</span>
+          <h3>The work happens</h3>
+          <p>You get a named person, a start time, and a message if anything moves by more than an hour.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="step">
+          <span class="k">Step 4 / Checked</span>
+          <h3>You sign it off</h3>
+          <p>We walk the result against the quote together. You pay when the sheet matches the work, not before.</p>
+        </div>
+      </div>
+    </div>
+    <figure class="photo-frame mb-0">
+      <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&q=60" alt="Work desk with plans, notes, and tools laid out in order">
+      <figcaption>FIG. 1 / The paperwork is boring by design. Boring paperwork means no surprises in week three.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="assure" id="assurances">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-5">
+        <p class="spec mb-2">Section 03 / Assurances</p>
+        <h2>The parts we put in writing.</h2>
+        <p class="mt-3" style="color:var(--ink-70)">Replace each line with your real policy. A specific promise with a number in it is worth ten adjectives.</p>
+      </div>
+      <div class="col-lg-7">
+        <div class="item"><span class="label">Response</span><p><b>We reply within one working day.</b> State your true response time, then beat it. This is the first promise anyone tests.</p></div>
+        <div class="item"><span class="label">Price</span><p><b>The quote is the invoice.</b> If we find something unexpected, work pauses until you approve the change in writing.</p></div>
+        <div class="item"><span class="label">Make-good</span><p><b>If it is not right, we return and fix it at our cost.</b> Name the window, 30 days, 12 months, whatever you honestly stand behind.</p></div>
+        <div class="item"><span class="label">Records</span><p><b>You get the paperwork.</b> Quotes, sign-offs, and any certificates, sent the same week, filed where you can find them next year.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-7">
+        <p class="spec mb-2" style="color:color-mix(in oklab, var(--ink) 70%, var(--accent))">Section 04 / Start a job</p>
+        <h2>Send the job. Get a number.</h2>
+        <p class="mt-3" style="max-width:50ch">Describe what you need in three sentences. You will get back a written quote or an honest "we are not the right fit", both within one working day.</p>
+        <a class="btn btn-stamp mt-3" href="#">Request a written quote</a>
+      </div>
+      <div class="col-lg-5">
+        <div class="lines">
+          <div><span>Phone</span><span>Add your number here</span></div>
+          <div><span>Email</span><span>hello@yourdomain.com</span></div>
+          <div><span>Hours</span><span>Mon to Sat, 9 to 6</span></div>
+          <div><span>Area</span><span>Name the localities you serve</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-5">
+        <div class="brand">{{BRAND}}</div>
+        <p class="mt-2" style="max-width:36ch">One plain line about who you serve and where. This is the line search engines quote, keep it factual.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4 class="mb-3">Sheet</h4>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#method">Method</a>
+        <a href="#assurances">Assurances</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h4 class="mb-3">Contact</h4>
+        <a href="#contact">Request a quote</a>
+        <a href="#">hello@yourdomain.com</a>
+        <a href="#">Add your phone</a>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h4 class="mb-3">Filed under</h4>
+        <a href="#">Your registration number</a>
+        <a href="#">Your insurance line</a>
+        <a href="#">Your city and pincode</a>
+      </div>
+    </div>
+    <div class="legal">© {{BRAND}} / CAPABILITY SHEET REV 04 / draft preview generated by Dharwin Studio</div>
+  </div>
+</footer>
+
+</body>
+</html>
