@@ -43,10 +43,10 @@ def append(
         "targets": targets or [],
     }
     _collection().insert_one(doc)
-    return doc
+    return db.strip_id(doc)
 
 
 def list_for_project(project_id):
-    items = list(_collection().find({"projectId": project_id}))
+    items = [db.strip_id(doc) for doc in _collection().find({"projectId": project_id})]
     items.sort(key=lambda d: d.get("ts", 0), reverse=True)
     return items

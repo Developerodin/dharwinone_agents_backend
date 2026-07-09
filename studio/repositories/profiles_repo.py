@@ -54,7 +54,7 @@ def get(project_id):
     doc = coll.find_one({"projectId": project_id})
     if not doc:
         return _empty_profile(project_id)
-    return doc
+    return db.strip_id(doc)
 
 
 def save(profile):
@@ -68,4 +68,4 @@ def save(profile):
         )
     else:
         coll.insert_one(profile)
-    return profile
+    return db.strip_id(profile)

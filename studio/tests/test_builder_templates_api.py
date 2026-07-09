@@ -53,10 +53,12 @@ def test_generate_and_list_templates(client, memory_db):
     body = gen.json()
     assert body["templates"]
     assert body["templates"][0]["templateId"]
+    assert "_id" not in body["templates"][0]
     assert "{{" not in body["templates"][0]["htmlContent"]
 
     listed = client.get(f"/builder/projects/{project_id}/templates")
     assert listed.status_code == 200
     items = listed.json()
     assert len(items) == len(body["templates"])
+    assert "_id" not in items[0]
     assert items[0]["label"]

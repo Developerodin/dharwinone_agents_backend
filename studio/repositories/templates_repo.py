@@ -20,6 +20,14 @@ def _collection():
     return coll
 
 
+def _public(doc):
+    if not doc:
+        return None
+    clean = dict(doc)
+    clean.pop("_id", None)
+    return clean
+
+
 def replace_for_project(project_id, templates):
     coll = _collection()
     coll.delete_many({"projectId": project_id})
@@ -31,17 +39,19 @@ def replace_for_project(project_id, templates):
         doc.setdefault("templateId", uuid.uuid4().hex[:12])
         doc["generatedAt"] = now
         coll.insert_one(doc)
-        saved.append(doc)
+        saved.append(_public(doc))
     return saved
 
 
 def list_for_project(project_id):
-    items = list(_collection().find({"projectId": project_id}))
+    items = [_public(item) for item in _collection().find({"projectId": project_id})]
     items.sort(key=lambda d: d.get("generatedAt", 0), reverse=True)
     return items
 
 
 def get(project_id, template_id):
-    return _collection().find_one(
+    return _public(
+        _collection().find_one(
         {"projectId": project_id, "templateId": template_id},
+        )
     )

@@ -40,18 +40,20 @@ def create(project_id, *, label, trigger, html, profile=None):
         "s3HtmlKey": f"projects/{project_id}/versions/{version_id}.html",
     }
     _collection().insert_one(doc)
-    return doc
+    return db.strip_id(doc)
 
 
 def list_for_project(project_id):
-    items = list(_collection().find({"projectId": project_id}))
+    items = [db.strip_id(doc) for doc in _collection().find({"projectId": project_id})]
     items.sort(key=lambda d: d.get("createdAt", 0), reverse=True)
     return items
 
 
 def get(project_id, version_id):
-    return _collection().find_one(
-        {"projectId": project_id, "versionId": version_id},
+    return db.strip_id(
+        _collection().find_one(
+            {"projectId": project_id, "versionId": version_id},
+        )
     )
 
 

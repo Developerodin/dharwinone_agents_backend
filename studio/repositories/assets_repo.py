@@ -52,12 +52,14 @@ def create_pending(
         "updatedAt": now,
     }
     _collection().insert_one(doc)
-    return doc
+    return db.strip_id(doc)
 
 
 def get(project_id, asset_id):
-    return _collection().find_one(
-        {"projectId": project_id, "assetId": asset_id},
+    return db.strip_id(
+        _collection().find_one(
+            {"projectId": project_id, "assetId": asset_id},
+        )
     )
 
 
@@ -80,8 +82,9 @@ def confirm(project_id, asset_id, *, size_bytes, width=None, height=None):
 
 
 def list_for_project(project_id):
-    items = list(
-        _collection().find({"projectId": project_id, "status": "ready"})
-    )
+    items = [
+        db.strip_id(doc)
+        for doc in _collection().find({"projectId": project_id, "status": "ready"})
+    ]
     items.sort(key=lambda doc: doc.get("uploadedAt") or 0, reverse=True)
     return items

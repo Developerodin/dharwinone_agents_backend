@@ -13,6 +13,11 @@ class _MemoryCollection:
         self._docs = []
 
     def insert_one(self, doc):
+        # Mirror real Mongo: stamp a non-JSON-serializable ObjectId so leaks fail in tests too.
+        if "_id" not in doc:
+            from bson import ObjectId
+
+            doc["_id"] = ObjectId()
         self._docs.append(dict(doc))
         return type("Result", (), {"inserted_id": doc.get("_id")})()
 
@@ -56,6 +61,15 @@ class _MemoryDatabase:
         if name not in self._collections:
             self._collections[name] = _MemoryCollection(name)
         return self._collections[name]
+
+
+def strip_id(doc):
+    """Return a copy of a Mongo doc without the driver-level _id."""
+    if not doc:
+        return doc
+    clean = dict(doc)
+    clean.pop("_id", None)
+    return clean
 
 
 def mongo_enabled():

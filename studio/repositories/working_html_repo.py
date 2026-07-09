@@ -33,7 +33,7 @@ def _validate(html):
 
 
 def get(project_id):
-    return _collection().find_one({"projectId": project_id})
+    return db.strip_id(_collection().find_one({"projectId": project_id}))
 
 
 def put(project_id, html, *, template_id=None):
@@ -53,7 +53,7 @@ def put(project_id, html, *, template_id=None):
         coll.update_one({"projectId": project_id}, {"$set": doc})
     else:
         coll.insert_one(doc)
-    return doc
+    return db.strip_id(doc)
 
 
 def require_html(project_id):

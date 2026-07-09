@@ -41,8 +41,11 @@ def _get_nested(profile, path):
 
 
 def _missing_fields(profile):
+    skipped = set(profile.get("skipped") or [])
     missing = []
     for path, label in _REQUIRED_FIELDS:
+        if path in skipped:
+            continue
         val = _get_nested(profile, path)
         if path == "business.services":
             if not val:
