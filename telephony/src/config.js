@@ -1,4 +1,8 @@
-import 'dotenv/config';
+import { fileURLToPath } from 'node:url';
+import dotenv from 'dotenv';
+
+// Single shared env file at backend/.env (holds STUDIO_* and TWILIO_* vars).
+dotenv.config({ path: fileURLToPath(new URL('../../.env', import.meta.url)) });
 
 const env = process.env;
 
