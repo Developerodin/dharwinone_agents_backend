@@ -13,6 +13,10 @@ _COLLECTION = "builder_releases"
 _QUALITY_COLLECTION = "builder_quality"
 
 
+def _public(doc):
+    return db.strip_id(doc)
+
+
 def _releases():
     try:
         _projects_collection()
@@ -40,7 +44,7 @@ def run_quality_gate(project_id):
 
 
 def latest_quality(project_id):
-    items = list(_quality().find({"projectId": project_id}))
+    items = [_public(item) for item in _quality().find({"projectId": project_id})]
     items.sort(key=lambda d: d.get("ts", 0), reverse=True)
     return items[0]["result"] if items else None
 
@@ -60,10 +64,10 @@ def publish(project_id, *, channel="preview", version_id=None):
     }
     _releases().insert_one(doc)
     analytics_repo.track(project_id, "publish_success", metadata={"channel": channel})
-    return doc
+    return _public(doc)
 
 
 def list_releases(project_id):
-    items = list(_releases().find({"projectId": project_id}))
+    items = [_public(item) for item in _releases().find({"projectId": project_id})]
     items.sort(key=lambda d: d.get("createdAt", 0), reverse=True)
     return items

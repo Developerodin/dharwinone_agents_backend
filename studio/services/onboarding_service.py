@@ -19,13 +19,11 @@ _QUESTIONS = {
     "business.services": "What are the main services or products you want highlighted?",
     "business.description": (
         "What should the intro line on your homepage say? "
-        'One or two lines about what you offer — e.g. "Easy photo editing tools for creators."'
+        "One or two lines about what you offer."
     ),
     "business.targetAudience": "Who are your ideal customers?",
     "location.country": "Which country should we show for your business location?",
     "location.city": "And which city should we mention?",
-    "contact.email": "What email should people use to contact you?",
-    "contact.phone": "What phone number should we display?",
 }
 
 _GENERIC_PROMPT_RE = re.compile(
@@ -131,14 +129,67 @@ def _set_nested(profile, path, value):
 
 def _question_for(profile, path):
     base = _QUESTIONS[path]
-    if path != "business.services":
-        return base
-    business_type = (_get_nested(profile, "business.type") or "").strip()
-    context = f"business type: {business_type}" if business_type else "business type unknown"
-    llm = _llm_phrase("ask_services", base, user_message=context)
-    if llm and "?" not in llm:
-        llm = llm.rstrip(".") + "?"
-    return llm or base
+    if path == "business.services":
+        business_type = (_get_nested(profile, "business.type") or "").strip()
+        context = (
+            f"business type: {business_type}" if business_type else "business type unknown"
+        )
+        llm = _llm_phrase("ask_services", base, user_message=context)
+        if llm and "?" not in llm:
+            llm = llm.rstrip(".") + "?"
+        return llm or base
+    if path == "business.description":
+        return f"{base} {_description_example(profile)}"
+    return base
+
+
+def _services_for_example(profile):
+    raw = _get_nested(profile, "business.services")
+    if isinstance(raw, list):
+        items = [str(item).strip(" .,") for item in raw if str(item).strip(" .,")]
+    elif isinstance(raw, str):
+        items = [
+            part.strip(" .,")
+            for part in re.split(r",|/|\band\b", raw, flags=re.I)
+            if part.strip(" .,")
+        ]
+    else:
+        items = []
+    deduped = []
+    seen = set()
+    for item in items:
+        key = item.lower()
+        if key in seen:
+            continue
+        deduped.append(item)
+        seen.add(key)
+    return deduped[:2]
+
+
+def _description_example(profile):
+    brand = str(_get_nested(profile, "brand.brandName") or "").strip(" .,")
+    business_type = str(_get_nested(profile, "business.type") or "").strip(" .,")
+    services = _services_for_example(profile)
+    if len(services) == 2:
+        services_text = f"{services[0]} and {services[1]}"
+    elif len(services) == 1:
+        services_text = services[0]
+    else:
+        services_text = ""
+
+    if brand and services_text:
+        return f'For example: "{brand} helps you improve with {services_text}."'
+    if services_text and business_type:
+        return f'For example: "A {business_type} focused on {services_text}."'
+    if services_text:
+        return f'For example: "We offer {services_text} with clear, practical guidance."'
+    if brand and business_type:
+        return f'For example: "{brand} is a {business_type} built for real results."'
+    if brand:
+        return f'For example: "{brand} helps customers get better outcomes, faster."'
+    return (
+        'For example: "We help customers solve their goals with simple, reliable service."'
+    )
 
 
 def _next_question(profile):
@@ -873,12 +924,17 @@ def handle_message(project_id, message):
     else:
         question, next_field = _next_question(profile)
         fallback = _friendly_question(question, profile["completeness"]["percent"])
-        assistant = _llm_phrase(
-            "ask_next",
-            fallback,
-            user_message=message,
-            profile=profile,
-        ) or fallback
+        # Keep business-description prompts deterministic so contextual examples
+        # from the user's own profile are never dropped by LLM shortening.
+        if next_field == "business.description":
+            assistant = fallback
+        else:
+            assistant = _llm_phrase(
+                "ask_next",
+                fallback,
+                user_message=message,
+                profile=profile,
+            ) or fallback
         intent = f"ask_{next_field}" if next_field else "ask_more"
     if skipped_now:
         assistant = f"No problem — you can add it later from your profile. {assistant}"

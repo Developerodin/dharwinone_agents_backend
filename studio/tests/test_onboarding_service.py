@@ -205,7 +205,7 @@ def test_location_entities_parse_from_mixed_phrase():
     assert profile["location"]["country"] == "India"
     # both parsed from one phrase — city question is skipped
     assert profile["location"]["city"] == "Jaipur"
-    assert "email" in country_result["assistantMessage"].lower()
+    assert country_result["readyToGenerate"] is True
 
 
 def test_location_extraction_uses_llm_for_space_separated_city_country(monkeypatch):
@@ -226,7 +226,7 @@ def test_location_extraction_uses_llm_for_space_separated_city_country(monkeypat
     assert profile["location"]["country"] == "India"
     # LLM parsed both entities from one phrase — city question is skipped
     assert profile["location"]["city"] == "Jaipur"
-    assert "email" in country_result["assistantMessage"].lower()
+    assert country_result["readyToGenerate"] is True
 
 
 def test_country_extraction_works_without_country_dictionary():
@@ -326,7 +326,23 @@ def test_clarify_request_is_explained_not_stored():
     assert not profile["business"].get("description")
     # explains with an example and re-asks the same question
     assert "for example" in result["assistantMessage"].lower() or "e.g." in result["assistantMessage"].lower()
+    assert "easy photo editing" not in result["assistantMessage"].lower()
+    assert "workout" in result["assistantMessage"].lower() or "nutrition" in result["assistantMessage"].lower()
     assert result["readyToGenerate"] is False
+
+
+def test_description_question_example_uses_profile_context():
+    project = _project()
+    pid = project["projectId"]
+    onboarding_service.handle_message(pid, "Landing page for a fitness app")
+    onboarding_service.handle_message(pid, "Hurcules")
+    result = onboarding_service.handle_message(pid, "cardio and strength training")
+
+    msg = result["assistantMessage"].lower()
+    assert "for example" in msg
+    assert "easy photo editing" not in msg
+    assert "hurcules" in msg
+    assert "cardio" in msg or "strength" in msg
 
 
 def _fake_router(monkeypatch, payload):
@@ -427,15 +443,10 @@ def test_user_can_skip_a_field_and_is_not_trapped():
     pid = project["projectId"]
     _advance_to_country(pid)
     onboarding_service.handle_message(pid, "India")
-    onboarding_service.handle_message(pid, "Jaipur")
     result = onboarding_service.handle_message(pid, "i will add it later")
 
     profile = profiles_repo.get(pid)
-    assert "contact.email" in profile.get("skipped", [])
-    assert "email" not in result["assistantMessage"].lower()
-    assert "phone" in result["assistantMessage"].lower()
-
-    result = onboarding_service.handle_message(pid, "i don't have any number, skip")
+    assert "location.city" in profile.get("skipped", [])
     assert result["readyToGenerate"] is True
 
 
@@ -448,4 +459,16 @@ def test_country_answer_with_city_pair_fills_both():
     profile = profiles_repo.get(pid)
     assert profile["location"]["country"] == "India"
     assert profile["location"]["city"] == "Jaipur"
-    assert "email" in result["assistantMessage"].lower()
+    assert result["readyToGenerate"] is True
+
+
+def test_onboarding_no_longer_asks_contact_email_or_phone():
+    project = _project()
+    pid = project["projectId"]
+    _advance_to_country(pid)
+    onboarding_service.handle_message(pid, "India")
+    result = onboarding_service.handle_message(pid, "Jaipur")
+    msg = result["assistantMessage"].lower()
+    assert "email" not in msg
+    assert "phone" not in msg
+    assert result["readyToGenerate"] is True

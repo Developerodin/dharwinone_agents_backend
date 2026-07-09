@@ -33,6 +33,8 @@ def _empty_profile(project_id):
             "website": None,
             "socialLinks": [],
         },
+        "design": {"stylePreference": None},
+        "skipped": [],
         "completeness": {"percent": 0, "missingFields": []},
         "updatedAt": time.time(),
     }

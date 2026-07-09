@@ -8,15 +8,16 @@ _REQUIRED_FIELDS = [
     ("brand.brandName", "brand name"),
     ("business.type", "business type"),
     ("business.services", "at least one service"),
+    ("business.description", "homepage intro line"),
     ("business.targetAudience", "target audience"),
-    ("contact.email", "contact email"),
-    ("contact.phone", "contact phone"),
+    ("location.country", "country"),
+    ("location.city", "city"),
 ]
 
 _EMAIL_RE = re.compile(r"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$", re.I)
 _PHONE_RE = re.compile(r"\+?\d[\d\s().-]{7,}\d")
 
-_MERGE_KEYS = frozenset({"brand", "business", "location", "contact"})
+_MERGE_KEYS = frozenset({"brand", "business", "location", "contact", "design", "skipped"})
 
 
 class ProfileValidationError(ValueError):

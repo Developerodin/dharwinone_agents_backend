@@ -6,7 +6,7 @@ import re
 import time
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, HTTPException, Request, Header
+from fastapi import FastAPI, HTTPException, Request, Header, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, PlainTextResponse, StreamingResponse
 from harness import gitops, packets, providers
@@ -86,6 +86,8 @@ class BusinessProfilePatch(BaseModel):
     business: dict | None = None
     location: dict | None = None
     contact: dict | None = None
+    design: dict | None = None
+    skipped: list[str] | None = None
 
 
 class AssetPresignRequest(BaseModel):
@@ -296,13 +298,16 @@ def create_app():
             raise HTTPException(status_code=404, detail=str(exc)) from exc
 
     @app.post("/builder/projects/{project_id}/generate-templates")
-    def post_builder_generate_templates(project_id: str):
+    def post_builder_generate_templates(
+        project_id: str,
+        force: bool = Query(default=False),
+    ):
         _require_builder_v2()
         if not projects_repo.get(project_id):
             raise HTTPException(status_code=404, detail="project not found")
         try:
             profile_service.require_generation_ready(project_id)
-            templates = personalization_service.generate_for_project(project_id)
+            templates = personalization_service.generate_for_project(project_id, force=force)
         except profile_service.ProfileIncompleteError as exc:
             raise HTTPException(
                 status_code=422,

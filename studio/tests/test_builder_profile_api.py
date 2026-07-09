@@ -11,6 +11,7 @@ from studio.repositories import profiles_repo
 def memory_db(monkeypatch):
     monkeypatch.setenv("STUDIO_BUILDER_V2", "true")
     monkeypatch.setenv("STUDIO_MONGO_URI", "memory://")
+    monkeypatch.setenv("STUDIO_ONBOARDING_LLM", "false")
     config.reset_for_tests()
     db.reset_for_tests()
     yield
@@ -60,6 +61,17 @@ def test_put_business_profile_patches_fields(client, memory_db):
     body = r.json()
     assert body["brand"]["brandName"] == "Gate Test Co"
     assert body["gate"]["ready"] is True
+
+
+def test_put_business_profile_persists_design_preferences(client, memory_db):
+    project_id = _create_project(client)
+    r = client.put(
+        f"/builder/projects/{project_id}/business-profile",
+        json={"design": {"stylePreference": "minimal and sleek"}},
+    )
+    assert r.status_code == 200
+    body = r.json()
+    assert body["design"]["stylePreference"] == "minimal and sleek"
 
 
 def test_put_business_profile_rejects_invalid_email(client, memory_db):

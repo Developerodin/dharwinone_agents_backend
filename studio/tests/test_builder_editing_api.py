@@ -5,7 +5,7 @@ from fastapi.testclient import TestClient
 from studio import config, db
 from studio.app import create_app
 from studio.repositories import profiles_repo
-from studio.services import personalization_service
+from studio.services import edit_service, personalization_service
 
 
 @pytest.fixture
@@ -13,6 +13,7 @@ def memory_db(monkeypatch):
     monkeypatch.setenv("STUDIO_BUILDER_V2", "true")
     monkeypatch.setenv("STUDIO_MONGO_URI", "memory://")
     monkeypatch.setenv("STUDIO_S3_MOCK", "true")
+    monkeypatch.setenv("STUDIO_ONBOARDING_LLM", "false")
     config.reset_for_tests()
     db.reset_for_tests()
     yield
@@ -78,6 +79,50 @@ def test_edit_and_history(client, memory_db):
     edits = client.get(f"/builder/projects/{pid}/edits")
     assert edits.status_code == 200
     assert len(edits.json()) >= 1
+
+
+def test_edit_uses_llm_for_general_prompt(client, memory_db, monkeypatch):
+    pid, tid = _ready_with_templates(client)
+    client.post(f"/builder/projects/{pid}/templates/{tid}/select")
+
+    class FakeProvider:
+        def generate(self, model, prompt, **kwargs):
+            return "<!DOCTYPE html><html><body><h1>Premium Cafe Experience</h1></body></html>"
+
+    monkeypatch.setattr(
+        edit_service,
+        "_load_edit_provider",
+        lambda: (FakeProvider(), "fake-model"),
+    )
+    edit = client.post(
+        f"/builder/projects/{pid}/edit",
+        json={"prompt": "make the hero copy feel more premium"},
+    )
+    assert edit.status_code == 200
+    assert "Premium Cafe Experience" in edit.json()["html"]
+
+
+def test_edit_returns_422_when_llm_unavailable_for_general_prompt(client, memory_db, monkeypatch):
+    pid, tid = _ready_with_templates(client)
+    client.post(f"/builder/projects/{pid}/templates/{tid}/select")
+    monkeypatch.setattr(edit_service, "_load_edit_provider", lambda: (None, None))
+    edit = client.post(
+        f"/builder/projects/{pid}/edit",
+        json={"prompt": "add a premium hero section"},
+    )
+    assert edit.status_code == 422
+    assert "could not apply edit" in edit.json()["detail"]
+
+
+def test_edit_requires_clarification_for_ambiguous_prompt(client, memory_db):
+    pid, tid = _ready_with_templates(client)
+    client.post(f"/builder/projects/{pid}/templates/{tid}/select")
+    edit = client.post(
+        f"/builder/projects/{pid}/edit",
+        json={"prompt": "change this in site to match our brand"},
+    )
+    assert edit.status_code == 422
+    assert "Tell me exactly what to change" in edit.json()["detail"]
 
 
 def test_versions_restore(client, memory_db):
