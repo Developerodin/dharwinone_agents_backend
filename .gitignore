@@ -1,0 +1,31 @@
+# env (keep .env.example templates)
+.env
+.env.*
+!.env.example
+
+# python
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+
+# node
+node_modules/
+
+# runtime data / logs
+studio/data/
+studio/data-e2e/
+harness/packets/
+harness/journal.jsonl
+harness/stats.json
+harness/report.md
+harness/generated_tasks.yaml
+harness/ui_queue.yaml
+*.log
+.tmp-*
+
+# LLM model files
+*.gguf
+*.safetensors
+*.onnx
+*.pt
