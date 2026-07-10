@@ -85,6 +85,11 @@ _STYLE_DIRECTIVE_RE = re.compile(
     r".*\b(?:minim\w+|sleek|clean|modern|simple|elegant|premium|bold|dark|light)\b",
     re.I,
 )
+_LEGACY_CONTACT_PROMPT_RE = re.compile(
+    r"(what\s+email\s+address\s+would\s+you\s+like\s+people\s+to\s+use)"
+    r"|(what\s+phone\s+number\s+would\s+you\s+like\s+us\s+to\s+show)",
+    re.I,
+)
 _INITIAL_VERB_RE = re.compile(
     r"^(?:please\s+)?(?:create|build|make|design|i\s+(?:want|need))\s+(?:an?\s+)?",
     re.I,
@@ -953,4 +958,13 @@ def handle_message(project_id, message):
 
 
 def get_chat(project_id):
-    return {"turns": conversations_repo.list_turns(project_id)}
+    turns = conversations_repo.list_turns(project_id)
+    filtered = []
+    for turn in turns:
+        if (
+            turn.get("role") == "assistant"
+            and _LEGACY_CONTACT_PROMPT_RE.search(str(turn.get("text") or ""))
+        ):
+            continue
+        filtered.append(turn)
+    return {"turns": filtered}
