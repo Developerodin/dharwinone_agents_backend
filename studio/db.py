@@ -43,6 +43,15 @@ class _MemoryCollection:
                 return type("Result", (), {"modified_count": 1})()
         return type("Result", (), {"modified_count": 0})()
 
+    def update_many(self, query, update):
+        modified = 0
+        for doc in self._docs:
+            if all(doc.get(k) == v for k, v in query.items()):
+                if "$set" in update:
+                    doc.update(update["$set"])
+                modified += 1
+        return type("Result", (), {"modified_count": modified})()
+
     def delete_many(self, query):
         before = len(self._docs)
         self._docs = [
