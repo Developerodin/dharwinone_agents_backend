@@ -93,6 +93,30 @@ def resend_verification(email):
     email_service.send_verification(user["email"], raw)
 
 
+def forgot_password(email):
+    user = users_repo.find_by_email(email)
+    if not user:
+        return
+    raw = users_repo.issue_token(user["userId"], "reset", users_repo.RESET_TTL_S)
+    email_service.send_password_reset(user["email"], raw)
+
+
+def reset_password(raw_token, new_password):
+    if (
+        len(new_password or "") < 8
+        or not re.search(r"[A-Za-z]", new_password)
+        or not re.search(r"\d", new_password)
+    ):
+        raise AuthError(
+            422, "password must be at least 8 characters with a letter and a number"
+        )
+    user_id = users_repo.consume_token(raw_token, "reset")
+    if not user_id:
+        raise AuthError(400, "invalid or expired reset token")
+    password_hash, salt = security.hash_password(new_password)
+    users_repo.set_password(user_id, password_hash, salt)
+
+
 def _adopt_legacy_data(user_id):
     """First registered account claims everything owned by 'local-user'."""
     coll = db.collection("meta")
