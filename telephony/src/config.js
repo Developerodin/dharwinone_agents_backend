@@ -9,6 +9,7 @@ const env = process.env;
 export default {
   port: Number(env.PORT || 8788),
   mongoUri: env.MONGO_URI || 'mongodb://127.0.0.1:27017/dharwinone',
+  authJwtSecret: env.AUTH_JWT_SECRET || '',
   twilio: {
     accountSid: env.TWILIO_AUTH_ID || '',
     authToken: env.TWILIO_AUTH_TOKEN || '',

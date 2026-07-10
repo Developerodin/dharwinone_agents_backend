@@ -4,6 +4,7 @@ import pytest
 from fastapi.testclient import TestClient
 from studio import config, knowledge, projects
 from studio.app import create_app
+from studio.tests._auth_support import auth_headers
 
 
 @pytest.fixture
@@ -24,6 +25,7 @@ def kenv(tmp_path, monkeypatch):
     )
     project = projects.create({"name": "Know", "repo_root": str(repo)})
     client = TestClient(create_app())
+    client.headers.update(auth_headers())
     yield client, project
     config.reset_for_tests()
 

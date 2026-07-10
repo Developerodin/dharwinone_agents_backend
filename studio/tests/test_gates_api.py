@@ -9,6 +9,7 @@ from fastapi.testclient import TestClient
 from harness import gitops, packets
 from studio import config, driver, gates, projects
 from studio.app import create_app
+from studio.tests._auth_support import auth_headers
 from studio.tests._test_support import FakeProvider
 
 PY = sys.executable
@@ -78,6 +79,7 @@ def genv(tmp_path, monkeypatch):
         },
     )
     client = TestClient(create_app())
+    client.headers.update(auth_headers())
     yield client, project, run_id, run_dir, cfg, task
     config.reset_for_tests()
 

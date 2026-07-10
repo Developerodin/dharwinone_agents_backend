@@ -6,6 +6,7 @@ import pytest
 from fastapi.testclient import TestClient
 from studio import config, db
 from studio.app import create_app
+from studio.tests._auth_support import auth_headers
 from studio.repositories import profiles_repo
 
 
@@ -24,7 +25,9 @@ def memory_db(monkeypatch):
 
 @pytest.fixture
 def client():
-    return TestClient(create_app())
+    c = TestClient(create_app())
+    c.headers.update(auth_headers())
+    return c
 
 
 def _ready_project(client):

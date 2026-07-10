@@ -6,6 +6,7 @@ import pytest
 from fastapi.testclient import TestClient
 from studio import config, projects, runs
 from studio.app import create_app
+from studio.tests._auth_support import auth_headers
 
 FAKE_WORKER = os.path.join(os.path.dirname(__file__), "fake_worker.py")
 
@@ -31,6 +32,7 @@ def renv(tmp_path, monkeypatch):
     )
     project = projects.create({"name": "Runs", "repo_root": str(repo)})
     client = TestClient(create_app())
+    client.headers.update(auth_headers())
     yield client, project
     config.reset_for_tests()
 

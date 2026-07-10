@@ -1,16 +1,11 @@
-"""Request auth context for builder APIs."""
+"""Request auth context. The JWT middleware in app.py verifies the token
+and stores the subject on request.state; routes read it from here."""
 
-import os
-
-from fastapi import Header, HTTPException
-
-
-def resolve_user_id(x_studio_user_id: str | None = Header(default=None)):
-    return (x_studio_user_id or os.environ.get("STUDIO_DEFAULT_USER_ID", "local-user")).strip()
+from fastapi import HTTPException, Request
 
 
-def require_authenticated(user_id: str = Header(default=None, alias="X-Studio-User-Id")):
-    uid = resolve_user_id(user_id)
-    if not uid:
+def resolve_user_id(request: Request) -> str:
+    user_id = getattr(request.state, "user_id", None)
+    if not user_id:
         raise HTTPException(status_code=401, detail="authentication required")
-    return uid
+    return user_id

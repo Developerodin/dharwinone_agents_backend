@@ -78,6 +78,18 @@ def list_all():
     return docs
 
 
+def list_for_user(user_id):
+    return [
+        doc
+        for doc in list_all()
+        if doc.get("ownerUserId") == user_id
+        or any(
+            collab.get("userId") == user_id
+            for collab in doc.get("collaborators") or []
+        )
+    ]
+
+
 def get(project_id):
     coll = _collection()
     return _public(coll.find_one({"projectId": project_id}))

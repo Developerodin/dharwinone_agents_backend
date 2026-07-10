@@ -5,6 +5,7 @@ import pytest
 from fastapi.testclient import TestClient
 from studio import config, projects
 from studio.app import create_app
+from studio.tests._auth_support import auth_headers
 
 
 @pytest.fixture
@@ -66,6 +67,7 @@ def test_derive_harness_cfg_paths_isolated(data_dir, git_repo):
 
 def test_api_get_post_projects(data_dir, git_repo):
     client = TestClient(create_app())
+    client.headers.update(auth_headers())
     r = client.post("/projects", json={"name": "Api Proj", "repo_root": git_repo})
     assert r.status_code == 201
     body = r.json()
@@ -77,6 +79,7 @@ def test_api_get_post_projects(data_dir, git_repo):
 
 def test_api_post_non_git_422(data_dir, tmp_path):
     client = TestClient(create_app())
+    client.headers.update(auth_headers())
     bad = str(tmp_path / "nope")
     os.makedirs(bad)
     r = client.post("/projects", json={"name": "X", "repo_root": bad})

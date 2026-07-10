@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { verifyTwilioWebhook } from './verifyTwilioWebhook.js';
 import * as controller from './controller.js';
+import { requireAuth } from './requireAuth.js';
 
 export function createApp() {
   const app = express();
@@ -12,16 +13,16 @@ export function createApp() {
 
   app.get('/health', (req, res) => res.json({ ok: true, service: 'dharwin-telephony' }));
 
-  app.post('/api/telephony/token', controller.token);
+  app.post('/api/telephony/token', requireAuth, controller.token);
 
   app.post('/api/telephony/public/voice', verifyTwilioWebhook, controller.outboundVoice);
   app.post('/api/telephony/public/call-status', verifyTwilioWebhook, controller.callStatusWebhook);
   app.post('/api/telephony/public/recording', verifyTwilioWebhook, controller.recordingWebhook);
 
-  app.get('/api/telephony/call-records', controller.listRecords);
-  app.get('/api/telephony/call-records/:callSid', controller.getRecord);
-  app.patch('/api/telephony/call-records/:callSid', controller.patchRecord);
-  app.get('/api/telephony/call-records/:callSid/recording', controller.streamRecording);
+  app.get('/api/telephony/call-records', requireAuth, controller.listRecords);
+  app.get('/api/telephony/call-records/:callSid', requireAuth, controller.getRecord);
+  app.patch('/api/telephony/call-records/:callSid', requireAuth, controller.patchRecord);
+  app.get('/api/telephony/call-records/:callSid/recording', requireAuth, controller.streamRecording);
 
   return app;
 }

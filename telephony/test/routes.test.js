@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import mongoose from 'mongoose';
+import jwt from 'jsonwebtoken';
 
 process.env.TWILIO_AUTH_ID = 'AC00000000000000000000000000000000';
 process.env.TWILIO_AUTH_TOKEN = 'testauthtoken';
@@ -10,6 +11,7 @@ process.env.TWILIO_TWIML_APP_SID = 'AP00000000000000000000000000000000';
 process.env.TWILIO_PHONE_NUMBER = '+15005550006';
 process.env.TWILIO_WEBHOOK_BASE_URL = 'https://example.com';
 process.env.TWILIO_VERIFY_WEBHOOKS = 'false';
+process.env.AUTH_JWT_SECRET = 'test-secret';
 
 // No Mongo in unit tests: fail fast, persistence is fire-and-forget in webhooks.
 mongoose.set('bufferCommands', false);
@@ -24,8 +26,14 @@ function listen() {
 
 test('POST /api/telephony/token returns a signed JWT', async () => {
   const server = await listen();
+  const now = Math.floor(Date.now() / 1000);
+  const bearer = jwt.sign(
+    { sub: 'usr-1', iat: now, exp: now + 600, iss: 'dharwin-auth', aud: 'dharwin-api' },
+    'test-secret',
+  );
   const res = await fetch(`http://127.0.0.1:${server.address().port}/api/telephony/token`, {
     method: 'POST',
+    headers: { Authorization: `Bearer ${bearer}` },
   });
   const body = await res.json();
   assert.equal(res.status, 200);
