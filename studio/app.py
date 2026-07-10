@@ -292,6 +292,26 @@ def create_app():
             raise HTTPException(status_code=503, detail=str(exc)) from exc
         return {"status": "ok"}
 
+    @app.post("/auth/forgot-password")
+    def post_auth_forgot(body: EmailRequest):
+        _rate_limit(f"forgot:email:{body.email.strip().lower()}", 3, 3600)
+        try:
+            auth_service.forgot_password(body.email)
+        except users_repo.AuthDbUnavailable as exc:
+            raise HTTPException(status_code=503, detail=str(exc)) from exc
+        return {"status": "ok"}
+
+    @app.post("/auth/reset-password")
+    def post_auth_reset(body: ResetPasswordRequest, request: Request):
+        _rate_limit(f"reset:ip:{_client_ip(request)}", 10, 3600)
+        try:
+            auth_service.reset_password(body.token, body.password)
+        except auth_service.AuthError as exc:
+            raise _auth_error(exc) from exc
+        except users_repo.AuthDbUnavailable as exc:
+            raise HTTPException(status_code=503, detail=str(exc)) from exc
+        return {"status": "ok"}
+
     @app.get("/projects")
     def list_projects():
         return projects.load_all()

@@ -176,3 +176,61 @@ def test_adoption_rewrite_is_idempotent(client, outbox):
     auth_service._rewrite_legacy_ownership(login["user"]["id"])
     docs = projects_repo.list_all()
     assert all(d["ownerUserId"] == login["user"]["id"] for d in docs)
+
+
+def test_forgot_password_always_200_and_reset_flow(client, outbox):
+    _register_and_verify(client, outbox)
+    assert (
+        client.post(
+            "/auth/forgot-password", json={"email": "ghost@example.com"}
+        ).status_code
+        == 200
+    )
+    before = len(outbox)
+    assert (
+        client.post(
+            "/auth/forgot-password", json={"email": "jane@example.com"}
+        ).status_code
+        == 200
+    )
+    assert len(outbox) == before + 1
+    reset_token = _extract_token(outbox[-1]["html"])
+    r = client.post(
+        "/auth/reset-password",
+        json={"token": reset_token, "password": "newpassword1"},
+    )
+    assert r.status_code == 200
+    old = client.post(
+        "/auth/login", json={"email": "jane@example.com", "password": "hunter2abc"}
+    )
+    new = client.post(
+        "/auth/login", json={"email": "jane@example.com", "password": "newpassword1"}
+    )
+    assert old.status_code == 401
+    assert new.status_code == 200
+
+
+def test_reset_password_rejects_bad_token_and_weak_password(client, outbox):
+    _register_and_verify(client, outbox)
+    assert (
+        client.post(
+            "/auth/reset-password", json={"token": "nope", "password": "newpassword1"}
+        ).status_code
+        == 400
+    )
+    client.post("/auth/forgot-password", json={"email": "jane@example.com"})
+    reset_token = _extract_token(outbox[-1]["html"])
+    assert (
+        client.post(
+            "/auth/reset-password", json={"token": reset_token, "password": "weak"}
+        ).status_code
+        == 422
+    )
+
+
+def test_forgot_password_rate_limited(client, outbox):
+    _register_and_verify(client, outbox)
+    for _ in range(3):
+        client.post("/auth/forgot-password", json={"email": "jane@example.com"})
+    r = client.post("/auth/forgot-password", json={"email": "jane@example.com"})
+    assert r.status_code == 429
