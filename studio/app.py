@@ -6,13 +6,13 @@ import re
 import time
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, HTTPException, Request, Header, Query
+from fastapi import FastAPI, HTTPException, Request, Query
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse, PlainTextResponse, StreamingResponse
+from fastapi.responses import HTMLResponse, JSONResponse, PlainTextResponse, StreamingResponse
 from harness import gitops, packets, providers
 from pydantic import BaseModel
 
-from studio import auth, consent, draft, events, gates, knowledge, policy, preview, projects, ratelimit, runs
+from studio import auth, consent, draft, events, gates, knowledge, policy, preview, projects, ratelimit, runs, security
 from studio.repositories import profiles_repo, projects_repo, users_repo
 from studio.services import (
     auth_service,
@@ -147,6 +147,18 @@ class ResetPasswordRequest(BaseModel):
     password: str
 
 
+_PUBLIC_PATHS = frozenset(
+    {
+        "/auth/register",
+        "/auth/verify",
+        "/auth/login",
+        "/auth/resend-verification",
+        "/auth/forgot-password",
+        "/auth/reset-password",
+    }
+)
+
+
 def _require_builder_v2():
     from studio import config
 
@@ -237,6 +249,24 @@ def create_app():
         runs.stop_monitor()
 
     app = FastAPI(title="Dharwin Studio", lifespan=lifespan)
+
+    @app.middleware("http")
+    async def _require_jwt(request: Request, call_next):
+        if request.method == "OPTIONS" or request.url.path in _PUBLIC_PATHS:
+            return await call_next(request)
+        header = request.headers.get("authorization", "")
+        token = header[7:] if header.startswith("Bearer ") else ""
+        if not token:
+            return JSONResponse(
+                status_code=401, content={"detail": "authentication required"}
+            )
+        try:
+            request.state.user_id = security.verify_jwt(token)
+        except security.TokenError:
+            return JSONResponse(
+                status_code=401, content={"detail": "invalid or expired token"}
+            )
+        return await call_next(request)
 
     app.add_middleware(
         CORSMiddleware,
@@ -331,20 +361,23 @@ def create_app():
         return p
 
     @app.get("/builder/projects")
-    def list_builder_projects():
+    def list_builder_projects(request: Request):
         _require_builder_v2()
+        uid = auth.resolve_user_id(request)
         try:
-            return projects_repo.list_all()
+            return projects_repo.list_for_user(uid)
         except projects_repo.BuilderV2Disabled:
             raise HTTPException(status_code=404, detail="builder v2 disabled") from None
 
     @app.post("/builder/projects", status_code=201)
-    def post_builder_project(body: BuilderProjectCreate):
+    def post_builder_project(body: BuilderProjectCreate, request: Request):
         _require_builder_v2()
+        uid = auth.resolve_user_id(request)
         try:
             return projects_repo.create(
                 body.projectName,
                 initial_prompt=body.initialPrompt,
+                owner_user_id=uid,
             )
         except projects_repo.BuilderV2Disabled:
             raise HTTPException(status_code=404, detail="builder v2 disabled") from None
@@ -439,10 +472,10 @@ def create_app():
     def post_builder_select_template(
         project_id: str,
         template_id: str,
-        user_id: str = Header(default=None, alias="X-Studio-User-Id"),
+        request: Request,
     ):
         _require_builder_v2()
-        uid = auth.resolve_user_id(user_id)
+        uid = auth.resolve_user_id(request)
         _require_builder_action(project_id, uid, "edit")
         try:
             return selection_service.select_template(project_id, template_id)
@@ -464,10 +497,10 @@ def create_app():
     def put_builder_working_html(
         project_id: str,
         body: BuilderWorkingHtmlUpdate,
-        user_id: str = Header(default=None, alias="X-Studio-User-Id"),
+        request: Request,
     ):
         _require_builder_v2()
-        uid = auth.resolve_user_id(user_id)
+        uid = auth.resolve_user_id(request)
         _require_builder_action(project_id, uid, "edit")
         try:
             return edit_service.save_manual(project_id, body.html)
@@ -478,10 +511,10 @@ def create_app():
     def post_builder_edit(
         project_id: str,
         body: BuilderEditRequest,
-        user_id: str = Header(default=None, alias="X-Studio-User-Id"),
+        request: Request,
     ):
         _require_builder_v2()
-        uid = auth.resolve_user_id(user_id)
+        uid = auth.resolve_user_id(request)
         _require_builder_action(project_id, uid, "edit")
         try:
             return edit_service.apply_edit(
@@ -514,10 +547,10 @@ def create_app():
     def post_builder_restore_version(
         project_id: str,
         body: RestoreVersionRequest,
-        user_id: str = Header(default=None, alias="X-Studio-User-Id"),
+        request: Request,
     ):
         _require_builder_v2()
-        uid = auth.resolve_user_id(user_id)
+        uid = auth.resolve_user_id(request)
         _require_builder_action(project_id, uid, "restore")
         try:
             return version_service.restore(project_id, body.versionId)
@@ -556,10 +589,10 @@ def create_app():
     def post_builder_publish(
         project_id: str,
         body: PublishRequest,
-        user_id: str = Header(default=None, alias="X-Studio-User-Id"),
+        request: Request,
     ):
         _require_builder_v2()
-        uid = auth.resolve_user_id(user_id)
+        uid = auth.resolve_user_id(request)
         _require_builder_action(project_id, uid, "publish")
         try:
             release = publish_service.publish(

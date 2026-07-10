@@ -7,6 +7,7 @@ from fastapi.testclient import TestClient
 from harness import gitops
 from studio import config, preview, projects, runs
 from studio.app import create_app
+from studio.tests._auth_support import auth_headers
 
 PY = __import__("sys").executable
 
@@ -78,6 +79,7 @@ def penv(tmp_path, monkeypatch):
 
     atomic_write_json(os.path.join(run_dir, "run.json"), run_data)
     client = TestClient(create_app())
+    client.headers.update(auth_headers())
     yield client, project, run_id, run_data
     preview.stop(run_id)
     config.reset_for_tests()

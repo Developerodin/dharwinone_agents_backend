@@ -6,6 +6,7 @@ import pytest
 from fastapi.testclient import TestClient
 from studio import config, consent, projects
 from studio.app import create_app
+from studio.tests._auth_support import auth_headers
 
 PY = sys.executable
 
@@ -27,6 +28,7 @@ def priv_env(tmp_path, monkeypatch):
         ["git", "commit", "-m", "init"], cwd=repo, check=True, capture_output=True
     )
     client = TestClient(create_app())
+    client.headers.update(auth_headers())
     yield client, tmp_path
     config.reset_for_tests()
 

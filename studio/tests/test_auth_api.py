@@ -234,3 +234,48 @@ def test_forgot_password_rate_limited(client, outbox):
         client.post("/auth/forgot-password", json={"email": "jane@example.com"})
     r = client.post("/auth/forgot-password", json={"email": "jane@example.com"})
     assert r.status_code == 429
+
+
+def _bearer(client, outbox):
+    _register_and_verify(client, outbox)
+    login = client.post(
+        "/auth/login", json={"email": "jane@example.com", "password": "hunter2abc"}
+    ).json()
+    return {"Authorization": f"Bearer {login['token']}"}, login["user"]["id"]
+
+
+def test_protected_route_requires_jwt(client, outbox):
+    assert client.get("/builder/projects").status_code == 401
+    assert (
+        client.get(
+            "/builder/projects", headers={"Authorization": "Bearer garbage"}
+        ).status_code
+        == 401
+    )
+
+
+def test_protected_route_accepts_valid_jwt(client, outbox):
+    headers, _uid = _bearer(client, outbox)
+    assert client.get("/builder/projects", headers=headers).status_code == 200
+
+
+def test_projects_are_scoped_to_owner(client, outbox):
+    headers, uid = _bearer(client, outbox)
+    created = client.post(
+        "/builder/projects",
+        json={"projectName": "Mine", "initialPrompt": None},
+        headers=headers,
+    )
+    assert created.status_code == 201
+    assert created.json()["ownerUserId"] == uid
+    listing = client.get("/builder/projects", headers=headers).json()
+    assert [p["projectId"] for p in listing] == [created.json()["projectId"]]
+
+    # A second user sees an empty list.
+    second = {"name": "Bob", "email": "bob@example.com", "password": "hunter2abc"}
+    _register_and_verify(client, outbox, body=second)
+    bob = client.post(
+        "/auth/login", json={"email": "bob@example.com", "password": "hunter2abc"}
+    ).json()
+    bob_headers = {"Authorization": f"Bearer {bob['token']}"}
+    assert client.get("/builder/projects", headers=bob_headers).json() == []
