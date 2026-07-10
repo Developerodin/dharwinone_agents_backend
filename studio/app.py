@@ -12,10 +12,10 @@ from fastapi.responses import HTMLResponse, PlainTextResponse, StreamingResponse
 from harness import gitops, packets, providers
 from pydantic import BaseModel
 
-from studio import consent, draft, events, gates, knowledge, preview, projects, runs
-from studio.repositories import profiles_repo, projects_repo
-from studio import auth, policy
+from studio import auth, consent, draft, events, gates, knowledge, policy, preview, projects, ratelimit, runs
+from studio.repositories import profiles_repo, projects_repo, users_repo
 from studio.services import (
+    auth_service,
     asset_service,
     context_service,
     edit_service,
@@ -123,6 +123,30 @@ class PublishRequest(BaseModel):
     versionId: str | None = None
 
 
+class RegisterRequest(BaseModel):
+    name: str
+    email: str
+    password: str
+
+
+class LoginRequest(BaseModel):
+    email: str
+    password: str
+
+
+class TokenRequest(BaseModel):
+    token: str
+
+
+class EmailRequest(BaseModel):
+    email: str
+
+
+class ResetPasswordRequest(BaseModel):
+    token: str
+    password: str
+
+
 def _require_builder_v2():
     from studio import config
 
@@ -141,6 +165,23 @@ def _require_builder_action(project_id, user_id, action):
     project = _builder_project_or_404(project_id)
     policy.require_action(project, user_id, action)
     return project
+
+
+def _client_ip(request: Request) -> str:
+    return request.client.host if request.client else "unknown"
+
+
+def _rate_limit(key: str, limit: int, window_s: float):
+    if not ratelimit.allow(key, limit, window_s):
+        raise HTTPException(
+            status_code=429,
+            detail="too many requests",
+            headers={"Retry-After": str(ratelimit.retry_after(key, window_s))},
+        )
+
+
+def _auth_error(exc: "auth_service.AuthError"):
+    return HTTPException(status_code=exc.status, detail=exc.detail)
 
 
 def _get_run_or_404(run_id):
@@ -208,6 +249,48 @@ def create_app():
         allow_methods=["*"],
         allow_headers=["*"],
     )
+
+    @app.post("/auth/register", status_code=201)
+    def post_auth_register(body: RegisterRequest, request: Request):
+        _rate_limit(f"register:ip:{_client_ip(request)}", 10, 3600)
+        try:
+            return auth_service.register(body.name, body.email, body.password)
+        except auth_service.AuthError as exc:
+            raise _auth_error(exc) from exc
+        except users_repo.AuthDbUnavailable as exc:
+            raise HTTPException(status_code=503, detail=str(exc)) from exc
+
+    @app.post("/auth/verify")
+    def post_auth_verify(body: TokenRequest, request: Request):
+        _rate_limit(f"verify:ip:{_client_ip(request)}", 10, 3600)
+        try:
+            auth_service.verify_email(body.token)
+        except auth_service.AuthError as exc:
+            raise _auth_error(exc) from exc
+        except users_repo.AuthDbUnavailable as exc:
+            raise HTTPException(status_code=503, detail=str(exc)) from exc
+        return {"status": "verified"}
+
+    @app.post("/auth/login")
+    def post_auth_login(body: LoginRequest, request: Request):
+        email_key = body.email.strip().lower()
+        _rate_limit(f"login:email:{email_key}", 5, 900)
+        _rate_limit(f"login:ip:{_client_ip(request)}", 20, 900)
+        try:
+            return auth_service.login(body.email, body.password)
+        except auth_service.AuthError as exc:
+            raise _auth_error(exc) from exc
+        except users_repo.AuthDbUnavailable as exc:
+            raise HTTPException(status_code=503, detail=str(exc)) from exc
+
+    @app.post("/auth/resend-verification")
+    def post_auth_resend(body: EmailRequest):
+        _rate_limit(f"resend:email:{body.email.strip().lower()}", 3, 3600)
+        try:
+            auth_service.resend_verification(body.email)
+        except users_repo.AuthDbUnavailable as exc:
+            raise HTTPException(status_code=503, detail=str(exc)) from exc
+        return {"status": "ok"}
 
     @app.get("/projects")
     def list_projects():
