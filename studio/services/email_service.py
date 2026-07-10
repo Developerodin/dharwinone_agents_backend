@@ -1,34 +1,63 @@
-"""Outbound email via Resend's HTTP API; console fallback when unconfigured."""
+"""Outbound email via SMTP; console fallback when unconfigured."""
 
+import email.utils
 import os
+import smtplib
+import ssl
 import urllib.parse
-
-import httpx
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 
 def app_base_url():
     return os.environ.get("APP_BASE_URL", "http://localhost:3000").rstrip("/")
 
 
+def _smtp_configured():
+    return bool(
+        os.environ.get("SMTP_USERNAME", "").strip()
+        and os.environ.get("SMTP_PASSWORD", "").strip()
+    )
+
+
+def _email_from():
+    raw = (
+        os.environ.get("EMAIL_FROM")
+        or os.environ.get("AUTH_EMAIL_FROM", "onboarding@example.com")
+    ).strip()
+    if "<" not in raw:
+        return f"Dharwin One <{raw}>"
+    return raw
+
+
+def _deliver_smtp(to, subject, html):
+    host = os.environ.get("SMTP_HOST", "smtp.gmail.com").strip()
+    port = int(os.environ.get("SMTP_PORT", "465"))
+    timeout = float(os.environ.get("SMTP_TIMEOUT", "7"))
+    username = os.environ.get("SMTP_USERNAME", "").strip()
+    password = os.environ.get("SMTP_PASSWORD", "").strip()
+    from_header = _email_from()
+    _, envelope_from = email.utils.parseaddr(from_header)
+    if not envelope_from:
+        envelope_from = username
+
+    msg = MIMEMultipart("alternative")
+    msg["Subject"] = subject
+    msg["From"] = from_header
+    msg["To"] = to
+    msg.attach(MIMEText(html, "html", "utf-8"))
+
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL(host, port, timeout=timeout, context=context) as server:
+        server.login(username, password)
+        server.sendmail(envelope_from, [to], msg.as_string())
+
+
 def send_email(to, subject, html):
-    api_key = os.environ.get("RESEND_API_KEY", "").strip()
-    if not api_key:
+    if not _smtp_configured():
         print(f"[email:console] to={to} subject={subject}\n{html}")
         return
-    response = httpx.post(
-        "https://api.resend.com/emails",
-        headers={"Authorization": f"Bearer {api_key}"},
-        json={
-            "from": os.environ.get(
-                "AUTH_EMAIL_FROM", "Dharwin One <onboarding@resend.dev>"
-            ),
-            "to": [to],
-            "subject": subject,
-            "html": html,
-        },
-        timeout=10,
-    )
-    response.raise_for_status()
+    _deliver_smtp(to, subject, html)
 
 
 # Email-client constraints: table layout, inline CSS, system fonts, no
