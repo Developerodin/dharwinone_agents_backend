@@ -13,6 +13,7 @@ dependencies = [
     "pymongo",
     "pyyaml",
     "python-dotenv",
+    "pyjwt",
 ]
 
 [project.optional-dependencies]
