@@ -1,0 +1,35 @@
+<style>.c-saas-5{--accent-deep:color-mix(in srgb, var(--accent), var(--ink) 34%);--on-accent:color-mix(in srgb, var(--bg), var(--accent) 7%);--on-accent-dim:color-mix(in srgb, var(--bg) 68%, var(--accent) 32%);--card:color-mix(in srgb, var(--bg), var(--soft) 40%);} .c-saas-5{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);font-size:1.0625rem;line-height:1.6;} .c-saas-5 p{max-width:68ch;} .c-saas-5 .eyebrow{font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);} .c-saas-5 .feat-visual{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:1.6rem;min-height:230px;display:flex;flex-direction:column;gap:.7rem;justify-content:center;} .c-saas-5 .logline{display:flex;gap:.7rem;align-items:baseline;font-size:.78rem;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:.55rem .8rem;} .c-saas-5 .logline code{color:var(--accent-deep);background:transparent;font-weight:600;} .c-saas-5 .logline .t{color:var(--muted);min-width:4.2rem;} .c-saas-5 details p{color:var(--muted);margin:.7rem 0 0;font-size:.97rem;} .c-saas-5 .sec-title{font-size:clamp(1.9rem,3vw,2.6rem);font-weight:800;}</style>
+<section class="c-saas-5" id="features" style="background:var(--soft);border-block:1px solid var(--line);padding:6rem 0;">
+  <div class="container">
+    <div class="row align-items-center g-5 mb-5 pb-3">
+      <div class="col-lg-6">
+        <p class="eyebrow">Auto-rollback</p>
+        <h2 class="sec-title">Bad deploys revert themselves</h2>
+        <p style="color:var(--muted);">Set a threshold once: error rate over 2%, p95 over 400ms, or any Datadog or Grafana alert. When a canary breaches it, {{BRAND}} freezes promotion, restores the last good build, and posts the diff, the metric, and the timeline to your incident channel. On-call reads a receipt, not a mystery.</p>
+      </div>
+      <div class="col-lg-6">
+        <div class="feat-visual">
+          <div class="logline"><span class="t">14:02:11</span><span><code>deploy</code> v2.41 canary at 25%, us-east</span></div>
+          <div class="logline"><span class="t">14:06:47</span><span><code>breach</code> error rate 2.1% crossed 2.0% threshold</span></div>
+          <div class="logline"><span class="t">14:07:09</span><span><code>rollback</code> restored v2.40 in 22s, traffic rerouted</span></div>
+          <div class="logline"><span class="t">14:07:10</span><span><code>notify</code> #incidents in Slack, Linear ticket OPS-291 opened</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="row align-items-center g-5 flex-lg-row-reverse">
+      <div class="col-lg-6">
+        <p class="eyebrow">Release timeline</p>
+        <h2 class="sec-title">One answer to "what changed?"</h2>
+        <p style="color:var(--muted);">Every flag flip, config push, and deploy across every service lands on a single searchable timeline. Filter by service, author, or blast radius. When support asks why checkout slowed at 14:06 on a Tuesday, the answer is one query, with the commit and the owner attached.</p>
+      </div>
+      <div class="col-lg-6">
+        <div class="feat-visual">
+          <div class="logline"><span class="t">Tue 14:02</span><span><code>checkout-service</code> v2.41 · rollout started · @mira</span></div>
+          <div class="logline"><span class="t">Tue 13:48</span><span><code>flag</code> new-tax-engine enabled for EU plan tier · @jonas</span></div>
+          <div class="logline"><span class="t">Tue 11:15</span><span><code>config</code> payments retry budget 3 to 5 · @mira</span></div>
+          <div class="logline"><span class="t">Mon 18:30</span><span><code>search-api</code> v9.12 · promoted to 100% · auto</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

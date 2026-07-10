@@ -1,0 +1,35 @@
+<style>.c-medical-2{--accent-deep:color-mix(in srgb, var(--accent) 82%, var(--ink));--accent-tint:color-mix(in srgb, var(--accent) 10%, var(--bg));--ink-soft:color-mix(in srgb, var(--ink) 68%, var(--bg));} .c-medical-2{background:var(--bg);color:var(--ink);font-family:"Instrument Sans",system-ui,sans-serif;line-height:1.65;} .c-medical-2 a{color:var(--accent-deep);} .c-medical-2 .btn-pine{background:var(--accent);color:var(--soft);border:1px solid var(--accent);border-radius:999px;padding:.6rem 1.5rem;font-weight:600;} .c-medical-2 .btn-pine:hover{background:var(--accent-deep);color:var(--soft);border-color:var(--accent-deep);} .c-medical-2 .btn-quiet{border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:.6rem 1.5rem;font-weight:600;background:var(--soft);} .c-medical-2 .btn-quiet:hover{border-color:var(--accent);color:var(--accent-deep);background:var(--soft);} .c-medical-2 .hero{padding:5.5rem 0 4.5rem;} .c-medical-2 .hero h1{font-family:"Source Serif 4",Georgia,serif;font-size:clamp(3rem, 6.2vw, 4.75rem);font-weight:700;line-height:1.04;letter-spacing:-.015em;} .c-medical-2 .hero .tagline{color:var(--accent-deep);font-weight:600;letter-spacing:.14em;text-transform:uppercase;font-size:.85rem;} .c-medical-2 .hero .lede{font-size:1.15rem;color:var(--ink-soft);max-width:34rem;} .c-medical-2 .slot-panel{background:var(--soft);border:1px solid var(--line);border-radius:1.25rem;overflow:hidden;box-shadow:0 24px 48px -32px color-mix(in srgb, var(--ink) 40%, transparent);} .c-medical-2 .slot-panel .panel-head{background:var(--accent);color:var(--soft);padding:1.1rem 1.5rem;} .c-medical-2 .slot-panel .panel-head small{color:color-mix(in srgb, var(--soft) 75%, var(--accent));letter-spacing:.12em;text-transform:uppercase;font-weight:600;} .c-medical-2 .hours-row{display:flex;justify-content:space-between;gap:1rem;padding:.7rem 0;border-bottom:1px dashed var(--line);font-size:.95rem;} .c-medical-2 .hours-row:last-child{border-bottom:0;} .c-medical-2 .hours-row .day{color:var(--ink-soft);} .c-medical-2 .hours-row .time{font-weight:600;font-variant-numeric:tabular-nums;} .c-medical-2 .open-now{display:inline-flex;align-items:center;gap:.5rem;background:color-mix(in srgb, var(--soft) 22%, var(--accent));color:var(--soft);border-radius:999px;padding:.3rem .9rem;font-size:.85rem;font-weight:600;} .c-medical-2 .open-now::before{content:"";width:.55rem;height:.55rem;border-radius:50%;background:var(--soft);} .c-medical-2 footer a{color:color-mix(in srgb, var(--bg) 90%, var(--ink));text-decoration:none;} .c-medical-2 footer a:hover{color:var(--bg);} .c-medical-2 .muted{color:var(--ink-soft);} @media (prefers-reduced-motion: no-preference){.c-medical-2 .slot-panel, .c-medical-2 .faq details, .c-medical-2 .btn-pine, .c-medical-2 .btn-quiet{transition:transform .25s ease, box-shadow .25s ease, background .2s ease, border-color .2s ease;}.c-medical-2 .slot-panel:hover{transform:translateY(-4px);}.c-medical-2 .btn-pine:hover, .c-medical-2 .btn-quiet:hover{transform:translateY(-2px);}.c-medical-2 .photo-frame img{transition:transform .6s ease;}.c-medical-2 .photo-frame:hover img{transform:scale(1.045);}.c-medical-2 .doc-row img{transition:transform .3s ease;}.c-medical-2 .doc-row:hover img{transform:scale(1.07);}.c-medical-2 .hero h1, .c-medical-2 .hero .lede{animation:rise .7s ease both;}.c-medical-2 .hero .lede{animation-delay:.12s;}@keyframes c-medical-2-rise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}}</style>
+<header class="c-medical-2 hero">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-7">
+        <p class="tagline mb-3">{{TAGLINE}}</p>
+        <h1>Walk in unwell.<br>Walk out with answers, the same day.</h1>
+        <p class="lede mt-4">{{BRAND}} is a family clinic with in-house diagnostics: OPD consultations, a NABL-accredited lab, and pharmacy under one roof. Most blood reports are ready by 6 pm, and follow-up reviews within 7 days are free.</p>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <a class="btn btn-pine" href="#book">Book a slot</a>
+          <a class="btn btn-quiet" href="#departments">Browse departments</a>
+        </div>
+      </div>
+      <div class="col-lg-5" id="book">
+        <div class="slot-panel">
+          <div class="panel-head d-flex justify-content-between align-items-center">
+            <div>
+              <small>Clinic hours</small>
+              <div class="fw-semibold fs-5">Visit or call ahead</div>
+            </div>
+            <span class="open-now">Open today</span>
+          </div>
+          <div class="p-4">
+            <div class="hours-row"><span class="day">Mon to Sat, morning OPD</span><span class="time">8:30 am to 1:00 pm</span></div>
+            <div class="hours-row"><span class="day">Mon to Sat, evening OPD</span><span class="time">5:00 pm to 9:00 pm</span></div>
+            <div class="hours-row"><span class="day">Sunday</span><span class="time">9:00 am to 12:30 pm</span></div>
+            <div class="hours-row"><span class="day">Sample collection</span><span class="time">from 7:00 am</span></div>
+            <a class="btn btn-pine w-100 mt-3" href="tel:+910000000000">Call 000 000 0000 to book</a>
+            <p class="text-center mt-3 mb-0 muted" style="font-size:.85rem;">Walk-ins welcome. Senior citizens and expectant mothers are seen on priority.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

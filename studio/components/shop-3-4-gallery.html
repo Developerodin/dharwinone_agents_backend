@@ -1,0 +1,53 @@
+<style>.c-shop-3-4{--ink-60:color-mix(in oklab, var(--ink) 62%, var(--bg));--stamp:color-mix(in oklab, var(--accent) 10%, var(--bg));} .c-shop-3-4{background:var(--bg);color:var(--ink);font-family:"Inter",sans-serif;font-size:1.0625rem;line-height:1.6} .c-shop-3-4 h1, .c-shop-3-4 h2, .c-shop-3-4 h3{font-family:"Inter",sans-serif;font-weight:800;letter-spacing:-.02em;color:var(--ink)} .c-shop-3-4 a{color:var(--accent)} .c-shop-3-4 .num{font-variant-numeric:tabular-nums} .c-shop-3-4 .catalog{padding:5rem 0} .c-shop-3-4 .catalog-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:1rem;margin-bottom:2rem} .c-shop-3-4 .catalog-head h2{font-size:clamp(1.9rem,4vw,3rem);text-transform:uppercase;margin:0} .c-shop-3-4 .catalog-head .count{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:var(--ink-60)} .c-shop-3-4 .cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)} @media (max-width: 991.98px){.c-shop-3-4 .cat-grid{grid-template-columns:repeat(2,1fr)}} @media (max-width: 575.98px){.c-shop-3-4 .cat-grid{grid-template-columns:1fr}} .c-shop-3-4 .item{background:var(--bg);padding:1.4rem} .c-shop-3-4 .item .sku{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.1em;color:var(--ink-60);display:flex;justify-content:space-between} .c-shop-3-4 .item .sku .stock{color:var(--accent);font-weight:600} .c-shop-3-4 .item .sku .stock.low{background:var(--stamp);padding:0 .4rem} .c-shop-3-4 .item img{width:100%;aspect-ratio:5/4;object-fit:cover;display:block;margin:.9rem 0;border:1px solid var(--line)} .c-shop-3-4 .item h3{font-size:1.1rem;font-weight:700;margin:0} .c-shop-3-4 .spec{width:100%;font-family:"IBM Plex Mono",monospace;font-size:.78rem;margin-top:.8rem;border-collapse:collapse} .c-shop-3-4 .spec td{padding:.32rem 0;border-top:1px dashed var(--line);font-variant-numeric:tabular-nums} .c-shop-3-4 .spec td:first-child{color:var(--ink-60);text-transform:uppercase;letter-spacing:.06em;width:42%} .c-shop-3-4 .spec td:last-child{text-align:right} .c-shop-3-4 .item .buy{display:flex;justify-content:space-between;align-items:center;margin-top:1rem} .c-shop-3-4 .item .price{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:1.15rem;font-variant-numeric:tabular-nums} .c-shop-3-4 .item .add{font-family:"IBM Plex Mono",monospace;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);text-decoration:none;border:1px solid var(--accent);padding:.4rem .8rem} .c-shop-3-4 .item .add:hover{background:var(--accent);color:#fff} .c-shop-3-4 footer a{color:var(--ink-60);text-decoration:none;display:block;padding:.2rem 0;font-size:.92rem} .c-shop-3-4 footer a:hover{color:var(--accent)} @media (prefers-reduced-motion: no-preference){.c-shop-3-4 a, .c-shop-3-4 .btn-safety, .c-shop-3-4 .btn-plain, .c-shop-3-4 .item .add{transition:all .18s ease}.c-shop-3-4 .item{transition:background .18s ease}.c-shop-3-4 .item:hover{background:var(--stamp)}}</style>
+<section class="c-shop-3-4 catalog" id="catalog">
+  <div class="container">
+    <div class="catalog-head">
+      <h2>Current catalog</h2>
+      <span class="count num">Showing 06 of 34 SKUs / all in production</span>
+    </div>
+    <div class="cat-grid">
+      <article class="item">
+        <div class="sku"><span>UG-201</span><span class="stock">IN STOCK</span></div>
+        <img src="https://images.unsplash.com/photo-1547949003-9792a18a2601?w=700&q=60" alt="Waxed canvas field rucksack with leather straps">
+        <h3>Field Rucksack</h3>
+        <table class="spec"><tr><td>Material</td><td>18 oz waxed duck</td></tr><tr><td>Weight</td><td>1,420 g</td></tr><tr><td>Volume</td><td>26 L</td></tr></table>
+        <div class="buy"><span class="price num">$188.00</span><a class="add" href="#">Add</a></div>
+      </article>
+      <article class="item">
+        <div class="sku"><span>UG-114</span><span class="stock">IN STOCK</span></div>
+        <img src="https://images.unsplash.com/photo-1473188588951-666fce8e7c68?w=700&q=60" alt="Stainless steel vacuum flask on a workbench">
+        <h3>Crew Flask, 1 L</h3>
+        <table class="spec"><tr><td>Material</td><td>316 stainless</td></tr><tr><td>Weight</td><td>640 g</td></tr><tr><td>Hot hold</td><td>14 h</td></tr></table>
+        <div class="buy"><span class="price num">$64.00</span><a class="add" href="#">Add</a></div>
+      </article>
+      <article class="item">
+        <div class="sku"><span>UG-330</span><span class="stock low">LOW / 12</span></div>
+        <img src="https://images.unsplash.com/photo-1620814923416-8fb2b3d59a10?w=700&q=60" alt="Canvas and leather work apron hanging on a hook">
+        <h3>Shop Apron</h3>
+        <table class="spec"><tr><td>Material</td><td>14 oz duck, brass</td></tr><tr><td>Weight</td><td>820 g</td></tr><tr><td>Pockets</td><td>7</td></tr></table>
+        <div class="buy"><span class="price num">$96.00</span><a class="add" href="#">Add</a></div>
+      </article>
+      <article class="item">
+        <div class="sku"><span>UG-078</span><span class="stock">IN STOCK</span></div>
+        <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?w=700&q=60" alt="Brass and steel pocket tool laid on paper">
+        <h3>Pocket Tool No. 3</h3>
+        <table class="spec"><tr><td>Material</td><td>S35VN, brass</td></tr><tr><td>Weight</td><td>88 g</td></tr><tr><td>Functions</td><td>6</td></tr></table>
+        <div class="buy"><span class="price num">$72.00</span><a class="add" href="#">Add</a></div>
+      </article>
+      <article class="item">
+        <div class="sku"><span>UG-455</span><span class="stock">IN STOCK</span></div>
+        <img src="https://images.unsplash.com/photo-1519219788971-8d9797e0928e?w=700&q=60" alt="Heavy wool blanket folded on a shelf">
+        <h3>Depot Blanket</h3>
+        <table class="spec"><tr><td>Material</td><td>90/10 wool blend</td></tr><tr><td>Weight</td><td>1,950 g</td></tr><tr><td>Size</td><td>200 x 150 cm</td></tr></table>
+        <div class="buy"><span class="price num">$128.00</span><a class="add" href="#">Add</a></div>
+      </article>
+      <article class="item">
+        <div class="sku"><span>UG-509</span><span class="stock low">LOW / 05</span></div>
+        <img src="https://images.unsplash.com/photo-1503602642458-232111445657?w=700&q=60" alt="Powder coated steel desk lamp on a table">
+        <h3>Task Lamp, Clamp</h3>
+        <table class="spec"><tr><td>Material</td><td>Steel, powder coat</td></tr><tr><td>Weight</td><td>1,240 g</td></tr><tr><td>Reach</td><td>84 cm</td></tr></table>
+        <div class="buy"><span class="price num">$142.00</span><a class="add" href="#">Add</a></div>
+      </article>
+    </div>
+  </div>
+</section>

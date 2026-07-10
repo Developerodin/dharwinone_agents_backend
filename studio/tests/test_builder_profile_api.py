@@ -55,8 +55,10 @@ def test_put_business_profile_patches_fields(client, memory_db):
             "business": {
                 "type": "Retail",
                 "services": ["Shoes"],
+                "description": "Retail footwear for runners.",
                 "targetAudience": "Runners",
             },
+            "location": {"country": "India", "city": "Jaipur"},
             "contact": {"email": "shop@example.com", "phone": "555-123-4567"},
         },
     )
@@ -101,8 +103,10 @@ def test_generate_templates_blocked_until_gate_passes(client, memory_db):
             "business": {
                 "type": "Retail",
                 "services": ["Shoes"],
+                "description": "Retail footwear for runners.",
                 "targetAudience": "Runners",
             },
+            "location": {"country": "India", "city": "Jaipur"},
             "contact": {"email": "shop@example.com", "phone": "555-123-4567"},
             "completeness": {"percent": 100, "missingFields": []},
         }

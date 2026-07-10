@@ -41,8 +41,10 @@ def _ready_selected_template(client):
             "business": {
                 "type": "Cafe",
                 "services": ["Espresso", "Pastries"],
+                "description": "Cafe serving quick espresso and fresh pastries.",
                 "targetAudience": "Morning commuters",
             },
+            "location": {"country": "India", "city": "Jaipur"},
             "contact": {"email": "hi@publish.com", "phone": "555-9000"},
             "completeness": {"percent": 100, "missingFields": []},
         }

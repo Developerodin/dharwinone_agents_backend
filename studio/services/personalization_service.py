@@ -1,12 +1,15 @@
 """Personalized template generation from base templates + business profile."""
 
 import html as html_lib
+import logging
 import os
 import re
 
 from studio import draft
 from studio.repositories import assets_repo, profiles_repo, projects_repo, templates_repo
-from studio.services import onboarding_service
+from studio.services import composition_service, onboarding_service
+
+_log = logging.getLogger(__name__)
 
 _PLACEHOLDER_RE = re.compile(r"\{\{[^}]+\}\}")
 _EMAIL_TEXT_RE = re.compile(r"(?i)\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b")
@@ -267,6 +270,47 @@ def _selected_style_packs(profile):
     return selected
 
 
+def _composed_count():
+    raw = os.environ.get("STUDIO_COMPOSED_VARIANTS", "1")
+    try:
+        n = int(raw)
+    except ValueError:
+        n = 1
+    return max(0, min(n, 2))
+
+
+def _composed_templates(project_id, profile, assets, genre):
+    """Composed variants as template dicts. Any failure returns what succeeded."""
+    out = []
+    try:
+        composed = composition_service.compose_project_variants(
+            project_id, _business_facts(profile), genre, _composed_count()
+        )
+        for idx, comp in enumerate(composed):
+            try:
+                html = personalize_html(comp["html"], profile, assets, genre)
+                if idx == 0:  # LLM budget cap: rewrite only the first composed variant
+                    html = _rewrite_copy(html, profile)
+                    html = _apply_contact(html, profile)
+            except PersonalizationError:
+                _log.warning("composed variant %s failed personalization", idx)
+                continue
+            template_id = f"composed-{idx + 1}"
+            out.append(
+                {
+                    "templateId": template_id,
+                    "label": f"Composed {idx + 1} · {genre.title()}",
+                    "style": genre,
+                    "sourceTemplateRef": ",".join(comp["componentIds"]),
+                    "s3HtmlKey": _persist_key(project_id, template_id),
+                    "htmlContent": html,
+                }
+            )
+    except Exception:
+        _log.exception("composed variants skipped for project %s", project_id)
+    return out
+
+
 def generate_for_project(project_id, *, force=False):
     project = projects_repo.get(project_id)
     if not project:
@@ -316,6 +360,8 @@ def generate_for_project(project_id, *, force=False):
                     "htmlContent": packed,
                 }
             )
+
+    templates.extend(_composed_templates(project_id, profile, assets, genre))
 
     saved = templates_repo.replace_for_project(project_id, templates)
     projects_repo.update_fields(

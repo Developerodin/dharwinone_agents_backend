@@ -27,7 +27,7 @@ def _complete_profile(project_id):
             "description": "HR software",
             "targetAudience": "HR teams",
         },
-        "location": {"country": None, "state": None, "city": None, "address": None},
+        "location": {"country": "India", "state": None, "city": "Jaipur", "address": None},
         "contact": {
             "email": "hello@dharwin.com",
             "phone": "+1 555 0100",

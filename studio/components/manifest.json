@@ -1,0 +1,4067 @@
+[
+ {
+  "id": "agency-2-1-nav",
+  "type": "nav",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "case",
+   "ledger",
+   "nav"
+  ],
+  "description": "agency nav",
+  "path": "agency-2-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Archivo:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "agency-2-2-hero",
+  "type": "hero",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "case",
+   "hero",
+   "ledger"
+  ],
+  "description": "agency hero: We only publish work we can put a number on.",
+  "path": "agency-2-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Archivo:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "agency-2-3-about",
+  "type": "about",
+  "genre": "agency",
+  "tags": [
+   "about",
+   "agency",
+   "case",
+   "ledger"
+  ],
+  "description": "agency about: Four rules before we take an engagement",
+  "path": "agency-2-3-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Archivo:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "agency-2-4-gallery",
+  "type": "gallery",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "case",
+   "gallery",
+   "ledger"
+  ],
+  "description": "agency gallery: Three recent entries, unabridged",
+  "path": "agency-2-4-gallery.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Archivo:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "agency-2-5-features",
+  "type": "features",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "case",
+   "features",
+   "ledger"
+  ],
+  "description": "agency features: Where the ledger says we are useful",
+  "path": "agency-2-5-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Archivo:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "agency-2-6-testimonials",
+  "type": "testimonials",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "case",
+   "ledger",
+   "testimonials"
+  ],
+  "description": "agency testimonials: About the three misses",
+  "path": "agency-2-6-testimonials.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Archivo:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "agency-2-7-contact",
+  "type": "contact",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "case",
+   "contact",
+   "ledger"
+  ],
+  "description": "agency contact: Bring us a number that embarrasses you.",
+  "path": "agency-2-7-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Archivo:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "agency-2-8-footer",
+  "type": "footer",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "case",
+   "footer",
+   "ledger"
+  ],
+  "description": "agency footer",
+  "path": "agency-2-8-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Archivo:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "agency-3-1-nav",
+  "type": "nav",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "bold",
+   "nav",
+   "poster"
+  ],
+  "description": "agency nav",
+  "path": "agency-3-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "agency-3-2-hero",
+  "type": "hero",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "bold",
+   "hero",
+   "poster"
+  ],
+  "description": "agency hero: Loud work for quiet brands.",
+  "path": "agency-3-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "agency-3-3-features",
+  "type": "features",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "bold",
+   "features",
+   "poster"
+  ],
+  "description": "agency features",
+  "path": "agency-3-3-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "agency-3-4-gallery",
+  "type": "gallery",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "bold",
+   "gallery",
+   "poster"
+  ],
+  "description": "agency gallery: Three jobs we still talk about",
+  "path": "agency-3-4-gallery.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "agency-3-5-features",
+  "type": "features",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "bold",
+   "features",
+   "poster"
+  ],
+  "description": "agency features",
+  "path": "agency-3-5-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "agency-3-6-about",
+  "type": "about",
+  "genre": "agency",
+  "tags": [
+   "about",
+   "agency",
+   "bold",
+   "poster"
+  ],
+  "description": "agency about: Eight weeks, four fights, one launch",
+  "path": "agency-3-6-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "agency-3-7-contact",
+  "type": "contact",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "bold",
+   "contact",
+   "poster"
+  ],
+  "description": "agency contact: Say the scary version out loud.",
+  "path": "agency-3-7-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "agency-3-8-footer",
+  "type": "footer",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "bold",
+   "footer",
+   "poster"
+  ],
+  "description": "agency footer",
+  "path": "agency-3-8-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "agency-1-nav",
+  "type": "nav",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "nav"
+  ],
+  "description": "agency nav",
+  "path": "agency-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "agency-2-hero",
+  "type": "hero",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "hero"
+  ],
+  "description": "agency hero: Counsel you call before the decision, not after.",
+  "path": "agency-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "agency-3-gallery",
+  "type": "gallery",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "gallery"
+  ],
+  "description": "agency gallery",
+  "path": "agency-3-gallery.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "agency-4-cta",
+  "type": "cta",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "cta"
+  ],
+  "description": "agency cta: Where we are worth the fee",
+  "path": "agency-4-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "agency-5-features",
+  "type": "features",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "features"
+  ],
+  "description": "agency features",
+  "path": "agency-5-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "agency-6-cta",
+  "type": "cta",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "cta"
+  ],
+  "description": "agency cta: Three ways to engage. Each one has edges.",
+  "path": "agency-6-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "agency-7-testimonials",
+  "type": "testimonials",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "testimonials"
+  ],
+  "description": "agency testimonials",
+  "path": "agency-7-testimonials.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "agency-8-cta",
+  "type": "cta",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "cta"
+  ],
+  "description": "agency cta",
+  "path": "agency-8-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "agency-9-contact",
+  "type": "contact",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "contact"
+  ],
+  "description": "agency contact: Bring us the decision you keep postponing.",
+  "path": "agency-9-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "agency-10-footer",
+  "type": "footer",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "footer"
+  ],
+  "description": "agency footer",
+  "path": "agency-10-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-2-1-nav",
+  "type": "nav",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "espresso",
+   "nav",
+   "noir"
+  ],
+  "description": "cafe nav",
+  "path": "cafe-2-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-2-2-hero",
+  "type": "hero",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "espresso",
+   "hero",
+   "noir"
+  ],
+  "description": "cafe hero: Coffee for the hours nobody else keeps.",
+  "path": "cafe-2-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-2-3-features",
+  "type": "features",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "espresso",
+   "features",
+   "noir"
+  ],
+  "description": "cafe features: The list",
+  "path": "cafe-2-3-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-2-4-features",
+  "type": "features",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "espresso",
+   "features",
+   "noir"
+  ],
+  "description": "cafe features",
+  "path": "cafe-2-4-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-2-5-cta",
+  "type": "cta",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "cta",
+   "espresso",
+   "noir"
+  ],
+  "description": "cafe cta: Three rules of the night shift.",
+  "path": "cafe-2-5-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-2-6-about",
+  "type": "about",
+  "genre": "cafe",
+  "tags": [
+   "about",
+   "cafe",
+   "espresso",
+   "noir"
+  ],
+  "description": "cafe about",
+  "path": "cafe-2-6-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-2-7-contact",
+  "type": "contact",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "contact",
+   "espresso",
+   "noir"
+  ],
+  "description": "cafe contact: Down the lane, follow the amber light.",
+  "path": "cafe-2-7-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-2-8-footer",
+  "type": "footer",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "espresso",
+   "footer",
+   "noir"
+  ],
+  "description": "cafe footer",
+  "path": "cafe-2-8-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-3-1-nav",
+  "type": "nav",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "light",
+   "morning",
+   "nav"
+  ],
+  "description": "cafe nav",
+  "path": "cafe-3-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-3-2-hero",
+  "type": "hero",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "hero",
+   "light",
+   "morning"
+  ],
+  "description": "cafe hero: Soft light, warm crumb, no rush at all.",
+  "path": "cafe-3-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-3-3-features",
+  "type": "features",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "features",
+   "light",
+   "morning"
+  ],
+  "description": "cafe features: Today's bake, in order of appearance",
+  "path": "cafe-3-3-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-3-4-about",
+  "type": "about",
+  "genre": "cafe",
+  "tags": [
+   "about",
+   "cafe",
+   "light",
+   "morning"
+  ],
+  "description": "cafe about: Mornings are the whole point.",
+  "path": "cafe-3-4-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-3-5-gallery",
+  "type": "gallery",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "gallery",
+   "light",
+   "morning"
+  ],
+  "description": "cafe gallery: Milk from Havredal farm, flour from the old mill, honey from three streets away.",
+  "path": "cafe-3-5-gallery.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-3-6-testimonials",
+  "type": "testimonials",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "light",
+   "morning",
+   "testimonials"
+  ],
+  "description": "cafe testimonials",
+  "path": "cafe-3-6-testimonials.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-3-7-contact",
+  "type": "contact",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "contact",
+   "light",
+   "morning"
+  ],
+  "description": "cafe contact: Open with the sun, gone by two.",
+  "path": "cafe-3-7-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-3-8-footer",
+  "type": "footer",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "footer",
+   "light",
+   "morning"
+  ],
+  "description": "cafe footer",
+  "path": "cafe-3-8-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-1-nav",
+  "type": "nav",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "nav"
+  ],
+  "description": "cafe nav",
+  "path": "cafe-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Karla:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-2-hero",
+  "type": "hero",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "hero"
+  ],
+  "description": "cafe hero: The first sip should slow the whole street down.",
+  "path": "cafe-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Karla:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-3-about",
+  "type": "about",
+  "genre": "cafe",
+  "tags": [
+   "about",
+   "cafe"
+  ],
+  "description": "cafe about",
+  "path": "cafe-3-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Karla:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-4-gallery",
+  "type": "gallery",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "gallery"
+  ],
+  "description": "cafe gallery: Today's board",
+  "path": "cafe-4-gallery.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Karla:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-5-gallery",
+  "type": "gallery",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "gallery"
+  ],
+  "description": "cafe gallery: Roasted eleven meters from where you drink it.",
+  "path": "cafe-5-gallery.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Karla:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-6-features",
+  "type": "features",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "features"
+  ],
+  "description": "cafe features",
+  "path": "cafe-6-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Karla:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-7-testimonials",
+  "type": "testimonials",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "testimonials"
+  ],
+  "description": "cafe testimonials",
+  "path": "cafe-7-testimonials.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Karla:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-8-contact",
+  "type": "contact",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "contact"
+  ],
+  "description": "cafe contact: Open early, gone when the bread is.",
+  "path": "cafe-8-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Karla:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-9-cta",
+  "type": "cta",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "cta"
+  ],
+  "description": "cafe cta: Skip the queue, not the ritual.",
+  "path": "cafe-9-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Karla:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-10-footer",
+  "type": "footer",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "footer"
+  ],
+  "description": "cafe footer",
+  "path": "cafe-10-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Karla:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "construction-2-1-nav",
+  "type": "nav",
+  "genre": "construction",
+  "tags": [
+   "blueprint",
+   "construction",
+   "nav"
+  ],
+  "description": "construction nav",
+  "path": "construction-2-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Archivo:wght@400;500;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "construction-2-2-hero",
+  "type": "hero",
+  "genre": "construction",
+  "tags": [
+   "blueprint",
+   "construction",
+   "hero"
+  ],
+  "description": "construction hero: We build from the drawing, not around it.",
+  "path": "construction-2-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Archivo:wght@400;500;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "construction-2-3-features",
+  "type": "features",
+  "genre": "construction",
+  "tags": [
+   "blueprint",
+   "construction",
+   "features"
+  ],
+  "description": "construction features: Engineering capabilities",
+  "path": "construction-2-3-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Archivo:wght@400;500;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "construction-2-4-features",
+  "type": "features",
+  "genre": "construction",
+  "tags": [
+   "blueprint",
+   "construction",
+   "features"
+  ],
+  "description": "construction features: Every project ships with a title block",
+  "path": "construction-2-4-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Archivo:wght@400;500;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "construction-2-5-about",
+  "type": "about",
+  "genre": "construction",
+  "tags": [
+   "about",
+   "blueprint",
+   "construction"
+  ],
+  "description": "construction about: Method statement, in plain terms",
+  "path": "construction-2-5-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Archivo:wght@400;500;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "construction-2-6-contact",
+  "type": "contact",
+  "genre": "construction",
+  "tags": [
+   "blueprint",
+   "construction",
+   "contact"
+  ],
+  "description": "construction contact: Send us your drawings. We reply with numbers, not adjectives.",
+  "path": "construction-2-6-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Archivo:wght@400;500;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "construction-2-7-footer",
+  "type": "footer",
+  "genre": "construction",
+  "tags": [
+   "blueprint",
+   "construction",
+   "footer"
+  ],
+  "description": "construction footer",
+  "path": "construction-2-7-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Archivo:wght@400;500;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "construction-3-1-nav",
+  "type": "nav",
+  "genre": "construction",
+  "tags": [
+   "construction",
+   "craft",
+   "nav",
+   "warm"
+  ],
+  "description": "construction nav",
+  "path": "construction-3-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "construction-3-2-hero",
+  "type": "hero",
+  "genre": "construction",
+  "tags": [
+   "construction",
+   "craft",
+   "hero",
+   "warm"
+  ],
+  "description": "construction hero: Rooms that feel like they were always yours.",
+  "path": "construction-3-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "construction-3-3-features",
+  "type": "features",
+  "genre": "construction",
+  "tags": [
+   "construction",
+   "craft",
+   "features",
+   "warm"
+  ],
+  "description": "construction features: Three ways we work on a home",
+  "path": "construction-3-3-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "construction-3-4-cta",
+  "type": "cta",
+  "genre": "construction",
+  "tags": [
+   "construction",
+   "craft",
+   "cta",
+   "warm"
+  ],
+  "description": "construction cta: The Arbor Lane living room",
+  "path": "construction-3-4-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "construction-3-5-features",
+  "type": "features",
+  "genre": "construction",
+  "tags": [
+   "construction",
+   "craft",
+   "features",
+   "warm"
+  ],
+  "description": "construction features: Renovation without the horror stories",
+  "path": "construction-3-5-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "construction-3-6-contact",
+  "type": "contact",
+  "genre": "construction",
+  "tags": [
+   "construction",
+   "contact",
+   "craft",
+   "warm"
+  ],
+  "description": "construction contact: Walk us through your home. Tea is on us.",
+  "path": "construction-3-6-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "construction-3-7-footer",
+  "type": "footer",
+  "genre": "construction",
+  "tags": [
+   "construction",
+   "craft",
+   "footer",
+   "warm"
+  ],
+  "description": "construction footer",
+  "path": "construction-3-7-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "construction-1-nav",
+  "type": "nav",
+  "genre": "construction",
+  "tags": [
+   "construction",
+   "nav"
+  ],
+  "description": "construction nav",
+  "path": "construction-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "construction-2-hero",
+  "type": "hero",
+  "genre": "construction",
+  "tags": [
+   "construction",
+   "hero"
+  ],
+  "description": "construction hero: Built to drawing.Handed over on date.",
+  "path": "construction-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "construction-3-about",
+  "type": "about",
+  "genre": "construction",
+  "tags": [
+   "about",
+   "construction"
+  ],
+  "description": "construction about",
+  "path": "construction-3-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "construction-4-cta",
+  "type": "cta",
+  "genre": "construction",
+  "tags": [
+   "construction",
+   "cta"
+  ],
+  "description": "construction cta: Two crews. One standard.",
+  "path": "construction-4-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "construction-5-cta",
+  "type": "cta",
+  "genre": "construction",
+  "tags": [
+   "construction",
+   "cta"
+  ],
+  "description": "construction cta: Five stages. No surprises at stage four.",
+  "path": "construction-5-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "construction-6-cta",
+  "type": "cta",
+  "genre": "construction",
+  "tags": [
+   "construction",
+   "cta"
+  ],
+  "description": "construction cta: Projects, with their status",
+  "path": "construction-6-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "construction-7-cta",
+  "type": "cta",
+  "genre": "construction",
+  "tags": [
+   "construction",
+   "cta"
+  ],
+  "description": "construction cta: The boring paperwork that protects you",
+  "path": "construction-7-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "construction-8-contact",
+  "type": "contact",
+  "genre": "construction",
+  "tags": [
+   "construction",
+   "contact"
+  ],
+  "description": "construction contact: Walk a live site before you sign anything.",
+  "path": "construction-8-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "construction-9-footer",
+  "type": "footer",
+  "genre": "construction",
+  "tags": [
+   "construction",
+   "footer"
+  ],
+  "description": "construction footer",
+  "path": "construction-9-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "education-2-1-nav",
+  "type": "nav",
+  "genre": "education",
+  "tags": [
+   "education",
+   "nav",
+   "prospectus"
+  ],
+  "description": "education nav",
+  "path": "education-2-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Public+Sans:wght@400;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "education-2-2-hero",
+  "type": "hero",
+  "genre": "education",
+  "tags": [
+   "education",
+   "hero",
+   "prospectus"
+  ],
+  "description": "education hero: Read deeply. Argue well. Leave better.",
+  "path": "education-2-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Public+Sans:wght@400;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "education-2-3-about",
+  "type": "about",
+  "genre": "education",
+  "tags": [
+   "about",
+   "education",
+   "prospectus"
+  ],
+  "description": "education about: Three schools, taught in seminar",
+  "path": "education-2-3-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Public+Sans:wght@400;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "education-2-4-about",
+  "type": "about",
+  "genre": "education",
+  "tags": [
+   "about",
+   "education",
+   "prospectus"
+  ],
+  "description": "education about: The academic calendar for entry",
+  "path": "education-2-4-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Public+Sans:wght@400;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "education-2-5-gallery",
+  "type": "gallery",
+  "genre": "education",
+  "tags": [
+   "education",
+   "gallery",
+   "prospectus"
+  ],
+  "description": "education gallery: Four years, fully resident",
+  "path": "education-2-5-gallery.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Public+Sans:wght@400;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "education-2-6-cta",
+  "type": "cta",
+  "genre": "education",
+  "tags": [
+   "cta",
+   "education",
+   "prospectus"
+  ],
+  "description": "education cta: The prospectus answers what this page cannot.",
+  "path": "education-2-6-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Public+Sans:wght@400;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "education-2-7-footer",
+  "type": "footer",
+  "genre": "education",
+  "tags": [
+   "education",
+   "footer",
+   "prospectus"
+  ],
+  "description": "education footer",
+  "path": "education-2-7-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Public+Sans:wght@400;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "education-3-1-nav",
+  "type": "nav",
+  "genre": "education",
+  "tags": [
+   "course",
+   "education",
+   "nav",
+   "open"
+  ],
+  "description": "education nav",
+  "path": "education-3-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap"
+  ]
+ },
+ {
+  "id": "education-3-2-hero",
+  "type": "hero",
+  "genre": "education",
+  "tags": [
+   "course",
+   "education",
+   "hero",
+   "open"
+  ],
+  "description": "education hero: Learn to ship, not just watch.",
+  "path": "education-3-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap"
+  ]
+ },
+ {
+  "id": "education-3-3-cta",
+  "type": "cta",
+  "genre": "education",
+  "tags": [
+   "course",
+   "cta",
+   "education",
+   "open"
+  ],
+  "description": "education cta: Three tracks. Every one ends with real work.",
+  "path": "education-3-3-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap"
+  ]
+ },
+ {
+  "id": "education-3-4-cta",
+  "type": "cta",
+  "genre": "education",
+  "tags": [
+   "course",
+   "cta",
+   "education",
+   "open"
+  ],
+  "description": "education cta: Every module, every lesson, no mystery",
+  "path": "education-3-4-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap"
+  ]
+ },
+ {
+  "id": "education-3-5-cta",
+  "type": "cta",
+  "genre": "education",
+  "tags": [
+   "course",
+   "cta",
+   "education",
+   "open"
+  ],
+  "description": "education cta: Graduates, counted honestly",
+  "path": "education-3-5-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap"
+  ]
+ },
+ {
+  "id": "education-3-6-cta",
+  "type": "cta",
+  "genre": "education",
+  "tags": [
+   "course",
+   "cta",
+   "education",
+   "open"
+  ],
+  "description": "education cta: Cohort 14 starts 4 August. Seats are capped at 30.",
+  "path": "education-3-6-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap"
+  ]
+ },
+ {
+  "id": "education-3-7-footer",
+  "type": "footer",
+  "genre": "education",
+  "tags": [
+   "course",
+   "education",
+   "footer",
+   "open"
+  ],
+  "description": "education footer",
+  "path": "education-3-7-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap"
+  ]
+ },
+ {
+  "id": "education-1-nav",
+  "type": "nav",
+  "genre": "education",
+  "tags": [
+   "education",
+   "nav"
+  ],
+  "description": "education nav",
+  "path": "education-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "education-2-hero",
+  "type": "hero",
+  "genre": "education",
+  "tags": [
+   "education",
+   "hero"
+  ],
+  "description": "education hero: Small batches. Real teachers. Marks follow.",
+  "path": "education-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "education-3-features",
+  "type": "features",
+  "genre": "education",
+  "tags": [
+   "education",
+   "features"
+  ],
+  "description": "education features: Batches starting this term",
+  "path": "education-3-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "education-4-stats",
+  "type": "stats",
+  "genre": "education",
+  "tags": [
+   "education",
+   "stats"
+  ],
+  "description": "education stats",
+  "path": "education-4-stats.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "education-5-about",
+  "type": "about",
+  "genre": "education",
+  "tags": [
+   "about",
+   "education"
+  ],
+  "description": "education about: A term at {{BRAND}}, step by step",
+  "path": "education-5-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "education-6-about",
+  "type": "about",
+  "genre": "education",
+  "tags": [
+   "about",
+   "education"
+  ],
+  "description": "education about: The people at the blackboard",
+  "path": "education-6-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "education-7-features",
+  "type": "features",
+  "genre": "education",
+  "tags": [
+   "education",
+   "features"
+  ],
+  "description": "education features: What each course actually covers",
+  "path": "education-7-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "education-8-cta",
+  "type": "cta",
+  "genre": "education",
+  "tags": [
+   "cta",
+   "education"
+  ],
+  "description": "education cta: Sit in a class before you pay for one",
+  "path": "education-8-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "education-9-footer",
+  "type": "footer",
+  "genre": "education",
+  "tags": [
+   "education",
+   "footer"
+  ],
+  "description": "education footer",
+  "path": "education-9-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-2-1-nav",
+  "type": "nav",
+  "genre": "fitness",
+  "tags": [
+   "fitness",
+   "nav",
+   "night",
+   "shift"
+  ],
+  "description": "fitness nav",
+  "path": "fitness-2-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-2-2-hero",
+  "type": "hero",
+  "genre": "fitness",
+  "tags": [
+   "fitness",
+   "hero",
+   "night",
+   "shift"
+  ],
+  "description": "fitness hero: The gym that keeps your hours.",
+  "path": "fitness-2-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-2-3-about",
+  "type": "about",
+  "genre": "fitness",
+  "tags": [
+   "about",
+   "fitness",
+   "night",
+   "shift"
+  ],
+  "description": "fitness about: Built for people who train off-peak",
+  "path": "fitness-2-3-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-2-4-gallery",
+  "type": "gallery",
+  "genre": "fitness",
+  "tags": [
+   "fitness",
+   "gallery",
+   "night",
+   "shift"
+  ],
+  "description": "fitness gallery: Pick your hour. It is on the board.",
+  "path": "fitness-2-4-gallery.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-2-5-pricing",
+  "type": "pricing",
+  "genre": "fitness",
+  "tags": [
+   "fitness",
+   "night",
+   "pricing",
+   "shift"
+  ],
+  "description": "fitness pricing: Two prices. No initiation fee.",
+  "path": "fitness-2-5-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-2-6-about",
+  "type": "about",
+  "genre": "fitness",
+  "tags": [
+   "about",
+   "fitness",
+   "night",
+   "shift"
+  ],
+  "description": "fitness about: Someone is always on the floor",
+  "path": "fitness-2-6-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-2-7-cta",
+  "type": "cta",
+  "genre": "fitness",
+  "tags": [
+   "cta",
+   "fitness",
+   "night",
+   "shift"
+  ],
+  "description": "fitness cta: It is always a good time to start.",
+  "path": "fitness-2-7-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-2-8-footer",
+  "type": "footer",
+  "genre": "fitness",
+  "tags": [
+   "fitness",
+   "footer",
+   "night",
+   "shift"
+  ],
+  "description": "fitness footer",
+  "path": "fitness-2-8-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-3-1-nav",
+  "type": "nav",
+  "genre": "fitness",
+  "tags": [
+   "calm",
+   "fitness",
+   "nav",
+   "studio"
+  ],
+  "description": "fitness nav",
+  "path": "fitness-3-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Karla:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-3-2-hero",
+  "type": "hero",
+  "genre": "fitness",
+  "tags": [
+   "calm",
+   "fitness",
+   "hero",
+   "studio"
+  ],
+  "description": "fitness hero: Move at the pace of your breath.",
+  "path": "fitness-3-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Karla:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-3-3-about",
+  "type": "about",
+  "genre": "fitness",
+  "tags": [
+   "about",
+   "calm",
+   "fitness",
+   "studio"
+  ],
+  "description": "fitness about: Three quiet rules we never break",
+  "path": "fitness-3-3-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Karla:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-3-4-features",
+  "type": "features",
+  "genre": "fitness",
+  "tags": [
+   "calm",
+   "features",
+   "fitness",
+   "studio"
+  ],
+  "description": "fitness features: Classes, paced like a long exhale",
+  "path": "fitness-3-4-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Karla:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-3-5-features",
+  "type": "features",
+  "genre": "fitness",
+  "tags": [
+   "calm",
+   "features",
+   "fitness",
+   "studio"
+  ],
+  "description": "fitness features: A converted weaving atelier on a quiet courtyard",
+  "path": "fitness-3-5-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Karla:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-3-6-contact",
+  "type": "contact",
+  "genre": "fitness",
+  "tags": [
+   "calm",
+   "contact",
+   "fitness",
+   "studio"
+  ],
+  "description": "fitness contact: Arrive early, leave slowly",
+  "path": "fitness-3-6-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Karla:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-3-7-cta",
+  "type": "cta",
+  "genre": "fitness",
+  "tags": [
+   "calm",
+   "cta",
+   "fitness",
+   "studio"
+  ],
+  "description": "fitness cta: The mat is ready. The room is quiet.",
+  "path": "fitness-3-7-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Karla:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-3-8-footer",
+  "type": "footer",
+  "genre": "fitness",
+  "tags": [
+   "calm",
+   "fitness",
+   "footer",
+   "studio"
+  ],
+  "description": "fitness footer",
+  "path": "fitness-3-8-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Karla:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-1-nav",
+  "type": "nav",
+  "genre": "fitness",
+  "tags": [
+   "fitness",
+   "nav"
+  ],
+  "description": "fitness nav",
+  "path": "fitness-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-2-hero",
+  "type": "hero",
+  "genre": "fitness",
+  "tags": [
+   "fitness",
+   "hero"
+  ],
+  "description": "fitness hero: Show up.Lift heavy.Leave taller.",
+  "path": "fitness-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-3-features",
+  "type": "features",
+  "genre": "fitness",
+  "tags": [
+   "features",
+   "fitness"
+  ],
+  "description": "fitness features",
+  "path": "fitness-3-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-4-about",
+  "type": "about",
+  "genre": "fitness",
+  "tags": [
+   "about",
+   "fitness"
+  ],
+  "description": "fitness about: Pick your poison",
+  "path": "fitness-4-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-5-about",
+  "type": "about",
+  "genre": "fitness",
+  "tags": [
+   "about",
+   "fitness"
+  ],
+  "description": "fitness about: Class timetable",
+  "path": "fitness-5-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-6-about",
+  "type": "about",
+  "genre": "fitness",
+  "tags": [
+   "about",
+   "fitness"
+  ],
+  "description": "fitness about: The people on your rack",
+  "path": "fitness-6-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-7-pricing",
+  "type": "pricing",
+  "genre": "fitness",
+  "tags": [
+   "fitness",
+   "pricing"
+  ],
+  "description": "fitness pricing: Simple rates, no lock-in",
+  "path": "fitness-7-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-8-features",
+  "type": "features",
+  "genre": "fitness",
+  "tags": [
+   "features",
+   "fitness"
+  ],
+  "description": "fitness features: First-visit questions",
+  "path": "fitness-8-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-9-cta",
+  "type": "cta",
+  "genre": "fitness",
+  "tags": [
+   "cta",
+   "fitness"
+  ],
+  "description": "fitness cta: Your trial week starts Monday.",
+  "path": "fitness-9-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-10-footer",
+  "type": "footer",
+  "genre": "fitness",
+  "tags": [
+   "fitness",
+   "footer"
+  ],
+  "description": "fitness footer",
+  "path": "fitness-10-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "generic-2-1-nav",
+  "type": "nav",
+  "genre": "generic",
+  "tags": [
+   "generic",
+   "mono",
+   "nav",
+   "sheet"
+  ],
+  "description": "generic nav",
+  "path": "generic-2-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Inter:wght@400;500;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "generic-2-2-hero",
+  "type": "hero",
+  "genre": "generic",
+  "tags": [
+   "generic",
+   "hero",
+   "mono",
+   "sheet"
+  ],
+  "description": "generic hero: Plain scope. Fixed price. Dates we actually hit.",
+  "path": "generic-2-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Inter:wght@400;500;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "generic-2-3-features",
+  "type": "features",
+  "genre": "generic",
+  "tags": [
+   "features",
+   "generic",
+   "mono",
+   "sheet"
+  ],
+  "description": "generic features: What we do, in the words a customer would use.",
+  "path": "generic-2-3-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Inter:wght@400;500;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "generic-2-4-about",
+  "type": "about",
+  "genre": "generic",
+  "tags": [
+   "about",
+   "generic",
+   "mono",
+   "sheet"
+  ],
+  "description": "generic about: Every job runs the same four steps.",
+  "path": "generic-2-4-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Inter:wght@400;500;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "generic-2-5-about",
+  "type": "about",
+  "genre": "generic",
+  "tags": [
+   "about",
+   "generic",
+   "mono",
+   "sheet"
+  ],
+  "description": "generic about: The parts we put in writing.",
+  "path": "generic-2-5-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Inter:wght@400;500;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "generic-2-6-contact",
+  "type": "contact",
+  "genre": "generic",
+  "tags": [
+   "contact",
+   "generic",
+   "mono",
+   "sheet"
+  ],
+  "description": "generic contact: Send the job. Get a number.",
+  "path": "generic-2-6-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Inter:wght@400;500;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "generic-2-7-footer",
+  "type": "footer",
+  "genre": "generic",
+  "tags": [
+   "footer",
+   "generic",
+   "mono",
+   "sheet"
+  ],
+  "description": "generic footer",
+  "path": "generic-2-7-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Inter:wght@400;500;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "generic-3-1-nav",
+  "type": "nav",
+  "genre": "generic",
+  "tags": [
+   "block",
+   "generic",
+   "nav",
+   "vivid"
+  ],
+  "description": "generic nav",
+  "path": "generic-3-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&display=swap"
+  ]
+ },
+ {
+  "id": "generic-3-2-hero",
+  "type": "hero",
+  "genre": "generic",
+  "tags": [
+   "block",
+   "generic",
+   "hero",
+   "vivid"
+  ],
+  "description": "generic hero: Done. Like you meant it.",
+  "path": "generic-3-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&display=swap"
+  ]
+ },
+ {
+  "id": "generic-3-3-features",
+  "type": "features",
+  "genre": "generic",
+  "tags": [
+   "block",
+   "features",
+   "generic",
+   "vivid"
+  ],
+  "description": "generic features: Three things. Done properly.",
+  "path": "generic-3-3-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&display=swap"
+  ]
+ },
+ {
+  "id": "generic-3-4-about",
+  "type": "about",
+  "genre": "generic",
+  "tags": [
+   "about",
+   "block",
+   "generic",
+   "vivid"
+  ],
+  "description": "generic about: You tell us the job",
+  "path": "generic-3-4-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&display=swap"
+  ]
+ },
+ {
+  "id": "generic-3-5-stats",
+  "type": "stats",
+  "genre": "generic",
+  "tags": [
+   "block",
+   "generic",
+   "stats",
+   "vivid"
+  ],
+  "description": "generic stats: The line customers repeat",
+  "path": "generic-3-5-stats.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&display=swap"
+  ]
+ },
+ {
+  "id": "generic-3-6-cta",
+  "type": "cta",
+  "genre": "generic",
+  "tags": [
+   "block",
+   "cta",
+   "generic",
+   "vivid"
+  ],
+  "description": "generic cta: Say the word.",
+  "path": "generic-3-6-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&display=swap"
+  ]
+ },
+ {
+  "id": "generic-3-7-footer",
+  "type": "footer",
+  "genre": "generic",
+  "tags": [
+   "block",
+   "footer",
+   "generic",
+   "vivid"
+  ],
+  "description": "generic footer",
+  "path": "generic-3-7-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&display=swap"
+  ]
+ },
+ {
+  "id": "generic-1-nav",
+  "type": "nav",
+  "genre": "generic",
+  "tags": [
+   "generic",
+   "nav"
+  ],
+  "description": "generic nav",
+  "path": "generic-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "generic-2-hero",
+  "type": "hero",
+  "genre": "generic",
+  "tags": [
+   "generic",
+   "hero"
+  ],
+  "description": "generic hero: The work done properly, the first time.",
+  "path": "generic-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "generic-3-stats",
+  "type": "stats",
+  "genre": "generic",
+  "tags": [
+   "generic",
+   "stats"
+  ],
+  "description": "generic stats",
+  "path": "generic-3-stats.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "generic-4-cta",
+  "type": "cta",
+  "genre": "generic",
+  "tags": [
+   "cta",
+   "generic"
+  ],
+  "description": "generic cta: Three things, done well",
+  "path": "generic-4-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "generic-5-cta",
+  "type": "cta",
+  "genre": "generic",
+  "tags": [
+   "cta",
+   "generic"
+  ],
+  "description": "generic cta: A short, true story about how you work",
+  "path": "generic-5-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "generic-6-faq",
+  "type": "faq",
+  "genre": "generic",
+  "tags": [
+   "faq",
+   "generic"
+  ],
+  "description": "generic faq: Answer the questions you hear every week",
+  "path": "generic-6-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "generic-7-contact",
+  "type": "contact",
+  "genre": "generic",
+  "tags": [
+   "contact",
+   "generic"
+  ],
+  "description": "generic contact: Ready when you are.",
+  "path": "generic-7-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "generic-8-footer",
+  "type": "footer",
+  "genre": "generic",
+  "tags": [
+   "footer",
+   "generic"
+  ],
+  "description": "generic footer",
+  "path": "generic-8-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "medical-2-1-nav",
+  "type": "nav",
+  "genre": "medical",
+  "tags": [
+   "care",
+   "family",
+   "medical",
+   "nav"
+  ],
+  "description": "medical nav",
+  "path": "medical-2-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "medical-2-2-hero",
+  "type": "hero",
+  "genre": "medical",
+  "tags": [
+   "care",
+   "family",
+   "hero",
+   "medical"
+  ],
+  "description": "medical hero: One clinic for every age under your roof.",
+  "path": "medical-2-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "medical-2-3-about",
+  "type": "about",
+  "genre": "medical",
+  "tags": [
+   "about",
+   "care",
+   "family",
+   "medical"
+  ],
+  "description": "medical about: From first vaccines to golden years",
+  "path": "medical-2-3-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "medical-2-4-about",
+  "type": "about",
+  "genre": "medical",
+  "tags": [
+   "about",
+   "care",
+   "family",
+   "medical"
+  ],
+  "description": "medical about: Three doctors. One family file.",
+  "path": "medical-2-4-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "medical-2-5-contact",
+  "type": "contact",
+  "genre": "medical",
+  "tags": [
+   "care",
+   "contact",
+   "family",
+   "medical"
+  ],
+  "description": "medical contact: Small things that make visits easier",
+  "path": "medical-2-5-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "medical-2-6-contact",
+  "type": "contact",
+  "genre": "medical",
+  "tags": [
+   "care",
+   "contact",
+   "family",
+   "medical"
+  ],
+  "description": "medical contact: New to the neighbourhood? First visit is half price.",
+  "path": "medical-2-6-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "medical-2-7-footer",
+  "type": "footer",
+  "genre": "medical",
+  "tags": [
+   "care",
+   "family",
+   "footer",
+   "medical"
+  ],
+  "description": "medical footer",
+  "path": "medical-2-7-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "medical-3-1-nav",
+  "type": "nav",
+  "genre": "medical",
+  "tags": [
+   "grid",
+   "medical",
+   "nav",
+   "specialist"
+  ],
+  "description": "medical nav",
+  "path": "medical-3-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "medical-3-2-hero",
+  "type": "hero",
+  "genre": "medical",
+  "tags": [
+   "grid",
+   "hero",
+   "medical",
+   "specialist"
+  ],
+  "description": "medical hero: Nine departments. One standard of evidence.",
+  "path": "medical-3-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "medical-3-3-contact",
+  "type": "contact",
+  "genre": "medical",
+  "tags": [
+   "contact",
+   "grid",
+   "medical",
+   "specialist"
+  ],
+  "description": "medical contact: Find your department, doctor and floor",
+  "path": "medical-3-3-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "medical-3-4-features",
+  "type": "features",
+  "genre": "medical",
+  "tags": [
+   "features",
+   "grid",
+   "medical",
+   "specialist"
+  ],
+  "description": "medical features: Reports you can act on, the same day",
+  "path": "medical-3-4-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "medical-3-5-features",
+  "type": "features",
+  "genre": "medical",
+  "tags": [
+   "features",
+   "grid",
+   "medical",
+   "specialist"
+  ],
+  "description": "medical features: Numbers we report to the board, shared with you",
+  "path": "medical-3-5-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "medical-3-6-cta",
+  "type": "cta",
+  "genre": "medical",
+  "tags": [
+   "cta",
+   "grid",
+   "medical",
+   "specialist"
+  ],
+  "description": "medical cta: Book an OPD slot with a named consultant",
+  "path": "medical-3-6-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "medical-3-7-footer",
+  "type": "footer",
+  "genre": "medical",
+  "tags": [
+   "footer",
+   "grid",
+   "medical",
+   "specialist"
+  ],
+  "description": "medical footer",
+  "path": "medical-3-7-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "medical-1-nav",
+  "type": "nav",
+  "genre": "medical",
+  "tags": [
+   "medical",
+   "nav"
+  ],
+  "description": "medical nav",
+  "path": "medical-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Instrument+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "medical-2-hero",
+  "type": "hero",
+  "genre": "medical",
+  "tags": [
+   "hero",
+   "medical"
+  ],
+  "description": "medical hero: Walk in unwell.Walk out with answers, the same day.",
+  "path": "medical-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Instrument+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "medical-3-features",
+  "type": "features",
+  "genre": "medical",
+  "tags": [
+   "features",
+   "medical"
+  ],
+  "description": "medical features: One clinic, six specialities",
+  "path": "medical-3-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Instrument+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "medical-4-testimonials",
+  "type": "testimonials",
+  "genre": "medical",
+  "tags": [
+   "medical",
+   "testimonials"
+  ],
+  "description": "medical testimonials",
+  "path": "medical-4-testimonials.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Instrument+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "medical-5-gallery",
+  "type": "gallery",
+  "genre": "medical",
+  "tags": [
+   "gallery",
+   "medical"
+  ],
+  "description": "medical gallery: The boring parts, handled properly",
+  "path": "medical-5-gallery.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Instrument+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "medical-6-about",
+  "type": "about",
+  "genre": "medical",
+  "tags": [
+   "about",
+   "medical"
+  ],
+  "description": "medical about: Doctors who sit here, not visiting cards",
+  "path": "medical-6-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Instrument+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "medical-7-faq",
+  "type": "faq",
+  "genre": "medical",
+  "tags": [
+   "faq",
+   "medical"
+  ],
+  "description": "medical faq: Things patients ask at the front desk",
+  "path": "medical-7-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Instrument+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "medical-8-footer",
+  "type": "footer",
+  "genre": "medical",
+  "tags": [
+   "footer",
+   "medical"
+  ],
+  "description": "medical footer",
+  "path": "medical-8-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Instrument+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-2-1-nav",
+  "type": "nav",
+  "genre": "portfolio",
+  "tags": [
+   "index",
+   "nav",
+   "portfolio",
+   "type"
+  ],
+  "description": "portfolio nav",
+  "path": "portfolio-2-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-2-2-hero",
+  "type": "hero",
+  "genre": "portfolio",
+  "tags": [
+   "hero",
+   "index",
+   "portfolio",
+   "type"
+  ],
+  "description": "portfolio hero: Words,grids &amp;stubborn ideas.",
+  "path": "portfolio-2-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-2-3-features",
+  "type": "features",
+  "genre": "portfolio",
+  "tags": [
+   "features",
+   "index",
+   "portfolio",
+   "type"
+  ],
+  "description": "portfolio features: The index",
+  "path": "portfolio-2-3-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-2-4-about",
+  "type": "about",
+  "genre": "portfolio",
+  "tags": [
+   "about",
+   "index",
+   "portfolio",
+   "type"
+  ],
+  "description": "portfolio about: Three things, done slowly, charged fairly.",
+  "path": "portfolio-2-4-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-2-5-features",
+  "type": "features",
+  "genre": "portfolio",
+  "tags": [
+   "features",
+   "index",
+   "portfolio",
+   "type"
+  ],
+  "description": "portfolio features",
+  "path": "portfolio-2-5-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-2-6-about",
+  "type": "about",
+  "genre": "portfolio",
+  "tags": [
+   "about",
+   "index",
+   "portfolio",
+   "type"
+  ],
+  "description": "portfolio about",
+  "path": "portfolio-2-6-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-2-7-contact",
+  "type": "contact",
+  "genre": "portfolio",
+  "tags": [
+   "contact",
+   "index",
+   "portfolio",
+   "type"
+  ],
+  "description": "portfolio contact: Say it in one sentence.We will take it from there.",
+  "path": "portfolio-2-7-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-2-8-footer",
+  "type": "footer",
+  "genre": "portfolio",
+  "tags": [
+   "footer",
+   "index",
+   "portfolio",
+   "type"
+  ],
+  "description": "portfolio footer",
+  "path": "portfolio-2-8-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-3-1-nav",
+  "type": "nav",
+  "genre": "portfolio",
+  "tags": [
+   "dark",
+   "gallery",
+   "nav",
+   "portfolio"
+  ],
+  "description": "portfolio nav",
+  "path": "portfolio-3-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-3-2-hero",
+  "type": "hero",
+  "genre": "portfolio",
+  "tags": [
+   "dark",
+   "gallery",
+   "hero",
+   "portfolio"
+  ],
+  "description": "portfolio hero: Pictures made slowly,in places that empty out at dusk.",
+  "path": "portfolio-3-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-3-3-gallery",
+  "type": "gallery",
+  "genre": "portfolio",
+  "tags": [
+   "dark",
+   "gallery",
+   "portfolio"
+  ],
+  "description": "portfolio gallery: Grid at Rest",
+  "path": "portfolio-3-3-gallery.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-3-4-testimonials",
+  "type": "testimonials",
+  "genre": "portfolio",
+  "tags": [
+   "dark",
+   "gallery",
+   "portfolio",
+   "testimonials"
+  ],
+  "description": "portfolio testimonials",
+  "path": "portfolio-3-4-testimonials.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-3-5-pricing",
+  "type": "pricing",
+  "genre": "portfolio",
+  "tags": [
+   "dark",
+   "gallery",
+   "portfolio",
+   "pricing"
+  ],
+  "description": "portfolio pricing: Seven prints per negative, then it rests.",
+  "path": "portfolio-3-5-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-3-6-about",
+  "type": "about",
+  "genre": "portfolio",
+  "tags": [
+   "about",
+   "dark",
+   "gallery",
+   "portfolio"
+  ],
+  "description": "portfolio about: One camera, one lens, and the discipline to wait for the light instead of fixing",
+  "path": "portfolio-3-6-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-3-7-gallery",
+  "type": "gallery",
+  "genre": "portfolio",
+  "tags": [
+   "dark",
+   "gallery",
+   "portfolio"
+  ],
+  "description": "portfolio gallery",
+  "path": "portfolio-3-7-gallery.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-3-8-contact",
+  "type": "contact",
+  "genre": "portfolio",
+  "tags": [
+   "contact",
+   "dark",
+   "gallery",
+   "portfolio"
+  ],
+  "description": "portfolio contact: The darkroom light is on.",
+  "path": "portfolio-3-8-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-3-9-footer",
+  "type": "footer",
+  "genre": "portfolio",
+  "tags": [
+   "dark",
+   "footer",
+   "gallery",
+   "portfolio"
+  ],
+  "description": "portfolio footer",
+  "path": "portfolio-3-9-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-1-nav",
+  "type": "nav",
+  "genre": "portfolio",
+  "tags": [
+   "nav",
+   "portfolio"
+  ],
+  "description": "portfolio nav",
+  "path": "portfolio-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Karla:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-2-hero",
+  "type": "hero",
+  "genre": "portfolio",
+  "tags": [
+   "hero",
+   "portfolio"
+  ],
+  "description": "portfolio hero: {{BRAND}}",
+  "path": "portfolio-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Karla:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-3-gallery",
+  "type": "gallery",
+  "genre": "portfolio",
+  "tags": [
+   "gallery",
+   "portfolio"
+  ],
+  "description": "portfolio gallery: Selected work",
+  "path": "portfolio-3-gallery.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Karla:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-4-testimonials",
+  "type": "testimonials",
+  "genre": "portfolio",
+  "tags": [
+   "portfolio",
+   "testimonials"
+  ],
+  "description": "portfolio testimonials",
+  "path": "portfolio-4-testimonials.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Karla:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-5-features",
+  "type": "features",
+  "genre": "portfolio",
+  "tags": [
+   "features",
+   "portfolio"
+  ],
+  "description": "portfolio features: Where the work has lived",
+  "path": "portfolio-5-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Karla:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-6-features",
+  "type": "features",
+  "genre": "portfolio",
+  "tags": [
+   "features",
+   "portfolio"
+  ],
+  "description": "portfolio features: Ways we can work together",
+  "path": "portfolio-6-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Karla:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-7-contact",
+  "type": "contact",
+  "genre": "portfolio",
+  "tags": [
+   "contact",
+   "portfolio"
+  ],
+  "description": "portfolio contact: The studio door is open.",
+  "path": "portfolio-7-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Karla:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-8-footer",
+  "type": "footer",
+  "genre": "portfolio",
+  "tags": [
+   "footer",
+   "portfolio"
+  ],
+  "description": "portfolio footer",
+  "path": "portfolio-8-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Karla:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "saas-2-1-nav",
+  "type": "nav",
+  "genre": "saas",
+  "tags": [
+   "docs",
+   "nav",
+   "saas",
+   "terminal"
+  ],
+  "description": "saas nav",
+  "path": "saas-2-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-2-2-hero",
+  "type": "hero",
+  "genre": "saas",
+  "tags": [
+   "docs",
+   "hero",
+   "saas",
+   "terminal"
+  ],
+  "description": "saas hero: Preview databases for every branch, from one command.",
+  "path": "saas-2-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-2-3-features",
+  "type": "features",
+  "genre": "saas",
+  "tags": [
+   "docs",
+   "features",
+   "saas",
+   "terminal"
+  ],
+  "description": "saas features: Built for the loop you already run",
+  "path": "saas-2-3-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-2-4-features",
+  "type": "features",
+  "genre": "saas",
+  "tags": [
+   "docs",
+   "features",
+   "saas",
+   "terminal"
+  ],
+  "description": "saas features: Four endpoints do most of the work",
+  "path": "saas-2-4-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-2-5-features",
+  "type": "features",
+  "genre": "saas",
+  "tags": [
+   "docs",
+   "features",
+   "saas",
+   "terminal"
+  ],
+  "description": "saas features: Docs written like changelogs, not brochures",
+  "path": "saas-2-5-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-2-6-faq",
+  "type": "faq",
+  "genre": "saas",
+  "tags": [
+   "docs",
+   "faq",
+   "saas",
+   "terminal"
+  ],
+  "description": "saas faq: Questions from real support threads",
+  "path": "saas-2-6-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-2-7-cta",
+  "type": "cta",
+  "genre": "saas",
+  "tags": [
+   "cta",
+   "docs",
+   "saas",
+   "terminal"
+  ],
+  "description": "saas cta: Your next branch deserves its own database.",
+  "path": "saas-2-7-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-2-8-footer",
+  "type": "footer",
+  "genre": "saas",
+  "tags": [
+   "docs",
+   "footer",
+   "saas",
+   "terminal"
+  ],
+  "description": "saas footer",
+  "path": "saas-2-8-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-3-1-nav",
+  "type": "nav",
+  "genre": "saas",
+  "tags": [
+   "enterprise",
+   "ledger",
+   "nav",
+   "saas"
+  ],
+  "description": "saas nav",
+  "path": "saas-3-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-3-2-hero",
+  "type": "hero",
+  "genre": "saas",
+  "tags": [
+   "enterprise",
+   "hero",
+   "ledger",
+   "saas"
+  ],
+  "description": "saas hero: Every supplier decision, documented like it will be audited.",
+  "path": "saas-3-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-3-3-features",
+  "type": "features",
+  "genre": "saas",
+  "tags": [
+   "enterprise",
+   "features",
+   "ledger",
+   "saas"
+  ],
+  "description": "saas features: Four registers, one authoritative record",
+  "path": "saas-3-3-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-3-4-stats",
+  "type": "stats",
+  "genre": "saas",
+  "tags": [
+   "enterprise",
+   "ledger",
+   "saas",
+   "stats"
+  ],
+  "description": "saas stats",
+  "path": "saas-3-4-stats.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-3-5-pricing",
+  "type": "pricing",
+  "genre": "saas",
+  "tags": [
+   "enterprise",
+   "ledger",
+   "pricing",
+   "saas"
+  ],
+  "description": "saas pricing: Priced like a line item, stated like one",
+  "path": "saas-3-5-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-3-6-features",
+  "type": "features",
+  "genre": "saas",
+  "tags": [
+   "enterprise",
+   "features",
+   "ledger",
+   "saas"
+  ],
+  "description": "saas features: Six weeks, stated in writing",
+  "path": "saas-3-6-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-3-7-contact",
+  "type": "contact",
+  "genre": "saas",
+  "tags": [
+   "contact",
+   "enterprise",
+   "ledger",
+   "saas"
+  ],
+  "description": "saas contact: Bring your messiest vendor file to the first call.",
+  "path": "saas-3-7-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-3-8-footer",
+  "type": "footer",
+  "genre": "saas",
+  "tags": [
+   "enterprise",
+   "footer",
+   "ledger",
+   "saas"
+  ],
+  "description": "saas footer",
+  "path": "saas-3-8-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-1-nav",
+  "type": "nav",
+  "genre": "saas",
+  "tags": [
+   "nav",
+   "saas"
+  ],
+  "description": "saas nav",
+  "path": "saas-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-2-hero",
+  "type": "hero",
+  "genre": "saas",
+  "tags": [
+   "hero",
+   "saas"
+  ],
+  "description": "saas hero: Ship every release like it is boring.",
+  "path": "saas-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-3-features",
+  "type": "features",
+  "genre": "saas",
+  "tags": [
+   "features",
+   "saas"
+  ],
+  "description": "saas features",
+  "path": "saas-3-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-4-about",
+  "type": "about",
+  "genre": "saas",
+  "tags": [
+   "about",
+   "saas"
+  ],
+  "description": "saas about: Merge to measured in four steps",
+  "path": "saas-4-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-5-features",
+  "type": "features",
+  "genre": "saas",
+  "tags": [
+   "features",
+   "saas"
+  ],
+  "description": "saas features: Bad deploys revert themselves",
+  "path": "saas-5-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-6-pricing",
+  "type": "pricing",
+  "genre": "saas",
+  "tags": [
+   "pricing",
+   "saas"
+  ],
+  "description": "saas pricing: Honest tiers, no seat traps",
+  "path": "saas-6-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-7-faq",
+  "type": "faq",
+  "genre": "saas",
+  "tags": [
+   "faq",
+   "saas"
+  ],
+  "description": "saas faq: Questions engineers actually ask",
+  "path": "saas-7-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-8-cta",
+  "type": "cta",
+  "genre": "saas",
+  "tags": [
+   "cta",
+   "saas"
+  ],
+  "description": "saas cta: Your next deploy could be the calm one.",
+  "path": "saas-8-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-9-footer",
+  "type": "footer",
+  "genre": "saas",
+  "tags": [
+   "footer",
+   "saas"
+  ],
+  "description": "saas footer",
+  "path": "saas-9-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "shop-2-1-nav",
+  "type": "nav",
+  "genre": "shop",
+  "tags": [
+   "lookbook",
+   "nav",
+   "shop"
+  ],
+  "description": "shop nav",
+  "path": "shop-2-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Mulish:wght@400;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "shop-2-2-hero",
+  "type": "hero",
+  "genre": "shop",
+  "tags": [
+   "hero",
+   "lookbook",
+   "shop"
+  ],
+  "description": "shop hero: Clothes cut for long light and longer dinners.",
+  "path": "shop-2-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Mulish:wght@400;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "shop-2-3-features",
+  "type": "features",
+  "genre": "shop",
+  "tags": [
+   "features",
+   "lookbook",
+   "shop"
+  ],
+  "description": "shop features",
+  "path": "shop-2-3-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Mulish:wght@400;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "shop-2-4-features",
+  "type": "features",
+  "genre": "shop",
+  "tags": [
+   "features",
+   "lookbook",
+   "shop"
+  ],
+  "description": "shop features: Look seven, worn to a gallery opening and then the night bus.",
+  "path": "shop-2-4-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Mulish:wght@400;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "shop-2-5-features",
+  "type": "features",
+  "genre": "shop",
+  "tags": [
+   "features",
+   "lookbook",
+   "shop"
+  ],
+  "description": "shop features: Twelve pieces, made once.",
+  "path": "shop-2-5-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Mulish:wght@400;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "shop-2-6-features",
+  "type": "features",
+  "genre": "shop",
+  "tags": [
+   "features",
+   "lookbook",
+   "shop"
+  ],
+  "description": "shop features",
+  "path": "shop-2-6-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Mulish:wght@400;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "shop-2-7-features",
+  "type": "features",
+  "genre": "shop",
+  "tags": [
+   "features",
+   "lookbook",
+   "shop"
+  ],
+  "description": "shop features: Try the whole issue on, by appointment.",
+  "path": "shop-2-7-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Mulish:wght@400;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "shop-2-8-features",
+  "type": "features",
+  "genre": "shop",
+  "tags": [
+   "features",
+   "lookbook",
+   "shop"
+  ],
+  "description": "shop features: Provenance printed inside",
+  "path": "shop-2-8-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Mulish:wght@400;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "shop-2-9-footer",
+  "type": "footer",
+  "genre": "shop",
+  "tags": [
+   "footer",
+   "lookbook",
+   "shop"
+  ],
+  "description": "shop footer",
+  "path": "shop-2-9-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Mulish:wght@400;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "shop-3-1-features",
+  "type": "features",
+  "genre": "shop",
+  "tags": [
+   "features",
+   "goods",
+   "shop",
+   "utility"
+  ],
+  "description": "shop features",
+  "path": "shop-3-1-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "shop-3-2-nav",
+  "type": "nav",
+  "genre": "shop",
+  "tags": [
+   "goods",
+   "nav",
+   "shop",
+   "utility"
+  ],
+  "description": "shop nav",
+  "path": "shop-3-2-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "shop-3-3-hero",
+  "type": "hero",
+  "genre": "shop",
+  "tags": [
+   "goods",
+   "hero",
+   "shop",
+   "utility"
+  ],
+  "description": "shop hero: Buy it once. Use it hard. Repair it free.",
+  "path": "shop-3-3-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "shop-3-4-gallery",
+  "type": "gallery",
+  "genre": "shop",
+  "tags": [
+   "gallery",
+   "goods",
+   "shop",
+   "utility"
+  ],
+  "description": "shop gallery: Current catalog",
+  "path": "shop-3-4-gallery.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "shop-3-5-features",
+  "type": "features",
+  "genre": "shop",
+  "tags": [
+   "features",
+   "goods",
+   "shop",
+   "utility"
+  ],
+  "description": "shop features: What every SKU must survive",
+  "path": "shop-3-5-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "shop-3-6-features",
+  "type": "features",
+  "genre": "shop",
+  "tags": [
+   "features",
+   "goods",
+   "shop",
+   "utility"
+  ],
+  "description": "shop features",
+  "path": "shop-3-6-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "shop-3-7-features",
+  "type": "features",
+  "genre": "shop",
+  "tags": [
+   "features",
+   "goods",
+   "shop",
+   "utility"
+  ],
+  "description": "shop features: No sales. No seasons. Just the sheet.",
+  "path": "shop-3-7-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "shop-3-8-footer",
+  "type": "footer",
+  "genre": "shop",
+  "tags": [
+   "footer",
+   "goods",
+   "shop",
+   "utility"
+  ],
+  "description": "shop footer",
+  "path": "shop-3-8-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "shop-1-nav",
+  "type": "nav",
+  "genre": "shop",
+  "tags": [
+   "nav",
+   "shop"
+  ],
+  "description": "shop nav",
+  "path": "shop-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Archivo:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "shop-2-hero",
+  "type": "hero",
+  "genre": "shop",
+  "tags": [
+   "hero",
+   "shop"
+  ],
+  "description": "shop hero: Walk in loud.Leave louder.",
+  "path": "shop-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Archivo:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "shop-3-about",
+  "type": "about",
+  "genre": "shop",
+  "tags": [
+   "about",
+   "shop"
+  ],
+  "description": "shop about",
+  "path": "shop-3-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Archivo:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "shop-4-gallery",
+  "type": "gallery",
+  "genre": "shop",
+  "tags": [
+   "gallery",
+   "shop"
+  ],
+  "description": "shop gallery: The drop, all 6 of it",
+  "path": "shop-4-gallery.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Archivo:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "shop-5-about",
+  "type": "about",
+  "genre": "shop",
+  "tags": [
+   "about",
+   "shop"
+  ],
+  "description": "shop about: One factory. Forty-one hands. Zero landfill colorways.",
+  "path": "shop-5-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Archivo:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "shop-6-testimonials",
+  "type": "testimonials",
+  "genre": "shop",
+  "tags": [
+   "shop",
+   "testimonials"
+  ],
+  "description": "shop testimonials",
+  "path": "shop-6-testimonials.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Archivo:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "shop-7-cta",
+  "type": "cta",
+  "genre": "shop",
+  "tags": [
+   "cta",
+   "shop"
+  ],
+  "description": "shop cta: Miss a drop once, never again.",
+  "path": "shop-7-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Archivo:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "shop-8-footer",
+  "type": "footer",
+  "genre": "shop",
+  "tags": [
+   "footer",
+   "shop"
+  ],
+  "description": "shop footer",
+  "path": "shop-8-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Archivo:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "travel-2-1-nav",
+  "type": "nav",
+  "genre": "travel",
+  "tags": [
+   "field",
+   "journal",
+   "nav",
+   "travel"
+  ],
+  "description": "travel nav",
+  "path": "travel-2-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bitter:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap"
+  ]
+ },
+ {
+  "id": "travel-2-2-hero",
+  "type": "hero",
+  "genre": "travel",
+  "tags": [
+   "field",
+   "hero",
+   "journal",
+   "travel"
+  ],
+  "description": "travel hero: Every trip we sell, we walked first.",
+  "path": "travel-2-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bitter:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap"
+  ]
+ },
+ {
+  "id": "travel-2-3-features",
+  "type": "features",
+  "genre": "travel",
+  "tags": [
+   "features",
+   "field",
+   "journal",
+   "travel"
+  ],
+  "description": "travel features: This season, dated and graded.",
+  "path": "travel-2-3-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bitter:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap"
+  ]
+ },
+ {
+  "id": "travel-2-4-features",
+  "type": "features",
+  "genre": "travel",
+  "tags": [
+   "features",
+   "field",
+   "journal",
+   "travel"
+  ],
+  "description": "travel features: Pulled from the guides' own rolls.",
+  "path": "travel-2-4-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bitter:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap"
+  ]
+ },
+ {
+  "id": "travel-2-5-features",
+  "type": "features",
+  "genre": "travel",
+  "tags": [
+   "features",
+   "field",
+   "journal",
+   "travel"
+  ],
+  "description": "travel features: What the price covers, line by line.",
+  "path": "travel-2-5-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bitter:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap"
+  ]
+ },
+ {
+  "id": "travel-2-6-cta",
+  "type": "cta",
+  "genre": "travel",
+  "tags": [
+   "cta",
+   "field",
+   "journal",
+   "travel"
+  ],
+  "description": "travel cta: Tell us your dates. We will mail back a real day sheet, not a pitch.",
+  "path": "travel-2-6-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bitter:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap"
+  ]
+ },
+ {
+  "id": "travel-2-7-footer",
+  "type": "footer",
+  "genre": "travel",
+  "tags": [
+   "field",
+   "footer",
+   "journal",
+   "travel"
+  ],
+  "description": "travel footer",
+  "path": "travel-2-7-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bitter:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap"
+  ]
+ },
+ {
+  "id": "travel-3-1-nav",
+  "type": "nav",
+  "genre": "travel",
+  "tags": [
+   "nav",
+   "resort",
+   "serene",
+   "travel"
+  ],
+  "description": "travel nav",
+  "path": "travel-3-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Karla:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "travel-3-2-hero",
+  "type": "hero",
+  "genre": "travel",
+  "tags": [
+   "hero",
+   "resort",
+   "serene",
+   "travel"
+  ],
+  "description": "travel hero: Arrive with plans. Lose them by morning.",
+  "path": "travel-3-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Karla:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "travel-3-3-features",
+  "type": "features",
+  "genre": "travel",
+  "tags": [
+   "features",
+   "resort",
+   "serene",
+   "travel"
+  ],
+  "description": "travel features: Eleven suites on a private cove. No lobby music, no schedule, no key cards jangl",
+  "path": "travel-3-3-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Karla:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "travel-3-4-gallery",
+  "type": "gallery",
+  "genre": "travel",
+  "tags": [
+   "gallery",
+   "resort",
+   "serene",
+   "travel"
+  ],
+  "description": "travel gallery: Three ways to sleep beside the water.",
+  "path": "travel-3-4-gallery.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Karla:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "travel-3-5-features",
+  "type": "features",
+  "genre": "travel",
+  "tags": [
+   "features",
+   "resort",
+   "serene",
+   "travel"
+  ],
+  "description": "travel features: Nothing is scheduled. Everything is ready.",
+  "path": "travel-3-5-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Karla:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "travel-3-6-features",
+  "type": "features",
+  "genre": "travel",
+  "tags": [
+   "features",
+   "resort",
+   "serene",
+   "travel"
+  ],
+  "description": "travel features",
+  "path": "travel-3-6-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Karla:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "travel-3-7-features",
+  "type": "features",
+  "genre": "travel",
+  "tags": [
+   "features",
+   "resort",
+   "serene",
+   "travel"
+  ],
+  "description": "travel features: We hold eleven keys. One of them can be yours.",
+  "path": "travel-3-7-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Karla:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "travel-3-8-footer",
+  "type": "footer",
+  "genre": "travel",
+  "tags": [
+   "footer",
+   "resort",
+   "serene",
+   "travel"
+  ],
+  "description": "travel footer",
+  "path": "travel-3-8-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Karla:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "travel-1-nav",
+  "type": "nav",
+  "genre": "travel",
+  "tags": [
+   "nav",
+   "travel"
+  ],
+  "description": "travel nav",
+  "path": "travel-1-nav.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "travel-2-hero",
+  "type": "hero",
+  "genre": "travel",
+  "tags": [
+   "hero",
+   "travel"
+  ],
+  "description": "travel hero: Go where the map creases.",
+  "path": "travel-2-hero.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "travel-3-about",
+  "type": "about",
+  "genre": "travel",
+  "tags": [
+   "about",
+   "travel"
+  ],
+  "description": "travel about",
+  "path": "travel-3-about.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "travel-4-features",
+  "type": "features",
+  "genre": "travel",
+  "tags": [
+   "features",
+   "travel"
+  ],
+  "description": "travel features: Five days in Torres del Paine, hour by honest hour.",
+  "path": "travel-4-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "travel-5-features",
+  "type": "features",
+  "genre": "travel",
+  "tags": [
+   "features",
+   "travel"
+  ],
+  "description": "travel features: Where next season points",
+  "path": "travel-5-features.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "travel-6-gallery",
+  "type": "gallery",
+  "genre": "travel",
+  "tags": [
+   "gallery",
+   "travel"
+  ],
+  "description": "travel gallery: Elena has crossed the Paine massif 214 times. She still packs extra chocolate fo",
+  "path": "travel-6-gallery.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "travel-7-testimonials",
+  "type": "testimonials",
+  "genre": "travel",
+  "tags": [
+   "testimonials",
+   "travel"
+  ],
+  "description": "travel testimonials",
+  "path": "travel-7-testimonials.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "travel-8-faq",
+  "type": "faq",
+  "genre": "travel",
+  "tags": [
+   "faq",
+   "travel"
+  ],
+  "description": "travel faq: The questions everyone asks on the first call.",
+  "path": "travel-8-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "travel-9-cta",
+  "type": "cta",
+  "genre": "travel",
+  "tags": [
+   "cta",
+   "travel"
+  ],
+  "description": "travel cta: The best departures sell out a season early.",
+  "path": "travel-9-cta.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "travel-10-footer",
+  "type": "footer",
+  "genre": "travel",
+  "tags": [
+   "footer",
+   "travel"
+  ],
+  "description": "travel footer",
+  "path": "travel-10-footer.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap"
+  ]
+ }
+]

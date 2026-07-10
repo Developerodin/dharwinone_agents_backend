@@ -1,0 +1,18 @@
+<style>.c-saas-2-4{--dim:color-mix(in srgb, var(--ink) 58%, var(--bg) 42%);--on-accent:#0b1310;--panel:color-mix(in srgb, var(--soft) 80%, var(--bg) 20%);} .c-saas-2-4{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);font-size:1.0625rem;line-height:1.65;} .c-saas-2-4 p{max-width:66ch;} .c-saas-2-4 .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);} .c-saas-2-4 .sec-title{font-size:clamp(1.7rem,3vw,2.4rem);font-weight:700;} .c-saas-2-4 .muted{color:var(--muted);} .c-saas-2-4 .api-wrap{border:1px solid var(--line);border-radius:10px;overflow-x:auto;background:var(--panel);} .c-saas-2-4 table.api{width:100%;border-collapse:collapse;font-size:.88rem;min-width:640px;margin:0;} .c-saas-2-4 table.api th{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);font-weight:500;text-align:left;padding:.8rem 1.1rem;border-bottom:1px solid var(--line);} .c-saas-2-4 table.api td{padding:.85rem 1.1rem;border-bottom:1px solid var(--line);color:var(--muted);vertical-align:top;} .c-saas-2-4 table.api tr:last-child td{border-bottom:none;} .c-saas-2-4 table.api code{font-family:'JetBrains Mono',monospace;color:var(--ink);background:var(--soft);border:1px solid var(--line);border-radius:4px;padding:.1rem .45rem;font-size:.82rem;white-space:nowrap;} .c-saas-2-4 .verb{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.75rem;padding:.14rem .5rem;border-radius:4px;border:1px solid var(--line);color:var(--ink);background:var(--soft);} .c-saas-2-4 .verb.get{color:var(--accent);border-color:color-mix(in srgb, var(--accent) 40%, var(--bg));} .c-saas-2-4 details p{color:var(--muted);margin:.6rem 0 0;font-size:.95rem;}</style>
+<section id="api" class="c-saas-2-4 container" style="padding:1rem 0 5.5rem;">
+  <p class="eyebrow">API reference</p>
+  <h2 class="sec-title mb-2">Four endpoints do most of the work</h2>
+  <p class="muted" style="margin-bottom:2rem;">Everything the CLI does is a documented REST call. Tokens are scoped per project, and every response includes a request id for support.</p>
+  <div class="api-wrap">
+    <table class="api">
+      <thead><tr><th>Method</th><th>Endpoint</th><th>Description</th><th>Rate limit</th></tr></thead>
+      <tbody>
+        <tr><td><span class="verb">POST</span></td><td><code>/v1/branches</code></td><td>Fork a new branch from a snapshot or a live primary. Returns connection string and TTL.</td><td>60 / min</td></tr>
+        <tr><td><span class="verb get">GET</span></td><td><code>/v1/branches/:id</code></td><td>Branch status, storage delta, and parent lineage.</td><td>600 / min</td></tr>
+        <tr><td><span class="verb get">GET</span></td><td><code>/v1/branches/:id/diff</code></td><td>Schema and row-count diff against any other branch. Destructive operations are flagged.</td><td>120 / min</td></tr>
+        <tr><td><span class="verb">DELETE</span></td><td><code>/v1/branches/:id</code></td><td>Reap a branch immediately. Storage is reclaimed after the 7-day undo window.</td><td>60 / min</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted mt-3" style="font-size:.92rem;">Webhooks fire on <code style="font-family:'JetBrains Mono',monospace;color:var(--ink);">branch.ready</code> and <code style="font-family:'JetBrains Mono',monospace;color:var(--ink);">branch.reaped</code>. Full reference covers 23 endpoints.</p>
+</section>

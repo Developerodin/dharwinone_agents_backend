@@ -1,0 +1,40 @@
+<style>.c-medical-3{--accent-deep:color-mix(in srgb, var(--accent) 82%, var(--ink));--accent-tint:color-mix(in srgb, var(--accent) 10%, var(--bg));--ink-soft:color-mix(in srgb, var(--ink) 68%, var(--bg));} .c-medical-3{background:var(--bg);color:var(--ink);font-family:"Instrument Sans",system-ui,sans-serif;line-height:1.65;} .c-medical-3 .dept-rows{border-top:1px solid var(--line);} .c-medical-3 .dept-row{display:grid;grid-template-columns:1fr;gap:.35rem 3rem;padding:1.6rem 0;border-bottom:1px solid var(--line);} @media(min-width:768px){.c-medical-3 .dept-row{grid-template-columns:15rem 1fr auto;align-items:baseline;}} .c-medical-3 .dept-row dt{font-family:"Source Serif 4",Georgia,serif;font-size:1.45rem;font-weight:600;} .c-medical-3 .dept-row dd{margin:0;color:var(--ink-soft);max-width:60ch;} .c-medical-3 .dept-row .opd{font-size:.85rem;font-weight:600;color:var(--accent-deep);white-space:nowrap;font-variant-numeric:tabular-nums;} .c-medical-3 .eyebrow{letter-spacing:.14em;text-transform:uppercase;font-size:.8rem;font-weight:600;color:var(--accent-deep);} .c-medical-3 .section-title{font-family:"Source Serif 4",Georgia,serif;font-size:clamp(2rem, 3.6vw, 2.75rem);font-weight:700;letter-spacing:-.01em;} .c-medical-3 .muted{color:var(--ink-soft);}</style>
+<section class="c-medical-3 py-5 my-4" id="departments">
+  <div class="container">
+    <p class="eyebrow mb-2">Departments</p>
+    <h2 class="section-title mb-2">One clinic, six specialities</h2>
+    <p class="muted mb-5" style="max-width:60ch;">Each department runs its own OPD schedule. Bring previous prescriptions and reports, our doctors read your history before they write anything new.</p>
+    <dl class="dept-rows mb-0">
+      <div class="dept-row">
+        <dt>General Medicine</dt>
+        <dd>Fevers, infections, diabetes and blood pressure management, annual health reviews for the whole family.</dd>
+        <div class="opd">Daily, both OPDs</div>
+      </div>
+      <div class="dept-row">
+        <dt>Paediatrics</dt>
+        <dd>Newborn care, vaccination on the national schedule, growth tracking with a chart you can keep.</dd>
+        <div class="opd">Mon, Wed, Fri, 5 to 8 pm</div>
+      </div>
+      <div class="dept-row">
+        <dt>Obstetrics &amp; Gynaecology</dt>
+        <dd>Antenatal checkups, ultrasound referrals, PCOS and menstrual health consultations in a private consulting room.</dd>
+        <div class="opd">Tue, Thu, Sat, 10 am to 1 pm</div>
+      </div>
+      <div class="dept-row">
+        <dt>Orthopaedics</dt>
+        <dd>Joint pain, sports injuries, fracture follow-ups, with digital X-ray on the premises.</dd>
+        <div class="opd">Wed and Sat, 6 to 9 pm</div>
+      </div>
+      <div class="dept-row">
+        <dt>Dermatology</dt>
+        <dd>Skin, hair and nail conditions, allergy patch testing, and honest advice on what does not need treatment.</dd>
+        <div class="opd">Tue and Fri, 5 to 8 pm</div>
+      </div>
+      <div class="dept-row">
+        <dt>Dental</dt>
+        <dd>Cleaning, fillings, root canal treatment over two sittings, and a dedicated children's chair.</dd>
+        <div class="opd">Daily except Sunday</div>
+      </div>
+    </dl>
+  </div>
+</section>

@@ -1,0 +1,3 @@
+:root{--accent:#0d6e60;--bg:#f7f8fa;--ink:#182433;--muted:#5b6675;--line:#d7dde5;--soft:#ecf0f4;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.6;}
+img{max-width:100%;}

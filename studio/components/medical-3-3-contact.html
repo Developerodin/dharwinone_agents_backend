@@ -1,0 +1,83 @@
+<style>.c-medical-3-3{background:var(--bg);color:var(--ink);font-family:"Inter Tight",system-ui,sans-serif;font-size:1rem;line-height:1.5;} .c-medical-3-3 h1, .c-medical-3-3 h2, .c-medical-3-3 h3, .c-medical-3-3 h4{font-weight:800;letter-spacing:-.02em;} .c-medical-3-3 .ovl{font-weight:700;font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);} .c-medical-3-3 p{max-width:68ch;} .c-medical-3-3 .directory{padding:4rem 0 5rem;} .c-medical-3-3 .dir-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;margin-bottom:2rem;} .c-medical-3-3 .dir-board{border:1px solid var(--ink);} .c-medical-3-3 .dept{border:1px solid var(--line);margin:-1px 0 0 -1px;padding:1.5rem;height:100%;background:var(--bg);} .c-medical-3-3 .dept .dcode{font-weight:700;font-size:.75rem;letter-spacing:.16em;color:var(--accent);} .c-medical-3-3 .dept h3{font-size:1.25rem;margin:.5rem 0 1rem;} .c-medical-3-3 .dept dl{margin:0;font-size:.875rem;} .c-medical-3-3 .dept dl div{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 0;border-top:1px solid var(--line);} .c-medical-3-3 .dept dt{font-weight:500;color:color-mix(in srgb, var(--ink) 66%, var(--bg));} .c-medical-3-3 .dept dd{margin:0;font-weight:700;text-align:right;} .c-medical-3-3 .dept .floor{display:inline-block;background:var(--soft);border:1px solid var(--line);font-weight:700;font-size:.75rem;letter-spacing:.1em;padding:.25rem .75rem;margin-top:1rem;text-transform:uppercase;} .c-medical-3-3 .diag .ovl{color:#6fc3cb;} @media (prefers-reduced-motion: no-preference){.c-medical-3-3 .dept, .c-medical-3-3 .q-cell{transition:background-color .2s ease,border-color .2s ease,transform .2s ease;}.c-medical-3-3 .dept:hover{background:var(--soft);}.c-medical-3-3 .q-cell:hover{transform:translateY(-4px);}.c-medical-3-3 .hero-img img, .c-medical-3-3 .diag-img img{transition:transform .5s ease;}.c-medical-3-3 .hero-img:hover img, .c-medical-3-3 .diag-img:hover img{transform:scale(1.04);}.c-medical-3-3 .btn-teal, .c-medical-3-3 .btn-line{transition:background-color .2s ease,color .2s ease,border-color .2s ease;}}</style>
+<section class="c-medical-3-3 directory" id="departments">
+  <div class="container">
+    <div class="dir-head">
+      <div>
+        <p class="ovl mb-2">Department index</p>
+        <h2 class="mb-0" style="font-size:clamp(1.75rem,4vw,2.75rem);">Find your department, doctor and floor</h2>
+      </div>
+      <span class="ovl">OPD hours 9:00 to 17:00</span>
+    </div>
+    <div class="dir-board">
+      <div class="row g-0">
+        <div class="col-lg-4 col-md-6">
+          <div class="dept">
+            <span class="dcode">DEPT 01</span>
+            <h3>Cardiology</h3>
+            <dl>
+              <div><dt>Lead physician</dt><dd>Dr. S. Raghavan, DM</dd></div>
+              <div><dt>OPD days</dt><dd>Mon · Wed · Fri</dd></div>
+            </dl>
+            <span class="floor">Floor 2 · Block A</span>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="dept">
+            <span class="dcode">DEPT 02</span>
+            <h3>Orthopaedics</h3>
+            <dl>
+              <div><dt>Lead physician</dt><dd>Dr. Neha Kulkarni, MS</dd></div>
+              <div><dt>OPD days</dt><dd>Tue · Thu · Sat</dd></div>
+            </dl>
+            <span class="floor">Floor 1 · Block A</span>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="dept">
+            <span class="dcode">DEPT 03</span>
+            <h3>Neurology</h3>
+            <dl>
+              <div><dt>Lead physician</dt><dd>Dr. A. Fernandes, DM</dd></div>
+              <div><dt>OPD days</dt><dd>Mon · Thu</dd></div>
+            </dl>
+            <span class="floor">Floor 3 · Block A</span>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="dept">
+            <span class="dcode">DEPT 04</span>
+            <h3>Obstetrics and gynaecology</h3>
+            <dl>
+              <div><dt>Lead physician</dt><dd>Dr. Priya Nair, MD</dd></div>
+              <div><dt>OPD days</dt><dd>Daily except Sun</dd></div>
+            </dl>
+            <span class="floor">Floor 2 · Block B</span>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="dept">
+            <span class="dcode">DEPT 05</span>
+            <h3>Gastroenterology</h3>
+            <dl>
+              <div><dt>Lead physician</dt><dd>Dr. R. Bhandari, DM</dd></div>
+              <div><dt>OPD days</dt><dd>Wed · Sat</dd></div>
+            </dl>
+            <span class="floor">Floor 3 · Block B</span>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="dept">
+            <span class="dcode">DEPT 06</span>
+            <h3>Paediatrics</h3>
+            <dl>
+              <div><dt>Lead physician</dt><dd>Dr. Meenal Joshi, DCH</dd></div>
+              <div><dt>OPD days</dt><dd>Daily except Sun</dd></div>
+            </dl>
+            <span class="floor">Ground · Block B</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="mt-3 mb-0" style="font-size:.875rem;color:#5a6a6d;">Full directory of nine departments and 41 consultants available at the reception desk and on the appointment line.</p>
+  </div>
+</section>
