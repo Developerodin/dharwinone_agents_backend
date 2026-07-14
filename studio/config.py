@@ -86,17 +86,37 @@ def mongo_db_name():
 
 
 def s3_mock_enabled():
+    """Mock unless a real bucket and credentials are configured.
+
+    STUDIO_S3_MOCK always wins when set. Without it, mocking on while real creds sit
+    in .env is how images silently never reached S3; tests pin it to true explicitly.
+    """
     global _s3_mock
     if _s3_mock is None:
-        raw = os.environ.get("STUDIO_S3_MOCK", "true").strip().lower()
-        _s3_mock = raw in _TRUTHY
+        raw = os.environ.get("STUDIO_S3_MOCK", "").strip().lower()
+        if raw:
+            _s3_mock = raw in _TRUTHY
+        else:
+            _s3_mock = not (
+                _configured_bucket()
+                and os.environ.get("AWS_ACCESS_KEY_ID")
+                and os.environ.get("AWS_SECRET_ACCESS_KEY")
+            )
     return _s3_mock
+
+
+def _configured_bucket():
+    return (
+        os.environ.get("STUDIO_S3_BUCKET")
+        or os.environ.get("AWS_S3_BUCKET_NAME")
+        or ""
+    ).strip()
 
 
 def s3_bucket():
     global _s3_bucket
     if _s3_bucket is None:
-        _s3_bucket = os.environ.get("STUDIO_S3_BUCKET", "dharwin-studio-dev")
+        _s3_bucket = _configured_bucket() or "dharwin-studio-dev"
     return _s3_bucket
 
 

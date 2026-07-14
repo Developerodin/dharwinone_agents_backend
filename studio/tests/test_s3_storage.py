@@ -28,6 +28,7 @@ def test_public_asset_url_mock_mode_without_cdn_returns_none():
 def test_public_asset_url_real_s3_uses_region(monkeypatch):
     monkeypatch.setenv("STUDIO_S3_MOCK", "false")
     monkeypatch.setenv("AWS_REGION", "ap-south-1")
+    monkeypatch.setenv("STUDIO_S3_BUCKET", "dharwin-studio-dev")  # don't inherit .env's bucket
     config.reset_for_tests()
     url = s3.public_asset_url("studio/placeholders/fitness/0.jpg")
     assert url == "https://dharwin-studio-dev.s3.ap-south-1.amazonaws.com/studio/placeholders/fitness/0.jpg"
@@ -73,6 +74,7 @@ def test_resolve_img_src_keeps_existing_cdn_asset_urls(monkeypatch):
 def test_ensure_genre_placeholder_uploads_when_missing(monkeypatch):
     monkeypatch.setenv("STUDIO_S3_MOCK", "false")
     monkeypatch.setenv("AWS_REGION", "ap-south-1")
+    monkeypatch.setenv("STUDIO_S3_BUCKET", "dharwin-studio-dev")  # don't inherit .env's bucket
     config.reset_for_tests()
     uploaded = []
 

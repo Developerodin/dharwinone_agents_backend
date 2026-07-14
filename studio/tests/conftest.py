@@ -6,6 +6,10 @@ import pytest
 
 os.environ.setdefault("AUTH_JWT_SECRET", "test-secret")
 
+# `import studio` loads backend/.env, real AWS creds included. Pin the mock on so the
+# suite can never write to the live bucket; a test that wants real S3 must opt in.
+os.environ["STUDIO_S3_MOCK"] = "true"
+
 
 @pytest.fixture(autouse=True)
 def _clean_ratelimit():

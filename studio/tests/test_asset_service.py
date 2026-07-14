@@ -91,6 +91,7 @@ def test_presign_uses_real_s3_client_when_mock_disabled(monkeypatch):
     project = projects_repo.create("Upload Co", initial_prompt="Site")
     monkeypatch.setenv("STUDIO_S3_MOCK", "false")
     monkeypatch.setenv("AWS_REGION", "ap-south-1")
+    monkeypatch.setenv("STUDIO_S3_BUCKET", "dharwin-studio-dev")  # don't inherit .env's bucket
     config.reset_for_tests()
     calls = {}
 
