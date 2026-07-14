@@ -135,3 +135,37 @@ def test_composition_failure_never_blocks_generation(client, memory_db, monkeypa
     gen = client.post(f"/builder/projects/{project_id}/generate-templates")
     assert gen.status_code == 200
     assert gen.json()["templates"]  # legacy variants intact
+
+
+def test_templates_repo_sorts_by_gallery_index(memory_db):
+    from studio.repositories import templates_repo
+
+    templates_repo.replace_for_project(
+        "p-sort",
+        [
+            {
+                "templateId": "saas-bold-pop",
+                "label": "Pack",
+                "galleryIndex": 3,
+                "htmlContent": "<html></html>",
+            },
+            {
+                "templateId": "composed-1",
+                "label": "Composed 1",
+                "galleryIndex": 0,
+                "htmlContent": "<html></html>",
+            },
+            {
+                "templateId": "composed-2",
+                "label": "Composed 2",
+                "galleryIndex": 1,
+                "htmlContent": "<html></html>",
+            },
+        ],
+    )
+    listed = templates_repo.list_for_project("p-sort")
+    assert [t["templateId"] for t in listed] == [
+        "composed-1",
+        "composed-2",
+        "saas-bold-pop",
+    ]

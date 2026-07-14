@@ -33,19 +33,26 @@ def replace_for_project(project_id, templates):
     coll.delete_many({"projectId": project_id})
     now = time.time()
     saved = []
-    for item in templates:
+    for idx, item in enumerate(templates):
         doc = dict(item)
         doc["projectId"] = project_id
         doc.setdefault("templateId", uuid.uuid4().hex[:12])
+        doc.setdefault("galleryIndex", idx)
         doc["generatedAt"] = now
         coll.insert_one(doc)
         saved.append(_public(doc))
+    saved.sort(key=lambda d: (d.get("galleryIndex", 999), d.get("templateId", "")))
     return saved
 
 
 def list_for_project(project_id):
     items = [_public(item) for item in _collection().find({"projectId": project_id})]
-    items.sort(key=lambda d: d.get("generatedAt", 0), reverse=True)
+    items.sort(
+        key=lambda d: (
+            d.get("galleryIndex", 999),
+            d.get("templateId", ""),
+        )
+    )
     return items
 
 
