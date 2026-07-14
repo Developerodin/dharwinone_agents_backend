@@ -1365,6 +1365,9 @@ def handle_message(project_id, message):
         "assistantMessage": assistant,
         "completeness": profile["completeness"],
         "readyToGenerate": ready,
+        # readyToGenerate only means "profile is complete". Generation starts
+        # only when the user actually asked for it.
+        "startGeneration": intent == "trigger_generate",
     }
 
 

@@ -245,6 +245,20 @@ def test_ready_state_reply_is_natural_and_understands_go_ahead():
     assert "kicking off" in result["assistantMessage"].lower()
 
 
+def test_completing_profile_does_not_start_generation():
+    """Regression: a complete profile made the frontend fire generation on every
+    later turn, rebuilding an already-generated site. Only an explicit request
+    starts generation."""
+    project = _project()
+    _complete_profile(project["projectId"])
+    passive = onboarding_service.handle_message(project["projectId"], "+15551234567")
+    assert passive["readyToGenerate"] is True
+    assert passive["startGeneration"] is False
+
+    asked = onboarding_service.handle_message(project["projectId"], "go ahead")
+    assert asked["startGeneration"] is True
+
+
 def test_ready_state_understands_start_intent():
     project = _project()
     _complete_profile(project["projectId"])
