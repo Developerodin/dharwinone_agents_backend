@@ -120,6 +120,16 @@ _COUNTRY_HINT_WORDS = {
     "nation",
 }
 _COUNTRY_HINT_PREFIXES = {"united", "south", "north", "new", "saudi", "sri"}
+_COUNTRY_ABBREVS = {
+    "usa": "USA",
+    "us": "USA",
+    "uk": "UK",
+    "uae": "UAE",
+}
+_BOTH_COUNTRIES_RE = re.compile(
+    r"\b(?:both|all(?:\s+of\s+them)?|the\s+two|those\s+two|yes\s+to\s+both)\b",
+    re.I,
+)
 _TRUTHY = {"1", "true", "yes", "on"}
 _ONBOARDING_LLM_CFG = backend_path("harness/config.yaml")
 _ONBOARDING_PROVIDER = None
@@ -157,6 +167,8 @@ def _question_for(profile, path):
         return llm or base
     if path == "business.description":
         return f"{base} {_description_example(profile)}"
+    if path == "location.country":
+        return f"{base} {_country_example(profile)}"
     return base
 
 
@@ -193,6 +205,91 @@ def _example_value_for_field(profile, field_path):
         match = re.search(r'"([^"]+)"', example_text)
         if match:
             return match.group(1).strip().rstrip(".")
+    if field_path == "location.country":
+        example_text = _country_example(profile)
+        match = re.search(r'"([^"]+)"', example_text)
+        if match:
+            return match.group(1).strip().rstrip(".")
+    return None
+
+
+def _country_example(profile):
+    return 'For example: "India".'
+
+
+def _format_country_name(text):
+    cleaned = _sanitize_location_phrase(text)
+    if not cleaned:
+        return ""
+    low = cleaned.lower()
+    if low in _COUNTRY_ABBREVS:
+        return _COUNTRY_ABBREVS[low]
+    return _title_case_words(cleaned)
+
+
+def _format_multi_countries(parts):
+    names = []
+    for part in parts:
+        name = _format_country_name(part)
+        if name:
+            names.append(name)
+    if not names:
+        return None
+    if len(names) == 1:
+        return names[0]
+    if len(names) == 2:
+        return f"{names[0]} and {names[1]}"
+    return ", ".join(names[:-1]) + f", and {names[-1]}"
+
+
+def _is_country_abbrev(text):
+    cleaned = _sanitize_location_phrase(text)
+    if not cleaned:
+        return False
+    tokens = cleaned.split()
+    if len(tokens) != 1:
+        return False
+    token = tokens[0]
+    return token.lower() in _COUNTRY_ABBREVS or (token.isalpha() and 2 <= len(token) <= 3)
+
+
+def _is_multi_country_parts(parts, original_text):
+    if len(parts) < 2:
+        return False
+    if re.search(r"\band\b", original_text, re.I):
+        return all(_sanitize_location_phrase(part) for part in parts)
+    if "," in original_text and len(parts) == 2:
+        first = _sanitize_location_phrase(parts[0])
+        second = _sanitize_location_phrase(parts[1])
+        if not first or not second:
+            return False
+        if _looks_country_like(first) or _is_country_abbrev(second):
+            return True
+    return False
+
+
+def _multi_country_from_text(text):
+    candidate = _normalize_place_text(text)
+    if not candidate:
+        return None
+    parts = _split_place_parts(candidate)
+    if not _is_multi_country_parts(parts, candidate):
+        return None
+    return _format_multi_countries(parts)
+
+
+def _is_both_countries_reply(message):
+    return bool(_BOTH_COUNTRIES_RE.search(message or ""))
+
+
+def _multi_country_from_recent_user_turns(project_id):
+    turns = conversations_repo.list_turns(project_id)
+    for turn in reversed(turns):
+        if turn.get("role") != "user":
+            continue
+        value = _multi_country_from_text(turn.get("text") or "")
+        if value:
+            return value
     return None
 
 
@@ -385,6 +482,10 @@ def _extract(message, field_path, profile=None):
             if city and profile is not None and not _get_nested(profile, "location.city"):
                 _set_nested(profile, "location.city", city)
 
+        multi_country = _multi_country_from_text(text)
+        if multi_country:
+            return multi_country, "high"
+
         llm_loc = _location_from_llm(text)
         llm_country = llm_loc.get("country")
         if llm_country:
@@ -398,14 +499,20 @@ def _extract(message, field_path, profile=None):
         )
         if country_match:
             country = _sanitize_location_phrase(country_match.group(1))
+            multi = _multi_country_from_text(country)
+            if multi:
+                return multi, "high"
             if 1 <= len(country.split()) <= 4:
-                return _title_case_words(country), "high"
+                return _format_country_name(country), "high"
 
         from_match = re.search(r"\bfrom\s+([a-z][a-z\s.-]{1,40})$", text, re.I)
         if from_match:
             country = _sanitize_location_phrase(from_match.group(1))
+            multi = _multi_country_from_text(country)
+            if multi:
+                return multi, "high"
             if 1 <= len(country.split()) <= 4:
-                return _title_case_words(country), "high"
+                return _format_country_name(country), "high"
 
         candidate = _normalize_place_text(text)
         if (
@@ -419,19 +526,23 @@ def _extract(message, field_path, profile=None):
         if not parts:
             return None, "low"
         if len(parts) >= 2:
+            if _is_multi_country_parts(parts, candidate):
+                return _format_multi_countries(parts), "high"
             country = _sanitize_location_phrase(parts[-1])
             if country:
                 city = _sanitize_location_phrase(parts[0])
                 if city and not _looks_country_like(city):
                     _stash_city(_title_case_words(city))
-                return _title_case_words(country), "high"
+                return _format_country_name(country), "high"
         if len(parts) == 1:
             country = _sanitize_location_phrase(parts[0])
             tokens = country.split()
             if len(tokens) == 1 and tokens[0].isalpha() and len(tokens[0]) >= 3:
-                return _title_case_words(country), "medium"
+                if tokens[0].lower() in {"both", "all"}:
+                    return None, "low"
+                return _format_country_name(country), "medium"
             if len(tokens) == 2 and _looks_country_like(country):
-                return _title_case_words(country), "medium"
+                return _format_country_name(country), "medium"
         return None, "low"
 
     if field_path == "location.city":
@@ -832,6 +943,20 @@ def handle_message(project_id, message):
             if merged:
                 target_field = None
 
+    if target_field == "location.country" and _is_both_countries_reply(message):
+        prior = _multi_country_from_recent_user_turns(project_id)
+        if prior:
+            profile, merged = _merge_field(profile, target_field, prior, "high")
+            if merged:
+                target_field = None
+
+    if target_field and target_field.startswith("location."):
+        value, confidence = _extract(message, target_field, profile)
+        if value is not None and confidence != "low":
+            profile, merged = _merge_field(profile, target_field, value, confidence)
+            if merged:
+                target_field = None
+
     if target_field and (
         intent == "clarify"
         or (route is None and _CLARIFY_REQUEST_RE.search(message))
@@ -964,6 +1089,8 @@ def handle_message(project_id, message):
         # Keep business-description prompts deterministic so contextual examples
         # from the user's own profile are never dropped by LLM shortening.
         if next_field == "business.description":
+            assistant = fallback
+        elif next_field == "location.country":
             assistant = fallback
         else:
             assistant = _llm_phrase(

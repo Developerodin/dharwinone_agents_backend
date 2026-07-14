@@ -516,3 +516,93 @@ def test_accept_description_example_when_llm_routes_other(monkeypatch):
     assert "sure! meanwhile" not in result["assistantMessage"].lower()
     assert "intro line" not in result["assistantMessage"].lower()
     assert "country" in result["assistantMessage"].lower()
+
+
+def test_multi_country_and_phrase_saves_both():
+    project = _project()
+    pid = project["projectId"]
+    _advance_to_country(pid)
+    result = onboarding_service.handle_message(pid, "in india and usa")
+
+    profile = profiles_repo.get(pid)
+    country = profile["location"]["country"]
+    assert "india" in country.lower()
+    assert "usa" in country.lower()
+    assert profile["location"].get("city") is None
+    assert "country" not in result["assistantMessage"].lower() or result["readyToGenerate"]
+
+
+def test_multi_country_comma_separated_saves_both():
+    project = _project()
+    pid = project["projectId"]
+    _advance_to_country(pid)
+    onboarding_service.handle_message(pid, "India, USA")
+
+    profile = profiles_repo.get(pid)
+    country = profile["location"]["country"]
+    assert "india" in country.lower()
+    assert "usa" in country.lower()
+    assert profile["location"].get("city") is None
+
+
+def test_both_reuses_prior_multi_country_answer(monkeypatch):
+    project = _project()
+    pid = project["projectId"]
+    _advance_to_country(pid)
+    calls = {"n": 0}
+    original_extract = onboarding_service._extract
+
+    def flaky_extract(message, field_path, profile=None):
+        if field_path == "location.country" and calls["n"] == 0:
+            calls["n"] += 1
+            return None, "low"
+        return original_extract(message, field_path, profile)
+
+    monkeypatch.setattr(onboarding_service, "_extract", flaky_extract)
+    _fake_router(monkeypatch, '{"intent": "clarify", "value": null}')
+    onboarding_service.handle_message(pid, "in india and usa")
+    assert profiles_repo.get(pid)["location"]["country"] is None
+
+    result = onboarding_service.handle_message(pid, "both")
+    profile = profiles_repo.get(pid)
+    country = profile["location"]["country"]
+    assert "india" in country.lower()
+    assert "usa" in country.lower()
+    assert "no problem" not in result["assistantMessage"].lower()
+
+
+def test_multi_country_not_misrouted_as_clarify(monkeypatch):
+    project = _project()
+    pid = project["projectId"]
+    _advance_to_country(pid)
+    _fake_router(monkeypatch, '{"intent": "clarify", "value": null}')
+    result = onboarding_service.handle_message(pid, "in india and usa")
+
+    profile = profiles_repo.get(pid)
+    country = profile["location"]["country"]
+    assert "india" in country.lower()
+    assert "usa" in country.lower()
+    assert "no problem" not in result["assistantMessage"].lower()
+
+
+def test_accept_country_example_saves_value_and_advances():
+    project = _project()
+    pid = project["projectId"]
+    _advance_to_country(pid)
+    result = onboarding_service.handle_message(pid, "go with the example")
+
+    profile = profiles_repo.get(pid)
+    assert profile["location"]["country"] == "India"
+    assert "country" not in result["assistantMessage"].lower() or "city" in result["assistantMessage"].lower()
+
+
+def test_accept_country_example_when_llm_routes_other(monkeypatch):
+    project = _project()
+    pid = project["projectId"]
+    _advance_to_country(pid)
+    _fake_router(monkeypatch, '{"intent": "other", "value": null}')
+    result = onboarding_service.handle_message(pid, "go with the example")
+
+    profile = profiles_repo.get(pid)
+    assert profile["location"]["country"] == "India"
+    assert "sure! meanwhile" not in result["assistantMessage"].lower()
