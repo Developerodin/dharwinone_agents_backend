@@ -636,6 +636,58 @@ def _extract_html_document(out):
     return out[start : end + len("</html>")]
 
 
+def normalize_cta_anchors(html):
+    """Replace placeholder href=\"#\" on CTAs with in-page section anchors."""
+    ids = re.findall(r'\bid="([A-Za-z][\w-]*)"', html)
+    if not ids:
+        return html
+    id_set = set(ids)
+    contact = next((i for i in ("contact", "visit") if i in id_set), None)
+    menu = next((i for i in ("menu", "list", "board", "bakes") if i in id_set), None)
+    about = next(
+        (i for i in ("about", "story", "ritual", "process", "why", "method") if i in id_set),
+        None,
+    )
+    primary = menu or about or next((i for i in ids if i not in ("top", "contact", "visit")), ids[0])
+    secondary = about or contact or primary
+
+    if "top" in id_set:
+        html = re.sub(
+            r'(<a\b[^>]*class="[^"]*\bbrand\b[^"]*"[^>]*\b)href="#"',
+            r'\1href="#top"',
+            html,
+            count=1,
+            flags=re.I,
+        )
+
+    btn_idx = 0
+
+    def _btn_target():
+        nonlocal btn_idx
+        target = primary if btn_idx == 0 else secondary
+        btn_idx += 1
+        return target
+
+    def _btn_repl(match):
+        return f'{match.group(1)}href="#{_btn_target()}"'
+
+    html = re.sub(
+        r'(<a\b[^>]*\bclass="[^"]*\bbtn[^"]*"[^>]*\b)href="#"',
+        _btn_repl,
+        html,
+        flags=re.I,
+    )
+
+    if contact:
+        html = re.sub(
+            r'(<a\b[^>]*\b)href="#"(?=[^>]*>)',
+            rf'\1href="#{contact}"',
+            html,
+            flags=re.I,
+        )
+    return html
+
+
 def sanitize_html(html):
     """Remove executable payloads from model/user supplied HTML."""
     html = _strip_markdown_fences(html)

@@ -111,4 +111,4 @@ def rewrite_components_parallel(html, profile):
         len(targets),
         (time.perf_counter() - started) * 1000,
     )
-    return draft.sanitize_html(current)
+    return draft.sanitize_html(draft.normalize_cta_anchors(current))

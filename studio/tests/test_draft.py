@@ -306,6 +306,24 @@ def test_refine_section_strips_markdown_fences():
     assert "```" not in out
 
 
+def test_normalize_cta_anchors_maps_buttons_to_sections():
+    html = """
+    <nav><a class="brand" href="#">Brand</a></nav>
+    <header data-section="hero">
+      <a class="btn-main" href="#">Explore our menu</a>
+      <a class="btn-quiet" href="#">Discover our process</a>
+    </header>
+    <section id="menu">Menu</section>
+    <section id="story">Story</section>
+    <section id="contact">Contact</section>
+    """
+    out = draft.normalize_cta_anchors(html)
+    assert 'class="brand" href="#"' not in out
+    assert 'href="#menu"' in out
+    assert 'href="#story"' in out
+    assert 'href="#contact"' in out
+
+
 def test_ensure_loadable_images_replaces_invalid_src():
     html = '<img src="mock+logo" alt="Logo"><img src="" alt="Hero">'
     out = draft.ensure_loadable_images(html, "fitness")
@@ -314,12 +332,30 @@ def test_ensure_loadable_images_replaces_invalid_src():
     assert out.count("referrerpolicy=") == 2
 
 
-def test_ensure_loadable_images_keeps_valid_https_src():
+def test_ensure_loadable_images_keeps_valid_https_src(monkeypatch):
+    monkeypatch.delenv("STUDIO_ASSET_PUBLIC_BASE_URL", raising=False)
+    from studio import config
+
+    config.reset_for_tests()
     url = "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800"
     html = f'<img src="{url}" alt="Gym">'
     out = draft.ensure_loadable_images(html, "fitness")
     assert url in out
     assert 'referrerpolicy="no-referrer"' in out
+
+
+def test_ensure_loadable_images_rewrites_https_to_s3_when_cdn_configured(monkeypatch):
+    monkeypatch.setenv("STUDIO_ASSET_PUBLIC_BASE_URL", "https://cdn.dharwinone.com")
+    from studio import config
+    from studio.storage import s3
+
+    config.reset_for_tests()
+    source = "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800"
+    key = s3.build_url_cache_key(source)
+    html = f'<img src="{source}" alt="Gym">'
+    out = draft.ensure_loadable_images(html, "fitness")
+    assert f'src="https://cdn.dharwinone.com/{key}"' in out
+    assert "images.unsplash.com" not in out
 
 
 def test_ensure_loadable_images_rewrites_mock_s3_src(monkeypatch):
