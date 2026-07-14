@@ -292,7 +292,6 @@ def _composed_templates(project_id, profile, assets, genre):
                 html = personalize_html(comp["html"], profile, assets, genre)
                 if idx == 0:  # LLM budget cap: rewrite only the first composed variant
                     html = _rewrite_copy(html, profile)
-                    html = _apply_contact(html, profile)
             except PersonalizationError:
                 _log.warning("composed variant %s failed personalization", idx)
                 continue
@@ -325,14 +324,11 @@ def generate_for_project(project_id, *, force=False):
     templates = []
 
     design_files = draft.template_files(genre)[:_MAX_DESIGNS]
-    for idx, fname in enumerate(design_files):
+    for fname in design_files:
         stem = fname[: -len(".html")]
         with open(os.path.join(draft.TEMPLATES_DIR, fname), encoding="utf-8") as f:
             raw = f.read()
         html = personalize_html(raw, profile, assets, genre)
-        if idx == 0:  # LLM budget cap: rewrite only the primary design variant
-            html = _rewrite_copy(html, profile)
-        html = _apply_contact(html, profile)
         template_id = stem
         templates.append(
             {
