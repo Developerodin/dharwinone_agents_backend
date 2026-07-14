@@ -312,3 +312,24 @@ def test_composition_failure_emits_single_whole_fallback(monkeypatch):
     fallback = [t for t in result if t.get("sourceKind") == "fallback"]
     assert len(fallback) >= 1
     assert result[-1].get("galleryIndex", 99) >= 0
+
+
+def test_generate_template_payload_under_2mb():
+    project = _seed_ready_project()
+    result = personalization_service.generate_for_project(project["projectId"], force=True)
+    total = sum(len(t["htmlContent"].encode("utf-8")) for t in result)
+    assert total < 2 * 1024 * 1024
+
+
+def test_style_pack_on_composed_base_renders_coherently():
+    project = _seed_ready_project()
+    result = personalization_service.generate_for_project(project["projectId"], force=True)
+    composed_primary = result[0]
+    packs = [t for t in result if t.get("sourceKind") == "pack"]
+    assert packs
+    for pack in packs:
+        html = pack["htmlContent"]
+        assert "<!DOCTYPE html>" in html
+        assert 'data-section="hero"' in html
+        assert "bootstrap" in html.lower()
+        assert html != composed_primary["htmlContent"]
