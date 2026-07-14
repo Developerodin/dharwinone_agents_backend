@@ -1,11 +1,12 @@
 """Working-html edits with safety policy."""
 
 import html as html_lib
+import logging
 import re
 
 import yaml
 from harness import providers
-from studio import draft
+from studio import componentizer, draft
 from studio.repositories import (
     edits_repo,
     profiles_repo,
@@ -14,6 +15,26 @@ from studio.repositories import (
     working_html_repo,
 )
 from studio.services import onboarding_service
+
+_log = logging.getLogger(__name__)
+
+_BASE_SECTION_ALIASES = {
+    section_type: tuple(keywords)
+    for section_type, keywords in componentizer._TYPE_KEYWORDS
+}
+_SECTION_ALIASES = {
+    **_BASE_SECTION_ALIASES,
+    "hero": ("hero", "headline", "banner", "header"),
+    "nav": ("nav", "menu", "navigation"),
+    "footer": ("footer",),
+    "features": _BASE_SECTION_ALIASES.get("features", ())
+    + ("features", "benefits"),
+    "cta": _BASE_SECTION_ALIASES.get("cta", ()) + ("call to action", "button"),
+    "testimonials": _BASE_SECTION_ALIASES.get("testimonials", ())
+    + ("testimonials", "reviews", "quotes"),
+    "faq": _BASE_SECTION_ALIASES.get("faq", ()) + ("questions",),
+    "pricing": _BASE_SECTION_ALIASES.get("pricing", ()) + ("plans", "price"),
+}
 
 _TAGLINE_RE = re.compile(
     r'(<p class="tagline[^"]*"[^>]*>)(.*?)(</p>)',
@@ -100,6 +121,17 @@ def _selected_template_html(project_id):
     if not doc:
         return None
     return doc.get("htmlContent")
+
+
+def _identify_sections(prompt):
+    text = (prompt or "").lower()
+    hits = []
+    for section_type, keywords in _SECTION_ALIASES.items():
+        if any(kw in text for kw in keywords):
+            hits.append(section_type)
+    if len(hits) == 1:
+        return hits[0]
+    return None
 
 
 def _load_edit_provider():
