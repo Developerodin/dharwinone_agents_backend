@@ -1,5 +1,6 @@
 """S3 presign helpers with mock-mode support."""
 
+import hashlib
 import os
 import re
 import time
@@ -7,7 +8,12 @@ from urllib.parse import quote
 
 from studio import config
 
-_ALLOWED_PREFIXES = ("projects/", "studio/placeholders/", "studio/cache/")
+_ALLOWED_PREFIXES = (
+    "projects/",
+    "studio/placeholders/",
+    "studio/assets/",
+    "studio/cache/",
+)
 _PLACEHOLDER_PREFIX = "studio/placeholders/"
 _MOCK_S3_RE = re.compile(r"^mock\+s3://[^/]+/(.+)$")
 
@@ -32,6 +38,13 @@ def build_placeholder_key(genre, slot):
     return _validate_key(f"{_PLACEHOLDER_PREFIX}{safe_genre}/{int(slot)}.jpg")
 
 
+def build_url_cache_key(url):
+    """Deterministic S3 key for a remote image URL."""
+    normalized = (url or "").strip()
+    digest = hashlib.sha256(normalized.encode("utf-8")).hexdigest()[:16]
+    return _validate_key(f"studio/assets/{digest}.jpg")
+
+
 def public_urls_available():
     """True when img src can resolve to browser-loadable public URLs."""
     base = os.environ.get("STUDIO_ASSET_PUBLIC_BASE_URL", "").strip()
@@ -47,8 +60,39 @@ def key_from_mock_url(url):
     return match.group(1) if match else None
 
 
+def _public_asset_base():
+    return os.environ.get("STUDIO_ASSET_PUBLIC_BASE_URL", "").strip().rstrip("/")
+
+
+def _is_already_public_asset_url(src):
+    base = _public_asset_base()
+    if base and src.startswith(f"{base}/"):
+        return True
+    if not config.s3_mock_enabled():
+        bucket = config.s3_bucket()
+        region = os.environ.get("AWS_REGION", "").strip()
+        hosts = [f"{bucket}.s3.amazonaws.com"]
+        if region:
+            hosts.append(f"{bucket}.s3.{region}.amazonaws.com")
+        if any(host in src for host in hosts):
+            return True
+    return False
+
+
+def cached_public_url_for_source(url):
+    """Public URL for a pre-seeded external image, when CDN/S3 is configured."""
+    src = (url or "").strip()
+    if not src.startswith(("http://", "https://")):
+        return None
+    if _is_already_public_asset_url(src):
+        return None
+    if not public_urls_available():
+        return None
+    return public_asset_url(build_url_cache_key(src))
+
+
 def resolve_img_src(url):
-    """Rewrite mock+s3:// or bare S3 keys to public URLs when available."""
+    """Rewrite mock+s3://, bare S3 keys, or seeded https URLs to public URLs."""
     if not url:
         return None
     src = url.strip()
@@ -58,6 +102,10 @@ def resolve_img_src(url):
     if public_urls_available() and not src.startswith(("http://", "https://", "data:")):
         if any(src.startswith(prefix) for prefix in _ALLOWED_PREFIXES):
             return public_asset_url(src)
+    if src.startswith(("http://", "https://")) and not _is_already_public_asset_url(src):
+        cached = cached_public_url_for_source(src)
+        if cached:
+            return cached
     return src
 
 
@@ -115,6 +163,28 @@ def _fetch_bytes(url, timeout=15.0):
         resp.raise_for_status()
         content_type = resp.headers.get("content-type", "image/jpeg")
         return resp.content, content_type.split(";")[0].strip() or "image/jpeg"
+
+
+def ensure_url_cached(url):
+    """Download an external image to S3 when missing; return its public URL."""
+    src = (url or "").strip()
+    if not src.startswith(("http://", "https://")):
+        return None
+    if not public_urls_available():
+        return None
+    key = build_url_cache_key(src)
+    public = public_asset_url(key)
+    if not public:
+        return None
+    if config.s3_mock_enabled():
+        return public
+    if not object_exists(key):
+        try:
+            data, content_type = _fetch_bytes(src)
+            upload_bytes(key, data, content_type)
+        except Exception:
+            return None
+    return public
 
 
 def ensure_genre_placeholder_url(genre, slot, source_url):

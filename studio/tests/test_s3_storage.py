@@ -49,6 +49,27 @@ def test_build_placeholder_key():
     assert s3.build_placeholder_key("Fitness Gym", 1) == "studio/placeholders/fitness-gym/1.jpg"
 
 
+def test_build_url_cache_key():
+    url = "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800"
+    assert s3.build_url_cache_key(url).startswith("studio/assets/")
+    assert s3.build_url_cache_key(url) == s3.build_url_cache_key(url)
+
+
+def test_resolve_img_src_rewrites_https_when_cdn_configured(monkeypatch):
+    monkeypatch.setenv("STUDIO_ASSET_PUBLIC_BASE_URL", "https://cdn.dharwinone.com")
+    config.reset_for_tests()
+    source = "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800"
+    key = s3.build_url_cache_key(source)
+    assert s3.resolve_img_src(source) == f"https://cdn.dharwinone.com/{key}"
+
+
+def test_resolve_img_src_keeps_existing_cdn_asset_urls(monkeypatch):
+    monkeypatch.setenv("STUDIO_ASSET_PUBLIC_BASE_URL", "https://cdn.dharwinone.com")
+    config.reset_for_tests()
+    logo = "https://cdn.dharwinone.com/projects/p1/assets/a1/logo.png"
+    assert s3.resolve_img_src(logo) == logo
+
+
 def test_ensure_genre_placeholder_uploads_when_missing(monkeypatch):
     monkeypatch.setenv("STUDIO_S3_MOCK", "false")
     monkeypatch.setenv("AWS_REGION", "ap-south-1")

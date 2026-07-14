@@ -290,6 +290,28 @@ def test_sanitize_html_strips_fences_between_sections():
     assert "Featured pizzas" in clean
 
 
+def test_sanitize_html_strips_fences_spliced_into_section_root():
+    # Shape of legacy rows in builder_templates: fence opened on the section tag line.
+    doc = (
+        '<html><body><header data-section="hero" class="c-cafe-2 hero">```html\n'
+        "<div>Start your day</div>\n"
+        "```</header></body></html>"
+    )
+    clean = draft.sanitize_html(doc)
+    assert "```" not in clean
+    assert "Start your day" in clean
+
+
+def test_templates_repo_public_strips_fences_from_legacy_rows():
+    from studio.repositories import templates_repo
+
+    row = templates_repo._public(
+        {"_id": 1, "htmlContent": "<html><body>```html\n<h1>Hi</h1>\n```</body></html>"}
+    )
+    assert "```" not in row["htmlContent"]
+    assert "<h1>Hi</h1>" in row["htmlContent"]
+
+
 def test_refine_section_strips_markdown_fences():
     class FenceProvider:
         def generate(self, model, prompt, **kwargs):
@@ -334,6 +356,7 @@ def test_ensure_loadable_images_replaces_invalid_src():
 
 def test_ensure_loadable_images_keeps_valid_https_src(monkeypatch):
     monkeypatch.delenv("STUDIO_ASSET_PUBLIC_BASE_URL", raising=False)
+    monkeypatch.setenv("STUDIO_S3_MOCK", "true")
     from studio import config
 
     config.reset_for_tests()
