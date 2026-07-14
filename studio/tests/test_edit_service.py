@@ -69,3 +69,16 @@ def test_edit_without_markers_falls_back_to_full_page(monkeypatch):
     edit_service._apply_llm_edit("p1", html, "change hero headline to New")
     assert calls["refine"] == 1
     assert calls["refine_section"] == 0
+
+
+def test_theme_prompt_swaps_style_pack_without_llm():
+    assert edit_service._is_theme_request("change the theme i don't like this one")
+    assert edit_service._is_theme_request("try a different colour scheme")
+    # narrower targets still go down the normal content path
+    assert not edit_service._is_theme_request('change the headline to "Hi"')
+
+    html = "<html><head></head><body></body></html>"
+    first = edit_service._apply_theme_edit(html, "change the theme")
+    second = edit_service._apply_theme_edit(first, "change the theme")
+    assert draft.current_pack_id(first) != draft.current_pack_id(second)
+    assert second.count('id="style-pack"') == 1  # swapped, not stacked

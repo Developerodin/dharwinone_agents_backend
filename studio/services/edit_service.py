@@ -54,6 +54,19 @@ _HAS_DIRECTIVE_RE = re.compile(
     r"\b(?:change|replace|update|set)\b.+\bto\b.+",
     re.I,
 )
+# Whole-page restyle: served deterministically from draft.STYLE_PACKS, never
+# the LLM (a 27KB full-page rewrite reliably guts the component CSS).
+_THEME_EDIT_RE = re.compile(
+    r"\b(?:theme|palette|colou?r scheme|colou?rs|look and feel|vibe|"
+    r"dark mode|light mode|restyle|redesign)\b",
+    re.I,
+)
+# ...but only when nothing narrower is being targeted.
+_THEME_TARGETED_RE = re.compile(
+    r'"|\b(?:headline|tagline|subheading|text|copy|wording|word|image|photo|logo|'
+    r"section|paragraph)\b",
+    re.I,
+)
 
 
 class EditValidationError(ValueError):
@@ -74,6 +87,17 @@ def _needs_clarification(prompt):
     if _BRAND_ALIGN_RE.search(text) and not _EXPLICIT_TARGET_RE.search(text):
         return True
     return False
+
+
+def _is_theme_request(prompt):
+    text = (prompt or "").strip()
+    return bool(_THEME_EDIT_RE.search(text)) and not _THEME_TARGETED_RE.search(text)
+
+
+def _apply_theme_edit(html, prompt):
+    pack = draft.pick_style_pack(prompt, draft.current_pack_id(html))
+    _log.info("edit_path=style-pack pack=%s", pack["id"])
+    return draft.apply_pack(html, pack)
 
 
 def _clarification_message():
@@ -243,6 +267,9 @@ def apply_edit(project_id, prompt, *, structural=False):
     if structural:
         updated = _apply_structural_edit(html, prompt)
         scope = "structural"
+    elif _is_theme_request(prompt):
+        updated = _apply_theme_edit(html, prompt)
+        scope = "content"
     else:
         if _needs_clarification(prompt):
             raise EditValidationError(_clarification_message())

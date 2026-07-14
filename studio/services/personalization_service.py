@@ -141,18 +141,28 @@ def _apply_contact(html, profile):
         return html
 
     phone_line = (
-        f'<a href="tel:{phone_href}">{phone}</a>' if phone_href else f"{phone}"
+        f'<a href="tel:{phone_href}" style="color:var(--accent,#0d6efd);">{phone}</a>'
+        if phone_href
+        else f"{phone}"
     )
+    # Inherit the page's own theme vars (base.css :root) instead of hardcoding a
+    # light palette — a hardcoded block reads as a foreign section on a dark page.
     section = (
-        '<section id="contact" class="builder-contact" '
-        'style="padding:48px 24px;border-top:1px solid #e5e7eb;">'
-        '<div style="max-width:960px;margin:0 auto;">'
-        '<h2 style="margin:0 0 12px;">Contact</h2>'
-        f'<p style="margin:0 0 8px;">Email: <a href="mailto:{email}">{email}</a></p>'
-        f"<p style=\"margin:0 0 8px;\">Phone: {phone_line}</p>"
-        f'<p style="margin:0;">Location: {address}</p>'
+        '<section id="contact" data-section="contact" class="builder-contact" '
+        'style="padding:64px 24px;background:var(--bg,#fff);color:var(--ink,#111);'
+        'border-top:1px solid var(--line,#e5e7eb);font:inherit;">'
+        '<div class="container" style="max-width:1140px;margin:0 auto;">'
+        '<h2 style="margin:0 0 16px;color:inherit;font-size:1.75rem;">Contact</h2>'
+        f'<p style="margin:0 0 8px;color:inherit;">Email: '
+        f'<a href="mailto:{email}" style="color:var(--accent,#0d6efd);">{email}</a></p>'
+        f'<p style="margin:0 0 8px;color:inherit;">Phone: {phone_line}</p>'
+        f'<p style="margin:0;color:inherit;">Location: {address}</p>'
         "</div></section>"
     )
+    # Before the footer, not after it — contact details below the footer read as a
+    # second page stapled on.
+    if re.search(r"<footer\b", html, flags=re.I):
+        return re.sub(r"<footer\b", f"{section}<footer", html, count=1, flags=re.I)
     if re.search(r"</body>", html, flags=re.I):
         return re.sub(r"</body>", f"{section}</body>", html, count=1, flags=re.I)
     return f"{html}{section}"

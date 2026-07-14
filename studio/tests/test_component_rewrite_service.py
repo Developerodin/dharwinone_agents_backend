@@ -169,3 +169,24 @@ def test_429_falls_back_to_sequential(monkeypatch):
     out = component_rewrite_service.rewrite_components_parallel(_HTML, _PROFILE)
     assert "SEQ HERO" in out
     assert calls["n"] >= 2
+
+
+def test_rewrite_dropping_layout_classes_is_rejected(monkeypatch):
+    # Models strip container/d-flex/navlink and the section renders unstyled.
+    html = (
+        '<html><body><nav data-section="nav" class="c-x topnav">'
+        '<div class="container d-flex justify-content-between">'
+        '<a class="brand" href="#">Brand</a><a class="navlink" href="#p">Programs</a>'
+        "</div></nav></body></html>"
+    )
+
+    class ClassStripper(SeqProvider):
+        def generate(self, model, prompt, **kwargs):
+            return '<div><a href="#">Brand</a><a href="#p">Training Plans</a></div>'
+
+    monkeypatch.setattr(
+        component_rewrite_service, "_load_provider", lambda: (ClassStripper(), "fake")
+    )
+    out = component_rewrite_service.rewrite_components_parallel(html, _PROFILE)
+    assert 'class="container d-flex justify-content-between"' in out
+    assert "Training Plans" not in out

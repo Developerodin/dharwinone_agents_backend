@@ -53,3 +53,21 @@ def test_replace_section_validates_markers_and_scope_class():
 def test_list_section_types_finds_all_markers():
     types = component_html.list_section_types(_SAMPLE)
     assert types == ["nav", "hero", "footer"]
+
+
+_NESTED = (
+    '<div data-section="stats" class="c-s stats">'
+    '<div class="row"><p>Team</p></div><div class="row"><p>75%</p></div>'
+    "</div>"
+)
+
+
+def test_div_rooted_section_is_not_truncated_at_first_nested_close():
+    inner = component_html.extract_section_inner(_NESTED, "stats")
+    assert inner == '<div class="row"><p>Team</p></div><div class="row"><p>75%</p></div>'
+    assert component_html.replace_section_inner(_NESTED, "stats", inner) == _NESTED
+
+
+def test_replace_div_rooted_section_leaves_no_orphan_close_tag():
+    out = component_html.replace_section_inner(_NESTED, "stats", "<p>NEW</p>")
+    assert out == '<div data-section="stats" class="c-s stats"><p>NEW</p></div>'

@@ -29,6 +29,11 @@ _TEXT_SECTIONS = (
 )
 _MAX_WORKERS = 4
 _RATE_LIMIT_RE = re.compile(r"\b429\b|rate\s*limit", re.I)
+_CLASS_ATTR_RE = re.compile(r"""\bclass\s*=\s*["']([^"']*)["']""", re.I)
+
+
+def _class_tokens(html):
+    return {c for m in _CLASS_ATTR_RE.finditer(html) for c in m.group(1).split()}
 
 _SECTION_GEN_PROMPT = (
     "Rewrite this {section_type} section copy to accurately describe the business.\n"
@@ -70,6 +75,16 @@ def _rewrite_one(provider, model, html, section_type, facts):
     if not new_inner:
         return section_type, None, False
     new_inner = draft._strip_markdown_fences(new_inner)
+    # ponytail: a copy rewrite must never drop a class. Models routinely strip the
+    # layout classes (container/d-flex/navlink), which unstyles the whole section.
+    dropped = _class_tokens(inner) - _class_tokens(new_inner)
+    if dropped:
+        _log.warning(
+            "section rewrite dropped classes type=%s classes=%s; keeping original",
+            section_type,
+            sorted(dropped),
+        )
+        return section_type, None, False
     return section_type, draft.preserve_img_srcs(inner, new_inner), False
 
 

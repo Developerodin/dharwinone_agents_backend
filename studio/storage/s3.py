@@ -13,6 +13,7 @@ _ALLOWED_PREFIXES = (
     "studio/placeholders/",
     "studio/assets/",
     "studio/cache/",
+    "studio/library/",  # tagged stock photo library, seeded per category
 )
 _PLACEHOLDER_PREFIX = "studio/placeholders/"
 _MOCK_S3_RE = re.compile(r"^mock\+s3://[^/]+/(.+)$")

@@ -330,7 +330,7 @@ STYLE_PACKS = [
 ]
 
 _PACK_CSS = """
-<style id="style-pack">
+<style id="style-pack" data-pack="{id}">
 :root {{
   --accent:{accent}; --pop:{accent}; --volt:{accent}; --gold:{accent};
   --brand:{accent};
@@ -377,11 +377,51 @@ def _fill(html, prompt, template):
     return html.replace("{{TAGLINE}}", tagline)
 
 
-def _apply_pack(html, pack):
+_PACK_BLOCK_RE = re.compile(r'(?is)<style id="style-pack".*?</style>\s*')
+_PACK_ID_RE = re.compile(r'(?i)<style id="style-pack"[^>]*data-pack="([^"]+)"')
+
+# Words that name a specific pack. Anything else rotates to the next pack.
+_PACK_KEYWORDS = [
+    ("sleek-dark", ("dark", "night", "black", "moody")),
+    ("minimal-light", ("minimal", "light", "clean", "simple", "plain", "white")),
+    ("bold-pop", ("bold", "pop", "vibrant", "playful", "bright", "fun", "loud")),
+    ("frosted", ("frosted", "glass", "blue", "soft", "airy")),
+    ("luxe-serif", ("luxe", "luxury", "elegant", "premium", "serif", "classy")),
+    ("high-contrast", ("high contrast", "contrast", "yellow", "accessible")),
+    ("ocean-calm", ("ocean", "calm", "teal", "green", "fresh", "natural")),
+]
+
+
+def current_pack_id(html):
+    m = _PACK_ID_RE.search(html or "")
+    return m.group(1) if m else None
+
+
+def pick_style_pack(prompt, current_id=None):
+    """Named pack if the prompt names one, else the next pack in rotation.
+
+    Rotation is what makes a bare "change the theme" actually change it, and
+    keeps changing it when the user asks again.
+    """
+    low = (prompt or "").lower()
+    themed = [p for p in STYLE_PACKS if p.get("accent")]
+    for pack_id, words in _PACK_KEYWORDS:
+        if pack_id != current_id and any(w in low for w in words):
+            return next(p for p in themed if p["id"] == pack_id)
+    ids = [p["id"] for p in themed]
+    idx = ids.index(current_id) + 1 if current_id in ids else 0
+    return themed[idx % len(themed)]
+
+
+def apply_pack(html, pack):
+    """Swap the page's style pack. Idempotent — replaces any existing pack."""
+    html = _PACK_BLOCK_RE.sub("", html)
     if not pack.get("accent"):
         return html
-    block = _PACK_CSS.format(**pack)
-    return html.replace("</head>", block + "</head>")
+    return html.replace("</head>", _PACK_CSS.format(**pack) + "</head>", 1)
+
+
+_apply_pack = apply_pack
 
 
 def make_variants(prompt):
@@ -545,13 +585,18 @@ def _wants_style_reset(user_prompt):
     return bool(_STYLE_RESET_HINT_RE.search(user_prompt or ""))
 
 
-def _extract_style_assets(head_inner):
-    parts = []
+def _extract_style_assets(html):
+    """Every style asset in document order.
+
+    Composed pages carry one <style> per component in the *body* (see
+    componentizer), so scanning only <head> loses the whole component CSS.
+    """
+    matches = []
     for pattern in (_FONT_LINK_RE, _STYLESHEET_LINK_RE, _STYLE_TAG_RE):
-        parts.extend(m.group(0) for m in pattern.finditer(head_inner))
+        matches.extend((m.start(), m.group(0)) for m in pattern.finditer(html))
     deduped = []
     seen = set()
-    for item in parts:
+    for _, item in sorted(matches):
         if item in seen:
             continue
         deduped.append(item)
@@ -559,25 +604,40 @@ def _extract_style_assets(head_inner):
     return deduped
 
 
+def _style_css_bytes(html):
+    return sum(len(m.group(0)) for m in _STYLE_TAG_RE.finditer(html))
+
+
+def _lost_style_system(original_html, edited_html):
+    # ponytail: byte-ratio heuristic. A real restyle rewrites CSS; a model
+    # that dropped the component <style> blocks loses most of it.
+    original = _style_css_bytes(original_html)
+    return bool(original) and _style_css_bytes(edited_html) < original * 0.6
+
+
 def _preserve_style_system(original_html, edited_html):
-    original_head = _HEAD_RE.search(original_html)
     edited_head = _HEAD_RE.search(edited_html)
-    if not original_head or not edited_head:
+    if not edited_head:
         return edited_html
-    style_assets = _extract_style_assets(original_head.group(2))
+    style_assets = _extract_style_assets(original_html)
     if not style_assets:
         return edited_html
 
+    # Drop every style asset the model emitted anywhere, then re-inject the
+    # originals into <head> in their original cascade order.
+    body = edited_html[edited_head.end(3) :]
+    for pattern in (_STYLE_TAG_RE, _STYLESHEET_LINK_RE, _FONT_LINK_RE):
+        body = pattern.sub("", body)
+
     edited_inner = edited_head.group(2)
-    edited_inner = _STYLE_TAG_RE.sub("", edited_inner)
-    edited_inner = _STYLESHEET_LINK_RE.sub("", edited_inner)
-    edited_inner = _FONT_LINK_RE.sub("", edited_inner)
-    style_block = "\n".join(style_assets)
-    merged_inner = f"{edited_inner.rstrip()}\n{style_block}\n"
+    for pattern in (_STYLE_TAG_RE, _STYLESHEET_LINK_RE, _FONT_LINK_RE):
+        edited_inner = pattern.sub("", edited_inner)
+    merged_inner = f"{edited_inner.rstrip()}\n" + "\n".join(style_assets) + "\n"
     return (
         edited_html[: edited_head.start(2)]
         + merged_inner
-        + edited_html[edited_head.end(2) :]
+        + edited_html[edited_head.end(2) : edited_head.end(3)]
+        + body
     )
 
 
@@ -885,7 +945,9 @@ def refine(provider, model, working_html, user_prompt, *, style_reference_html=N
     if reset_requested:
         source = style_reference_html or working_html
         sanitized = _preserve_style_system(source, sanitized)
-    elif not style_requested:
+    elif not style_requested or _lost_style_system(working_html, sanitized):
+        # A restyle may rewrite CSS, but it may never gut it: a model that
+        # returned a near-styleless document gets the original CSS back.
         sanitized = _preserve_style_system(working_html, sanitized)
     return sanitized
 

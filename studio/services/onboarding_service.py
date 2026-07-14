@@ -986,11 +986,16 @@ def _business_context(profile):
         return ""
     btype = _get_nested(profile, "business.type")
     brand = _get_nested(profile, "brand.brandName")
+    city = _get_nested(profile, "location.city")
+    country = _get_nested(profile, "location.country")
     parts = []
     if brand:
         parts.append(f'brand "{str(brand)[:60]}"')
     if btype:
         parts.append(f"a {str(btype)[:60]} business")
+    where = ", ".join(str(p)[:60] for p in (city, country) if p)
+    if where:
+        parts.append(f"based in {where}")
     return ", ".join(parts)
 
 
@@ -1009,7 +1014,12 @@ def _llm_phrase(kind, fallback_text, user_message=None, profile=None):
         "Rules:\n"
         "- Keep the original intent exactly.\n"
         "- Do not guess or mention any business type; only the known business above may be referenced.\n"
-        "- Keep it one sentence, max 22 words.\n"
+        + (
+            "- Open by briefly acknowledging the last user message, then keep the intent.\n"
+            if kind == "ready_waiting"
+            else ""
+        )
+        + "- Keep it one sentence, max 22 words.\n"
         "- Plain text only. No markdown, no bullets."
     )
     try:

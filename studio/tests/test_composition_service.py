@@ -1,5 +1,6 @@
 """Composition service tests."""
 
+import re
 import time
 
 import pytest
@@ -72,26 +73,34 @@ def test_composed_page_personalizes_clean():
     assert "Acme" in out
 
 
-def test_tag_overlap_ranks_cross_genre_candidates(monkeypatch):
-    fake_pool = [
-        {"id": "aaa-1-pricing", "type": "pricing", "genre": "aaa", "tags": ["aaa", "pricing"]},
-        {"id": "zzz-1-pricing", "type": "pricing", "genre": "zzz", "tags": ["zzz", "pricing", "coffee"]},
-    ]
-    monkeypatch.setattr(composition_service, "_index", lambda: {"pricing": fake_pool})
-    ranked = composition_service._candidates("pricing", "none", frozenset({"coffee"}))
-    assert ranked[0]["id"] == "zzz-1-pricing"  # tag overlap when no same-genre pool
+def test_every_section_comes_from_one_page_family():
+    # Mixing source pages mixes fonts and button shapes: the page stops reading as one site.
+    for genre in ("fitness", "cafe", "saas", "agency"):
+        ids = _one(f"proj-{genre}", genre=genre)["componentIds"]
+        families = {composition_service._family({"id": i}) for i in ids}
+        assert len(families) == 1, (genre, ids)
 
 
-def test_candidates_same_genre_only_when_available(monkeypatch):
-    fake_pool = [
-        {"id": "cafe-1-gallery", "type": "gallery", "genre": "cafe", "tags": ["coffee"]},
-        {"id": "fitness-1-gallery", "type": "gallery", "genre": "fitness", "tags": ["gym"]},
-        {"id": "saas-1-gallery", "type": "gallery", "genre": "saas", "tags": ["software"]},
-    ]
-    monkeypatch.setattr(composition_service, "_index", lambda: {"gallery": fake_pool})
-    ranked = composition_service._candidates("gallery", "fitness")
-    assert ranked
-    assert all(e["genre"] == "fitness" for e in ranked)
+def test_page_carries_its_own_palette_not_the_shared_base_one():
+    # base.css ships saas' palette; without the per-page :root every genre came
+    # out in the same green and the templates' own themes never shipped.
+    palettes = set()
+    for genre in ("fitness", "cafe", "medical", "shop"):
+        for seed in range(3):
+            v = composition_service.compose_project_variants(f"p{seed}", "", genre, 1)
+            root = re.search(r"<style>(:root\{[^}]*\})</style>", v[0]["html"])
+            assert root, (genre, seed)
+            palettes.add(root.group(1))
+    assert len(palettes) > 1
+    assert not any("#0d6e60" in p and "#f7f8fa" in p for p in palettes)  # base.css default
+
+
+def test_sections_keep_source_page_order():
+    ids = _one("proj-1", genre="fitness")["componentIds"]
+    orders = [composition_service._order({"id": i}) for i in ids]
+    assert orders == sorted(orders)
+    assert ids[0].endswith("-nav")
+    assert ids[-1].endswith("-footer")
 
 
 def test_zero_count_returns_empty():
@@ -135,15 +144,11 @@ def _with_provider(monkeypatch, reply):
 
 
 def _valid_selection():
-    """Build a genuinely valid slot->id mapping from the real manifest."""
+    """A real page family id from the manifest."""
     import json as _json
 
-    selection = {}
-    for slot in composition_service.RECIPE:
-        pool = composition_service._candidates(slot, "saas")
-        if pool:
-            selection[slot] = pool[0]["id"]
-    return _json.dumps(selection)
+    family = sorted(composition_service._families("saas"))[0]
+    return _json.dumps({"design": family})
 
 
 def test_llm_valid_selection_is_used(monkeypatch):
@@ -151,15 +156,12 @@ def test_llm_valid_selection_is_used(monkeypatch):
     v = composition_service.compose_project_variants("p1", "SaaS startup", "saas", 1)[0]
     assert v["via"] == "llm"
     assert len(provider.prompts) == 1
-    # top-K only: prompt must not contain the whole manifest
-    assert provider.prompts[0].count('"id"') <= len(composition_service.RECIPE) * 5
+    chosen = sorted(composition_service._families("saas"))[0]
+    assert {composition_service._family({"id": i}) for i in v["componentIds"]} == {chosen}
 
 
 def test_llm_hallucinated_id_falls_back(monkeypatch):
-    _with_provider(
-        monkeypatch,
-        '{"nav": "no-such-id", "hero": "also-fake", "footer": "nope"}',
-    )
+    _with_provider(monkeypatch, '{"design": "no-such-design"}')
     v = composition_service.compose_project_variants("p1", "facts", "saas", 1)[0]
     assert v["via"] == "deterministic"
 
@@ -176,22 +178,8 @@ def test_llm_exception_falls_back(monkeypatch):
     assert v["via"] == "deterministic"
 
 
-def test_llm_valid_id_in_wrong_slot_falls_back(monkeypatch):
-    import json as _json
-
-    selection = _json.loads(_valid_selection())
-    selection["hero"], selection["footer"] = selection["footer"], selection["hero"]
-    _with_provider(monkeypatch, _json.dumps(selection))
-    v = composition_service.compose_project_variants("p1", "facts", "saas", 1)[0]
-    assert v["via"] == "deterministic"
-
-
-def test_llm_missing_required_slot_falls_back(monkeypatch):
-    import json as _json
-
-    selection = _json.loads(_valid_selection())
-    del selection["footer"]
-    _with_provider(monkeypatch, _json.dumps(selection))
+def test_llm_missing_design_key_falls_back(monkeypatch):
+    _with_provider(monkeypatch, '{"nav": "saas-1-nav"}')
     v = composition_service.compose_project_variants("p1", "facts", "saas", 1)[0]
     assert v["via"] == "deterministic"
 

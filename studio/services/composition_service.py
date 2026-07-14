@@ -11,9 +11,9 @@ from studio.services import onboarding_service
 
 _log = logging.getLogger(__name__)
 
-COMPONENTS_DIR = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "components"
-)
+_STUDIO_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+COMPONENTS_DIR = os.path.join(_STUDIO_DIR, "components")
+TEMPLATES_DIR = os.path.join(_STUDIO_DIR, "templates")
 
 RECIPE = [
     "nav",
@@ -30,7 +30,6 @@ RECIPE = [
     "footer",
 ]
 REQUIRED = frozenset({"nav", "hero", "footer"})
-_TOP_K = 5
 _MAX_HTML_BYTES = 150 * 1024
 
 _index_cache = None
@@ -45,6 +44,7 @@ _SHELL = """<!DOCTYPE html>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 __FONTS__
 <style>__BASE__</style>
+<style>__PALETTE__</style>
 </head>
 <body>
 __BODY__
@@ -52,22 +52,17 @@ __BODY__
 </html>
 """
 
-_SELECT_PROMPT = """Pick the best component for each section of a small-business website.
+_SELECT_PROMPT = """Pick the page design that best fits this small business.
 
 Business genre: {genre}
 Business:
 {facts}
 
-Candidates per section (JSON):
-{candidates}
+Page designs (JSON) — each is one complete, visually coherent page:
+{designs}
 
-Reply with only JSON mapping section names to ONE candidate id each, like
-{{"nav": "saas-1-nav", "hero": "cafe-2-2-hero"}}.
-Rules:
-- Use only ids listed above, under their own section.
-- Every id belongs to the {genre} genre — do not mix other genres.
-- Always include nav, hero and footer.
-- Omit sections that do not fit this business."""
+Reply with only JSON naming ONE design, like {{"design": "2"}}.
+Use only a design id listed above."""
 
 
 class CompositionError(RuntimeError):
@@ -100,69 +95,91 @@ def _read(name):
     return _file_cache[name]
 
 
-def _keywords(business_facts):
-    return frozenset(re.findall(r"[a-z]+", (business_facts or "").lower()))
+def _family(entry):
+    """Which source page a component was extracted from.
 
-
-def _rank(pool, genre, keywords):
-    """Spec ranking: same-genre first, then tag overlap with business keywords."""
-
-    def score(entry):
-        overlap = len(keywords & set(entry["tags"]))
-        return (entry["genre"] != genre, -overlap, entry["id"])
-
-    return sorted(pool, key=score)
-
-
-def _candidates(type_, genre, keywords=frozenset()):
-    pool = _index().get(type_, [])
-    same_genre = [e for e in pool if e["genre"] == genre]
-    ranked = _rank(same_genre if same_genre else pool, genre, keywords)
-    return ranked[:_TOP_K]
-
-
-def _pick_deterministic(project_id, genre, seed, keywords):
-    """Pick same-genre components only for visual and topical coherence."""
-    rng = random.Random(f"{project_id}:{seed}")
-    chosen = []
-    for slot in RECIPE:
-        pool = [e for e in _index().get(slot, []) if e["genre"] == genre]
-        if not pool:
-            if slot in REQUIRED:
-                raise CompositionError(f"no {genre} candidates for required slot: {slot}")
-            continue
-        chosen.append(rng.choice(pool))
-    return chosen
-
-
-def _pick_llm(genre, business_facts):
-    """LLM slot selection over top-K candidates. None = use deterministic path.
-
-    Returns FULL manifest entries (with type/path/fonts) so _assemble can read
-    the component files; the prompt sees only a reduced projection of them.
+    Ids are {genre}-{page}-{index}-{type} for the multi-page sets and
+    {genre}-{index}-{type} for the first page. Components from different pages
+    carry different fonts, button shapes and section backgrounds, so mixing them
+    produces a page that reads as several sites stapled together.
     """
+    parts = entry["id"].split("-")
+    return parts[1] if len(parts) == 4 else "0"
+
+
+def _order(entry):
+    """Original position on the source page — keeps the designer's section flow."""
+    parts = entry["id"].split("-")
+    return int(parts[2]) if len(parts) == 4 else int(parts[1])
+
+
+def _families(genre):
+    """{family: {slot: [entries]}} for families that can build a whole page."""
+    fams = {}
+    for slot in RECIPE:
+        for entry in _index().get(slot, []):
+            if entry["genre"] == genre:
+                fams.setdefault(_family(entry), {}).setdefault(slot, []).append(entry)
+    return {f: slots for f, slots in fams.items() if REQUIRED <= set(slots)}
+
+
+_ROOT_RE = re.compile(r"(?s):root\s*\{[^}]*\}")
+
+
+def _palette(entry):
+    """The :root palette of the page this component was extracted from.
+
+    base.css ships one palette for the whole library, so without this every
+    genre renders in the same colours (saas green) and the "themes" the
+    templates actually define never reach a composed page.
+    """
+    fam = _family(entry)
+    name = f"{entry['genre']}.html" if fam == "0" else f"{entry['genre']}-{fam}.html"
+    if name not in _file_cache:
+        try:
+            with open(os.path.join(TEMPLATES_DIR, name), encoding="utf-8") as f:
+                found = _ROOT_RE.search(f.read())
+        except OSError:
+            found = None
+        _file_cache[name] = found.group(0) if found else ""
+    return _file_cache[name]
+
+
+def _build(slots, rng):
+    chosen = [rng.choice(slots[s]) for s in RECIPE if s in slots]
+    return sorted(chosen, key=_order)
+
+
+def _pick_deterministic(project_id, genre, seed):
+    """One whole page family, so every section shares one visual language."""
+    fams = _families(genre)
+    if not fams:
+        raise CompositionError(f"no complete {genre} component family")
+    rng = random.Random(f"{project_id}:{seed}")
+    return _build(fams[rng.choice(sorted(fams))], rng)
+
+
+def _pick_llm(genre, business_facts, rng):
+    """LLM picks the page family. None = use deterministic path."""
     provider, model = onboarding_service._load_onboarding_provider()
     if provider is None or not model:
         return None
-    keywords = _keywords(business_facts)
-    pools = {}
-    for slot in RECIPE:
-        pool = _candidates(slot, genre, keywords)
-        if pool:
-            pools[slot] = pool
+    fams = _families(genre)
+    if not fams:
+        return None
+    designs = {
+        f: {
+            "sections": [s for s in RECIPE if s in slots],
+            "tags": sorted(
+                {t for pool in slots.values() for e in pool for t in e["tags"]} - {genre}
+            ),
+        }
+        for f, slots in fams.items()
+    }
     prompt = _SELECT_PROMPT.format(
         genre=genre,
         facts=business_facts or "(no details provided)",
-        candidates=json.dumps(
-            {
-                slot: [
-                    {"id": e["id"], "tags": e["tags"], "description": e["description"]}
-                    for e in pool
-                ]
-                for slot, pool in pools.items()
-            },
-            indent=0,
-        ),
+        designs=json.dumps(designs, indent=0),
     )
     try:
         out = provider.generate(model, prompt, num_ctx=8192, timeout_s=30)
@@ -174,20 +191,12 @@ def _pick_llm(genre, business_facts):
         data = json.loads(raw)
     except ValueError:
         return None
-    if not isinstance(data, dict) or not REQUIRED <= set(data):
+    if not isinstance(data, dict):
         return None
-    chosen = []
-    for slot in RECIPE:
-        cid = data.get(slot)
-        if cid is None:
-            continue
-        # id must be one of the candidates offered for THIS slot — covers both
-        # hallucinated ids and valid ids placed under the wrong section
-        entry = next((e for e in pools.get(slot, []) if e["id"] == str(cid)), None)
-        if entry is None:
-            return None  # full fallback
-        chosen.append(entry)
-    return chosen
+    slots = fams.get(str(data.get("design")))
+    if slots is None:
+        return None
+    return _build(slots, rng)
 
 
 def _assemble(entries):
@@ -201,6 +210,7 @@ def _assemble(entries):
     html = (
         _SHELL.replace("__FONTS__", "\n".join(fonts))
         .replace("__BASE__", _read("base.css"))
+        .replace("__PALETTE__", _palette(entries[0]))
         .replace("__BODY__", "\n".join(parts))
     )
     for slot in ("nav", "hero", "footer"):
@@ -213,7 +223,6 @@ def compose_project_variants(project_id, business_facts, genre, count):
     """Compose up to `count` page variants. Never raises; failures are skipped."""
     if count <= 0:
         return []
-    keywords = _keywords(business_facts)
     variants = []
     for seed in range(count):
         started = time.perf_counter()
@@ -221,14 +230,16 @@ def compose_project_variants(project_id, business_facts, genre, count):
             entries, via = None, "deterministic"
             if seed == 0:
                 try:
-                    entries = _pick_llm(genre, business_facts)
+                    entries = _pick_llm(
+                        genre, business_facts, random.Random(f"{project_id}:llm")
+                    )
                 except Exception:
                     _log.exception("llm selection crashed; using deterministic")
                     entries = None
                 if entries:
                     via = "llm"
             if entries is None:
-                entries = _pick_deterministic(project_id, genre, seed, keywords)
+                entries = _pick_deterministic(project_id, genre, seed)
             html = _assemble(entries)
             if len(html.encode("utf-8")) > _MAX_HTML_BYTES:
                 raise CompositionError("composed page exceeds 150KB budget")

@@ -88,10 +88,15 @@ def test_generate_rewrites_template_copy_via_llm(monkeypatch):
     from studio.services import component_rewrite_service, onboarding_service
 
     class FakeProvider:
+        """A copy rewrite keeps the section markup; only the text changes."""
+
         def generate(self, model, prompt, **kwargs):
-            if "Section type:" in prompt:
-                return "<h1>HR software that hires for you.</h1>"
-            return "<p>ok</p>"
+            if "Section type:" not in prompt:
+                return "<p>ok</p>"
+            inner = prompt.split("Current section inner HTML:\n", 1)[1]
+            if "Section type: hero" in prompt:
+                return f"{inner}<h1>HR software that hires for you.</h1>"
+            return inner
 
     monkeypatch.setattr(
         onboarding_service,

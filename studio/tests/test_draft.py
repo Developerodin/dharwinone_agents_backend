@@ -407,3 +407,23 @@ def test_ensure_loadable_images_uses_s3_placeholder_when_configured(monkeypatch)
     out = draft.ensure_loadable_images(html, "fitness")
     assert 'src="https://cdn.dharwinone.com/studio/placeholders/fitness/0.jpg"' in out
     assert "images.unsplash.com" not in out
+
+
+_STYLED = (
+    "<html><head><style>:root{--accent:#000}</style></head>"
+    '<body><style>.c-a .btn{padding:1rem}</style><section>old</section></body></html>'
+)
+
+
+def test_preserve_style_system_restores_component_css_dropped_from_body():
+    stripped = "<html><head></head><body><section>new</section></body></html>"
+    out = draft._preserve_style_system(_STYLED, stripped)
+    assert ".c-a .btn{padding:1rem}" in out
+    assert ":root{--accent:#000}" in out
+    assert "<section>new</section>" in out
+
+
+def test_refine_restyle_still_rescued_when_model_guts_the_css():
+    gutted = "<html><head><style>body{color:red}</style></head><body>x</body></html>"
+    assert draft._lost_style_system(_STYLED, gutted)
+    assert not draft._lost_style_system(_STYLED, _STYLED)
