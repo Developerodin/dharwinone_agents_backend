@@ -264,6 +264,32 @@ def test_strip_markdown_fences_from_fragment():
     assert draft.sanitize_html(wrapped) == "<h2>Headline</h2>\n<p>Body</p>"
 
 
+def test_strip_markdown_fences_multiple_blocks():
+    wrapped = (
+        "```html\n<h1>Hero</h1>\n```\n"
+        "```\n<h2>Featured</h2>\n```"
+    )
+    assert draft._strip_markdown_fences(wrapped) == "<h1>Hero</h1>\n<h2>Featured</h2>"
+
+
+def test_strip_markdown_fences_standalone_fence_lines():
+    wrapped = "<h1>Hero</h1>\n```\n```html\n<h2>Menu</h2>"
+    assert draft._strip_markdown_fences(wrapped) == "<h1>Hero</h1>\n<h2>Menu</h2>"
+
+
+def test_sanitize_html_strips_fences_between_sections():
+    doc = (
+        "<!DOCTYPE html><html><body>"
+        "```html\n<h1>Hero</h1>\n```\n"
+        "```\n<section>Featured pizzas</section>\n```"
+        "</body></html>"
+    )
+    clean = draft.sanitize_html(doc)
+    assert "```" not in clean
+    assert "<h1>Hero</h1>" in clean
+    assert "Featured pizzas" in clean
+
+
 def test_refine_section_strips_markdown_fences():
     class FenceProvider:
         def generate(self, model, prompt, **kwargs):

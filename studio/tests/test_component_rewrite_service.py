@@ -52,6 +52,26 @@ class SeqProvider:
         return "<p>NEW</p>"
 
 
+def test_parallel_rewrite_strips_markdown_fences(monkeypatch):
+    class FenceProvider(SeqProvider):
+        def generate(self, model, prompt, **kwargs):
+            if "Section type: hero" in prompt:
+                return "```html\n<h1>NEW HERO</h1>\n```"
+            if "Section type: features" in prompt:
+                return "<p>NEW FEAT</p>\n```"
+            return super().generate(model, prompt, **kwargs)
+
+    monkeypatch.setattr(
+        component_rewrite_service,
+        "_load_provider",
+        lambda: (FenceProvider(), "fake"),
+    )
+    out = component_rewrite_service.rewrite_components_parallel(_HTML, _PROFILE)
+    assert "NEW HERO" in out
+    assert "NEW FEAT" in out
+    assert "```" not in out
+
+
 def test_parallel_rewrite_updates_text_sections_only(monkeypatch):
     monkeypatch.setattr(
         component_rewrite_service,

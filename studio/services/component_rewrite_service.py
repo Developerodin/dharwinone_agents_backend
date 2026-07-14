@@ -52,7 +52,7 @@ def _rewrite_one(provider, model, html, section_type, facts):
         return section_type, None, _is_rate_limit(exc)
     if not new_inner:
         return section_type, None, False
-    return section_type, new_inner, False
+    return section_type, draft._strip_markdown_fences(new_inner), False
 
 
 def rewrite_components_parallel(html, profile):
@@ -111,4 +111,4 @@ def rewrite_components_parallel(html, profile):
         len(targets),
         (time.perf_counter() - started) * 1000,
     )
-    return current
+    return draft.sanitize_html(current)

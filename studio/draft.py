@@ -581,13 +581,44 @@ def _preserve_style_system(original_html, edited_html):
     )
 
 
+_FENCE_BLOCK_RE = re.compile(
+    r"```(?:html|htm|xml|json)?\s*\r?\n(.*?)\r?\n```",
+    re.I | re.S,
+)
+_FENCE_OPEN_RE = re.compile(r"^```(?:html|htm|xml|json)?\s*\r?\n?", re.I)
+_FENCE_CLOSE_RE = re.compile(r"\r?\n?```\s*$")
+_STANDALONE_FENCE_LINE_RE = re.compile(
+    r"^\s*```(?:html|htm|xml|json)?\s*\r?$",
+    re.I | re.M,
+)
+
+
 def _strip_markdown_fences(text):
-    """Remove ```html / ``` wrappers from LLM output."""
+    """Remove ```html / ``` wrappers and orphan fence lines from LLM output."""
     if not isinstance(text, str):
         return text
     out = text.strip()
-    out = re.sub(r"^```(?:html|htm|xml|json)?\s*\r?\n?", "", out, flags=re.I)
-    out = re.sub(r"\r?\n?```\s*$", "", out)
+
+    prev = None
+    while prev != out:
+        prev = out
+        out = _FENCE_BLOCK_RE.sub(r"\1", out)
+
+    changed = True
+    while changed:
+        changed = False
+        peeled = _FENCE_OPEN_RE.sub("", out, count=1)
+        if peeled != out:
+            out = peeled
+            changed = True
+        peeled = _FENCE_CLOSE_RE.sub("", out, count=1)
+        if peeled != out:
+            out = peeled
+            changed = True
+
+    out = _STANDALONE_FENCE_LINE_RE.sub("", out)
+    while re.search(r"\n[ \t]*\n", out):
+        out = re.sub(r"\n[ \t]*\n", "\n", out, count=1)
     return out.strip()
 
 

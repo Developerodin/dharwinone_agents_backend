@@ -24,6 +24,16 @@ def test_replace_section_inner_preserves_outer_tag_and_attrs():
     assert "<h1>OLD</h1>" not in updated
 
 
+def test_replace_section_inner_strips_markdown_fences():
+    updated = component_html.replace_section_inner(
+        _SAMPLE,
+        "hero",
+        "```html\n<h1>Fenced headline</h1>\n```",
+    )
+    assert "<h1>Fenced headline</h1>" in updated
+    assert "```" not in updated
+
+
 def test_replace_section_validates_markers_and_scope_class():
     ok, reason = component_html.validate_section_root(
         '<header data-section="hero" class="c-saas-1-1 hero">',

@@ -229,7 +229,7 @@ def personalize_html(raw_html, profile, assets, genre):
     html = draft.ensure_loadable_images(html, genre)
     if _PLACEHOLDER_RE.search(html):
         raise PersonalizationError("unresolved template placeholders remain")
-    return html
+    return draft.sanitize_html(html)
 
 
 def _genre_hint(project, profile):

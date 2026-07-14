@@ -22,6 +22,9 @@ def extract_section_inner(html, section_type):
 
 
 def replace_section_inner(html, section_type, new_inner):
+    from studio import draft
+
+    new_inner = draft._strip_markdown_fences(new_inner)
     for m in _SECTION_ROOT_RE.finditer(html):
         if m.group("type") == section_type:
             return (
