@@ -157,7 +157,42 @@ def _load_edit_provider():
         return None, None
 
 
+def _apply_section_edit(project_id, html, prompt, section_type):
+    from studio import component_html
+
+    inner = component_html.extract_section_inner(html, section_type)
+    if inner is None:
+        return None
+    provider, model = _load_edit_provider()
+    if provider is None or not model:
+        return None
+    new_inner = draft.refine_section(
+        provider,
+        model,
+        inner,
+        section_type,
+        prompt,
+        style_reference_html=html,
+        num_ctx=8192,
+    )
+    if not new_inner:
+        return None
+    spliced = component_html.replace_section_inner(html, section_type, new_inner)
+    return draft.sanitize_html(spliced)
+
+
 def _apply_llm_edit(project_id, html, prompt):
+    section_type = _identify_sections(prompt)
+    if section_type and f'data-section="{section_type}"' in html:
+        edited = _apply_section_edit(project_id, html, prompt, section_type)
+        if edited:
+            _log.info(
+                "edit_path=section section_type=%s project=%s",
+                section_type,
+                project_id,
+            )
+            return edited
+    _log.info("edit_path=full-page project=%s", project_id)
     provider, model = _load_edit_provider()
     if provider is None or not model:
         return None
