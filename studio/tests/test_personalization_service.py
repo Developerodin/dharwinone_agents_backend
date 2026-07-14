@@ -85,18 +85,22 @@ def test_generate_picks_genre_from_profile_and_prompt():
 
 
 def test_generate_rewrites_template_copy_via_llm(monkeypatch):
-    from studio.services import onboarding_service
+    from studio.services import component_rewrite_service, onboarding_service
 
     class FakeProvider:
         def generate(self, model, prompt, **kwargs):
-            return (
-                "<!DOCTYPE html><html><head><title>x</title></head>"
-                "<body><h1>HR software that hires for you.</h1></body></html>"
-            )
+            if "Section type:" in prompt:
+                return "<h1>HR software that hires for you.</h1>"
+            return "<p>ok</p>"
 
     monkeypatch.setattr(
         onboarding_service,
         "_load_onboarding_provider",
+        lambda: (FakeProvider(), "fake-model"),
+    )
+    monkeypatch.setattr(
+        component_rewrite_service,
+        "_load_provider",
         lambda: (FakeProvider(), "fake-model"),
     )
     project = _seed_ready_project()
@@ -261,3 +265,50 @@ def test_generate_rewrite_copy_at_most_once(monkeypatch):
 def test_composed_count_respects_env(monkeypatch, env, expected):
     monkeypatch.setenv("STUDIO_COMPOSED_VARIANTS", env)
     assert personalization_service._composed_count() == expected
+
+
+def test_generate_gallery_cardinality_and_ordering(monkeypatch):
+    monkeypatch.delenv("STUDIO_COMPOSED_VARIANTS", raising=False)
+    project = _seed_ready_project()
+    result = personalization_service.generate_for_project(project["projectId"], force=True)
+    assert 4 <= len(result) <= 5
+    composed = [t for t in result if t["templateId"].startswith("composed-")]
+    assert len(composed) == 2
+    assert result[0]["templateId"].startswith("composed-")
+    assert result[0].get("galleryIndex", -1) == 0
+    assert result[0].get("sourceKind") == "composed"
+
+
+def test_generate_no_full_page_rewrite_when_component_rewrite_active(monkeypatch):
+    from studio.services import component_rewrite_service, onboarding_service
+
+    rewrite_calls = []
+    monkeypatch.setattr(
+        personalization_service,
+        "_rewrite_copy",
+        lambda html, profile: rewrite_calls.append(1) or html,
+    )
+    monkeypatch.setattr(
+        component_rewrite_service,
+        "rewrite_components_parallel",
+        lambda html, profile: html.replace("OLD", "NEW"),
+    )
+    monkeypatch.setattr(
+        onboarding_service,
+        "_load_onboarding_provider",
+        lambda: (object(), "fake"),
+    )
+    project = _seed_ready_project()
+    personalization_service.generate_for_project(project["projectId"], force=True)
+    assert len(rewrite_calls) == 0
+
+
+def test_composition_failure_emits_single_whole_fallback(monkeypatch):
+    from studio.services import composition_service
+
+    monkeypatch.setattr(composition_service, "compose_project_variants", lambda *a, **k: [])
+    project = _seed_ready_project()
+    result = personalization_service.generate_for_project(project["projectId"], force=True)
+    fallback = [t for t in result if t.get("sourceKind") == "fallback"]
+    assert len(fallback) >= 1
+    assert result[-1].get("galleryIndex", 99) >= 0

@@ -97,6 +97,7 @@ def test_generate_includes_composed_variant(client, memory_db):
     templates = gen.json()["templates"]
     composed = [t for t in templates if t["templateId"].startswith("composed-")]
     assert len(composed) == 2  # STUDIO_COMPOSED_VARIANTS default
+    assert templates[0]["templateId"].startswith("composed-")
     assert "{{" not in composed[0]["htmlContent"]
     assert composed[0]["htmlContent"].lstrip().startswith("<!DOCTYPE html>")
     # sourceTemplateRef records the component ids used
@@ -169,3 +170,26 @@ def test_templates_repo_sorts_by_gallery_index(memory_db):
         "composed-2",
         "saas-bold-pop",
     ]
+
+
+def _seed_and_generate(client):
+    project_id = _ready_project(client)
+    client.post(f"/builder/projects/{project_id}/generate-templates")
+    return project_id
+
+
+def test_get_templates_returns_composed_first(client, memory_db):
+    """GET /templates must return composed-first, not just POST body."""
+    pid = _seed_and_generate(client)
+    resp = client.get(f"/builder/projects/{pid}/templates")
+    assert resp.status_code == 200
+    templates = resp.json()
+    assert templates[0]["templateId"].startswith("composed-")
+    assert templates[0].get("galleryIndex", -1) == 0
+
+
+def test_reload_path_templates_zero_is_composed(client, memory_db):
+    """Reload path: templates[0] starts with composed-."""
+    pid = _seed_and_generate(client)
+    templates = client.get(f"/builder/projects/{pid}/templates").json()
+    assert templates[0]["templateId"].startswith("composed-")

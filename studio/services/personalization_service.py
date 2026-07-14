@@ -8,6 +8,7 @@ import re
 from studio import draft
 from studio.repositories import assets_repo, profiles_repo, projects_repo, templates_repo
 from studio.services import composition_service, onboarding_service
+from studio.services import component_rewrite_service
 from studio.services.profile_facts import business_facts
 from studio.storage import s3
 
@@ -16,7 +17,6 @@ _log = logging.getLogger(__name__)
 _PLACEHOLDER_RE = re.compile(r"\{\{[^}]+\}\}")
 _EMAIL_TEXT_RE = re.compile(r"(?i)\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b")
 _PHONE_TEXT_RE = re.compile(r"\+?\d[\d\s().-]{7,}\d")
-_MAX_DESIGNS = 3
 _MAX_PACKS = 2
 _STYLE_PREF_PACK_KEYWORDS = {
     "sleek-dark": ("sleek", "dark", "night", "moody"),
@@ -277,8 +277,17 @@ def _composed_templates(project_id, profile, assets, genre):
         for idx, comp in enumerate(composed):
             try:
                 html = personalize_html(comp["html"], profile, assets, genre)
-                if idx == 0:  # LLM budget cap: rewrite only the first composed variant
-                    html = _rewrite_copy(html, profile)
+                if idx == 0:
+                    if os.environ.get("STUDIO_COMPONENT_REWRITE", "1").strip().lower() in (
+                        "0",
+                        "false",
+                        "no",
+                    ):
+                        html = _rewrite_copy(html, profile)
+                    else:
+                        html = component_rewrite_service.rewrite_components_parallel(
+                            html, profile
+                        )
             except PersonalizationError:
                 _log.warning("composed variant %s failed personalization", idx)
                 continue
@@ -310,27 +319,14 @@ def generate_for_project(project_id, *, force=False):
     genre = draft.pick_template(_genre_hint(project, profile))
     templates = []
 
-    design_files = draft.template_files(genre)[:_MAX_DESIGNS]
-    for fname in design_files:
-        stem = fname[: -len(".html")]
-        with open(os.path.join(draft.TEMPLATES_DIR, fname), encoding="utf-8") as f:
-            raw = f.read()
-        html = personalize_html(raw, profile, assets, genre)
-        template_id = stem
-        templates.append(
-            {
-                "templateId": template_id,
-                "label": draft._design_label(raw, stem, genre),
-                "style": genre,
-                "sourceTemplateRef": fname,
-                "s3HtmlKey": _persist_key(project_id, template_id),
-                "htmlContent": html,
-            }
-        )
-
-    if design_files:
-        base_html = templates[0]["htmlContent"]
-        for pack in _selected_style_packs(profile):
+    composed = _composed_templates(project_id, profile, assets, genre)
+    if composed:
+        for i, t in enumerate(composed):
+            t["sourceKind"] = "composed"
+            t["galleryIndex"] = i
+            templates.append(t)
+        base_html = composed[0]["htmlContent"]
+        for j, pack in enumerate(_selected_style_packs(profile)):
             packed = draft._apply_pack(base_html, pack)
             if _PLACEHOLDER_RE.search(packed):
                 raise PersonalizationError("unresolved placeholders in style pack")
@@ -340,13 +336,35 @@ def generate_for_project(project_id, *, force=False):
                     "templateId": template_id,
                     "label": f"{pack['label']} · {genre.title()}",
                     "style": genre,
-                    "sourceTemplateRef": design_files[0],
+                    "sourceTemplateRef": composed[0].get("sourceTemplateRef", ""),
                     "s3HtmlKey": _persist_key(project_id, template_id),
                     "htmlContent": packed,
+                    "sourceKind": "pack",
+                    "galleryIndex": len(composed) + j,
+                }
+            )
+    else:
+        design_files = draft.template_files(genre)
+        if design_files:
+            fname = design_files[0]
+            stem = fname[: -len(".html")]
+            with open(os.path.join(draft.TEMPLATES_DIR, fname), encoding="utf-8") as f:
+                raw = f.read()
+            html = personalize_html(raw, profile, assets, genre)
+            templates.append(
+                {
+                    "templateId": stem,
+                    "label": draft._design_label(raw, stem, genre),
+                    "style": genre,
+                    "sourceTemplateRef": fname,
+                    "s3HtmlKey": _persist_key(project_id, stem),
+                    "htmlContent": html,
+                    "sourceKind": "fallback",
+                    "galleryIndex": 0,
                 }
             )
 
-    templates.extend(_composed_templates(project_id, profile, assets, genre))
+    templates.sort(key=lambda t: (t.get("galleryIndex", 999), t.get("templateId", "")))
 
     saved = templates_repo.replace_for_project(project_id, templates)
     projects_repo.update_fields(
