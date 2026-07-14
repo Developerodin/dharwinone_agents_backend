@@ -8,6 +8,7 @@ import re
 from studio import draft
 from studio.repositories import assets_repo, profiles_repo, projects_repo, templates_repo
 from studio.services import composition_service, onboarding_service
+from studio.services.profile_facts import business_facts
 from studio.storage import s3
 
 _log = logging.getLogger(__name__)
@@ -177,27 +178,13 @@ _COPY_REWRITE_PROMPT = (
 )
 
 
-def _business_facts(profile):
-    business = profile.get("business") or {}
-    facts = []
-    if business.get("type"):
-        facts.append(f"- Business type: {business['type']}")
-    if business.get("description"):
-        facts.append(f"- Description: {business['description']}")
-    if business.get("services"):
-        facts.append(f"- Services: {', '.join(business['services'][:6])}")
-    if business.get("targetAudience"):
-        facts.append(f"- Target audience: {business['targetAudience']}")
-    return "\n".join(facts)
-
-
 def _rewrite_copy(html, profile):
     """LLM pass that grounds template copy in the business profile.
 
     Falls back to the string-substituted html when no provider is configured
     or the model returns an invalid document.
     """
-    facts = _business_facts(profile)
+    facts = business_facts(profile)
     if not facts:
         return html
     provider, model = onboarding_service._load_onboarding_provider()
@@ -285,7 +272,7 @@ def _composed_templates(project_id, profile, assets, genre):
     out = []
     try:
         composed = composition_service.compose_project_variants(
-            project_id, _business_facts(profile), genre, _composed_count()
+            project_id, business_facts(profile), genre, _composed_count()
         )
         for idx, comp in enumerate(composed):
             try:
