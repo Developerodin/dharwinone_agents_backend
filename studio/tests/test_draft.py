@@ -223,3 +223,36 @@ def test_read_choice_roundtrip(tmp_path):
     ) as f:
         json.dump({"id": "bold-pop", "label": "Bold Pop", "variant": 3}, f)
     assert draft.read_choice(str(tmp_path))["id"] == "bold-pop"
+
+
+def test_refine_section_returns_inner_fragment_only():
+    class FakeProvider:
+        def generate(self, model, prompt, **kwargs):
+            assert kwargs.get("num_ctx") == 8192
+            return "<h1>Grounded headline</h1><p class='tagline'>New tagline</p>"
+
+    out = draft.refine_section(
+        FakeProvider(),
+        "fake",
+        section_html="<h1>Old</h1>",
+        section_type="hero",
+        user_prompt="Rewrite hero copy for a neighborhood cafe.",
+        style_reference_html="<!DOCTYPE html><html><body></body></html>",
+    )
+    assert out == "<h1>Grounded headline</h1><p class='tagline'>New tagline</p>"
+    assert "<html" not in (out or "").lower()
+
+
+def test_refine_section_rejects_full_document_response():
+    class BadProvider:
+        def generate(self, model, prompt, **kwargs):
+            return "<!DOCTYPE html><html><body><h1>x</h1></body></html>"
+
+    out = draft.refine_section(
+        BadProvider(),
+        "fake",
+        section_html="<h1>Old</h1>",
+        section_type="hero",
+        user_prompt="Rewrite",
+    )
+    assert out is None

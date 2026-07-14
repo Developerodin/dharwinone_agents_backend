@@ -598,6 +598,68 @@ def sanitize_html(html):
     return re.sub(r"(?i)javascript\s*:", "", html)
 
 
+_SECTION_REWRITE_PROMPT = """You are rewriting the INNER HTML of one website section.
+
+Section type: {section_type}
+
+User intent:
+{user_prompt}
+
+Rules:
+- Output ONLY the inner HTML for this section (no <html>, <head>, <body>, outer wrapper tags).
+- Do NOT include a data-section attribute in your output; the caller preserves the wrapper.
+- Change visible text only unless the user explicitly requests structural change.
+- Preserve existing CSS class names on elements you keep.
+- Never add <script>, inline event handlers, or javascript: URLs.
+- Keep tone appropriate for the business.
+
+{style_block}
+{facts_block}
+Current section inner HTML:
+{section_html}"""
+
+
+def _extract_html_fragment(out):
+    if not isinstance(out, str):
+        return None
+    low = out.lower()
+    if "<html" in low or "<!doctype" in low:
+        return None
+    return out.strip() or None
+
+
+def refine_section(
+    provider,
+    model,
+    section_html,
+    section_type,
+    user_prompt,
+    *,
+    style_reference_html=None,
+    num_ctx=8192,
+):
+    """Returns rewritten inner HTML only. Never a full document."""
+    style_block = ""
+    if style_reference_html:
+        style_block = (
+            "Surrounding page context (preserve visual language; do not copy verbatim):\n"
+            f"{style_reference_html[:4000]}\n"
+        )
+    facts_block = ""  # generation callers embed facts in user_prompt
+    prompt = _SECTION_REWRITE_PROMPT.format(
+        section_type=section_type,
+        user_prompt=user_prompt,
+        style_block=style_block,
+        facts_block=facts_block,
+        section_html=section_html,
+    )
+    out = provider.generate(model, prompt, num_ctx=num_ctx)
+    fragment = _extract_html_fragment(out)
+    if fragment is None:
+        return None
+    return sanitize_html(fragment)
+
+
 def refine(provider, model, working_html, user_prompt, *, style_reference_html=None):
     """Iteratively edit the live working copy for the builder session."""
     reset_requested = _wants_style_reset(user_prompt)
