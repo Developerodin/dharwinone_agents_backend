@@ -177,6 +177,25 @@ def test_personalize_html_replaces_existing_template_contact_literals():
     assert "+1 568646846" in html
 
 
+def test_personalize_html_never_rewrites_image_urls_as_phone_numbers():
+    # An Unsplash photo id looks exactly like a phone number to _PHONE_TEXT_RE.
+    profile = {
+        "projectId": "x",
+        "brand": {"brandName": "Lacafe"},
+        "business": {"type": "Cafe"},
+        "contact": {},
+        "location": {"city": "Pune"},
+    }
+    src = "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=60"
+    raw = (
+        "<!DOCTYPE html><html><body>"
+        f'<img src="{src}" alt="Espresso being poured">'
+        "</body></html>"
+    )
+    html = personalization_service.personalize_html(raw, profile, [], "cafe")
+    assert src in html  # unmangled, and therefore never swapped for a fallback
+
+
 def test_personalize_html_uses_brand_based_contact_placeholders():
     profile = {
         "projectId": "x",

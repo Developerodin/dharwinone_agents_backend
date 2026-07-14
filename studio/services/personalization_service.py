@@ -19,6 +19,10 @@ _log = logging.getLogger(__name__)
 _PLACEHOLDER_RE = re.compile(r"\{\{[^}]+\}\}")
 _EMAIL_TEXT_RE = re.compile(r"(?i)\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b")
 _PHONE_TEXT_RE = re.compile(r"\+?\d[\d\s().-]{7,}\d")
+# Splits into text, tag, text, tag... Script/style bodies count as tags (never rewritten).
+_TAG_SPLIT_RE = re.compile(
+    r"(?is)(<script\b.*?</script\s*>|<style\b.*?</style\s*>|<[^>]*>)"
+)
 _MAX_PACKS = 2
 _STYLE_PREF_PACK_KEYWORDS = {
     "sleek-dark": ("sleek", "dark", "night", "moody"),
@@ -82,6 +86,13 @@ def _location_display_text(profile):
     return "Your city"
 
 
+def _sub_visible_text(html, pattern, repl):
+    parts = _TAG_SPLIT_RE.split(html)
+    for i in range(0, len(parts), 2):  # even = text between tags
+        parts[i] = pattern.sub(lambda _m: repl, parts[i])  # lambda: repl is literal
+    return "".join(parts)
+
+
 def _apply_contact(html, profile):
     contact = profile.get("contact") or {}
     location = profile.get("location") or {}
@@ -106,9 +117,10 @@ def _apply_contact(html, profile):
     html = re.sub(r"(?i)hello@example\.com", email, html)
     html = re.sub(r"Your street, your city", address, html)
 
-    # Normalize any template-provided contact literals.
-    html = _EMAIL_TEXT_RE.sub(email, html)
-    html = _PHONE_TEXT_RE.sub(phone, html)
+    # Normalize any template-provided contact literals. Visible text only: a phone-shaped
+    # digit run also matches an Unsplash photo id, so never let this touch attributes.
+    html = _sub_visible_text(html, _EMAIL_TEXT_RE, email)
+    html = _sub_visible_text(html, _PHONE_TEXT_RE, phone)
 
     html = re.sub(
         r'(?i)(href\s*=\s*["\'])mailto:[^"\']+(["\'])',
@@ -217,7 +229,9 @@ def _rewrite_copy(html, profile):
         )
     except Exception:
         return html
-    return rewritten or html
+    if not rewritten:
+        return html
+    return draft.preserve_img_srcs(html, rewritten)
 
 
 def personalize_html(raw_html, profile, assets, genre):

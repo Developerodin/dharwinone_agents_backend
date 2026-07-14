@@ -717,11 +717,37 @@ _GENRE_IMAGE_FALLBACKS = {
 }
 
 
+_IMG_SRC_RE = re.compile(r'(<img\b[^>]*\bsrc=")([^"]*)(")', re.I)
+
+
+def preserve_img_srcs(original_html, new_html):
+    """Re-pin image URLs from the original HTML onto a copy-rewritten version.
+
+    Models invent plausible Unsplash ids that 404, and a well-formed dead URL passes
+    every check we have. A copy rewrite never needs a new image, so reuse the old ones
+    (cycling if the model added <img> tags).
+    """
+    srcs = [m.group(2) for m in _IMG_SRC_RE.finditer(original_html or "")]
+    if not srcs or not new_html:
+        return new_html
+    slot = 0
+
+    def _repl(match):
+        nonlocal slot
+        src = srcs[slot % len(srcs)]
+        slot += 1
+        return f"{match.group(1)}{src}{match.group(3)}"
+
+    return _IMG_SRC_RE.sub(_repl, new_html)
+
+
 def _img_src_ok(src):
     if not src or not isinstance(src, str):
         return False
     src = src.strip()
     if _INVALID_IMG_SRC.match(src):
+        return False
+    if re.search(r"\s", src):  # inner whitespace = a text pass scribbled on the attribute
         return False
     return bool(_VALID_IMG_SRC.match(src))
 

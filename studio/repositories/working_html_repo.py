@@ -33,7 +33,13 @@ def _validate(html):
 
 
 def get(project_id):
-    return db.strip_id(_collection().find_one({"projectId": project_id}))
+    from studio import draft
+
+    doc = db.strip_id(_collection().find_one({"projectId": project_id}))
+    # ponytail: heal rows written before fence-stripping landed; put() sanitizes too.
+    if doc and doc.get("html"):
+        doc["html"] = draft.sanitize_html(doc["html"])
+    return doc
 
 
 def put(project_id, html, *, template_id=None):

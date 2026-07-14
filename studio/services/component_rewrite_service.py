@@ -12,14 +12,31 @@ from studio.services.profile_facts import business_facts
 
 _log = logging.getLogger(__name__)
 
-_TEXT_SECTIONS = ("hero", "features", "about", "cta")
-_MAX_WORKERS = 3
+# Every text-bearing section. A restaurant on cafe components kept nav links like
+# "The roastery" because only hero/features/about/cta were ever rewritten.
+# stats and faq stay out: rewriting them invites invented numbers and invented policy.
+_TEXT_SECTIONS = (
+    "hero",
+    "features",
+    "about",
+    "cta",
+    "nav",
+    "gallery",
+    "contact",
+    "footer",
+    "pricing",
+    "testimonials",
+)
+_MAX_WORKERS = 4
 _RATE_LIMIT_RE = re.compile(r"\b429\b|rate\s*limit", re.I)
 
 _SECTION_GEN_PROMPT = (
     "Rewrite this {section_type} section copy to accurately describe the business.\n"
     "Business facts:\n{facts}\n"
-    "Keep brand name and contact details unchanged. Text only."
+    "Keep brand name and contact details unchanged. Text only.\n"
+    "Replace any wording that belongs to a different kind of business (for example a "
+    "coffee roastery's 'Today's board' or 'Reserve tomorrow's loaf') with wording this "
+    "business would actually use. Keep every link's href exactly as it is."
 )
 
 
@@ -52,7 +69,8 @@ def _rewrite_one(provider, model, html, section_type, facts):
         return section_type, None, _is_rate_limit(exc)
     if not new_inner:
         return section_type, None, False
-    return section_type, draft._strip_markdown_fences(new_inner), False
+    new_inner = draft._strip_markdown_fences(new_inner)
+    return section_type, draft.preserve_img_srcs(inner, new_inner), False
 
 
 def rewrite_components_parallel(html, profile):

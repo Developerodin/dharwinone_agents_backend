@@ -21,10 +21,15 @@ def _collection():
 
 
 def _public(doc):
+    from studio import draft
+
     if not doc:
         return None
     clean = dict(doc)
     clean.pop("_id", None)
+    # ponytail: heal rows written before fence-stripping landed; writes sanitize too.
+    if clean.get("htmlContent"):
+        clean["htmlContent"] = draft.sanitize_html(clean["htmlContent"])
     return clean
 
 

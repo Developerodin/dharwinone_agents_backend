@@ -12,6 +12,7 @@ _HTML = """<!DOCTYPE html><html><body>
 <header data-section="hero" class="c-x hero"><h1>OLD HERO</h1></header>
 <section data-section="features" class="c-x features"><p>OLD FEAT</p></section>
 <section data-section="about" class="c-x about"><p>OLD ABOUT</p></section>
+<section data-section="stats" class="c-x stats"><p>OLD STATS</p></section>
 <section data-section="cta" class="c-x cta"><a>OLD CTA</a></section>
 <footer data-section="footer" class="c-x footer"><p>OLD FOOT</p></footer>
 </body></html>"""
@@ -52,6 +53,33 @@ class SeqProvider:
         return "<p>NEW</p>"
 
 
+def test_rewrite_keeps_original_image_urls(monkeypatch):
+    # Models hallucinate Unsplash ids that 404; a copy rewrite must reuse the real ones.
+    real = "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=60"
+    html = (
+        '<html><body><section data-section="hero" class="c-1">'
+        f'<img src="{real}" alt="Espresso"><h1>Old</h1>'
+        "</section></body></html>"
+    )
+
+    class HallucinatingProvider(SeqProvider):
+        def generate(self, model, prompt, **kwargs):
+            return (
+                '<img src="https://images.unsplash.com/photo-1591504081469-0c94f3956024?w=700&q=60"'
+                ' alt="Espresso"><h1>New</h1>'
+            )
+
+    monkeypatch.setattr(
+        component_rewrite_service,
+        "_load_provider",
+        lambda: (HallucinatingProvider(), "fake"),
+    )
+    out = component_rewrite_service.rewrite_components_parallel(html, _PROFILE)
+    assert real in out
+    assert "1591504081469" not in out
+    assert "<h1>New</h1>" in out
+
+
 def test_parallel_rewrite_strips_markdown_fences(monkeypatch):
     class FenceProvider(SeqProvider):
         def generate(self, model, prompt, **kwargs):
@@ -72,7 +100,7 @@ def test_parallel_rewrite_strips_markdown_fences(monkeypatch):
     assert "```" not in out
 
 
-def test_parallel_rewrite_updates_text_sections_only(monkeypatch):
+def test_parallel_rewrite_updates_every_text_section(monkeypatch):
     monkeypatch.setattr(
         component_rewrite_service,
         "_load_provider",
@@ -81,7 +109,8 @@ def test_parallel_rewrite_updates_text_sections_only(monkeypatch):
     out = component_rewrite_service.rewrite_components_parallel(_HTML, _PROFILE)
     assert "NEW HERO" in out
     assert "NEW FEAT" in out
-    assert "OLD FOOT" in out  # footer skipped
+    assert "OLD FOOT" not in out  # nav/footer carry the wrong-genre copy: rewrite them
+    assert "OLD STATS" in out  # stats stays: rewriting it invents numbers
     assert 'data-section="hero"' in out
     assert 'data-section="footer"' in out
 
@@ -94,7 +123,7 @@ def test_parallel_rewrite_caps_concurrency(monkeypatch):
         lambda: (provider, "fake"),
     )
     component_rewrite_service.rewrite_components_parallel(_HTML, _PROFILE)
-    assert provider.max_inflight <= 3
+    assert provider.max_inflight <= component_rewrite_service._MAX_WORKERS
 
 
 def test_one_section_failure_keeps_others(monkeypatch):
