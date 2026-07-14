@@ -363,6 +363,75 @@ def _advance_to_description(pid):
     onboarding_service.handle_message(pid, "Workout plans, nutrition tracking")
 
 
+def test_user_requests_more_examples_stays_on_description_field():
+    project = _project()
+    pid = project["projectId"]
+    _advance_to_description(pid)
+    result = onboarding_service.handle_message(
+        pid, "do you have any more examples?"
+    )
+
+    profile = profiles_repo.get(pid)
+    assert not profile["business"].get("description")
+    msg = result["assistantMessage"].lower()
+    assert "here are a few options" in msg
+    assert "pick one" in msg
+    assert "flora" in msg
+    assert "country" not in msg
+    assert "perfect." not in msg
+
+
+def test_user_requests_classy_examples_gets_new_options_not_country_question():
+    project = _project()
+    pid = project["projectId"]
+    _advance_to_description(pid)
+    result = onboarding_service.handle_message(
+        pid, "do you have any more examples make something classy and professional"
+    )
+
+    profile = profiles_repo.get(pid)
+    assert not profile["business"].get("description")
+    msg = result["assistantMessage"].lower()
+    assert "here are a few options" in msg
+    assert "pick one" in msg
+    assert "flora" in msg
+    assert "workout" in msg or "nutrition" in msg
+    assert "country" not in msg
+    assert "perfect." not in msg
+
+
+def test_user_requests_classy_examples_when_llm_routes_answer(monkeypatch):
+    project = _project()
+    pid = project["projectId"]
+    _advance_to_description(pid)
+    _fake_router(
+        monkeypatch,
+        '{"intent": "answer", "value": "something classy and professional"}',
+    )
+    result = onboarding_service.handle_message(
+        pid, "do you have any more examples make something classy and professional"
+    )
+
+    profile = profiles_repo.get(pid)
+    assert not profile["business"].get("description")
+    assert "here are a few options" in result["assistantMessage"].lower()
+    assert "country" not in result["assistantMessage"].lower()
+
+
+def test_direct_answer_still_advances():
+    project = _project()
+    pid = project["projectId"]
+    _advance_to_description(pid)
+    result = onboarding_service.handle_message(
+        pid, "We help busy people stay fit at home with guided workouts."
+    )
+
+    profile = profiles_repo.get(pid)
+    assert profile["business"]["description"]
+    assert "country" in result["assistantMessage"].lower()
+    assert "intro line" not in result["assistantMessage"].lower()
+
+
 def test_llm_router_classifies_clarify_regex_would_miss(monkeypatch):
     project = _project()
     pid = project["projectId"]

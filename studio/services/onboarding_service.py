@@ -80,6 +80,18 @@ _SKIP_REQUEST_RE = re.compile(
     r"|\bno\s+(?:email|phone|number)\b",
     re.I,
 )
+_EXAMPLES_REQUEST_RE = re.compile(
+    r"\b(?:more|other|another|different|new|some)\s+(?:example|option|suggestion|alternative)s?\b"
+    r"|\b(?:any|got|have)\s+(?:more|other|another)\s+(?:example|option|suggestion)s?\b"
+    r"|\b(?:show|give|suggest|list)\s+(?:me\s+)?(?:some\s+)?(?:more\s+)?(?:example|option|alternative)s?\b"
+    r"|\b(?:example|option|alternative)s?\s+(?:please|pls)\b"
+    r"|\bsomething\s+(?:classy|elegant|professional|premium|minimal|catchy|better)\b"
+    r"|\b(?:classy|elegant|professional|premium)\b.*\b(?:example|option|tagline|intro)\b"
+    r"|\b(?:make|create|write)\s+(?:something|it|one)\s+(?:classy|elegant|professional|more\s+\w+)\b"
+    r"|\bwhat\s+(?:else|are)\s+(?:some|my)\s+(?:option|example)s?\b"
+    r"|\b(?:different|better)\s+(?:option|example|tagline|intro)s?\b",
+    re.I,
+)
 _ACCEPT_EXAMPLE_RE = re.compile(
     r"\b(?:use|pick|take|go\s+with|choose)\s+(?:it|that|this|the\s+example|the\s+suggested)\b"
     r"|\b(?:like|love|prefer)\s+(?:it|that|this|the\s+example|the\s+suggested)\b"
@@ -337,6 +349,137 @@ def _multi_city_from_recent_user_turns(project_id):
         if value:
             return value
     return None
+
+
+def _requests_more_examples(message):
+    return bool(_EXAMPLES_REQUEST_RE.search(message or ""))
+
+
+def _example_style_hint(message):
+    low = (message or "").lower()
+    hints = []
+    for word in (
+        "classy",
+        "elegant",
+        "professional",
+        "premium",
+        "minimal",
+        "minimalist",
+        "catchy",
+        "bold",
+        "warm",
+        "friendly",
+    ):
+        if word in low:
+            hints.append(word)
+    return ", ".join(hints)
+
+
+def _description_example_variants(profile, style_hint=""):
+    brand = str(_get_nested(profile, "brand.brandName") or "").strip(" .,")
+    business_type = str(_get_nested(profile, "business.type") or "").strip(" .,")
+    services = _services_for_example(profile)
+    if len(services) == 2:
+        services_text = f"{services[0]} and {services[1]}"
+    elif len(services) == 1:
+        services_text = services[0]
+    else:
+        services_text = ""
+
+    hint = (style_hint or "").lower()
+    polished = any(
+        word in hint
+        for word in ("classy", "elegant", "professional", "premium", "sophisticated")
+    )
+
+    variants = []
+    if brand and services_text:
+        if polished:
+            variants.extend(
+                [
+                    f"{brand} delivers refined {services_text} with expert care.",
+                    f"Elevate your experience with {services_text} from {brand}.",
+                    f"{brand} — distinguished {services_text} for discerning clients.",
+                ]
+            )
+        else:
+            variants.extend(
+                [
+                    f"{brand} helps you improve with {services_text}.",
+                    f"Discover {services_text} designed around you at {brand}.",
+                    f"{brand} makes {services_text} simple, practical, and effective.",
+                ]
+            )
+    elif services_text and business_type:
+        if polished:
+            variants.extend(
+                [
+                    f"A {business_type} offering premium {services_text}.",
+                    f"Expert {services_text} from a trusted {business_type}.",
+                    f"Refined {services_text} tailored to your goals.",
+                ]
+            )
+        else:
+            variants.extend(
+                [
+                    f"A {business_type} focused on {services_text}.",
+                    f"We offer {services_text} with clear, practical guidance.",
+                    f"Quality {services_text} from a team that cares.",
+                ]
+            )
+    elif brand and business_type:
+        variants.extend(
+            [
+                f"{brand} is a {business_type} built for real results.",
+                f"Trusted {business_type} services from {brand}.",
+                f"{brand} — your partner for dependable {business_type} solutions.",
+            ]
+        )
+    elif brand:
+        variants.extend(
+            [
+                f"{brand} helps customers get better outcomes, faster.",
+                f"Experience the difference with {brand}.",
+                f"{brand} — quality you can count on.",
+            ]
+        )
+    else:
+        variants.extend(
+            [
+                "We help customers solve their goals with simple, reliable service.",
+                "Quality solutions tailored to what you need most.",
+                "Trusted expertise with a focus on real results.",
+            ]
+        )
+    deduped = []
+    seen = set()
+    for item in variants:
+        key = item.lower()
+        if key in seen:
+            continue
+        deduped.append(item)
+        seen.add(key)
+    return deduped[:3]
+
+
+def _generate_field_examples(profile, field_path, user_message=None):
+    if field_path == "business.description":
+        return _description_example_variants(profile, _example_style_hint(user_message))
+    return []
+
+
+def _format_examples_response(profile, field_path, user_message=None):
+    examples = _generate_field_examples(profile, field_path, user_message)
+    if not examples:
+        return (
+            f"No problem. {_question_for(profile, field_path)} "
+            f"{_FIELD_HINTS.get(field_path, '')}"
+        ).strip()
+    lines = ["Here are a few options:"]
+    for index, example in enumerate(examples, 1):
+        lines.append(f'{index}. "{example}"')
+    lines.append("Pick one or tell me your own.")
+    return "\n".join(lines)
 
 
 def _description_example(profile):
@@ -892,7 +1035,9 @@ def _prefill_defaults(profile):
         _set_nested(profile, "business.targetAudience", default)
 
 
-_ROUTE_INTENTS = frozenset({"answer", "clarify", "style", "skip", "other"})
+_ROUTE_INTENTS = frozenset(
+    {"answer", "clarify", "style", "skip", "other", "request_examples"}
+)
 
 
 def _llm_route(message, target_field, profile):
@@ -913,10 +1058,12 @@ def _llm_route(message, target_field, profile):
         f"Field being collected: {target_field}\n"
         + (f"Known business: {context}\n" if context else "")
         + f"User message: {str(message)[:300]}\n\n"
-        'Return JSON only: {"intent": "answer"|"clarify"|"style"|"other", "value": string|null}\n'
+        'Return JSON only: {"intent": "answer"|"clarify"|"style"|"skip"|"request_examples"|"other", "value": string|null}\n'
         "Rules:\n"
         '- "answer": the message answers the question; put the cleaned, short answer in "value".\n'
         '- "clarify": the user does not understand the question or asks what it means.\n'
+        '- "request_examples": the user wants more examples, alternatives, or options for the current field '
+        '(e.g. "more examples", "something classy", "give me options").\n'
         '- "style": the message is a design/style instruction for the website (look, colors, vibe), not an answer.\n'
         '- "skip": the user declines or defers this question ("skip", "add it later", "I don\'t have one").\n'
         '- "other": greetings, small talk, or anything unrelated to the question.\n'
@@ -1018,6 +1165,23 @@ def handle_message(project_id, message):
             if merged:
                 target_field = None
 
+    if target_field and (
+        intent == "request_examples" or _requests_more_examples(message)
+    ):
+        assistant = _format_examples_response(profile, target_field, message)
+        conversations_repo.append_turn(
+            project_id,
+            "assistant",
+            assistant,
+            {"intent": f"examples_{target_field}"},
+        )
+        compute_completeness(profile)
+        profiles_repo.save(profile)
+        return {
+            "assistantMessage": assistant,
+            "completeness": profile["completeness"],
+            "readyToGenerate": False,
+        }
     if target_field and (
         intent == "clarify"
         or (route is None and _CLARIFY_REQUEST_RE.search(message))
