@@ -9,6 +9,7 @@ def test_pick_template_by_genre():
     assert draft.pick_template("portfolio for a photographer") == "portfolio"
     assert draft.pick_template("landing page for my ai saas tool") == "saas"
     assert draft.pick_template("website for a crossfit gym") == "fitness"
+    assert draft.pick_template("fitness app called fitro") == "fitness"
     assert draft.pick_template("site for a law firm") == "agency"
     assert (
         draft.pick_template("website for construction company delta") == "construction"
@@ -256,3 +257,40 @@ def test_refine_section_rejects_full_document_response():
         user_prompt="Rewrite",
     )
     assert out is None
+
+
+def test_strip_markdown_fences_from_fragment():
+    wrapped = "```html\n<h2>Headline</h2>\n<p>Body</p>\n```"
+    assert draft.sanitize_html(wrapped) == "<h2>Headline</h2>\n<p>Body</p>"
+
+
+def test_refine_section_strips_markdown_fences():
+    class FenceProvider:
+        def generate(self, model, prompt, **kwargs):
+            return "```html\n<h1>Grounded headline</h1>\n```"
+
+    out = draft.refine_section(
+        FenceProvider(),
+        "fake",
+        section_html="<h1>Old</h1>",
+        section_type="hero",
+        user_prompt="Rewrite hero copy.",
+    )
+    assert out == "<h1>Grounded headline</h1>"
+    assert "```" not in out
+
+
+def test_ensure_loadable_images_replaces_invalid_src():
+    html = '<img src="mock+logo" alt="Logo"><img src="" alt="Hero">'
+    out = draft.ensure_loadable_images(html, "fitness")
+    assert "mock+" not in out
+    assert 'src="https://images.unsplash.com/' in out
+    assert out.count("referrerpolicy=") == 2
+
+
+def test_ensure_loadable_images_keeps_valid_https_src():
+    url = "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800"
+    html = f'<img src="{url}" alt="Gym">'
+    out = draft.ensure_loadable_images(html, "fitness")
+    assert url in out
+    assert 'referrerpolicy="no-referrer"' in out

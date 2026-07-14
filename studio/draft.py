@@ -25,6 +25,7 @@ TEMPLATE_TAGS = {
         "store",
         "shoes",
         "shoe",
+        "sports",
         "ecommerce",
         "e-commerce",
         "product",
@@ -170,11 +171,13 @@ _STOPWORDS = frozenset(
 def pick_template(prompt):
     words = re.findall(r"[a-z]+", prompt.lower())
     text = " ".join(words)
-    best, best_score = "generic", 0
+    best, best_score, best_tie = "generic", 0, 0
     for name, tags in TEMPLATE_TAGS.items():
-        score = sum(1 for t in tags if t in text)
-        if score > best_score:
-            best, best_score = name, score
+        matched = [t for t in tags if re.search(rf"\b{re.escape(t)}\b", text)]
+        score = len(matched)
+        tie = sum(len(t) for t in matched)
+        if score > best_score or (score == best_score and tie > best_tie):
+            best, best_score, best_tie = name, score, tie
     return best
 
 
@@ -578,9 +581,20 @@ def _preserve_style_system(original_html, edited_html):
     )
 
 
+def _strip_markdown_fences(text):
+    """Remove ```html / ``` wrappers from LLM output."""
+    if not isinstance(text, str):
+        return text
+    out = text.strip()
+    out = re.sub(r"^```(?:html|htm|xml|json)?\s*\r?\n?", "", out, flags=re.I)
+    out = re.sub(r"\r?\n?```\s*$", "", out)
+    return out.strip()
+
+
 def _extract_html_document(out):
     if not isinstance(out, str):
         return None
+    out = _strip_markdown_fences(out)
     low = out.lower()
     start = low.find("<!doctype")
     if start == -1:
@@ -593,9 +607,73 @@ def _extract_html_document(out):
 
 def sanitize_html(html):
     """Remove executable payloads from model/user supplied HTML."""
+    html = _strip_markdown_fences(html)
     html = re.sub(r"(?is)<script\b[^>]*>.*?(</script\s*>|$)", "", html)
     html = re.sub(r"(?i)\son\w+\s*=\s*(\"[^\"]*\"|'[^']*'|[^\s>]+)", "", html)
     return re.sub(r"(?i)javascript\s*:", "", html)
+
+
+_VALID_IMG_SRC = re.compile(r"^(?:https?://|data:image/)", re.I)
+_INVALID_IMG_SRC = re.compile(r"^(?:mock\+|s3://|\{\{|#|\s*$)", re.I)
+
+_GENRE_IMAGE_FALLBACKS = {
+    "fitness": [
+        "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1000&q=70",
+        "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=70",
+    ],
+    "cafe": [
+        "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=60",
+        "https://images.unsplash.com/photo-1522992319-0365e5f11656?auto=format&fit=crop&w=800&q=60",
+    ],
+    "saas": [
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=70",
+    ],
+    "generic": [
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=70",
+    ],
+}
+
+
+def _img_src_ok(src):
+    if not src or not isinstance(src, str):
+        return False
+    src = src.strip()
+    if _INVALID_IMG_SRC.match(src):
+        return False
+    return bool(_VALID_IMG_SRC.match(src))
+
+
+def ensure_loadable_images(html, genre="generic"):
+    """Ensure img tags use browser-loadable https/data URLs."""
+    fallbacks = _GENRE_IMAGE_FALLBACKS.get(genre) or _GENRE_IMAGE_FALLBACKS["generic"]
+    idx = 0
+
+    def _next_url():
+        nonlocal idx
+        url = fallbacks[idx % len(fallbacks)]
+        idx += 1
+        return url
+
+    def _fix_tag(match):
+        tag = match.group(0)
+        src_m = re.search(r'\bsrc=(["\'])([^"\']*)\1', tag, re.I)
+        alt_m = re.search(r'\balt=(["\'])([^"\']*)\1', tag, re.I)
+        alt = alt_m.group(2) if alt_m else "Photo"
+        src = src_m.group(2) if src_m else ""
+        if not _img_src_ok(src):
+            src = _next_url()
+        fixed = re.sub(
+            r'\bsrc=(["\'])[^"\']*\1',
+            f'src="{src}"',
+            tag,
+            count=1,
+            flags=re.I,
+        )
+        if 'referrerpolicy=' not in fixed.lower():
+            fixed = fixed.rstrip("/> ").rstrip(">") + ' referrerpolicy="no-referrer">'
+        return fixed
+
+    return re.sub(r"<img\b[^>]*>", _fix_tag, html, flags=re.I)
 
 
 _SECTION_REWRITE_PROMPT = """You are rewriting the INNER HTML of one website section.
@@ -622,6 +700,7 @@ Current section inner HTML:
 def _extract_html_fragment(out):
     if not isinstance(out, str):
         return None
+    out = _strip_markdown_fences(out)
     low = out.lower()
     if "<html" in low or "<!doctype" in low:
         return None

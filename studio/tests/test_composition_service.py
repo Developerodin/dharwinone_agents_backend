@@ -54,10 +54,15 @@ def test_compose_is_reproducible_and_seeded_per_project():
 
 def test_same_genre_components_used_when_available():
     ids = _one("proj-1", genre="cafe")["componentIds"]
-    cafe_ids = [i for i in ids if i.startswith("cafe")]
-    # deterministic path picks same-genre whenever the slot has cafe candidates
-    assert len(cafe_ids) >= len(ids) // 2
-    assert any(i.endswith("-hero") for i in cafe_ids)
+    assert all(i.startswith("cafe-") for i in ids)
+    assert any(i.endswith("-hero") for i in ids)
+
+
+def test_fitness_compose_never_picks_other_genres():
+    ids = _one("proj-fitro", genre="fitness")["componentIds"]
+    assert ids
+    assert all(i.startswith("fitness-") for i in ids)
+    assert not any(i.startswith(("cafe-", "saas-", "agency-")) for i in ids)
 
 
 def test_composed_page_personalizes_clean():
@@ -74,7 +79,19 @@ def test_tag_overlap_ranks_cross_genre_candidates(monkeypatch):
     ]
     monkeypatch.setattr(composition_service, "_index", lambda: {"pricing": fake_pool})
     ranked = composition_service._candidates("pricing", "none", frozenset({"coffee"}))
-    assert ranked[0]["id"] == "zzz-1-pricing"  # tag overlap beats id order
+    assert ranked[0]["id"] == "zzz-1-pricing"  # tag overlap when no same-genre pool
+
+
+def test_candidates_same_genre_only_when_available(monkeypatch):
+    fake_pool = [
+        {"id": "cafe-1-gallery", "type": "gallery", "genre": "cafe", "tags": ["coffee"]},
+        {"id": "fitness-1-gallery", "type": "gallery", "genre": "fitness", "tags": ["gym"]},
+        {"id": "saas-1-gallery", "type": "gallery", "genre": "saas", "tags": ["software"]},
+    ]
+    monkeypatch.setattr(composition_service, "_index", lambda: {"gallery": fake_pool})
+    ranked = composition_service._candidates("gallery", "fitness")
+    assert ranked
+    assert all(e["genre"] == "fitness" for e in ranked)
 
 
 def test_zero_count_returns_empty():

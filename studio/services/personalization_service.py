@@ -226,6 +226,7 @@ def personalize_html(raw_html, profile, assets, genre):
     html = _apply_contact(html, profile)
     html = _apply_services(html, profile)
     html = _apply_logo(html, assets)
+    html = draft.ensure_loadable_images(html, genre)
     if _PLACEHOLDER_RE.search(html):
         raise PersonalizationError("unresolved template placeholders remain")
     return html

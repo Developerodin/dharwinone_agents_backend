@@ -54,6 +54,7 @@ __BODY__
 
 _SELECT_PROMPT = """Pick the best component for each section of a small-business website.
 
+Business genre: {genre}
 Business:
 {facts}
 
@@ -64,6 +65,7 @@ Reply with only JSON mapping section names to ONE candidate id each, like
 {{"nav": "saas-1-nav", "hero": "cafe-2-2-hero"}}.
 Rules:
 - Use only ids listed above, under their own section.
+- Every id belongs to the {genre} genre — do not mix other genres.
 - Always include nav, hero and footer.
 - Omit sections that do not fit this business."""
 
@@ -113,21 +115,21 @@ def _rank(pool, genre, keywords):
 
 
 def _candidates(type_, genre, keywords=frozenset()):
-    return _rank(_index().get(type_, []), genre, keywords)[:_TOP_K]
+    pool = _index().get(type_, [])
+    same_genre = [e for e in pool if e["genre"] == genre]
+    ranked = _rank(same_genre if same_genre else pool, genre, keywords)
+    return ranked[:_TOP_K]
 
 
 def _pick_deterministic(project_id, genre, seed, keywords):
-    """Same-genre components when available (style coherence); cross-genre fill
-    ranked by tag overlap. Broad cross-genre mixing stays the LLM path's job."""
+    """Pick same-genre components only for visual and topical coherence."""
     rng = random.Random(f"{project_id}:{seed}")
     chosen = []
     for slot in RECIPE:
-        pool = _index().get(slot, [])
-        same_genre = [e for e in pool if e["genre"] == genre]
-        pool = same_genre or _rank(pool, genre, keywords)[:_TOP_K]
+        pool = [e for e in _index().get(slot, []) if e["genre"] == genre]
         if not pool:
             if slot in REQUIRED:
-                raise CompositionError(f"no candidates for required slot: {slot}")
+                raise CompositionError(f"no {genre} candidates for required slot: {slot}")
             continue
         chosen.append(rng.choice(pool))
     return chosen
@@ -149,6 +151,7 @@ def _pick_llm(genre, business_facts):
         if pool:
             pools[slot] = pool
     prompt = _SELECT_PROMPT.format(
+        genre=genre,
         facts=business_facts or "(no details provided)",
         candidates=json.dumps(
             {
