@@ -54,6 +54,28 @@ def test_confirm_lists_asset_metadata():
     assert listed[0]["assetType"] == "brand"
 
 
+def test_confirm_and_list_include_public_url_when_cdn_configured(monkeypatch):
+    monkeypatch.setenv("STUDIO_ASSET_PUBLIC_BASE_URL", "https://cdn.dharwinone.com")
+    config.reset_for_tests()
+    project = projects_repo.create("Upload Co", initial_prompt="Site")
+    presign = asset_service.create_presign(
+        project["projectId"],
+        filename="logo.png",
+        content_type="image/png",
+        asset_type="logo",
+    )
+    asset = asset_service.confirm_upload(
+        project["projectId"],
+        asset_id=presign["assetId"],
+        s3_key=presign["s3Key"],
+        content_type="image/png",
+        size_bytes=1200,
+    )
+    assert asset["publicUrl"] == f"https://cdn.dharwinone.com/{presign['s3Key']}"
+    listed = asset_service.list_assets(project["projectId"])
+    assert listed[0]["publicUrl"] == asset["publicUrl"]
+
+
 def test_presign_rejects_invalid_asset_type():
     project = projects_repo.create("Upload Co", initial_prompt="Site")
     with pytest.raises(asset_service.AssetValidationError):

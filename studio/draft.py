@@ -643,25 +643,42 @@ def _img_src_ok(src):
     return bool(_VALID_IMG_SRC.match(src))
 
 
+def _genre_fallback_url(genre, slot_index):
+    from studio.storage import s3
+
+    fallbacks = _GENRE_IMAGE_FALLBACKS.get(genre) or _GENRE_IMAGE_FALLBACKS["generic"]
+    slot = slot_index % len(fallbacks)
+    source = fallbacks[slot]
+    s3_url = s3.ensure_genre_placeholder_url(genre, slot, source)
+    return s3_url or source
+
+
+def _resolve_img_src(src, genre, slot_index):
+    from studio.storage import s3
+
+    resolved = s3.resolve_img_src(src)
+    if resolved and _img_src_ok(resolved):
+        return resolved
+    if not _img_src_ok(src):
+        return _genre_fallback_url(genre, slot_index)
+    return src.strip()
+
+
 def ensure_loadable_images(html, genre="generic"):
     """Ensure img tags use browser-loadable https/data URLs."""
-    fallbacks = _GENRE_IMAGE_FALLBACKS.get(genre) or _GENRE_IMAGE_FALLBACKS["generic"]
     idx = 0
 
-    def _next_url():
+    def _next_slot():
         nonlocal idx
-        url = fallbacks[idx % len(fallbacks)]
+        slot = idx
         idx += 1
-        return url
+        return slot
 
     def _fix_tag(match):
         tag = match.group(0)
         src_m = re.search(r'\bsrc=(["\'])([^"\']*)\1', tag, re.I)
-        alt_m = re.search(r'\balt=(["\'])([^"\']*)\1', tag, re.I)
-        alt = alt_m.group(2) if alt_m else "Photo"
         src = src_m.group(2) if src_m else ""
-        if not _img_src_ok(src):
-            src = _next_url()
+        src = _resolve_img_src(src, genre, _next_slot())
         fixed = re.sub(
             r'\bsrc=(["\'])[^"\']*\1',
             f'src="{src}"',

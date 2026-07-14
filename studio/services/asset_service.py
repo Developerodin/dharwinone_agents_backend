@@ -49,6 +49,16 @@ def create_presign(project_id, *, filename, content_type, asset_type):
     }
 
 
+def _with_public_url(asset):
+    if not asset:
+        return asset
+    out = dict(asset)
+    public = s3.public_asset_url(asset.get("s3Key", ""))
+    if public:
+        out["publicUrl"] = public
+    return out
+
+
 def confirm_upload(
     project_id,
     *,
@@ -69,15 +79,16 @@ def confirm_upload(
         raise AssetValidationError("content type mismatch")
     if size_bytes <= 0:
         raise AssetValidationError("invalid file size")
-    return assets_repo.confirm(
+    asset = assets_repo.confirm(
         project_id,
         asset_id,
         size_bytes=size_bytes,
         width=width,
         height=height,
     )
+    return _with_public_url(asset)
 
 
 def list_assets(project_id):
     _require_project(project_id)
-    return assets_repo.list_for_project(project_id)
+    return [_with_public_url(asset) for asset in assets_repo.list_for_project(project_id)]

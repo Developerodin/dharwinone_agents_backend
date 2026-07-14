@@ -240,6 +240,27 @@ def test_personalize_html_uses_public_asset_base_url_for_logo(monkeypatch):
     assert 'src="https://cdn.dharwinone.com/projects/p1/assets/a1/logo.png"' in html
 
 
+def test_personalize_html_uses_s3_placeholder_for_broken_images(monkeypatch):
+    monkeypatch.setenv("STUDIO_ASSET_PUBLIC_BASE_URL", "https://cdn.dharwinone.com")
+    from studio.storage import s3
+
+    monkeypatch.setattr(
+        s3,
+        "ensure_genre_placeholder_url",
+        lambda genre, slot, source: f"https://cdn.dharwinone.com/studio/placeholders/{genre}/{slot}.jpg",
+    )
+    profile = {
+        "projectId": "x",
+        "brand": {"brandName": "Acme"},
+        "business": {"type": "Restaurant"},
+        "contact": {"email": "hello@acme.com"},
+    }
+    raw = '<!DOCTYPE html><html><body><img src="mock+logo" alt="Hero"></body></html>'
+    html = personalization_service.personalize_html(raw, profile, [], "cafe")
+    assert "mock+" not in html
+    assert 'src="https://cdn.dharwinone.com/studio/placeholders/cafe/0.jpg"' in html
+
+
 def test_generate_rewrite_copy_at_most_once(monkeypatch):
     """C2: duplicate whole-template + composed call sites must not both fire."""
     from studio.services import onboarding_service, personalization_service

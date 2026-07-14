@@ -294,3 +294,31 @@ def test_ensure_loadable_images_keeps_valid_https_src():
     out = draft.ensure_loadable_images(html, "fitness")
     assert url in out
     assert 'referrerpolicy="no-referrer"' in out
+
+
+def test_ensure_loadable_images_rewrites_mock_s3_src(monkeypatch):
+    monkeypatch.setenv("STUDIO_ASSET_PUBLIC_BASE_URL", "https://cdn.dharwinone.com")
+    from studio import config
+
+    config.reset_for_tests()
+    html = '<img src="mock+s3://dharwin-studio-dev/projects/p1/assets/a1/logo.png" alt="Logo">'
+    out = draft.ensure_loadable_images(html, "generic")
+    assert "mock+s3://" not in out
+    assert 'src="https://cdn.dharwinone.com/projects/p1/assets/a1/logo.png"' in out
+
+
+def test_ensure_loadable_images_uses_s3_placeholder_when_configured(monkeypatch):
+    monkeypatch.setenv("STUDIO_ASSET_PUBLIC_BASE_URL", "https://cdn.dharwinone.com")
+    from studio import config
+    from studio.storage import s3
+
+    config.reset_for_tests()
+    monkeypatch.setattr(
+        s3,
+        "ensure_genre_placeholder_url",
+        lambda genre, slot, source: f"https://cdn.dharwinone.com/studio/placeholders/{genre}/{slot}.jpg",
+    )
+    html = '<img src="" alt="Hero">'
+    out = draft.ensure_loadable_images(html, "fitness")
+    assert 'src="https://cdn.dharwinone.com/studio/placeholders/fitness/0.jpg"' in out
+    assert "images.unsplash.com" not in out
