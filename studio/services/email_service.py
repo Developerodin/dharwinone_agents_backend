@@ -9,8 +9,13 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 
-def app_base_url():
-    return os.environ.get("APP_BASE_URL", "http://localhost:3000").rstrip("/")
+def app_base_url(fallback_base_url=None):
+    configured = os.environ.get("APP_BASE_URL", "").strip()
+    if configured:
+        return configured.rstrip("/")
+    if fallback_base_url:
+        return fallback_base_url.rstrip("/")
+    return "http://localhost:3000"
 
 
 def _smtp_configured():
@@ -120,8 +125,8 @@ def _layout(preheader, title, intro, button_label, link, footnote):
 </html>"""
 
 
-def send_verification(to, raw_token):
-    link = f"{app_base_url()}/verify?token={urllib.parse.quote(raw_token)}"
+def send_verification(to, raw_token, base_url=None):
+    link = f"{app_base_url(base_url)}/verify?token={urllib.parse.quote(raw_token)}"
     send_email(
         to,
         "Verify your Dharwin One account",
@@ -142,8 +147,8 @@ def send_verification(to, raw_token):
     )
 
 
-def send_password_reset(to, raw_token):
-    link = f"{app_base_url()}/reset-password?token={urllib.parse.quote(raw_token)}"
+def send_password_reset(to, raw_token, base_url=None):
+    link = f"{app_base_url(base_url)}/reset-password?token={urllib.parse.quote(raw_token)}"
     send_email(
         to,
         "Reset your Dharwin One password",

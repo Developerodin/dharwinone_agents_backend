@@ -183,6 +183,15 @@ def _client_ip(request: Request) -> str:
     return request.client.host if request.client else "unknown"
 
 
+def _request_base_url(request: Request) -> str:
+    # Prefer proxy-forwarded host/proto so email links use the public domain.
+    forwarded_proto = (request.headers.get("x-forwarded-proto") or "").split(",")[0].strip()
+    forwarded_host = (request.headers.get("x-forwarded-host") or "").split(",")[0].strip()
+    if forwarded_proto and forwarded_host:
+        return f"{forwarded_proto}://{forwarded_host}"
+    return str(request.base_url).rstrip("/")
+
+
 def _rate_limit(key: str, limit: int, window_s: float):
     if not ratelimit.allow(key, limit, window_s):
         raise HTTPException(
@@ -284,7 +293,12 @@ def create_app():
     def post_auth_register(body: RegisterRequest, request: Request):
         _rate_limit(f"register:ip:{_client_ip(request)}", 10, 3600)
         try:
-            return auth_service.register(body.name, body.email, body.password)
+            return auth_service.register(
+                body.name,
+                body.email,
+                body.password,
+                base_url=_request_base_url(request),
+            )
         except auth_service.AuthError as exc:
             raise _auth_error(exc) from exc
         except users_repo.AuthDbUnavailable as exc:
@@ -314,19 +328,25 @@ def create_app():
             raise HTTPException(status_code=503, detail=str(exc)) from exc
 
     @app.post("/auth/resend-verification")
-    def post_auth_resend(body: EmailRequest):
+    def post_auth_resend(body: EmailRequest, request: Request):
         _rate_limit(f"resend:email:{body.email.strip().lower()}", 3, 3600)
         try:
-            auth_service.resend_verification(body.email)
+            auth_service.resend_verification(
+                body.email,
+                base_url=_request_base_url(request),
+            )
         except users_repo.AuthDbUnavailable as exc:
             raise HTTPException(status_code=503, detail=str(exc)) from exc
         return {"status": "ok"}
 
     @app.post("/auth/forgot-password")
-    def post_auth_forgot(body: EmailRequest):
+    def post_auth_forgot(body: EmailRequest, request: Request):
         _rate_limit(f"forgot:email:{body.email.strip().lower()}", 3, 3600)
         try:
-            auth_service.forgot_password(body.email)
+            auth_service.forgot_password(
+                body.email,
+                base_url=_request_base_url(request),
+            )
         except users_repo.AuthDbUnavailable as exc:
             raise HTTPException(status_code=503, detail=str(exc)) from exc
         return {"status": "ok"}

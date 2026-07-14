@@ -8,6 +8,7 @@ import re
 from studio import draft
 from studio.repositories import assets_repo, profiles_repo, projects_repo, templates_repo
 from studio.services import composition_service, onboarding_service
+from studio.storage import s3
 
 _log = logging.getLogger(__name__)
 
@@ -142,7 +143,7 @@ def _logo_url(assets):
         if asset.get("assetType") == "logo" and asset.get("status") == "ready":
             key = asset.get("s3Key", "")
             if key:
-                return f"mock+s3://asset/{key}"
+                return s3.public_asset_url(key)
     return None
 
 
@@ -324,12 +325,13 @@ def generate_for_project(project_id, *, force=False):
     templates = []
 
     design_files = draft.template_files(genre)[:_MAX_DESIGNS]
-    for fname in design_files:
+    for idx, fname in enumerate(design_files):
         stem = fname[: -len(".html")]
         with open(os.path.join(draft.TEMPLATES_DIR, fname), encoding="utf-8") as f:
             raw = f.read()
         html = personalize_html(raw, profile, assets, genre)
-        html = _rewrite_copy(html, profile)
+        if idx == 0:  # LLM budget cap: rewrite only the primary design variant
+            html = _rewrite_copy(html, profile)
         html = _apply_contact(html, profile)
         template_id = stem
         templates.append(

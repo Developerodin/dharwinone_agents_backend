@@ -4,6 +4,7 @@ import pytest
 from studio import config, db
 from studio.repositories import projects_repo
 from studio.services import asset_service
+from studio.storage import s3
 
 
 @pytest.fixture(autouse=True)
@@ -62,3 +63,35 @@ def test_presign_rejects_invalid_asset_type():
             content_type="image/png",
             asset_type="invalid",
         )
+
+
+def test_presign_uses_real_s3_client_when_mock_disabled(monkeypatch):
+    project = projects_repo.create("Upload Co", initial_prompt="Site")
+    monkeypatch.setenv("STUDIO_S3_MOCK", "false")
+    monkeypatch.setenv("AWS_REGION", "ap-south-1")
+    config.reset_for_tests()
+    calls = {}
+
+    class FakeS3Client:
+        def generate_presigned_url(
+            self, method, Params=None, ExpiresIn=None, HttpMethod=None
+        ):
+            calls["method"] = method
+            calls["params"] = Params
+            calls["expires"] = ExpiresIn
+            calls["http_method"] = HttpMethod
+            return "https://uploads.example.com/presigned-put"
+
+    monkeypatch.setattr(s3, "_s3_client", lambda: FakeS3Client())
+    presign = asset_service.create_presign(
+        project["projectId"],
+        filename="logo.png",
+        content_type="image/png",
+        asset_type="logo",
+    )
+    assert presign["uploadUrl"] == "https://uploads.example.com/presigned-put"
+    assert presign["method"] == "PUT"
+    assert calls["method"] == "put_object"
+    assert calls["params"]["Bucket"] == "dharwin-studio-dev"
+    assert calls["params"]["ContentType"] == "image/png"
+    assert calls["params"]["Key"].startswith(f"projects/{project['projectId']}/assets/")

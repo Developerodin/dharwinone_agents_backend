@@ -183,3 +183,52 @@ def test_personalize_html_uses_brand_based_contact_placeholders():
     html = personalization_service.personalize_html(raw, profile, [], "portfolio")
     assert "hello@jotei-studio.site" in html
     assert "Add your phone number" in html
+
+
+def test_personalize_html_does_not_inject_mock_s3_logo_url(monkeypatch):
+    monkeypatch.delenv("STUDIO_ASSET_PUBLIC_BASE_URL", raising=False)
+    profile = {
+        "projectId": "x",
+        "brand": {"brandName": "Acme"},
+        "business": {"type": "Restaurant"},
+        "contact": {"email": "hello@acme.com"},
+    }
+    raw = (
+        '<!DOCTYPE html><html><body>'
+        '<img src="https://images.example.com/hero.jpg" alt="Family dining at the restaurant">'
+        "</body></html>"
+    )
+    assets = [
+        {
+            "assetType": "logo",
+            "status": "ready",
+            "s3Key": "projects/p1/assets/a1/logo.png",
+        }
+    ]
+    html = personalization_service.personalize_html(raw, profile, assets, "generic")
+    assert "mock+s3://" not in html
+    assert 'src="https://images.example.com/hero.jpg"' in html
+
+
+def test_personalize_html_uses_public_asset_base_url_for_logo(monkeypatch):
+    monkeypatch.setenv("STUDIO_ASSET_PUBLIC_BASE_URL", "https://cdn.dharwinone.com")
+    profile = {
+        "projectId": "x",
+        "brand": {"brandName": "Acme"},
+        "business": {"type": "Restaurant"},
+        "contact": {"email": "hello@acme.com"},
+    }
+    raw = (
+        '<!DOCTYPE html><html><body>'
+        '<img src="https://images.example.com/hero.jpg" alt="Family dining at the restaurant">'
+        "</body></html>"
+    )
+    assets = [
+        {
+            "assetType": "logo",
+            "status": "ready",
+            "s3Key": "projects/p1/assets/a1/logo.png",
+        }
+    ]
+    html = personalization_service.personalize_html(raw, profile, assets, "generic")
+    assert 'src="https://cdn.dharwinone.com/projects/p1/assets/a1/logo.png"' in html

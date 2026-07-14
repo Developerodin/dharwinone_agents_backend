@@ -35,7 +35,7 @@ def _validate_registration(name, email, password):
         )
 
 
-def register(name, email, password):
+def register(name, email, password, base_url=None):
     _validate_registration(name, email, password)
     if users_repo.find_by_email(email):
         raise AuthError(409, "an account with this email already exists")
@@ -50,7 +50,7 @@ def register(name, email, password):
     if adopt:
         _adopt_legacy_data(user["userId"])
     raw = users_repo.issue_token(user["userId"], "verify", users_repo.VERIFY_TTL_S)
-    email_service.send_verification(user["email"], raw)
+    email_service.send_verification(user["email"], raw, base_url=base_url)
     return user
 
 
@@ -85,20 +85,20 @@ def login(email, password):
     }
 
 
-def resend_verification(email):
+def resend_verification(email, base_url=None):
     user = users_repo.find_by_email(email)
     if not user or user.get("emailVerified"):
         return
     raw = users_repo.issue_token(user["userId"], "verify", users_repo.VERIFY_TTL_S)
-    email_service.send_verification(user["email"], raw)
+    email_service.send_verification(user["email"], raw, base_url=base_url)
 
 
-def forgot_password(email):
+def forgot_password(email, base_url=None):
     user = users_repo.find_by_email(email)
     if not user:
         return
     raw = users_repo.issue_token(user["userId"], "reset", users_repo.RESET_TTL_S)
-    email_service.send_password_reset(user["email"], raw)
+    email_service.send_password_reset(user["email"], raw, base_url=base_url)
 
 
 def reset_password(raw_token, new_password):

@@ -44,6 +44,15 @@ def test_verification_email_contains_link(monkeypatch, capsys):
     assert "http://localhost:3000/verify?token=tok123" in out
 
 
+def test_verification_email_uses_runtime_base_url_when_env_missing(monkeypatch, capsys):
+    monkeypatch.delenv("SMTP_USERNAME", raising=False)
+    monkeypatch.delenv("SMTP_PASSWORD", raising=False)
+    monkeypatch.delenv("APP_BASE_URL", raising=False)
+    email_service.send_verification("a@b.com", "tok123", base_url="https://agents.dharwinone.com")
+    out = capsys.readouterr().out
+    assert "https://agents.dharwinone.com/verify?token=tok123" in out
+
+
 def test_reset_email_contains_link(monkeypatch, capsys):
     monkeypatch.delenv("SMTP_USERNAME", raising=False)
     monkeypatch.delenv("SMTP_PASSWORD", raising=False)

@@ -9,6 +9,7 @@ requires-python = ">=3.11"
 dependencies = [
     "fastapi",
     "uvicorn[standard]",
+    "boto3",
     "httpx",
     "pymongo",
     "pyyaml",
