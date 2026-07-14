@@ -272,12 +272,12 @@ def _selected_style_packs(profile):
 
 
 def _composed_count():
-    raw = os.environ.get("STUDIO_COMPOSED_VARIANTS", "1")
+    raw = os.environ.get("STUDIO_COMPOSED_VARIANTS", "2")
     try:
         n = int(raw)
     except ValueError:
-        n = 1
-    return max(0, min(n, 2))
+        n = 2
+    return max(0, min(n, 3))
 
 
 def _composed_templates(project_id, profile, assets, genre):

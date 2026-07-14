@@ -255,3 +255,9 @@ def test_generate_rewrite_copy_at_most_once(monkeypatch):
     project = _seed_ready_project()
     personalization_service.generate_for_project(project["projectId"], force=True)
     assert len(calls) <= 1, f"_rewrite_copy called {len(calls)} times; expected at most 1"
+
+
+@pytest.mark.parametrize("env,expected", [("1", 1), ("2", 2), ("3", 3), ("5", 3), ("x", 2)])
+def test_composed_count_respects_env(monkeypatch, env, expected):
+    monkeypatch.setenv("STUDIO_COMPOSED_VARIANTS", env)
+    assert personalization_service._composed_count() == expected
