@@ -606,3 +606,73 @@ def test_accept_country_example_when_llm_routes_other(monkeypatch):
     profile = profiles_repo.get(pid)
     assert profile["location"]["country"] == "India"
     assert "sure! meanwhile" not in result["assistantMessage"].lower()
+
+
+def test_onboarding_multi_country_skips_city_question():
+    project = _project()
+    pid = project["projectId"]
+    _advance_to_country(pid)
+    result = onboarding_service.handle_message(pid, "in india and usa")
+
+    profile = profiles_repo.get(pid)
+    country = profile["location"]["country"]
+    assert "india" in country.lower()
+    assert "usa" in country.lower()
+    assert profile["location"].get("city") is None
+    assert result["readyToGenerate"] is True
+    assert "city" not in result["assistantMessage"].lower()
+
+
+def test_onboarding_multi_city_single_country():
+    project = _project()
+    pid = project["projectId"]
+    _advance_to_country(pid)
+    onboarding_service.handle_message(pid, "India")
+    result = onboarding_service.handle_message(pid, "Delhi and Mumbai")
+
+    profile = profiles_repo.get(pid)
+    city = profile["location"]["city"]
+    assert "delhi" in city.lower()
+    assert "mumbai" in city.lower()
+    assert profile["location"]["country"] == "India"
+    assert result["readyToGenerate"] is True
+
+
+def test_onboarding_multi_city_comma_separated():
+    project = _project()
+    pid = project["projectId"]
+    _advance_to_country(pid)
+    onboarding_service.handle_message(pid, "India")
+    onboarding_service.handle_message(pid, "Delhi, Mumbai")
+
+    profile = profiles_repo.get(pid)
+    city = profile["location"]["city"]
+    assert "delhi" in city.lower()
+    assert "mumbai" in city.lower()
+
+
+def test_onboarding_both_cities_reuses_prior_answer(monkeypatch):
+    project = _project()
+    pid = project["projectId"]
+    _advance_to_country(pid)
+    onboarding_service.handle_message(pid, "India")
+    calls = {"n": 0}
+    original_extract = onboarding_service._extract
+
+    def flaky_extract(message, field_path, profile=None):
+        if field_path == "location.city" and calls["n"] == 0:
+            calls["n"] += 1
+            return None, "low"
+        return original_extract(message, field_path, profile)
+
+    monkeypatch.setattr(onboarding_service, "_extract", flaky_extract)
+    _fake_router(monkeypatch, '{"intent": "clarify", "value": null}')
+    onboarding_service.handle_message(pid, "Delhi and Mumbai")
+    assert profiles_repo.get(pid)["location"].get("city") is None
+
+    result = onboarding_service.handle_message(pid, "both")
+    profile = profiles_repo.get(pid)
+    city = profile["location"]["city"]
+    assert "delhi" in city.lower()
+    assert "mumbai" in city.lower()
+    assert result["readyToGenerate"] is True

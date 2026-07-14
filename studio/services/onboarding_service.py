@@ -11,7 +11,7 @@ from harness import providers
 from studio import draft
 from studio.paths import backend_path
 from studio.repositories import conversations_repo, profiles_repo, projects_repo
-from studio.services.profile_service import compute_completeness
+from studio.services.profile_service import compute_completeness, is_multi_place_value
 
 _QUESTIONS = {
     "business.type": "What kind of website are we building (coffee shop, portfolio, agency, online store, etc.)?",
@@ -293,6 +293,52 @@ def _multi_country_from_recent_user_turns(project_id):
     return None
 
 
+def _format_multi_places(parts):
+    names = []
+    for part in parts:
+        cleaned = _sanitize_location_phrase(part)
+        if cleaned:
+            names.append(_title_case_words(cleaned))
+    if len(names) < 2:
+        return None
+    if len(names) == 2:
+        return f"{names[0]} and {names[1]}"
+    return ", ".join(names[:-1]) + f", and {names[-1]}"
+
+
+def _is_multi_city_parts(parts, original_text):
+    if len(parts) < 2:
+        return False
+    if not (re.search(r"\band\b", original_text, re.I) or "," in original_text):
+        return False
+    for part in parts:
+        cleaned = _sanitize_location_phrase(part)
+        if not cleaned or _looks_country_like(cleaned):
+            return False
+    return True
+
+
+def _multi_city_from_text(text):
+    candidate = _normalize_place_text(text)
+    if not candidate:
+        return None
+    parts = _split_place_parts(candidate)
+    if not _is_multi_city_parts(parts, candidate):
+        return None
+    return _format_multi_places(parts)
+
+
+def _multi_city_from_recent_user_turns(project_id):
+    turns = conversations_repo.list_turns(project_id)
+    for turn in reversed(turns):
+        if turn.get("role") != "user":
+            continue
+        value = _multi_city_from_text(turn.get("text") or "")
+        if value:
+            return value
+    return None
+
+
 def _description_example(profile):
     brand = str(_get_nested(profile, "brand.brandName") or "").strip(" .,")
     business_type = str(_get_nested(profile, "business.type") or "").strip(" .,")
@@ -325,6 +371,10 @@ def _next_question(profile):
         if path in skipped:
             continue
         val = _get_nested(profile, path)
+        if path == "location.city":
+            country = _get_nested(profile, "location.country")
+            if is_multi_place_value(country):
+                continue
         if path == "business.services":
             if not val:
                 return _question_for(profile, path), path
@@ -546,6 +596,10 @@ def _extract(message, field_path, profile=None):
         return None, "low"
 
     if field_path == "location.city":
+        multi_city = _multi_city_from_text(text)
+        if multi_city:
+            return multi_city, "high"
+
         llm_loc = _location_from_llm(text)
         llm_city = llm_loc.get("city")
         if llm_city:
@@ -945,6 +999,13 @@ def handle_message(project_id, message):
 
     if target_field == "location.country" and _is_both_countries_reply(message):
         prior = _multi_country_from_recent_user_turns(project_id)
+        if prior:
+            profile, merged = _merge_field(profile, target_field, prior, "high")
+            if merged:
+                target_field = None
+
+    if target_field == "location.city" and _is_both_countries_reply(message):
+        prior = _multi_city_from_recent_user_turns(project_id)
         if prior:
             profile, merged = _merge_field(profile, target_field, prior, "high")
             if merged:

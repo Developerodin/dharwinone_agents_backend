@@ -11,6 +11,7 @@ from studio.repositories import assets_repo, profiles_repo, projects_repo, templ
 from studio.services import composition_service, onboarding_service
 from studio.services import component_rewrite_service
 from studio.services.profile_facts import business_facts
+from studio.services.profile_service import is_multi_place_value, split_multi_place_value
 from studio.storage import s3
 
 _log = logging.getLogger(__name__)
@@ -58,6 +59,29 @@ def _tagline(profile, genre):
     return html_lib.escape(default, quote=True)
 
 
+def _location_display_text(profile):
+    location = profile.get("location") or {}
+    country = str(location.get("country") or "").strip()
+    city = str(location.get("city") or "").strip()
+    street = str(location.get("address") or "").strip()
+
+    if country and is_multi_place_value(country):
+        names = ", ".join(split_multi_place_value(country))
+        return f"We work in many countries — {names}"
+
+    if city and is_multi_place_value(city):
+        names = ", ".join(split_multi_place_value(city))
+        return f"Serving {names}"
+
+    if street and city:
+        return ", ".join([street, city])
+    if city:
+        return city
+    if country:
+        return country
+    return "Your city"
+
+
 def _apply_contact(html, profile):
     contact = profile.get("contact") or {}
     location = profile.get("location") or {}
@@ -72,11 +96,7 @@ def _apply_contact(html, profile):
     if phone_href and raw_phone.startswith("+"):
         phone_href = f"+{phone_href}"
     phone_href = html_lib.escape(phone_href, quote=True)
-    city = location.get("city") or location.get("country") or "Your city"
-    address = html_lib.escape(
-        ", ".join(x for x in [location.get("address"), city] if x) or "Your city",
-        quote=True,
-    )
+    address = html_lib.escape(_location_display_text(profile), quote=True)
 
     html = re.sub(r"(?i)\bAdd your number here\b", phone, html)
     html = re.sub(r"(?i)\bAdd your phone number\b", phone, html)

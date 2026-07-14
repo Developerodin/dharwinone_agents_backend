@@ -18,6 +18,21 @@ _EMAIL_RE = re.compile(r"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$", re.I)
 _PHONE_RE = re.compile(r"\+?\d[\d\s().-]{7,}\d")
 
 _MERGE_KEYS = frozenset({"brand", "business", "location", "contact", "design", "skipped"})
+_MULTI_PLACE_RE = re.compile(r",|\band\b", re.I)
+
+
+def is_multi_place_value(value):
+    """True when a location field lists multiple places (e.g. India and USA)."""
+    if not value or not isinstance(value, str):
+        return False
+    parts = [p.strip() for p in _MULTI_PLACE_RE.split(value) if p.strip()]
+    return len(parts) >= 2
+
+
+def split_multi_place_value(value):
+    if not value or not isinstance(value, str):
+        return []
+    return [p.strip() for p in _MULTI_PLACE_RE.split(value) if p.strip()]
 
 
 class ProfileValidationError(ValueError):
@@ -49,6 +64,12 @@ def _missing_fields(profile):
             continue
         val = _get_nested(profile, path)
         if path == "business.services":
+            if not val:
+                missing.append(label)
+        elif path == "location.city":
+            country = _get_nested(profile, "location.country")
+            if is_multi_place_value(country):
+                continue
             if not val:
                 missing.append(label)
         elif not val:

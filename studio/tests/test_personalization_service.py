@@ -333,3 +333,47 @@ def test_style_pack_on_composed_base_renders_coherently():
         assert 'data-section="hero"' in html
         assert "bootstrap" in html.lower()
         assert html != composed_primary["htmlContent"]
+
+
+def test_personalize_html_multi_country_location_copy():
+    profile = {
+        "projectId": "x",
+        "brand": {"brandName": "Global Co"},
+        "business": {"type": "Agency"},
+        "contact": {"email": "hello@global.co", "phone": "+1 555 0100"},
+        "location": {"country": "India and USA"},
+    }
+    raw = "<!DOCTYPE html><html><body><h1>Hero</h1></body></html>"
+    html = personalization_service.personalize_html(raw, profile, [], "generic")
+    assert "We work in many countries" in html
+    assert "India" in html
+    assert "USA" in html
+
+
+def test_personalize_html_multi_city_location_copy():
+    profile = {
+        "projectId": "x",
+        "brand": {"brandName": "Local Co"},
+        "business": {"type": "Clinic"},
+        "contact": {"email": "hello@local.co", "phone": "+91 9876543210"},
+        "location": {"country": "India", "city": "Delhi and Mumbai"},
+    }
+    raw = "<!DOCTYPE html><html><body><h1>Hero</h1></body></html>"
+    html = personalization_service.personalize_html(raw, profile, [], "generic")
+    assert "Serving Delhi" in html
+    assert "Mumbai" in html
+
+
+def test_personalize_html_single_city_unchanged():
+    profile = {
+        "projectId": "x",
+        "brand": {"brandName": "Acme"},
+        "business": {"type": "Retail"},
+        "contact": {"email": "shop@acme.com", "phone": "555-1234"},
+        "location": {"city": "Austin"},
+    }
+    raw = "<!DOCTYPE html><html><body><h1>Hero</h1></body></html>"
+    html = personalization_service.personalize_html(raw, profile, [], "generic")
+    assert "Austin" in html
+    assert "Serving" not in html
+    assert "many countries" not in html
