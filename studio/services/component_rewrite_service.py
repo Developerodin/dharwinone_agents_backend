@@ -3,6 +3,7 @@
 import logging
 import os
 import re
+import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from studio import component_html, draft
@@ -56,6 +57,7 @@ def _rewrite_one(provider, model, html, section_type, facts):
 
 def rewrite_components_parallel(html, profile):
     """Rewrite text-bearing sections in parallel. Never raises."""
+    started = time.perf_counter()
     if os.environ.get("STUDIO_COMPONENT_REWRITE", "1").strip().lower() in (
         "0",
         "false",
@@ -104,4 +106,9 @@ def rewrite_components_parallel(html, profile):
     ):
         _log.warning("post-splice marker validation failed; reverting section rewrites")
         return html
+    _log.info(
+        "section_rewrite_batch sections=%d ms=%.1f",
+        len(targets),
+        (time.perf_counter() - started) * 1000,
+    )
     return current

@@ -4,6 +4,7 @@ import html as html_lib
 import logging
 import os
 import re
+import time
 
 from studio import draft
 from studio.repositories import assets_repo, profiles_repo, projects_repo, templates_repo
@@ -270,6 +271,7 @@ def _composed_count():
 def _composed_templates(project_id, profile, assets, genre):
     """Composed variants as template dicts. Any failure returns what succeeded."""
     out = []
+    section_ms = 0.0
     try:
         composed = composition_service.compose_project_variants(
             project_id, business_facts(profile), genre, _composed_count()
@@ -278,6 +280,7 @@ def _composed_templates(project_id, profile, assets, genre):
             try:
                 html = personalize_html(comp["html"], profile, assets, genre)
                 if idx == 0:
+                    rw_start = time.perf_counter()
                     if os.environ.get("STUDIO_COMPONENT_REWRITE", "1").strip().lower() in (
                         "0",
                         "false",
@@ -288,6 +291,7 @@ def _composed_templates(project_id, profile, assets, genre):
                         html = component_rewrite_service.rewrite_components_parallel(
                             html, profile
                         )
+                    section_ms = (time.perf_counter() - rw_start) * 1000
             except PersonalizationError:
                 _log.warning("composed variant %s failed personalization", idx)
                 continue
@@ -304,10 +308,11 @@ def _composed_templates(project_id, profile, assets, genre):
             )
     except Exception:
         _log.exception("composed variants skipped for project %s", project_id)
-    return out
+    return out, section_ms
 
 
 def generate_for_project(project_id, *, force=False):
+    started = time.perf_counter()
     project = projects_repo.get(project_id)
     if not project:
         raise ValueError("project not found")
@@ -318,8 +323,12 @@ def generate_for_project(project_id, *, force=False):
     assets = assets_repo.list_for_project(project_id)
     genre = draft.pick_template(_genre_hint(project, profile))
     templates = []
+    compose_ms = 0.0
+    section_ms = 0.0
 
-    composed = _composed_templates(project_id, profile, assets, genre)
+    compose_started = time.perf_counter()
+    composed, section_ms = _composed_templates(project_id, profile, assets, genre)
+    compose_ms = (time.perf_counter() - compose_started) * 1000 - section_ms
     if composed:
         for i, t in enumerate(composed):
             t["sourceKind"] = "composed"
@@ -370,5 +379,13 @@ def generate_for_project(project_id, *, force=False):
     projects_repo.update_fields(
         project_id,
         {"status": "ready", "templateCount": len(saved)},
+    )
+    _log.info(
+        "generate_timing project=%s compose_ms=%.1f section_batch_ms=%.1f templates=%d total_ms=%.1f",
+        project_id,
+        compose_ms,
+        section_ms,
+        len(saved),
+        (time.perf_counter() - started) * 1000,
     )
     return saved
