@@ -185,3 +185,11 @@ def test_llm_called_only_for_first_variant(monkeypatch):
     assert len(variants) == 2
     assert len(provider.prompts) == 1  # budget cap: one selection call
     assert variants[1]["via"] == "deterministic"
+
+
+def test_assembled_html_contains_required_section_markers():
+    variants = composition_service.compose_project_variants("p1", "SaaS startup", "saas", 1)
+    assert variants
+    html = variants[0]["html"]
+    for required in ("nav", "hero", "footer"):
+        assert f'data-section="{required}"' in html

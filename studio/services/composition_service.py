@@ -195,11 +195,15 @@ def _assemble(entries):
             if href not in seen:
                 seen.add(href)
                 fonts.append(f'<link href="{href}" rel="stylesheet">')
-    return (
+    html = (
         _SHELL.replace("__FONTS__", "\n".join(fonts))
         .replace("__BASE__", _read("base.css"))
         .replace("__BODY__", "\n".join(parts))
     )
+    for slot in ("nav", "hero", "footer"):
+        if f'data-section="{slot}"' not in html:
+            raise CompositionError(f"assembled html missing data-section={slot}")
+    return html
 
 
 def compose_project_variants(project_id, business_facts, genre, count):
