@@ -2,6 +2,7 @@
 
 import json
 import os
+import re
 
 from studio import componentizer
 
@@ -99,3 +100,34 @@ def test_placeholders_survive_extraction():
 def test_committed_components_in_sync():
     """Editing a template requires re-running: python -m studio.componentizer"""
     assert componentizer.check_outputs(componentizer.build_outputs()) == []
+
+
+def test_add_scope_class_emits_data_section():
+    block = '<header class="hero"><h1>Hi</h1></header>'
+    out = componentizer._add_scope_class(block, "c-saas-1-1", section_type="hero")
+    assert 'data-section="hero"' in out
+    assert out.startswith("<header")
+    assert 'class="c-saas-1-1' in out
+
+
+def test_hero_header_gets_hero_marker_not_wrapper():
+    """C6: hero blocks use <header>, marker on semantic root."""
+    outputs = componentizer.build_outputs()
+    manifest = json.loads(outputs["manifest.json"])
+    heroes = [e for e in manifest if e["type"] == "hero"]
+    assert heroes
+    for entry in heroes[:5]:  # spot-check representative sample
+        content = outputs[entry["path"]]
+        assert 'data-section="hero"' in content
+        # marker on <header or <section>, never a synthetic wrapper
+        assert re.search(r"<(?:header|section)[^>]*data-section=\"hero\"", content)
+
+
+def test_each_component_has_exactly_one_data_section():
+    outputs = componentizer.build_outputs()
+    manifest = json.loads(outputs["manifest.json"])
+    for entry in manifest:
+        content = outputs[entry["path"]]
+        markers = re.findall(r'data-section="([^"]+)"', content)
+        assert len(markers) == 1, entry["id"]
+        assert markers[0] == entry["type"], entry["id"]

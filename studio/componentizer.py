@@ -212,13 +212,14 @@ def minify(css):
     return re.sub(r"\s+", " ", css).strip()
 
 
-def _add_scope_class(block, scope):
+def _add_scope_class(block, scope, *, section_type):
     def repl(m):
         tag, attrs = m.group(1), m.group(2)
+        section_attr = f' data-section="{section_type}"'
         if 'class="' in attrs:
             new_attrs = attrs.replace('class="', 'class="' + scope + " ", 1)
-            return "<" + tag + new_attrs + ">"
-        return f'<{tag} class="{scope}"{attrs}>'
+            return "<" + tag + section_attr + new_attrs + ">"
+        return f'<{tag}{section_attr} class="{scope}"{attrs}>'
 
     return re.sub(r"^<(\w+)([^>]*)>", repl, block, count=1)
 
@@ -262,7 +263,8 @@ def _extract_template(fname, raw, outputs, manifest):
                 css = prefix + "\n" + css
         comp_id = f"{stem}-{n}-{type_}"
         outputs[f"{comp_id}.html"] = (
-            f"<style>{minify(css)}</style>\n{_add_scope_class(block, scope)}\n"
+            f"<style>{minify(css)}</style>\n"
+            f"{_add_scope_class(block, scope, section_type=type_)}\n"
         )
         manifest.append(
             {
