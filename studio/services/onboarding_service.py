@@ -85,11 +85,16 @@ _EXAMPLES_REQUEST_RE = re.compile(
     r"|\b(?:any|got|have)\s+(?:more|other|another)\s+(?:example|option|suggestion)s?\b"
     r"|\b(?:show|give|suggest|list)\s+(?:me\s+)?(?:some\s+)?(?:more\s+)?(?:example|option|alternative)s?\b"
     r"|\b(?:example|option|alternative)s?\s+(?:please|pls)\b"
-    r"|\bsomething\s+(?:classy|elegant|professional|premium|minimal|catchy|better)\b"
-    r"|\b(?:classy|elegant|professional|premium)\b.*\b(?:example|option|tagline|intro)\b"
-    r"|\b(?:make|create|write)\s+(?:something|it|one)\s+(?:classy|elegant|professional|more\s+\w+)\b"
+    r"|\bsomething\s+(?:classy|elegant|professional|premium|minimal|catchy|better|aggressive|fiery|bold|edgy|playful)\b"
+    r"|\b(?:classy|elegant|professional|premium|aggressive|fiery|bold|edgy|playful)\b.*\b(?:example|option|tagline|tag\s*line|intro)\b"
+    r"|\b(?:make|create|write)\s+(?:something|it|one|me)\s+(?:classy|elegant|professional|more\s+\w+|aggressive|fiery|bold|edgy|playful)\b"
     r"|\bwhat\s+(?:else|are)\s+(?:some|my)\s+(?:option|example)s?\b"
-    r"|\b(?:different|better)\s+(?:option|example|tagline|intro)s?\b",
+    r"|\b(?:different|better)\s+(?:option|example|tagline|tag\s*line|intro)s?\b"
+    r"|\bdo\s+you\s+have\b.*\b(?:example|option)s?\b"
+    r"|\b(?:tag\s*line|tagline)\s+(?:for\s+)?example\b"
+    r"|\b(?:example|option)s?\s+(?:of\s+)?(?:an?\s+)?(?:aggressive|fiery|bold|edgy|classy|playful)\b"
+    r"|\b(?:aggressive|fiery|bold|edgy|playful)\b.*\b(?:tag\s*line|tagline|intro)\b"
+    r"|\b(?:tag\s*line|tagline|intro)\b.*\b(?:aggressive|fiery|bold|edgy|playful)\b",
     re.I,
 )
 _ACCEPT_EXAMPLE_RE = re.compile(
@@ -369,6 +374,10 @@ def _example_style_hint(message):
         "bold",
         "warm",
         "friendly",
+        "aggressive",
+        "fiery",
+        "edgy",
+        "playful",
     ):
         if word in low:
             hints.append(word)
@@ -391,10 +400,28 @@ def _description_example_variants(profile, style_hint=""):
         word in hint
         for word in ("classy", "elegant", "professional", "premium", "sophisticated")
     )
+    fiery = any(word in hint for word in ("aggressive", "fiery", "bold", "edgy"))
+    playful = "playful" in hint
 
     variants = []
     if brand and services_text:
-        if polished:
+        if fiery:
+            variants.extend(
+                [
+                    f"{brand} — ignite your grind with {services_text}.",
+                    f"Unleash {services_text} that hits different at {brand}.",
+                    f"{brand} fuels your fire with elite {services_text}.",
+                ]
+            )
+        elif playful:
+            variants.extend(
+                [
+                    f"{brand} makes {services_text} feel like your best day ever.",
+                    f"Jump into {services_text} with {brand} — fun, fast, and effective.",
+                    f"{brand} turns {services_text} into something you'll actually enjoy.",
+                ]
+            )
+        elif polished:
             variants.extend(
                 [
                     f"{brand} delivers refined {services_text} with expert care.",
@@ -1210,7 +1237,7 @@ def handle_message(project_id, message):
             and target_field == "business.description"
             and _STYLE_DIRECTIVE_RE.search(message)
         )
-    ):
+    ) and not _requests_more_examples(message):
         # A style instruction ("make it minimalist"), not an answer — never
         # echo it into the site. Keep it as a design preference and re-ask.
         existing = _get_nested(profile, "design.stylePreference")

@@ -418,6 +418,67 @@ def test_user_requests_classy_examples_when_llm_routes_answer(monkeypatch):
     assert "country" not in result["assistantMessage"].lower()
 
 
+def _advance_to_fitro_description(pid):
+    onboarding_service.handle_message(pid, "Fitness app website")
+    onboarding_service.handle_message(pid, "fitro")
+    onboarding_service.handle_message(pid, "Workout plans, nutrition tracking")
+
+
+def test_aggressive_fiery_tagline_request_returns_examples():
+    project = _project()
+    pid = project["projectId"]
+    _advance_to_fitro_description(pid)
+    result = onboarding_service.handle_message(
+        pid, "do you have aggressive fiery tag line for example"
+    )
+
+    profile = profiles_repo.get(pid)
+    assert not profile["business"].get("description")
+    msg = result["assistantMessage"].lower()
+    assert "here are a few options" in msg
+    assert "pick one" in msg
+    assert "fitro" in msg
+    assert "workout" in msg or "nutrition" in msg
+    assert "noted" not in msg
+    assert "keep the design" not in msg
+    assert "country" not in msg
+
+
+def test_design_note_path_does_not_trigger_on_example_request(monkeypatch):
+    project = _project()
+    pid = project["projectId"]
+    _advance_to_fitro_description(pid)
+    _fake_router(monkeypatch, '{"intent": "style", "value": null}')
+    result = onboarding_service.handle_message(
+        pid, "do you have aggressive fiery tag line for example"
+    )
+
+    profile = profiles_repo.get(pid)
+    assert not profile["business"].get("description")
+    assert not profile["design"].get("stylePreference")
+    msg = result["assistantMessage"].lower()
+    assert "here are a few options" in msg
+    assert "pick one" in msg
+    assert "noted" not in msg
+    assert "keep the design" not in msg
+
+
+@pytest.mark.parametrize(
+    "message",
+    [
+        "do you have aggressive fiery tag line for example",
+        "tagline example please",
+        "tag line for example",
+        "do you have a bold example",
+        "give me an edgy tagline example",
+        "show me playful intro examples",
+        "something fiery and bold",
+    ],
+)
+def test_examples_request_regex_coverage(message):
+    assert onboarding_service._requests_more_examples(message)
+
+
 def test_direct_answer_still_advances():
     project = _project()
     pid = project["projectId"]
