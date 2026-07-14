@@ -472,3 +472,47 @@ def test_onboarding_no_longer_asks_contact_email_or_phone():
     assert "email" not in msg
     assert "phone" not in msg
     assert result["readyToGenerate"] is True
+
+
+def test_accept_description_example_saves_value_and_advances():
+    project = _project()
+    pid = project["projectId"]
+    _advance_to_description(pid)
+    result = onboarding_service.handle_message(pid, "i like this one in example use it")
+
+    profile = profiles_repo.get(pid)
+    desc = profile["business"]["description"]
+    assert "Flora" in desc
+    assert "workout" in desc.lower() or "nutrition" in desc.lower()
+    assert "intro line" not in result["assistantMessage"].lower()
+    assert "country" in result["assistantMessage"].lower()
+
+
+def test_accept_description_example_variants():
+    for message in (
+        "use it",
+        "like the example",
+        "that one works for me",
+        "use the example",
+    ):
+        project = _project()
+        pid = project["projectId"]
+        _advance_to_description(pid)
+        result = onboarding_service.handle_message(pid, message)
+        profile = profiles_repo.get(pid)
+        assert profile["business"]["description"]
+        assert "intro line" not in result["assistantMessage"].lower()
+
+
+def test_accept_description_example_when_llm_routes_other(monkeypatch):
+    project = _project()
+    pid = project["projectId"]
+    _advance_to_description(pid)
+    _fake_router(monkeypatch, '{"intent": "other", "value": null}')
+    result = onboarding_service.handle_message(pid, "i like this one in example use it")
+
+    profile = profiles_repo.get(pid)
+    assert profile["business"]["description"]
+    assert "sure! meanwhile" not in result["assistantMessage"].lower()
+    assert "intro line" not in result["assistantMessage"].lower()
+    assert "country" in result["assistantMessage"].lower()

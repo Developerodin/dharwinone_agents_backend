@@ -80,6 +80,18 @@ _SKIP_REQUEST_RE = re.compile(
     r"|\bno\s+(?:email|phone|number)\b",
     re.I,
 )
+_ACCEPT_EXAMPLE_RE = re.compile(
+    r"\b(?:use|pick|take|go\s+with|choose)\s+(?:it|that|this|the\s+example|the\s+suggested)\b"
+    r"|\b(?:like|love|prefer)\s+(?:it|that|this|the\s+example|the\s+suggested)\b"
+    r"|\b(?:that|this)\s+one\b"
+    r"|\b(?:use|with)\s+the\s+example\b"
+    r"|\bexample\s+(?:is\s+)?(?:fine|good|great|perfect|works)\b"
+    r"|\bsounds?\s+good\b"
+    r"|\bworks?\s+for\s+me\b"
+    r"|\bi\s+like\s+(?:it|that|this|the\s+example)\b"
+    r"|\bjust\s+use\s+(?:it|that|this)\b",
+    re.I,
+)
 _STYLE_DIRECTIVE_RE = re.compile(
     r"^(?:please\s+)?(?:make|keep)\b"
     r".*\b(?:minim\w+|sleek|clean|modern|simple|elegant|premium|bold|dark|light)\b",
@@ -169,6 +181,19 @@ def _services_for_example(profile):
         deduped.append(item)
         seen.add(key)
     return deduped[:2]
+
+
+def _accepts_example(message):
+    return bool(_ACCEPT_EXAMPLE_RE.search(message or ""))
+
+
+def _example_value_for_field(profile, field_path):
+    if field_path == "business.description":
+        example_text = _description_example(profile)
+        match = re.search(r'"([^"]+)"', example_text)
+        if match:
+            return match.group(1).strip().rstrip(".")
+    return None
 
 
 def _description_example(profile):
@@ -799,6 +824,13 @@ def handle_message(project_id, message):
     # and never lands in the profile.
     route = _llm_route(message, target_field, profile) if target_field else None
     intent = route["intent"] if route else None
+
+    if target_field and _accepts_example(message):
+        example_value = _example_value_for_field(profile, target_field)
+        if example_value:
+            profile, merged = _merge_field(profile, target_field, example_value, "high")
+            if merged:
+                target_field = None
 
     if target_field and (
         intent == "clarify"
