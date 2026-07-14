@@ -84,6 +84,40 @@ def test_edit_and_history(client, memory_db):
     assert len(edits.json()) >= 1
 
 
+def test_edit_hero_uses_section_scope(client, memory_db, monkeypatch):
+    from studio import draft
+
+    def fake_refine_section(provider, model, section_html, section_type, user_prompt, **kwargs):
+        assert section_type == "hero"
+        assert kwargs.get("style_reference_html")
+        return "<h1>API Hero</h1>"
+
+    monkeypatch.setattr(draft, "refine_section", fake_refine_section)
+    monkeypatch.setattr(
+        edit_service,
+        "_load_edit_provider",
+        lambda: (object(), "fake-model"),
+    )
+    pid, tid = _ready_with_templates(client)
+    client.post(f"/builder/projects/{pid}/templates/{tid}/select")
+    client.put(
+        f"/builder/projects/{pid}/working-html",
+        json={
+            "html": (
+                '<!DOCTYPE html><html><body>'
+                '<header data-section="hero" class="c-x hero"><h1>Old</h1></header>'
+                "</body></html>"
+            )
+        },
+    )
+    edit = client.post(
+        f"/builder/projects/{pid}/edit",
+        json={"prompt": "change hero headline to API Hero"},
+    )
+    assert edit.status_code == 200
+    assert "API Hero" in edit.json()["html"]
+
+
 def test_edit_uses_llm_for_general_prompt(client, memory_db, monkeypatch):
     pid, tid = _ready_with_templates(client)
     client.post(f"/builder/projects/{pid}/templates/{tid}/select")
