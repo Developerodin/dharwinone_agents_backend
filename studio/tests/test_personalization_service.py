@@ -101,7 +101,9 @@ def test_generate_rewrites_template_copy_via_llm(monkeypatch):
     )
     project = _seed_ready_project()
     result = personalization_service.generate_for_project(project["projectId"])
-    assert "HR software that hires for you." in result[0]["htmlContent"]
+    composed = [t for t in result if t["templateId"].startswith("composed-")]
+    assert composed
+    assert "HR software that hires for you." in composed[0]["htmlContent"]
 
 
 def test_generate_uses_style_preference_for_pack_selection():
@@ -232,3 +234,24 @@ def test_personalize_html_uses_public_asset_base_url_for_logo(monkeypatch):
     ]
     html = personalization_service.personalize_html(raw, profile, assets, "generic")
     assert 'src="https://cdn.dharwinone.com/projects/p1/assets/a1/logo.png"' in html
+
+
+def test_generate_rewrite_copy_at_most_once(monkeypatch):
+    """C2: duplicate whole-template + composed call sites must not both fire."""
+    from studio.services import onboarding_service, personalization_service
+
+    calls = []
+
+    def tracking_rewrite(html, profile):
+        calls.append(len(html))
+        return html
+
+    monkeypatch.setattr(personalization_service, "_rewrite_copy", tracking_rewrite)
+    monkeypatch.setattr(
+        onboarding_service,
+        "_load_onboarding_provider",
+        lambda: (object(), "fake-model"),
+    )
+    project = _seed_ready_project()
+    personalization_service.generate_for_project(project["projectId"], force=True)
+    assert len(calls) <= 1, f"_rewrite_copy called {len(calls)} times; expected at most 1"
