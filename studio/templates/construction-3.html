@@ -71,6 +71,14 @@
   .quote-card blockquote{font-family:"Lora",serif;font-style:italic;font-size:1.3rem;line-height:1.5;}
   .quote-card figcaption{font-size:.9rem;color:color-mix(in srgb, var(--bg) 75%, var(--ink));}
 
+  .faq{padding:4.5rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .faq details{border-bottom:1px solid var(--line);}
+  .faq summary{cursor:pointer;padding:1rem 0;font-family:"Lora",serif;font-weight:600;font-size:1.15rem;list-style:none;display:flex;justify-content:space-between;gap:1rem;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq summary::after{content:"+";font-family:"Quicksand",sans-serif;font-weight:700;color:var(--accent);}
+  .faq details[open] summary::after{content:"−";}
+  .faq details p{font-size:.97rem;padding-bottom:1rem;margin:0;color:color-mix(in srgb, var(--ink) 80%, var(--bg));}
+
   .cta{padding:0 0 5rem;}
   .cta-inner{background:var(--accent);color:var(--soft);border-radius:1.75rem;padding:3.2rem clamp(1.5rem,5vw,3.5rem);}
   .cta-inner h2{color:#fff;font-size:clamp(1.9rem,4.4vw,3rem);}
@@ -109,6 +117,8 @@
       <a class="nav-link" href="#services">What we make</a>
       <a class="nav-link" href="#transformations">Before and after</a>
       <a class="nav-link" href="#promise">Our promise</a>
+      <a class="nav-link" href="#pricing">Pricing</a>
+      <a class="nav-link" href="#faq">FAQ</a>
       <a class="btn btn-warm" href="#contact">Book a home visit</a>
     </div>
   </div>
@@ -246,7 +256,72 @@
   </div>
 </section>
 
-<section class="cta" id="contact">
+<!-- dharwin-enrich:pricing -->
+<section class="services" id="pricing">
+  <div class="container">
+    <p class="eyebrow mb-2">Service packages</p>
+    <h2 class="mb-4" style="font-size:clamp(1.9rem,4.2vw,2.8rem);">Service Packages</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="svc">
+          <div class="ic">G</div>
+          <h3>Garden Design</h3>
+          <p>Layouts that fit your space and light.</p>
+          <span class="from">Quote on request</span>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="svc">
+          <div class="ic">L</div>
+          <h3>Lawn Care</h3>
+          <p>Mowing, feeding and seasonal treatment.</p>
+          <span class="from">Quote on request</span>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="svc">
+          <div class="ic">M</div>
+          <h3>Maintenance Plans</h3>
+          <p>Scheduled visits that keep it thriving.</p>
+          <span class="from">Quote on request</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:faq -->
+<section class="faq" id="faq">
+  <div class="container">
+    <p class="eyebrow mb-2">Common questions</p>
+    <h2 class="mb-4" style="font-size:clamp(1.9rem,4.2vw,2.8rem);">Answers before you call</h2>
+    <details open>
+      <summary>Do you handle emergencies?</summary>
+      <p>Yes — same-day callouts when urgency demands it.</p>
+    </details>
+    <details>
+      <summary>Are estimates free?</summary>
+      <p>Quotes are free within our service area.</p>
+    </details>
+    <details>
+      <summary>Which areas do you cover?</summary>
+      <p>We cover the city and nearby neighbourhoods.</p>
+    </details>
+  </div>
+</section>
+
+<section id="contact" style="padding:5rem 0;background:var(--soft);border-top:1px solid var(--line);">
+  <div class="container">
+    <p class="eyebrow mb-3">Site office</p>
+    <h2 class="mb-4">Visit or call</h2>
+    <div class="row g-4">
+      <div class="col-md-6"><p><strong>Address</strong><br>Your address here</p><p><strong>Hours</strong><br>Mon–Sat, 9:00–19:00</p></div>
+      <div class="col-md-6"><p><strong>Phone</strong><br><a href="tel:+910000000000">+91 00000 00000</a></p><p><strong>Email</strong><br><a href="mailto:hello@construction3.example">hello@construction3.example</a></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="engage">
   <div class="container">
     <div class="cta-inner">
       <div class="row align-items-center g-4">
@@ -275,7 +350,7 @@
       </div>
       <div class="col-6 col-lg-3">
         <h6>Workshop</h6>
-        <ul><li>Unit 3, Timber Yard Lane</li><li>Visits by appointment</li><li>hello@yourdomain.com</li></ul>
+        <ul><li>Unit 3, Timber Yard Lane</li><li>Visits by appointment</li><li>hello@greenframegardens.example</li></ul>
       </div>
       <div class="col-6 col-lg-3">
         <h6>Good to know</h6>

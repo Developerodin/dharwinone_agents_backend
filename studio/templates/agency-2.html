@@ -79,6 +79,19 @@
   .contact-band p{color:color-mix(in srgb, var(--bg) 75%, var(--ink) 25%);}
   .contact-band .btn-inverse{background:var(--bg);color:var(--ink);border:1px solid var(--bg);padding:.9rem 2rem;font-weight:600;border-radius:3px;display:inline-block;text-decoration:none;}
   .contact-band .btn-inverse:hover{background:var(--soft);color:var(--ink);}
+  /* pricing + faq */
+  .pricing-band{padding:5.5rem 0;}
+  .plan-card{border:1px solid var(--line);padding:1.4rem 1.5rem;height:100%;background:var(--soft);border-radius:4px;}
+  .plan-card h3{font-family:'Newsreader',serif;font-weight:600;font-size:1.35rem;margin-bottom:.45rem;}
+  .plan-card .price{font-weight:700;margin-bottom:.35rem;}
+  .plan-card p{font-size:.95rem;color:var(--muted);margin:0;}
+  .faq{padding:5.5rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .faq details{border-bottom:1px solid var(--line);}
+  .faq summary{cursor:pointer;padding:1.15rem 0;font-family:'Newsreader',serif;font-weight:600;font-size:1.2rem;list-style:none;display:flex;justify-content:space-between;align-items:baseline;gap:1rem;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq summary::after{content:"+";font-family:'Archivo',sans-serif;font-weight:700;font-size:1.1rem;color:var(--accent-deep);flex-shrink:0;}
+  .faq details[open] summary::after{content:"−";}
+  .faq details p{font-size:.96rem;padding-bottom:1.15rem;margin:0;color:var(--muted);max-width:62ch;}
   footer.site{padding:2.9rem 0 2.5rem;color:var(--muted);font-size:.92rem;}
   footer.site a{color:var(--muted);text-decoration:none;}
   footer.site a:hover{color:var(--ink);}
@@ -108,7 +121,9 @@
       <a class="navlink" href="#capabilities">Capabilities</a>
       <a class="navlink" href="#contact">Contact</a>
     </div>
-    <a class="btn-main" style="padding:.55rem 1.2rem;font-size:.92rem;" href="#contact">Open a case</a>
+    <a class="nav-link" href="#pricing">Pricing</a>
+      <a class="nav-link" href="#faq">FAQ</a>
+      <a class="btn-main" style="padding:.55rem 1.2rem;font-size:.92rem;" href="#contact">Open a case</a>
   </div>
 </nav>
 
@@ -208,7 +223,9 @@
       <div class="col-lg-7">
         <blockquote class="big-quote">
           "They spent the first two weeks refusing to change anything, which annoyed me, and then handed us a baseline nobody could argue with. The number moved and stayed moved. I have hired consultants for twenty years and kept exactly one results memo. It is theirs."
-          <footer>Chief Operating Officer, ledger entry No. 37</footer>
+          
+
+<footer>Chief Operating Officer, ledger entry No. 37</footer>
         </blockquote>
       </div>
       <div class="col-lg-5">
@@ -218,6 +235,48 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:pricing -->
+<section class="pricing-band" id="pricing">
+  <div class="container">
+    <p class="eyebrow mb-2">Pricing</p>
+    <h2 class="sec-title mb-4">Insurance Plans</h2>
+    <div class="row g-4">
+      <div class="col-md-4"><div class="plan-card">
+        <h3>Health Insurance</h3>
+        <p class="price num">Quote on request</p>
+        <p>Plans compared across leading insurers.</p></div></div>
+      <div class="col-md-4"><div class="plan-card">
+        <h3>Life Insurance</h3>
+        <p class="price num">Quote on request</p>
+        <p>Protection matched to your family's needs.</p></div></div>
+      <div class="col-md-4"><div class="plan-card">
+        <h3>Claim Support</h3>
+        <p class="price num">Quote on request</p>
+        <p>Help with paperwork when it matters most.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:faq -->
+<section class="faq" id="faq">
+  <div class="container">
+    <p class="eyebrow mb-2">Common questions</p>
+    <h2 class="sec-title mb-4">Answers before you call</h2>
+    <details open>
+      <summary>Do you handle emergencies?</summary>
+      <p>Yes — same-day callouts when urgency demands it.</p>
+    </details>
+    <details>
+      <summary>Are estimates free?</summary>
+      <p>Quotes are free within our service area.</p>
+    </details>
+    <details>
+      <summary>Which areas do you cover?</summary>
+      <p>We cover the city and nearby neighbourhoods.</p>
+    </details>
   </div>
 </section>
 

@@ -1,0 +1,34 @@
+{
+  "id": "retail_boutique",
+  "name": "Retail & Small Shops — Boutique",
+  "category": "retail",
+  "subcategory": "boutique",
+  "wave": 1,
+  "status": "active",
+  "default_family": "premium_dark",
+  "keywords": [
+    "boutique",
+    "designer",
+    "couture",
+    "tailoring",
+    "bridal",
+    "bespoke"
+  ],
+  "matcher": {
+    "eligible_template_ids": [
+      "rt_boutique_v1",
+      "gn_generic_v1"
+    ],
+    "default_rank_order": [
+      "rt_boutique_v1",
+      "gn_generic_v1"
+    ]
+  },
+  "image_pack_refs": [
+    "pack_boutique_v1"
+  ],
+  "moderation": {
+    "blocked": false,
+    "notes": "Standard business — allowed"
+  }
+}

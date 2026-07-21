@@ -1,5 +1,7 @@
 """Edit safety tests."""
 
+import pytest
+
 from studio import draft
 from studio.services import edit_service
 
@@ -71,14 +73,39 @@ def test_edit_without_markers_falls_back_to_full_page(monkeypatch):
     assert calls["refine_section"] == 0
 
 
-def test_theme_prompt_swaps_style_pack_without_llm():
+def test_is_theme_request_matches_vibe_not_targeted_edits():
     assert edit_service._is_theme_request("change the theme i don't like this one")
     assert edit_service._is_theme_request("try a different colour scheme")
     # narrower targets still go down the normal content path
     assert not edit_service._is_theme_request('change the headline to "Hi"')
 
+
+def _stub_theme_env(monkeypatch, saved):
+    """No DB, no provider: exercise the local matching/fallback logic only."""
+    monkeypatch.setattr(edit_service, "_theme_options", lambda *a: [])
+    monkeypatch.setattr(edit_service, "_selected_template_id", lambda *a: None)
+    monkeypatch.setattr(edit_service, "_load_edit_provider", lambda: (None, None))
+    monkeypatch.setattr(edit_service, "_record_theme_edit", lambda *a, **k: None)
+    monkeypatch.setattr(
+        edit_service.working_html_repo,
+        "put",
+        lambda pid, html, template_id=None: saved.update(html=html),
+    )
+
+
+def test_vague_theme_request_asks_instead_of_recoloring(monkeypatch):
+    # Regression: "do you have other themes?" used to silently recolor to dark.
+    _stub_theme_env(monkeypatch, {})
     html = "<html><head></head><body></body></html>"
-    first = edit_service._apply_theme_edit(html, "change the theme")
-    second = edit_service._apply_theme_edit(first, "change the theme")
-    assert draft.current_pack_id(first) != draft.current_pack_id(second)
-    assert second.count('id="style-pack"') == 1  # swapped, not stacked
+    with pytest.raises(edit_service.EditValidationError):
+        edit_service._apply_theme_edit("p1", "do you have other themes?", html)
+
+
+def test_concrete_colour_request_recolors_when_no_matching_design(monkeypatch):
+    saved = {}
+    _stub_theme_env(monkeypatch, saved)
+    html = "<html><head></head><body></body></html>"
+    result = edit_service._apply_theme_edit("p1", "make it dark", html)
+    assert result["changeScope"] == "theme"
+    assert draft.current_pack_id(result["html"]) == "sleek-dark"
+    assert saved["html"] == result["html"]  # persisted

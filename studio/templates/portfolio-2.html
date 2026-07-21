@@ -102,6 +102,12 @@
     .ix-row:hover{padding-left:.9rem}
     .ix-row:hover .client{font-size:clamp(1.6rem,3.6vw,2.5rem)}
   }
+
+  .faq{padding:5rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .faq details{border-bottom:1px solid var(--line);}
+  .faq summary{cursor:pointer;padding:1rem 0;font-weight:600;font-size:1.05rem;list-style:none;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq details p{font-size:.95rem;padding-bottom:1rem;margin:0;}
 </style>
 </head>
 <body>
@@ -125,6 +131,8 @@
     <p class="tagline">{{TAGLINE}}</p>
     <div class="d-flex gap-3 mt-4 flex-wrap">
       <a class="btn-ix btn" href="#index">Read the index</a>
+      <a class="nav-link" href="#pricing">Pricing</a>
+      <a class="nav-link" href="#faq">FAQ</a>
       <a class="btn-ix-ghost btn" href="#contact">Start a project</a>
     </div>
     <div class="coords">
@@ -235,6 +243,42 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:pricing -->
+<section class="py-5" id="pricing">
+  <div class="container">
+    <p class="eyebrow mb-2">Pricing</p>
+    <h2 style="font-size:clamp(2rem,4vw,2.8rem);margin-bottom:2rem;">Products & Pricing</h2>
+    <div class="row g-4">
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Handcrafted Decor</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Pieces that make a house a home.</p></div></div>
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Custom Orders</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Tell us your idea; we'll craft it.</p></div></div>
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Gift Sets</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Ready-to-give, beautifully packed.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:faq -->
+<section class="faq py-5" id="faq">
+  <div class="container">
+    <p class="eyebrow mb-2">FAQ</p>
+    <h2 class="sec-title mb-4">Questions about working together</h2>
+    <details open>
+      <summary>Do you offer home delivery?</summary>
+      <p>Yes — local delivery and pickup slots are available.</p>
+    </details>
+    <details>
+      <summary>Can I return or exchange items?</summary>
+      <p>Unused items in original packaging can be exchanged within 7 days.</p>
+    </details>
+    <details>
+      <summary>Do you take custom orders?</summary>
+      <p>Tell us what you need — we confirm availability and timing.</p>
+    </details>
   </div>
 </section>
 

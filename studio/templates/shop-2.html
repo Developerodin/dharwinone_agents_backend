@@ -102,6 +102,12 @@
     .piece{transition:padding-left .25s ease}
     .piece:hover{padding-left:.75rem}
   }
+
+  .faq{padding:5.5rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .faq details{border-bottom:1px solid var(--line);}
+  .faq summary{cursor:pointer;padding:1.1rem 0;font-family:"Libre Caslon Display",serif;font-size:1.2rem;list-style:none;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq details p{color:var(--ink-65);font-size:.95rem;padding-bottom:1rem;margin:0;}
 </style>
 </head>
 <body>
@@ -111,6 +117,15 @@
     <span class="issue d-none d-lg-inline">Vol. 04, Autumn</span>
     <a class="brand" href="#">{{BRAND}}</a>
     <div class="d-none d-md-flex gap-4 align-items-center">
+      <a
+      class="link"
+      href="#pricing">Pricing</a>
+      <a
+      class="link"
+      href="#faq">FAQ</a>
+      <a
+      class="link"
+      href="#contact">Contact</a>
       <a class="link" href="#collage">Editorial</a>
       <a class="link" href="#look">The look</a>
       <a class="link" href="#collection">Collection</a>
@@ -227,6 +242,62 @@
       <div class="col-md-4">
         <div class="part"><span class="no">iii.</span><h3>Returns, without a sigh</h3><p>Thirty days, worn indoors is fine. If the fit is close, book the atelier and we will alter it instead.</p></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:pricing -->
+<section class="collection" id="pricing">
+  <div class="container">
+    <p class="folio mb-2">Pricing</p>
+    <h2 class="mb-4">Bespoke Services & Pricing</h2>
+    <div class="row g-4">
+      <div class="col-md-4"><div class="credit" style="flex-direction:column;align-items:flex-start;border:1px solid var(--line);padding:1.5rem;height:100%;">
+        <span class="no">01</span>
+        <div class="what"><b>Custom Tailoring</b><span>Fits perfected over a fitting or two.</span></div>
+        <span class="price" style="margin-left:0;margin-top:1rem;">Quote on request</span>
+      </div></div>
+      <div class="col-md-4"><div class="credit" style="flex-direction:column;align-items:flex-start;border:1px solid var(--line);padding:1.5rem;height:100%;">
+        <span class="no">02</span>
+        <div class="what"><b>Bridal Couture</b><span>Your day, your design.</span></div>
+        <span class="price" style="margin-left:0;margin-top:1rem;">Quote on request</span>
+      </div></div>
+      <div class="col-md-4"><div class="credit" style="flex-direction:column;align-items:flex-start;border:1px solid var(--line);padding:1.5rem;height:100%;">
+        <span class="no">03</span>
+        <div class="what"><b>Designer Wear</b><span>Limited pieces you won't see twice.</span></div>
+        <span class="price" style="margin-left:0;margin-top:1rem;">Quote on request</span>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:faq -->
+<section class="faq" id="faq">
+  <div class="container">
+    <p class="folio mb-2">Common questions</p>
+    <h2 style="font-size:clamp(2rem,4vw,2.8rem);margin-bottom:2rem;">Answers before you call</h2>
+    <details open>
+      <summary>Do you offer home delivery?</summary>
+      <p>Yes — local delivery and pickup slots are available.</p>
+    </details>
+    <details>
+      <summary>Can I return or exchange items?</summary>
+      <p>Unused items in original packaging can be exchanged within 7 days.</p>
+    </details>
+    <details>
+      <summary>Do you take custom orders?</summary>
+      <p>Tell us what you need — we confirm availability and timing.</p>
+    </details>
+  </div>
+</section>
+
+<!-- dharwin-enrich:contact-info -->
+<section class="particulars" id="contact">
+  <div class="container">
+    <p class="folio mb-3">Visit the Store</p>
+    <div class="row g-4">
+      <div class="col-md-6"><div class="part"><div class="no">I</div><h3>Visit</h3><p>High Street, Your City<br>Daily, 10:00–21:00</p></div></div>
+      <div class="col-md-6"><div class="part"><div class="no">II</div><h3>Reach us</h3><p><a href="tel:+910000000000">+91 00000 00000</a><br><a href="mailto:hello@shop2.example">hello@shop2.example</a></p></div></div>
     </div>
   </div>
 </section>

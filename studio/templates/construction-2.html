@@ -108,6 +108,12 @@
     .tb th{width:42%;}
     .hero-fig img{height:17rem;}
   }
+
+  .faq{padding:4.5rem 0;background:var(--soft);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);}
+  .faq details{border-bottom:1px dashed var(--line);}
+  .faq summary{cursor:pointer;padding:1rem 0;font-weight:800;font-size:1.15rem;list-style:none;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq details p{font-size:.96rem;margin:0;padding-bottom:1rem;color:color-mix(in srgb, var(--ink) 82%, var(--bg));}
 </style>
 </head>
 <body id="top">
@@ -119,6 +125,8 @@
       <a class="nav-link" href="#capabilities">01 Capabilities</a>
       <a class="nav-link" href="#specsheet">02 Spec sheet</a>
       <a class="nav-link" href="#method">03 Method</a>
+      <a class="nav-link" href="#pricing">Pricing</a>
+      <a class="nav-link" href="#faq">FAQ</a>
       <a class="btn btn-draw" href="#contact">Issue an RFQ</a>
     </div>
   </div>
@@ -257,7 +265,68 @@
   </div>
 </section>
 
-<section class="cta" id="contact">
+<!-- dharwin-enrich:pricing -->
+<section class="caps" id="pricing">
+  <div class="container">
+    <div class="caps-head">
+      <div><p class="tag-label mb-2">Service packages</p><h2 class="mb-0">Electrical Service Packages</h2></div>
+      <span class="mono" style="font-size:.8rem;letter-spacing:.12em;">SHEET 4 OF 6</span>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4"><div class="cap">
+        <span class="code">PKG-01</span>
+        <h3>House Wiring</h3>
+        <p>Safe, standards-compliant wiring and rewiring.</p>
+        <ul><li>Quote on request</li><li>Clear estimate before work starts</li></ul>
+      </div></div>
+      <div class="col-md-4"><div class="cap">
+        <span class="code">PKG-02</span>
+        <h3>AC Installation & Repair</h3>
+        <p>Install, service and gas top-up.</p>
+        <ul><li>Quote on request</li><li>Clear estimate before work starts</li></ul>
+      </div></div>
+      <div class="col-md-4"><div class="cap">
+        <span class="code">PKG-03</span>
+        <h3>Emergency Callout</h3>
+        <p>24/7 response for electrical faults.</p>
+        <ul><li>Quote on request</li><li>Clear estimate before work starts</li></ul>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:faq -->
+<section class="faq" id="faq">
+  <div class="container">
+    <p class="tag-label mb-2">Common questions</p>
+    <h2 class="mb-4">Answers before you call</h2>
+    <details open>
+      <summary>Are your electricians licensed?</summary>
+      <p>Yes — all work meets local safety standards.</p>
+    </details>
+    <details>
+      <summary>Do you offer emergency callouts?</summary>
+      <p>24/7 response for power faults and safety issues.</p>
+    </details>
+    <details>
+      <summary>Can you provide a written quote?</summary>
+      <p>Every job gets a clear estimate before work starts.</p>
+    </details>
+  </div>
+</section>
+
+<section id="contact" style="padding:5rem 0;background:var(--soft);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);">
+  <div class="container">
+    <p class="tag-label mb-2">Site office</p>
+    <h2 class="mb-4">Visit or call</h2>
+    <div class="row g-4">
+      <div class="col-md-6"><p><strong>Address</strong><br>Your address here</p><p><strong>Hours</strong><br>Mon–Sat, 9:00–19:00</p></div>
+      <div class="col-md-6"><p><strong>Phone</strong><br><a href="tel:+910000000000">+91 00000 00000</a></p><p><strong>Email</strong><br><a href="mailto:hello@construction2.example">hello@construction2.example</a></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="engage">
   <div class="container">
     <div class="cta-box">
       <div class="row align-items-center g-4">

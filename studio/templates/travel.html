@@ -88,6 +88,8 @@
   .guide{padding:6rem 0}
   .guide h2{font-size:clamp(2rem,4vw,3rem);font-weight:800}
   .guide .lede{color:var(--ink-70)}
+  .guide .cred a{color:var(--ink);text-decoration:none}
+  .guide .cred a:hover{color:var(--accent)}
   .guide-photo{border-radius:1.25rem;overflow:hidden}
   .guide-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}
   .cred{border-top:1px solid var(--line);padding:.8rem 0;display:flex;justify-content:space-between;gap:1rem;font-size:.95rem}
@@ -126,6 +128,15 @@
   <div class="container d-flex align-items-center justify-content-between">
     <a class="brand" href="#">{{BRAND}}</a>
     <div class="d-none d-md-flex gap-4 align-items-center">
+      <a
+      class="link"
+      href="#pricing">Pricing</a>
+      <a
+      class="link"
+      href="#faq">FAQ</a>
+      <a
+      class="link"
+      href="#contact">Contact</a>
       <a class="link" href="#itinerary">Sample itinerary</a>
       <a class="link" href="#destinations">Destinations</a>
       <a class="link" href="#guides">Your guides</a>
@@ -281,7 +292,7 @@
   </div>
 </section>
 
-<section class="faq">
+<section class="faq" id="faq">
   <div class="container">
     <div class="row g-5">
       <div class="col-lg-4">
@@ -305,6 +316,40 @@
           <summary>What happens if weather closes a trail?</summary>
           <p>The guide swaps in the alternate day, which is planned in advance for every single route. In nine years we have refunded two trips and rerouted hundreds. Nobody sits in a hotel lobby.</p>
         </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:pricing -->
+<section class="dest" id="pricing">
+  <div class="container">
+    <p class="eyebrow mb-2">Pricing</p>
+    <h2 style="font-size:clamp(2rem,4vw,2.8rem);margin-bottom:2rem;">Trip Packages</h2>
+    <div class="row g-4">
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Holiday Packages</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Flights, stays and sights bundled.</p></div></div>
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Custom Itineraries</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Built around your pace and taste.</p></div></div>
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Visa Assistance</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Documents guided end to end.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="guide" id="contact">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5">
+        <p class="eyebrow mb-3">Visit us</p>
+        <h2>Drop by the studio before you pack.</h2>
+        <p class="lede mt-3">Main Road, Your City. Walk-ins welcome during planning season, no appointment needed for a first conversation.</p>
+      </div>
+      <div class="col-lg-7">
+        <div class="cred"><span>Phone</span><b><a href="tel:+910000000000">+91 00000 00000</a></b></div>
+        <div class="cred"><span>Email</span><b><a href="mailto:hello@travel.example">hello@travel.example</a></b></div>
+        <div class="cred"><span>Hours</span><b>Daily, 8:00–22:00</b></div>
+        <div class="cred"><span>Studio</span><b>Main Road, Your City</b></div>
       </div>
     </div>
   </div>
@@ -342,8 +387,8 @@
       </div>
       <div class="col-6 col-lg-3">
         <h4 class="mb-3">Talk to a human</h4>
-        <a href="#">hello@example.com</a>
-        <a href="#">+1 555 014 2210, weekdays</a>
+        <a href="mailto:hello@travel.example">hello@travel.example</a>
+        <a href="tel:+910000000000">+91 00000 00000, weekdays</a>
         <a href="#">Instagram</a>
       </div>
     </div>

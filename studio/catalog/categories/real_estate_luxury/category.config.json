@@ -1,0 +1,38 @@
+{
+  "id": "real_estate_luxury",
+  "name": "Real Estate — Luxury Specialist",
+  "category": "real_estate",
+  "subcategory": "luxury",
+  "wave": 1,
+  "status": "active",
+  "default_family": "premium_dark",
+  "keywords": [
+    "luxury",
+    "premium",
+    "penthouse",
+    "villa",
+    "high-end",
+    "exclusive"
+  ],
+  "intents": [
+    "listing_showcase",
+    "luxury"
+  ],
+  "matcher": {
+    "eligible_template_ids": [
+      "re_luxury_v1",
+      "gn_generic_v1"
+    ],
+    "default_rank_order": [
+      "re_luxury_v1",
+      "gn_generic_v1"
+    ]
+  },
+  "image_pack_refs": [
+    "pack_luxury_v1"
+  ],
+  "moderation": {
+    "blocked": false,
+    "notes": "Standard business — allowed"
+  }
+}

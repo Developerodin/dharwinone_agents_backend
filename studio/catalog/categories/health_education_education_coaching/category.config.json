@@ -1,0 +1,42 @@
+{
+  "id": "health_education_education_coaching",
+  "name": "Health & Education — Coaching / Academy",
+  "category": "health_education",
+  "subcategory": "education_coaching",
+  "wave": 2,
+  "status": "planned",
+  "default_family": "clean_pro",
+  "keywords": [
+    "coaching",
+    "tuition",
+    "academy",
+    "courses",
+    "school",
+    "admission"
+  ],
+  "matcher": {
+    "eligible_template_ids": [
+      "he_education_v1",
+      "he_education_v2",
+      "he_education_v3",
+      "he_medical_v1",
+      "he_medical_v2",
+      "gn_generic_v1"
+    ],
+    "default_rank_order": [
+      "he_education_v1",
+      "he_education_v2",
+      "he_education_v3",
+      "he_medical_v1",
+      "he_medical_v2",
+      "gn_generic_v1"
+    ]
+  },
+  "image_pack_refs": [
+    "pack_education_coaching_v1"
+  ],
+  "moderation": {
+    "blocked": false,
+    "notes": "Standard business — allowed"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "id": "real_estate_broker",
+  "name": "Real Estate — Brokerage / Broker",
+  "category": "real_estate",
+  "subcategory": "broker",
+  "wave": 1,
+  "status": "active",
+  "default_family": "clean_pro",
+  "keywords": [
+    "brokerage",
+    "firm",
+    "RERA",
+    "agency",
+    "team of agents"
+  ],
+  "intents": [
+    "broker_profile"
+  ],
+  "matcher": {
+    "eligible_template_ids": [
+      "re_broker_v1",
+      "re_rental_v1",
+      "gn_generic_v1"
+    ],
+    "default_rank_order": [
+      "re_broker_v1",
+      "re_rental_v1",
+      "gn_generic_v1"
+    ]
+  },
+  "image_pack_refs": [
+    "pack_broker_v1"
+  ],
+  "moderation": {
+    "blocked": false,
+    "notes": "Standard business — allowed"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "id": "professional_portfolio_freelancer",
+  "name": "Professional Services — Portfolio / Freelancer",
+  "category": "professional",
+  "subcategory": "portfolio_freelancer",
+  "wave": 2,
+  "status": "planned",
+  "default_family": "warm_craft",
+  "keywords": [
+    "portfolio",
+    "freelancer",
+    "photographer",
+    "artist",
+    "works",
+    "hire"
+  ],
+  "matcher": {
+    "eligible_template_ids": [
+      "pf_portfolio_v1",
+      "pf_portfolio_v2",
+      "gn_generic_v1"
+    ],
+    "default_rank_order": [
+      "pf_portfolio_v1",
+      "pf_portfolio_v2",
+      "gn_generic_v1"
+    ]
+  },
+  "image_pack_refs": [
+    "pack_portfolio_freelancer_v1"
+  ],
+  "moderation": {
+    "blocked": false,
+    "notes": "Standard business — allowed"
+  }
+}

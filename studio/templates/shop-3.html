@@ -105,6 +105,12 @@
     .item{transition:background .18s ease}
     .item:hover{background:var(--stamp)}
   }
+
+  .faq{padding:5rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .faq details{border-bottom:1px solid var(--line);}
+  .faq summary{cursor:pointer;padding:1rem 0;font-weight:600;font-size:1.05rem;list-style:none;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq details p{font-size:.95rem;padding-bottom:1rem;margin:0;}
 </style>
 </head>
 <body>
@@ -117,6 +123,15 @@
   <div class="container d-flex align-items-center justify-content-between">
     <a class="brand" href="#"><span class="mark">EST.19</span>{{BRAND}}</a>
     <div class="d-none d-md-flex gap-4 align-items-center">
+      <a
+      class="link"
+      href="#pricing">Pricing</a>
+      <a
+      class="link"
+      href="#faq">FAQ</a>
+      <a
+      class="link"
+      href="#contact">Contact</a>
       <a class="link" href="#catalog">Catalog</a>
       <a class="link" href="#standards">Standards</a>
       <a class="link" href="#field">Field notes</a>
@@ -250,6 +265,64 @@
         <div class="order-row num"><span>Returns window</span><span>90 days, used is fine</span></div>
         <div class="order-row num"><span>Repairs</span><span>Free, forever, both ways paid</span></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:pricing -->
+<section class="drop" id="pricing" style="padding-top:4rem;">
+  <div class="container">
+    <p class="eyebrow mb-3">Collections & Pricing</p>
+    <h2 class="mb-4">Pick a package</h2>
+    <div class="row g-4">
+      <div class="col-md-4"><div class="p-card card-lift" style="height:100%;">
+        <div class="body"><span class="badge-tag">Package</span>
+        <div class="name mt-2">Menswear</div>
+        <span class="price">Quote on request</span>
+        <span class="meta">Casuals to formals, all sizes.</span></div></div></div>
+      <div class="col-md-4"><div class="p-card card-lift" style="height:100%;">
+        <div class="body"><span class="badge-tag">Package</span>
+        <div class="name mt-2">Womenswear</div>
+        <span class="price">Quote on request</span>
+        <span class="meta">Daily wear to festive picks.</span></div></div></div>
+      <div class="col-md-4"><div class="p-card card-lift" style="height:100%;">
+        <div class="body"><span class="badge-tag">Package</span>
+        <div class="name mt-2">Kids Wear</div>
+        <span class="price">Quote on request</span>
+        <span class="meta">Comfortable, durable, adorable.</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:faq -->
+<section class="story" id="faq" style="padding:5rem 0;">
+  <div class="container">
+    <p class="eyebrow mb-3">FAQ</p>
+    <h2 class="mb-4">Questions we hear often</h2>
+    <details open style="border-bottom:1px solid var(--line);">
+      <summary style="cursor:pointer;padding:1rem 0;font-weight:700;">Do you offer home delivery?</summary>
+      <p style="padding-bottom:1rem;margin:0;color:var(--ink-45);">Yes — local delivery and pickup slots are available.</p>
+    </details>
+    <details style="border-bottom:1px solid var(--line);">
+      <summary style="cursor:pointer;padding:1rem 0;font-weight:700;">Can I return or exchange items?</summary>
+      <p style="padding-bottom:1rem;margin:0;color:var(--ink-45);">Unused items in original packaging can be exchanged within 7 days.</p>
+    </details>
+    <details style="border-bottom:1px solid var(--line);">
+      <summary style="cursor:pointer;padding:1rem 0;font-weight:700;">Do you take custom orders?</summary>
+      <p style="padding-bottom:1rem;margin:0;color:var(--ink-45);">Tell us what you need — we confirm availability and timing.</p>
+    </details>
+  </div>
+</section>
+
+<!-- dharwin-enrich:contact-info -->
+<section class="story" id="contact" style="padding:5rem 0;">
+  <div class="container">
+    <p class="eyebrow mb-3">Visit the Store</p>
+    <div class="row g-4">
+      <div class="col-md-6"><div class="spec"><span>Address</span><b>High Street, Your City</b></div></div>
+      <div class="col-md-6"><div class="spec"><span>Hours</span><b>Daily, 10:00–21:00</b></div></div>
+      <div class="col-md-6"><div class="spec"><span>Phone</span><b><a href="tel:+910000000000">+91 00000 00000</a></b></div></div>
+      <div class="col-md-6"><div class="spec"><span>Email</span><b><a href="mailto:hello@shop3.example">hello@shop3.example</a></b></div></div>
     </div>
   </div>
 </section>

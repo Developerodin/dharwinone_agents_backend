@@ -1,0 +1,38 @@
+{
+  "id": "real_estate_agent",
+  "name": "Real Estate — Independent Agent",
+  "category": "real_estate",
+  "subcategory": "agent",
+  "wave": 1,
+  "status": "active",
+  "default_family": "trust_local",
+  "keywords": [
+    "independent agent",
+    "individual",
+    "advisor",
+    "buyer help"
+  ],
+  "intents": [
+    "lead_gen_landing",
+    "neighbourhood_specialist"
+  ],
+  "matcher": {
+    "eligible_template_ids": [
+      "re_agent_v1",
+      "re_agent_lead_v1",
+      "gn_generic_v1"
+    ],
+    "default_rank_order": [
+      "re_agent_v1",
+      "re_agent_lead_v1",
+      "gn_generic_v1"
+    ]
+  },
+  "image_pack_refs": [
+    "pack_agent_v1"
+  ],
+  "moderation": {
+    "blocked": false,
+    "notes": "Standard business — allowed"
+  }
+}

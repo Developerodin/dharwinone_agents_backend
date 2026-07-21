@@ -1,0 +1,42 @@
+{
+  "id": "health_education_clinic_medical",
+  "name": "Health & Education — Clinic / Medical",
+  "category": "health_education",
+  "subcategory": "clinic_medical",
+  "wave": 2,
+  "status": "planned",
+  "default_family": "clean_pro",
+  "keywords": [
+    "clinic",
+    "doctor",
+    "dental",
+    "physio",
+    "lab",
+    "appointment"
+  ],
+  "matcher": {
+    "eligible_template_ids": [
+      "he_medical_v1",
+      "he_medical_v2",
+      "he_education_v1",
+      "he_education_v2",
+      "he_education_v3",
+      "gn_generic_v1"
+    ],
+    "default_rank_order": [
+      "he_medical_v1",
+      "he_medical_v2",
+      "he_education_v1",
+      "he_education_v2",
+      "he_education_v3",
+      "gn_generic_v1"
+    ]
+  },
+  "image_pack_refs": [
+    "pack_clinic_medical_v1"
+  ],
+  "moderation": {
+    "blocked": false,
+    "notes": "Standard business — allowed"
+  }
+}

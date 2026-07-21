@@ -110,6 +110,12 @@
     .hero-img img{height:17rem;}
     .mod .head{flex-wrap:wrap;gap:.4rem .9rem;}
   }
+
+  .faq{padding:5rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .faq details{border-bottom:1px solid var(--line);}
+  .faq summary{cursor:pointer;padding:1rem 0;font-weight:600;font-size:1.05rem;list-style:none;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq details p{font-size:.95rem;padding-bottom:1rem;margin:0;}
 </style>
 </head>
 <body id="top">
@@ -118,6 +124,15 @@
   <div class="container d-flex align-items-center justify-content-between gap-3">
     <a class="brand" href="#top">{{BRAND}}<span class="cursor">_</span></a>
     <div class="d-none d-md-flex align-items-center gap-4">
+      <a
+      class="nav-link"
+      href="#pricing">Pricing</a>
+      <a
+      class="nav-link"
+      href="#faq">FAQ</a>
+      <a
+      class="nav-link"
+      href="#contact">Contact</a>
       <a class="nav-link" href="#tracks">Tracks</a>
       <a class="nav-link" href="#curriculum">Curriculum</a>
       <a class="nav-link" href="#outcomes">Outcomes</a>
@@ -285,6 +300,59 @@
           <figcaption>Sana Iqbal, Cohort 9 · now a full-stack developer at a logistics startup</figcaption>
         </figure>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:pricing -->
+<section id="pricing" style="padding:5rem 0;">
+  <div class="container">
+    <p class="mb-2">Pricing</p>
+    <h2 style="font-size:clamp(2rem,4vw,2.8rem);margin-bottom:2rem;">Programmes & Fees</h2>
+    <div class="row g-4">
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Exam Coaching</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Syllabus covered, concepts cleared.</p></div></div>
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Doubt Sessions</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">No question too small.</p></div></div>
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Mock Tests</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Exam-pattern practice with analysis.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:faq -->
+<section class="calendar" id="faq">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <p class="eyebrow mb-2">Common questions</p>
+        <h2 class="mb-4">Answers before you call</h2>
+      </div>
+      <div class="col-lg-8">
+    <details open>
+      <summary>How do I enrol in a batch?</summary>
+      <p>Call or visit — we place you by level after a short assessment.</p>
+    </details>
+    <details>
+      <summary>Are study materials included?</summary>
+      <p>Yes — notes, practice sets and mock tests are part of the programme.</p>
+    </details>
+    <details>
+      <summary>Do you offer one-on-one tutoring?</summary>
+      <p>Individual slots are available outside regular batch hours.</p>
+    </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:contact-info -->
+<section id="contact" style="padding:5rem 0;background:var(--soft);border-top:1px solid var(--line);">
+  <div class="container">
+    <p class="mb-2">Visit or Call</p>
+    <div class="row g-4 mt-1">
+      <div class="col-md-6"><p><strong>Address</strong><br>Ground Floor, Medical Plaza, Your City</p><p><strong>Hours</strong><br>Mon–Sat, 9:00–20:00 · Sun by appointment</p></div>
+      <div class="col-md-6"><p><strong>Phone</strong><br><a href="tel:+910000000000">+91 00000 00000</a></p><p><strong>Email</strong><br><a href="mailto:hello@education3.example">hello@education3.example</a></p></div>
     </div>
   </div>
 </section>

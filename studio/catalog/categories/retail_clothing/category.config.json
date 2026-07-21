@@ -1,0 +1,38 @@
+{
+  "id": "retail_clothing",
+  "name": "Retail & Small Shops — Clothing Store",
+  "category": "retail",
+  "subcategory": "clothing",
+  "wave": 1,
+  "status": "active",
+  "default_family": "fresh_retail",
+  "keywords": [
+    "clothing",
+    "garments",
+    "fashion",
+    "menswear",
+    "saree",
+    "kids wear"
+  ],
+  "matcher": {
+    "eligible_template_ids": [
+      "rt_clothing_v1",
+      "rt_clothing_v2",
+      "rt_print_shop_v1",
+      "gn_generic_v1"
+    ],
+    "default_rank_order": [
+      "rt_clothing_v1",
+      "rt_clothing_v2",
+      "rt_print_shop_v1",
+      "gn_generic_v1"
+    ]
+  },
+  "image_pack_refs": [
+    "pack_clothing_v1"
+  ],
+  "moderation": {
+    "blocked": false,
+    "notes": "Standard business — allowed"
+  }
+}

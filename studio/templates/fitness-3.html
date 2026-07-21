@@ -94,6 +94,12 @@
     .hero{padding:4rem 0;}
     .space img,.space .tall{height:250px;}
   }
+
+  .faq{padding:5.5rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .faq details{border-bottom:1px solid var(--line);}
+  .faq summary{cursor:pointer;padding:1rem 0;font-weight:600;font-size:1.1rem;list-style:none;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq details p{font-size:.95rem;padding-bottom:1rem;margin:0;color:var(--muted,var(--dim,var(--ink-65)));}
 </style>
 </head>
 <body>
@@ -106,7 +112,10 @@
       <a class="navlink" href="#rhythm">Classes</a>
       <a class="navlink" href="#space">The studio</a>
       <a class="navlink" href="#visit">First visit</a>
-    </div>
+    
+      <a class="navlink" href="#pricing">Pricing</a>
+      <a class="navlink" href="#faq">FAQ</a>
+      <a class="navlink" href="#contact">Contact</a></div>
     <a class="btn-main" style="padding:.55rem 1.4rem;font-size:.92rem;" href="#visit">Book a mat</a>
   </div>
 </nav>
@@ -208,6 +217,48 @@
       <div class="col-md-7">
         <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1100&q=70" alt="Person meditating cross-legged near a large window">
         <p class="muted mt-4">Clay-plastered walls, cork floors warm underfoot, and windows onto a courtyard with a single old fig tree. Tea after class is included and unhurried. Mats, props, and reformers are all provided and cleaned between every session.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:pricing -->
+<section id="pricing" style="padding:5rem 0;">
+  <div class="container">
+    <p class="eyebrow mb-2">Pricing</p>
+    <h2 style="font-size:clamp(2rem,4vw,2.8rem);margin-bottom:2rem;">Membership Plans</h2>
+    <div class="row g-4">
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Personal Training</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Programs built for your goals.</p></div></div>
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Group Classes</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Yoga, HIIT, Zumba and more.</p></div></div>
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Nutrition Plans</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Eat right without going hungry.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:faq -->
+<section class="faq" id="faq" style="background:var(--soft);border-block:1px solid var(--line);padding:6rem 0;">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <p class="eyebrow mb-2">Common questions</p>
+        <h2 class="sec-title">Answers before you call</h2>
+      </div>
+      <div class="col-lg-8">
+    <details open>
+      <summary>Do you offer trial sessions?</summary>
+      <p>Yes — one complimentary session before you choose a plan.</p>
+    </details>
+    <details>
+      <summary>Can I freeze my membership?</summary>
+      <p>Memberships can be paused once per term with prior notice.</p>
+    </details>
+    <details>
+      <summary>Do you provide diet guidance?</summary>
+      <p>Nutrition plans are included with personal training packages.</p>
+    </details>
       </div>
     </div>
   </div>

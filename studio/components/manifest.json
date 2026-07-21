@@ -96,7 +96,55 @@
   ]
  },
  {
-  "id": "agency-2-7-contact",
+  "id": "agency-2-7-pricing",
+  "type": "pricing",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "case",
+   "ledger",
+   "pricing"
+  ],
+  "description": "agency pricing: Insurance Plans",
+  "path": "agency-2-7-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Archivo:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "agency-2-8-faq",
+  "type": "faq",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "case",
+   "faq",
+   "ledger"
+  ],
+  "description": "agency faq: Common questions",
+  "path": "agency-2-8-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Archivo:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "agency-2-9-contact",
+  "type": "contact",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "case",
+   "contact",
+   "ledger"
+  ],
+  "description": "agency contact: Book a Service Call",
+  "path": "agency-2-9-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Archivo:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "agency-2-10-contact",
   "type": "contact",
   "genre": "agency",
   "tags": [
@@ -106,13 +154,13 @@
    "ledger"
   ],
   "description": "agency contact: Bring us a number that embarrasses you.",
-  "path": "agency-2-7-contact.html",
+  "path": "agency-2-10-contact.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Archivo:wght@400;500;600;700&display=swap"
   ]
  },
  {
-  "id": "agency-2-8-footer",
+  "id": "agency-2-11-footer",
   "type": "footer",
   "genre": "agency",
   "tags": [
@@ -122,7 +170,7 @@
    "ledger"
   ],
   "description": "agency footer",
-  "path": "agency-2-8-footer.html",
+  "path": "agency-2-11-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Archivo:wght@400;500;600;700&display=swap"
   ]
@@ -224,7 +272,55 @@
   ]
  },
  {
-  "id": "agency-3-7-contact",
+  "id": "agency-3-7-pricing",
+  "type": "pricing",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "bold",
+   "poster",
+   "pricing"
+  ],
+  "description": "agency pricing: Engagement Options",
+  "path": "agency-3-7-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "agency-3-8-faq",
+  "type": "faq",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "bold",
+   "faq",
+   "poster"
+  ],
+  "description": "agency faq: Common questions",
+  "path": "agency-3-8-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "agency-3-9-contact",
+  "type": "contact",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "bold",
+   "contact",
+   "poster"
+  ],
+  "description": "agency contact: Get in Touch",
+  "path": "agency-3-9-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "agency-3-10-contact",
   "type": "contact",
   "genre": "agency",
   "tags": [
@@ -234,13 +330,13 @@
    "poster"
   ],
   "description": "agency contact: Say the scary version out loud.",
-  "path": "agency-3-7-contact.html",
+  "path": "agency-3-10-contact.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap"
   ]
  },
  {
-  "id": "agency-3-8-footer",
+  "id": "agency-3-11-footer",
   "type": "footer",
   "genre": "agency",
   "tags": [
@@ -250,7 +346,7 @@
    "poster"
   ],
   "description": "agency footer",
-  "path": "agency-3-8-footer.html",
+  "path": "agency-3-11-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap"
   ]
@@ -368,7 +464,49 @@
   ]
  },
  {
-  "id": "agency-9-contact",
+  "id": "agency-9-pricing",
+  "type": "pricing",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "pricing"
+  ],
+  "description": "agency pricing: Choose a package",
+  "path": "agency-9-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "agency-10-faq",
+  "type": "faq",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "faq"
+  ],
+  "description": "agency faq: Answers before you call",
+  "path": "agency-10-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "agency-11-contact",
+  "type": "contact",
+  "genre": "agency",
+  "tags": [
+   "agency",
+   "contact"
+  ],
+  "description": "agency contact",
+  "path": "agency-11-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "agency-12-contact",
   "type": "contact",
   "genre": "agency",
   "tags": [
@@ -376,13 +514,13 @@
    "contact"
   ],
   "description": "agency contact: Bring us the decision you keep postponing.",
-  "path": "agency-9-contact.html",
+  "path": "agency-12-contact.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
   ]
  },
  {
-  "id": "agency-10-footer",
+  "id": "agency-13-footer",
   "type": "footer",
   "genre": "agency",
   "tags": [
@@ -390,7 +528,7 @@
    "footer"
   ],
   "description": "agency footer",
-  "path": "agency-10-footer.html",
+  "path": "agency-13-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
   ]
@@ -508,7 +646,55 @@
   ]
  },
  {
-  "id": "cafe-2-8-footer",
+  "id": "cafe-2-8-pricing",
+  "type": "pricing",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "espresso",
+   "noir",
+   "pricing"
+  ],
+  "description": "cafe pricing: Menu Highlights & Catering",
+  "path": "cafe-2-8-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-2-9-faq",
+  "type": "faq",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "espresso",
+   "faq",
+   "noir"
+  ],
+  "description": "cafe faq: Answers before you call",
+  "path": "cafe-2-9-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-2-10-contact",
+  "type": "contact",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "contact",
+   "espresso",
+   "noir"
+  ],
+  "description": "cafe contact",
+  "path": "cafe-2-10-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-2-11-footer",
   "type": "footer",
   "genre": "cafe",
   "tags": [
@@ -518,7 +704,7 @@
    "noir"
   ],
   "description": "cafe footer",
-  "path": "cafe-2-8-footer.html",
+  "path": "cafe-2-11-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;700&display=swap"
   ]
@@ -636,7 +822,55 @@
   ]
  },
  {
-  "id": "cafe-3-8-footer",
+  "id": "cafe-3-8-pricing",
+  "type": "pricing",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "light",
+   "morning",
+   "pricing"
+  ],
+  "description": "cafe pricing: Menu Highlights & Catering",
+  "path": "cafe-3-8-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-3-9-faq",
+  "type": "faq",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "faq",
+   "light",
+   "morning"
+  ],
+  "description": "cafe faq: Answers before you call",
+  "path": "cafe-3-9-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-3-10-contact",
+  "type": "contact",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "contact",
+   "light",
+   "morning"
+  ],
+  "description": "cafe contact",
+  "path": "cafe-3-10-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-3-11-footer",
   "type": "footer",
   "genre": "cafe",
   "tags": [
@@ -646,7 +880,7 @@
    "morning"
   ],
   "description": "cafe footer",
-  "path": "cafe-3-8-footer.html",
+  "path": "cafe-3-11-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap"
   ]
@@ -778,7 +1012,49 @@
   ]
  },
  {
-  "id": "cafe-10-footer",
+  "id": "cafe-10-pricing",
+  "type": "pricing",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "pricing"
+  ],
+  "description": "cafe pricing: Gift Collections & Pricing",
+  "path": "cafe-10-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Karla:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-11-faq",
+  "type": "faq",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "faq"
+  ],
+  "description": "cafe faq: Answers before you call",
+  "path": "cafe-11-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Karla:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-12-contact",
+  "type": "contact",
+  "genre": "cafe",
+  "tags": [
+   "cafe",
+   "contact"
+  ],
+  "description": "cafe contact",
+  "path": "cafe-12-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Karla:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "cafe-13-footer",
   "type": "footer",
   "genre": "cafe",
   "tags": [
@@ -786,7 +1062,7 @@
    "footer"
   ],
   "description": "cafe footer",
-  "path": "cafe-10-footer.html",
+  "path": "cafe-13-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Karla:wght@400;500;700&display=swap"
   ]
@@ -867,7 +1143,52 @@
   ]
  },
  {
-  "id": "construction-2-6-contact",
+  "id": "construction-2-6-pricing",
+  "type": "pricing",
+  "genre": "construction",
+  "tags": [
+   "blueprint",
+   "construction",
+   "pricing"
+  ],
+  "description": "construction pricing: Electrical Service Packages",
+  "path": "construction-2-6-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Archivo:wght@400;500;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "construction-2-7-faq",
+  "type": "faq",
+  "genre": "construction",
+  "tags": [
+   "blueprint",
+   "construction",
+   "faq"
+  ],
+  "description": "construction faq: Answers before you call",
+  "path": "construction-2-7-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Archivo:wght@400;500;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "construction-2-8-contact",
+  "type": "contact",
+  "genre": "construction",
+  "tags": [
+   "blueprint",
+   "construction",
+   "contact"
+  ],
+  "description": "construction contact",
+  "path": "construction-2-8-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Archivo:wght@400;500;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "construction-2-9-contact",
   "type": "contact",
   "genre": "construction",
   "tags": [
@@ -876,13 +1197,13 @@
    "contact"
   ],
   "description": "construction contact: Send us your drawings. We reply with numbers, not adjectives.",
-  "path": "construction-2-6-contact.html",
+  "path": "construction-2-9-contact.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Archivo:wght@400;500;600;700;800&display=swap"
   ]
  },
  {
-  "id": "construction-2-7-footer",
+  "id": "construction-2-10-footer",
   "type": "footer",
   "genre": "construction",
   "tags": [
@@ -891,7 +1212,7 @@
    "footer"
   ],
   "description": "construction footer",
-  "path": "construction-2-7-footer.html",
+  "path": "construction-2-10-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Archivo:wght@400;500;600;700;800&display=swap"
   ]
@@ -977,7 +1298,55 @@
   ]
  },
  {
-  "id": "construction-3-6-contact",
+  "id": "construction-3-6-pricing",
+  "type": "pricing",
+  "genre": "construction",
+  "tags": [
+   "construction",
+   "craft",
+   "pricing",
+   "warm"
+  ],
+  "description": "construction pricing: Service Packages",
+  "path": "construction-3-6-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "construction-3-7-faq",
+  "type": "faq",
+  "genre": "construction",
+  "tags": [
+   "construction",
+   "craft",
+   "faq",
+   "warm"
+  ],
+  "description": "construction faq: Answers before you call",
+  "path": "construction-3-7-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "construction-3-8-contact",
+  "type": "contact",
+  "genre": "construction",
+  "tags": [
+   "construction",
+   "contact",
+   "craft",
+   "warm"
+  ],
+  "description": "construction contact",
+  "path": "construction-3-8-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "construction-3-9-contact",
   "type": "contact",
   "genre": "construction",
   "tags": [
@@ -987,13 +1356,13 @@
    "warm"
   ],
   "description": "construction contact: Walk us through your home. Tea is on us.",
-  "path": "construction-3-6-contact.html",
+  "path": "construction-3-9-contact.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&display=swap"
   ]
  },
  {
-  "id": "construction-3-7-footer",
+  "id": "construction-3-10-footer",
   "type": "footer",
   "genre": "construction",
   "tags": [
@@ -1003,7 +1372,7 @@
    "warm"
   ],
   "description": "construction footer",
-  "path": "construction-3-7-footer.html",
+  "path": "construction-3-10-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&display=swap"
   ]
@@ -1107,7 +1476,49 @@
   ]
  },
  {
-  "id": "construction-8-contact",
+  "id": "construction-8-pricing",
+  "type": "pricing",
+  "genre": "construction",
+  "tags": [
+   "construction",
+   "pricing"
+  ],
+  "description": "construction pricing: Plumbing Service Packages",
+  "path": "construction-8-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "construction-9-faq",
+  "type": "faq",
+  "genre": "construction",
+  "tags": [
+   "construction",
+   "faq"
+  ],
+  "description": "construction faq: Answers before you call",
+  "path": "construction-9-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "construction-10-contact",
+  "type": "contact",
+  "genre": "construction",
+  "tags": [
+   "construction",
+   "contact"
+  ],
+  "description": "construction contact",
+  "path": "construction-10-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "construction-11-contact",
   "type": "contact",
   "genre": "construction",
   "tags": [
@@ -1115,13 +1526,13 @@
    "contact"
   ],
   "description": "construction contact: Walk a live site before you sign anything.",
-  "path": "construction-8-contact.html",
+  "path": "construction-11-contact.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap"
   ]
  },
  {
-  "id": "construction-9-footer",
+  "id": "construction-12-footer",
   "type": "footer",
   "genre": "construction",
   "tags": [
@@ -1129,7 +1540,7 @@
    "footer"
   ],
   "description": "construction footer",
-  "path": "construction-9-footer.html",
+  "path": "construction-12-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap"
   ]
@@ -1225,7 +1636,52 @@
   ]
  },
  {
-  "id": "education-2-7-footer",
+  "id": "education-2-7-pricing",
+  "type": "pricing",
+  "genre": "education",
+  "tags": [
+   "education",
+   "pricing",
+   "prospectus"
+  ],
+  "description": "education pricing: Programmes & Fees",
+  "path": "education-2-7-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Public+Sans:wght@400;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "education-2-8-faq",
+  "type": "faq",
+  "genre": "education",
+  "tags": [
+   "education",
+   "faq",
+   "prospectus"
+  ],
+  "description": "education faq: Answers before you call",
+  "path": "education-2-8-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Public+Sans:wght@400;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "education-2-9-contact",
+  "type": "contact",
+  "genre": "education",
+  "tags": [
+   "contact",
+   "education",
+   "prospectus"
+  ],
+  "description": "education contact",
+  "path": "education-2-9-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Public+Sans:wght@400;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "education-2-10-footer",
   "type": "footer",
   "genre": "education",
   "tags": [
@@ -1234,7 +1690,7 @@
    "prospectus"
   ],
   "description": "education footer",
-  "path": "education-2-7-footer.html",
+  "path": "education-2-10-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Public+Sans:wght@400;600;700&display=swap"
   ]
@@ -1336,7 +1792,55 @@
   ]
  },
  {
-  "id": "education-3-7-footer",
+  "id": "education-3-7-pricing",
+  "type": "pricing",
+  "genre": "education",
+  "tags": [
+   "course",
+   "education",
+   "open",
+   "pricing"
+  ],
+  "description": "education pricing: Programmes & Fees",
+  "path": "education-3-7-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap"
+  ]
+ },
+ {
+  "id": "education-3-8-faq",
+  "type": "faq",
+  "genre": "education",
+  "tags": [
+   "course",
+   "education",
+   "faq",
+   "open"
+  ],
+  "description": "education faq: Answers before you call",
+  "path": "education-3-8-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap"
+  ]
+ },
+ {
+  "id": "education-3-9-contact",
+  "type": "contact",
+  "genre": "education",
+  "tags": [
+   "contact",
+   "course",
+   "education",
+   "open"
+  ],
+  "description": "education contact",
+  "path": "education-3-9-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap"
+  ]
+ },
+ {
+  "id": "education-3-10-footer",
   "type": "footer",
   "genre": "education",
   "tags": [
@@ -1346,7 +1850,7 @@
    "open"
   ],
   "description": "education footer",
-  "path": "education-3-7-footer.html",
+  "path": "education-3-10-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap"
   ]
@@ -1464,7 +1968,35 @@
   ]
  },
  {
-  "id": "education-9-footer",
+  "id": "education-9-pricing",
+  "type": "pricing",
+  "genre": "education",
+  "tags": [
+   "education",
+   "pricing"
+  ],
+  "description": "education pricing: Programmes & Fees",
+  "path": "education-9-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "education-10-faq",
+  "type": "faq",
+  "genre": "education",
+  "tags": [
+   "education",
+   "faq"
+  ],
+  "description": "education faq: Answers before you call",
+  "path": "education-10-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "education-11-footer",
   "type": "footer",
   "genre": "education",
   "tags": [
@@ -1472,7 +2004,7 @@
    "footer"
   ],
   "description": "education footer",
-  "path": "education-9-footer.html",
+  "path": "education-11-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap"
   ]
@@ -1590,7 +2122,55 @@
   ]
  },
  {
-  "id": "fitness-2-8-footer",
+  "id": "fitness-2-8-pricing",
+  "type": "pricing",
+  "genre": "fitness",
+  "tags": [
+   "fitness",
+   "night",
+   "pricing",
+   "shift"
+  ],
+  "description": "fitness pricing: Membership Plans",
+  "path": "fitness-2-8-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-2-9-faq",
+  "type": "faq",
+  "genre": "fitness",
+  "tags": [
+   "faq",
+   "fitness",
+   "night",
+   "shift"
+  ],
+  "description": "fitness faq: Common questions",
+  "path": "fitness-2-9-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-2-10-contact",
+  "type": "contact",
+  "genre": "fitness",
+  "tags": [
+   "contact",
+   "fitness",
+   "night",
+   "shift"
+  ],
+  "description": "fitness contact: Visit or Call",
+  "path": "fitness-2-10-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-2-11-footer",
   "type": "footer",
   "genre": "fitness",
   "tags": [
@@ -1600,7 +2180,7 @@
    "shift"
   ],
   "description": "fitness footer",
-  "path": "fitness-2-8-footer.html",
+  "path": "fitness-2-11-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&display=swap"
   ]
@@ -1718,7 +2298,55 @@
   ]
  },
  {
-  "id": "fitness-3-8-footer",
+  "id": "fitness-3-8-pricing",
+  "type": "pricing",
+  "genre": "fitness",
+  "tags": [
+   "calm",
+   "fitness",
+   "pricing",
+   "studio"
+  ],
+  "description": "fitness pricing: Membership Plans",
+  "path": "fitness-3-8-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Karla:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-3-9-faq",
+  "type": "faq",
+  "genre": "fitness",
+  "tags": [
+   "calm",
+   "faq",
+   "fitness",
+   "studio"
+  ],
+  "description": "fitness faq: Common questions",
+  "path": "fitness-3-9-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Karla:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-3-10-contact",
+  "type": "contact",
+  "genre": "fitness",
+  "tags": [
+   "calm",
+   "contact",
+   "fitness",
+   "studio"
+  ],
+  "description": "fitness contact: Visit or Call",
+  "path": "fitness-3-10-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Karla:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-3-11-footer",
   "type": "footer",
   "genre": "fitness",
   "tags": [
@@ -1728,7 +2356,7 @@
    "studio"
   ],
   "description": "fitness footer",
-  "path": "fitness-3-8-footer.html",
+  "path": "fitness-3-11-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&family=Karla:wght@400;500;600&display=swap"
   ]
@@ -1860,7 +2488,49 @@
   ]
  },
  {
-  "id": "fitness-10-footer",
+  "id": "fitness-10-pricing",
+  "type": "pricing",
+  "genre": "fitness",
+  "tags": [
+   "fitness",
+   "pricing"
+  ],
+  "description": "fitness pricing: Wash & Detailing Packages",
+  "path": "fitness-10-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-11-faq",
+  "type": "faq",
+  "genre": "fitness",
+  "tags": [
+   "faq",
+   "fitness"
+  ],
+  "description": "fitness faq: Answers before you call",
+  "path": "fitness-11-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-12-contact",
+  "type": "contact",
+  "genre": "fitness",
+  "tags": [
+   "contact",
+   "fitness"
+  ],
+  "description": "fitness contact",
+  "path": "fitness-12-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "fitness-13-footer",
   "type": "footer",
   "genre": "fitness",
   "tags": [
@@ -1868,7 +2538,7 @@
    "footer"
   ],
   "description": "fitness footer",
-  "path": "fitness-10-footer.html",
+  "path": "fitness-13-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
   ]
@@ -1954,7 +2624,55 @@
   ]
  },
  {
-  "id": "generic-2-6-contact",
+  "id": "generic-2-6-pricing",
+  "type": "pricing",
+  "genre": "generic",
+  "tags": [
+   "generic",
+   "mono",
+   "pricing",
+   "sheet"
+  ],
+  "description": "generic pricing: Service Packages",
+  "path": "generic-2-6-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Inter:wght@400;500;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "generic-2-7-faq",
+  "type": "faq",
+  "genre": "generic",
+  "tags": [
+   "faq",
+   "generic",
+   "mono",
+   "sheet"
+  ],
+  "description": "generic faq: Answers before you call",
+  "path": "generic-2-7-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Inter:wght@400;500;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "generic-2-8-contact",
+  "type": "contact",
+  "genre": "generic",
+  "tags": [
+   "contact",
+   "generic",
+   "mono",
+   "sheet"
+  ],
+  "description": "generic contact",
+  "path": "generic-2-8-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Inter:wght@400;500;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "generic-2-9-contact",
   "type": "contact",
   "genre": "generic",
   "tags": [
@@ -1964,13 +2682,13 @@
    "sheet"
   ],
   "description": "generic contact: Send the job. Get a number.",
-  "path": "generic-2-6-contact.html",
+  "path": "generic-2-9-contact.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Inter:wght@400;500;700;800&display=swap"
   ]
  },
  {
-  "id": "generic-2-7-footer",
+  "id": "generic-2-10-footer",
   "type": "footer",
   "genre": "generic",
   "tags": [
@@ -1980,7 +2698,7 @@
    "sheet"
   ],
   "description": "generic footer",
-  "path": "generic-2-7-footer.html",
+  "path": "generic-2-10-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&family=Inter:wght@400;500;700;800&display=swap"
   ]
@@ -2082,7 +2800,55 @@
   ]
  },
  {
-  "id": "generic-3-7-footer",
+  "id": "generic-3-7-pricing",
+  "type": "pricing",
+  "genre": "generic",
+  "tags": [
+   "block",
+   "generic",
+   "pricing",
+   "vivid"
+  ],
+  "description": "generic pricing: Service Packages",
+  "path": "generic-3-7-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&display=swap"
+  ]
+ },
+ {
+  "id": "generic-3-8-faq",
+  "type": "faq",
+  "genre": "generic",
+  "tags": [
+   "block",
+   "faq",
+   "generic",
+   "vivid"
+  ],
+  "description": "generic faq: Answers before you call",
+  "path": "generic-3-8-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&display=swap"
+  ]
+ },
+ {
+  "id": "generic-3-9-contact",
+  "type": "contact",
+  "genre": "generic",
+  "tags": [
+   "block",
+   "contact",
+   "generic",
+   "vivid"
+  ],
+  "description": "generic contact",
+  "path": "generic-3-9-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&display=swap"
+  ]
+ },
+ {
+  "id": "generic-3-10-footer",
   "type": "footer",
   "genre": "generic",
   "tags": [
@@ -2092,7 +2858,7 @@
    "vivid"
   ],
   "description": "generic footer",
-  "path": "generic-3-7-footer.html",
+  "path": "generic-3-10-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&display=swap"
   ]
@@ -2182,7 +2948,35 @@
   ]
  },
  {
-  "id": "generic-7-contact",
+  "id": "generic-7-pricing",
+  "type": "pricing",
+  "genre": "generic",
+  "tags": [
+   "generic",
+   "pricing"
+  ],
+  "description": "generic pricing: Service Packages",
+  "path": "generic-7-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "generic-8-contact",
+  "type": "contact",
+  "genre": "generic",
+  "tags": [
+   "contact",
+   "generic"
+  ],
+  "description": "generic contact",
+  "path": "generic-8-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "generic-9-contact",
   "type": "contact",
   "genre": "generic",
   "tags": [
@@ -2190,13 +2984,13 @@
    "generic"
   ],
   "description": "generic contact: Ready when you are.",
-  "path": "generic-7-contact.html",
+  "path": "generic-9-contact.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
   ]
  },
  {
-  "id": "generic-8-footer",
+  "id": "generic-10-footer",
   "type": "footer",
   "genre": "generic",
   "tags": [
@@ -2204,7 +2998,7 @@
    "generic"
   ],
   "description": "generic footer",
-  "path": "generic-8-footer.html",
+  "path": "generic-10-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
   ]
@@ -2290,7 +3084,55 @@
   ]
  },
  {
-  "id": "medical-2-6-contact",
+  "id": "medical-2-6-pricing",
+  "type": "pricing",
+  "genre": "medical",
+  "tags": [
+   "care",
+   "family",
+   "medical",
+   "pricing"
+  ],
+  "description": "medical pricing: Consultation & Care Plans",
+  "path": "medical-2-6-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "medical-2-7-faq",
+  "type": "faq",
+  "genre": "medical",
+  "tags": [
+   "care",
+   "family",
+   "faq",
+   "medical"
+  ],
+  "description": "medical faq: Answers before you call",
+  "path": "medical-2-7-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "medical-2-8-contact",
+  "type": "contact",
+  "genre": "medical",
+  "tags": [
+   "care",
+   "contact",
+   "family",
+   "medical"
+  ],
+  "description": "medical contact",
+  "path": "medical-2-8-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "medical-2-9-contact",
   "type": "contact",
   "genre": "medical",
   "tags": [
@@ -2300,13 +3142,13 @@
    "medical"
   ],
   "description": "medical contact: New to the neighbourhood? First visit is half price.",
-  "path": "medical-2-6-contact.html",
+  "path": "medical-2-9-contact.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
   ]
  },
  {
-  "id": "medical-2-7-footer",
+  "id": "medical-2-10-footer",
   "type": "footer",
   "genre": "medical",
   "tags": [
@@ -2316,7 +3158,7 @@
    "medical"
   ],
   "description": "medical footer",
-  "path": "medical-2-7-footer.html",
+  "path": "medical-2-10-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
   ]
@@ -2418,7 +3260,55 @@
   ]
  },
  {
-  "id": "medical-3-7-footer",
+  "id": "medical-3-7-pricing",
+  "type": "pricing",
+  "genre": "medical",
+  "tags": [
+   "grid",
+   "medical",
+   "pricing",
+   "specialist"
+  ],
+  "description": "medical pricing: Consultation & Care Plans",
+  "path": "medical-3-7-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "medical-3-8-faq",
+  "type": "faq",
+  "genre": "medical",
+  "tags": [
+   "faq",
+   "grid",
+   "medical",
+   "specialist"
+  ],
+  "description": "medical faq: Answers before you call",
+  "path": "medical-3-8-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "medical-3-9-contact",
+  "type": "contact",
+  "genre": "medical",
+  "tags": [
+   "contact",
+   "grid",
+   "medical",
+   "specialist"
+  ],
+  "description": "medical contact",
+  "path": "medical-3-9-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "medical-3-10-footer",
   "type": "footer",
   "genre": "medical",
   "tags": [
@@ -2428,7 +3318,7 @@
    "specialist"
   ],
   "description": "medical footer",
-  "path": "medical-3-7-footer.html",
+  "path": "medical-3-10-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap"
   ]
@@ -2532,7 +3422,21 @@
   ]
  },
  {
-  "id": "medical-8-footer",
+  "id": "medical-8-pricing",
+  "type": "pricing",
+  "genre": "medical",
+  "tags": [
+   "medical",
+   "pricing"
+  ],
+  "description": "medical pricing: Service Packages",
+  "path": "medical-8-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Instrument+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "medical-9-footer",
   "type": "footer",
   "genre": "medical",
   "tags": [
@@ -2540,7 +3444,7 @@
    "medical"
   ],
   "description": "medical footer",
-  "path": "medical-8-footer.html",
+  "path": "medical-9-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Instrument+Sans:wght@400;500;600&display=swap"
   ]
@@ -2642,7 +3546,55 @@
   ]
  },
  {
-  "id": "portfolio-2-7-contact",
+  "id": "portfolio-2-7-pricing",
+  "type": "pricing",
+  "genre": "portfolio",
+  "tags": [
+   "index",
+   "portfolio",
+   "pricing",
+   "type"
+  ],
+  "description": "portfolio pricing: Products & Pricing",
+  "path": "portfolio-2-7-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-2-8-faq",
+  "type": "faq",
+  "genre": "portfolio",
+  "tags": [
+   "faq",
+   "index",
+   "portfolio",
+   "type"
+  ],
+  "description": "portfolio faq: Answers before you call",
+  "path": "portfolio-2-8-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-2-9-contact",
+  "type": "contact",
+  "genre": "portfolio",
+  "tags": [
+   "contact",
+   "index",
+   "portfolio",
+   "type"
+  ],
+  "description": "portfolio contact",
+  "path": "portfolio-2-9-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-2-10-contact",
   "type": "contact",
   "genre": "portfolio",
   "tags": [
@@ -2652,13 +3604,13 @@
    "type"
   ],
   "description": "portfolio contact: Say it in one sentence.We will take it from there.",
-  "path": "portfolio-2-7-contact.html",
+  "path": "portfolio-2-10-contact.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
   ]
  },
  {
-  "id": "portfolio-2-8-footer",
+  "id": "portfolio-2-11-footer",
   "type": "footer",
   "genre": "portfolio",
   "tags": [
@@ -2668,7 +3620,7 @@
    "type"
   ],
   "description": "portfolio footer",
-  "path": "portfolio-2-8-footer.html",
+  "path": "portfolio-2-11-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
   ]
@@ -2784,7 +3736,55 @@
   ]
  },
  {
-  "id": "portfolio-3-8-contact",
+  "id": "portfolio-3-8-pricing",
+  "type": "pricing",
+  "genre": "portfolio",
+  "tags": [
+   "dark",
+   "gallery",
+   "portfolio",
+   "pricing"
+  ],
+  "description": "portfolio pricing: Commission Packages",
+  "path": "portfolio-3-8-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-3-9-faq",
+  "type": "faq",
+  "genre": "portfolio",
+  "tags": [
+   "dark",
+   "faq",
+   "gallery",
+   "portfolio"
+  ],
+  "description": "portfolio faq: Answers before you call",
+  "path": "portfolio-3-9-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-3-10-contact",
+  "type": "contact",
+  "genre": "portfolio",
+  "tags": [
+   "contact",
+   "dark",
+   "gallery",
+   "portfolio"
+  ],
+  "description": "portfolio contact",
+  "path": "portfolio-3-10-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-3-11-contact",
   "type": "contact",
   "genre": "portfolio",
   "tags": [
@@ -2794,13 +3794,13 @@
    "portfolio"
   ],
   "description": "portfolio contact: The darkroom light is on.",
-  "path": "portfolio-3-8-contact.html",
+  "path": "portfolio-3-11-contact.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600&display=swap"
   ]
  },
  {
-  "id": "portfolio-3-9-footer",
+  "id": "portfolio-3-12-footer",
   "type": "footer",
   "genre": "portfolio",
   "tags": [
@@ -2810,7 +3810,7 @@
    "portfolio"
   ],
   "description": "portfolio footer",
-  "path": "portfolio-3-9-footer.html",
+  "path": "portfolio-3-12-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600&display=swap"
   ]
@@ -2900,7 +3900,49 @@
   ]
  },
  {
-  "id": "portfolio-7-contact",
+  "id": "portfolio-7-pricing",
+  "type": "pricing",
+  "genre": "portfolio",
+  "tags": [
+   "portfolio",
+   "pricing"
+  ],
+  "description": "portfolio pricing: Commission Packages",
+  "path": "portfolio-7-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Karla:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-8-faq",
+  "type": "faq",
+  "genre": "portfolio",
+  "tags": [
+   "faq",
+   "portfolio"
+  ],
+  "description": "portfolio faq: Answers before you call",
+  "path": "portfolio-8-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Karla:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-9-contact",
+  "type": "contact",
+  "genre": "portfolio",
+  "tags": [
+   "contact",
+   "portfolio"
+  ],
+  "description": "portfolio contact",
+  "path": "portfolio-9-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Karla:wght@400;500;700&display=swap"
+  ]
+ },
+ {
+  "id": "portfolio-10-contact",
   "type": "contact",
   "genre": "portfolio",
   "tags": [
@@ -2908,13 +3950,13 @@
    "portfolio"
   ],
   "description": "portfolio contact: The studio door is open.",
-  "path": "portfolio-7-contact.html",
+  "path": "portfolio-10-contact.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Karla:wght@400;500;700&display=swap"
   ]
  },
  {
-  "id": "portfolio-8-footer",
+  "id": "portfolio-11-footer",
   "type": "footer",
   "genre": "portfolio",
   "tags": [
@@ -2922,7 +3964,7 @@
    "portfolio"
   ],
   "description": "portfolio footer",
-  "path": "portfolio-8-footer.html",
+  "path": "portfolio-11-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Karla:wght@400;500;700&display=swap"
   ]
@@ -3040,7 +4082,55 @@
   ]
  },
  {
-  "id": "saas-2-8-footer",
+  "id": "saas-2-8-pricing",
+  "type": "pricing",
+  "genre": "saas",
+  "tags": [
+   "docs",
+   "pricing",
+   "saas",
+   "terminal"
+  ],
+  "description": "saas pricing: Plans & Pricing",
+  "path": "saas-2-8-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-2-9-faq",
+  "type": "faq",
+  "genre": "saas",
+  "tags": [
+   "docs",
+   "faq",
+   "saas",
+   "terminal"
+  ],
+  "description": "saas faq: Common questions",
+  "path": "saas-2-9-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-2-10-contact",
+  "type": "contact",
+  "genre": "saas",
+  "tags": [
+   "contact",
+   "docs",
+   "saas",
+   "terminal"
+  ],
+  "description": "saas contact: Get in Touch",
+  "path": "saas-2-10-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-2-11-footer",
   "type": "footer",
   "genre": "saas",
   "tags": [
@@ -3050,7 +4140,7 @@
    "terminal"
   ],
   "description": "saas footer",
-  "path": "saas-2-8-footer.html",
+  "path": "saas-2-11-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap"
   ]
@@ -3152,7 +4242,39 @@
   ]
  },
  {
-  "id": "saas-3-7-contact",
+  "id": "saas-3-7-faq",
+  "type": "faq",
+  "genre": "saas",
+  "tags": [
+   "enterprise",
+   "faq",
+   "ledger",
+   "saas"
+  ],
+  "description": "saas faq: Common questions",
+  "path": "saas-3-7-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-3-8-contact",
+  "type": "contact",
+  "genre": "saas",
+  "tags": [
+   "contact",
+   "enterprise",
+   "ledger",
+   "saas"
+  ],
+  "description": "saas contact: Get in Touch",
+  "path": "saas-3-8-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-3-9-contact",
   "type": "contact",
   "genre": "saas",
   "tags": [
@@ -3162,13 +4284,13 @@
    "saas"
   ],
   "description": "saas contact: Bring your messiest vendor file to the first call.",
-  "path": "saas-3-7-contact.html",
+  "path": "saas-3-9-contact.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600&display=swap"
   ]
  },
  {
-  "id": "saas-3-8-footer",
+  "id": "saas-3-10-footer",
   "type": "footer",
   "genre": "saas",
   "tags": [
@@ -3178,7 +4300,7 @@
    "saas"
   ],
   "description": "saas footer",
-  "path": "saas-3-8-footer.html",
+  "path": "saas-3-10-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Public+Sans:wght@400;500;600&display=swap"
   ]
@@ -3296,7 +4418,21 @@
   ]
  },
  {
-  "id": "saas-9-footer",
+  "id": "saas-9-contact",
+  "type": "contact",
+  "genre": "saas",
+  "tags": [
+   "contact",
+   "saas"
+  ],
+  "description": "saas contact: Visit the Store",
+  "path": "saas-9-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "saas-10-footer",
   "type": "footer",
   "genre": "saas",
   "tags": [
@@ -3304,7 +4440,7 @@
    "saas"
   ],
   "description": "saas footer",
-  "path": "saas-9-footer.html",
+  "path": "saas-10-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap"
   ]
@@ -3430,7 +4566,52 @@
   ]
  },
  {
-  "id": "shop-2-9-footer",
+  "id": "shop-2-9-pricing",
+  "type": "pricing",
+  "genre": "shop",
+  "tags": [
+   "lookbook",
+   "pricing",
+   "shop"
+  ],
+  "description": "shop pricing: Bespoke Services & Pricing",
+  "path": "shop-2-9-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Mulish:wght@400;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "shop-2-10-faq",
+  "type": "faq",
+  "genre": "shop",
+  "tags": [
+   "faq",
+   "lookbook",
+   "shop"
+  ],
+  "description": "shop faq: Answers before you call",
+  "path": "shop-2-10-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Mulish:wght@400;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "shop-2-11-contact",
+  "type": "contact",
+  "genre": "shop",
+  "tags": [
+   "contact",
+   "lookbook",
+   "shop"
+  ],
+  "description": "shop contact",
+  "path": "shop-2-11-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Mulish:wght@400;600;700&display=swap"
+  ]
+ },
+ {
+  "id": "shop-2-12-footer",
   "type": "footer",
   "genre": "shop",
   "tags": [
@@ -3439,7 +4620,7 @@
    "shop"
   ],
   "description": "shop footer",
-  "path": "shop-2-9-footer.html",
+  "path": "shop-2-12-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Mulish:wght@400;600;700&display=swap"
   ]
@@ -3557,7 +4738,55 @@
   ]
  },
  {
-  "id": "shop-3-8-footer",
+  "id": "shop-3-8-pricing",
+  "type": "pricing",
+  "genre": "shop",
+  "tags": [
+   "goods",
+   "pricing",
+   "shop",
+   "utility"
+  ],
+  "description": "shop pricing: Collections & Pricing",
+  "path": "shop-3-8-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "shop-3-9-faq",
+  "type": "faq",
+  "genre": "shop",
+  "tags": [
+   "faq",
+   "goods",
+   "shop",
+   "utility"
+  ],
+  "description": "shop faq: Answers before you call",
+  "path": "shop-3-9-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "shop-3-10-contact",
+  "type": "contact",
+  "genre": "shop",
+  "tags": [
+   "contact",
+   "goods",
+   "shop",
+   "utility"
+  ],
+  "description": "shop contact",
+  "path": "shop-3-10-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;700;800&display=swap"
+  ]
+ },
+ {
+  "id": "shop-3-11-footer",
   "type": "footer",
   "genre": "shop",
   "tags": [
@@ -3567,7 +4796,7 @@
    "utility"
   ],
   "description": "shop footer",
-  "path": "shop-3-8-footer.html",
+  "path": "shop-3-11-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;700;800&display=swap"
   ]
@@ -3671,7 +4900,49 @@
   ]
  },
  {
-  "id": "shop-8-footer",
+  "id": "shop-8-pricing",
+  "type": "pricing",
+  "genre": "shop",
+  "tags": [
+   "pricing",
+   "shop"
+  ],
+  "description": "shop pricing: Pick a package",
+  "path": "shop-8-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Archivo:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "shop-9-faq",
+  "type": "faq",
+  "genre": "shop",
+  "tags": [
+   "faq",
+   "shop"
+  ],
+  "description": "shop faq: Questions we hear often",
+  "path": "shop-9-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Archivo:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "shop-10-contact",
+  "type": "contact",
+  "genre": "shop",
+  "tags": [
+   "contact",
+   "shop"
+  ],
+  "description": "shop contact",
+  "path": "shop-10-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Archivo:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "shop-11-footer",
   "type": "footer",
   "genre": "shop",
   "tags": [
@@ -3679,7 +4950,7 @@
    "shop"
   ],
   "description": "shop footer",
-  "path": "shop-8-footer.html",
+  "path": "shop-11-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Archivo:wght@400;500;600&display=swap"
   ]
@@ -3781,7 +5052,55 @@
   ]
  },
  {
-  "id": "travel-2-7-footer",
+  "id": "travel-2-7-pricing",
+  "type": "pricing",
+  "genre": "travel",
+  "tags": [
+   "field",
+   "journal",
+   "pricing",
+   "travel"
+  ],
+  "description": "travel pricing: Trip Packages",
+  "path": "travel-2-7-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bitter:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap"
+  ]
+ },
+ {
+  "id": "travel-2-8-faq",
+  "type": "faq",
+  "genre": "travel",
+  "tags": [
+   "faq",
+   "field",
+   "journal",
+   "travel"
+  ],
+  "description": "travel faq: Answers before you call",
+  "path": "travel-2-8-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bitter:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap"
+  ]
+ },
+ {
+  "id": "travel-2-9-contact",
+  "type": "contact",
+  "genre": "travel",
+  "tags": [
+   "contact",
+   "field",
+   "journal",
+   "travel"
+  ],
+  "description": "travel contact",
+  "path": "travel-2-9-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bitter:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap"
+  ]
+ },
+ {
+  "id": "travel-2-10-footer",
   "type": "footer",
   "genre": "travel",
   "tags": [
@@ -3791,7 +5110,7 @@
    "travel"
   ],
   "description": "travel footer",
-  "path": "travel-2-7-footer.html",
+  "path": "travel-2-10-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Bitter:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap"
   ]
@@ -3909,7 +5228,55 @@
   ]
  },
  {
-  "id": "travel-3-8-footer",
+  "id": "travel-3-8-pricing",
+  "type": "pricing",
+  "genre": "travel",
+  "tags": [
+   "pricing",
+   "resort",
+   "serene",
+   "travel"
+  ],
+  "description": "travel pricing: Trip Packages",
+  "path": "travel-3-8-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Karla:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "travel-3-9-faq",
+  "type": "faq",
+  "genre": "travel",
+  "tags": [
+   "faq",
+   "resort",
+   "serene",
+   "travel"
+  ],
+  "description": "travel faq: Answers before you call",
+  "path": "travel-3-9-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Karla:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "travel-3-10-contact",
+  "type": "contact",
+  "genre": "travel",
+  "tags": [
+   "contact",
+   "resort",
+   "serene",
+   "travel"
+  ],
+  "description": "travel contact",
+  "path": "travel-3-10-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Karla:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "travel-3-11-footer",
   "type": "footer",
   "genre": "travel",
   "tags": [
@@ -3919,7 +5286,7 @@
    "travel"
   ],
   "description": "travel footer",
-  "path": "travel-3-8-footer.html",
+  "path": "travel-3-11-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Karla:wght@400;500;600&display=swap"
   ]
@@ -4051,7 +5418,49 @@
   ]
  },
  {
-  "id": "travel-10-footer",
+  "id": "travel-10-pricing",
+  "type": "pricing",
+  "genre": "travel",
+  "tags": [
+   "pricing",
+   "travel"
+  ],
+  "description": "travel pricing: Trip Packages",
+  "path": "travel-10-pricing.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "travel-11-faq",
+  "type": "faq",
+  "genre": "travel",
+  "tags": [
+   "faq",
+   "travel"
+  ],
+  "description": "travel faq: Answers before you call",
+  "path": "travel-11-faq.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "travel-12-contact",
+  "type": "contact",
+  "genre": "travel",
+  "tags": [
+   "contact",
+   "travel"
+  ],
+  "description": "travel contact",
+  "path": "travel-12-contact.html",
+  "fonts": [
+   "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap"
+  ]
+ },
+ {
+  "id": "travel-13-footer",
   "type": "footer",
   "genre": "travel",
   "tags": [
@@ -4059,7 +5468,7 @@
    "travel"
   ],
   "description": "travel footer",
-  "path": "travel-10-footer.html",
+  "path": "travel-13-footer.html",
   "fonts": [
    "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap"
   ]

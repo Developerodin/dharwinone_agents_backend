@@ -1,0 +1,40 @@
+{
+  "id": "local_service_cleaning_handyman",
+  "name": "Blue-Collar / Local Services — Cleaning / Handyman",
+  "category": "local_service",
+  "subcategory": "cleaning_handyman",
+  "wave": 1,
+  "status": "active",
+  "default_family": "trust_local",
+  "keywords": [
+    "cleaning",
+    "deep clean",
+    "handyman",
+    "pest",
+    "sofa",
+    "odd jobs"
+  ],
+  "matcher": {
+    "eligible_template_ids": [
+      "ls_cleaning_v1",
+      "ls_plumbing_v1",
+      "ls_electrician_v1",
+      "ls_landscaping_v1",
+      "gn_generic_v1"
+    ],
+    "default_rank_order": [
+      "ls_cleaning_v1",
+      "ls_plumbing_v1",
+      "ls_electrician_v1",
+      "ls_landscaping_v1",
+      "gn_generic_v1"
+    ]
+  },
+  "image_pack_refs": [
+    "pack_cleaning_handyman_v1"
+  ],
+  "moderation": {
+    "blocked": false,
+    "notes": "Standard business — allowed"
+  }
+}

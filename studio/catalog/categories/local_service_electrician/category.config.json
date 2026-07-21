@@ -1,0 +1,42 @@
+{
+  "id": "local_service_electrician",
+  "name": "Blue-Collar / Local Services — Electrician",
+  "category": "local_service",
+  "subcategory": "electrician",
+  "wave": 1,
+  "status": "active",
+  "default_family": "trust_local",
+  "keywords": [
+    "electrician",
+    "wiring",
+    "AC repair",
+    "fan",
+    "inverter",
+    "short circuit"
+  ],
+  "matcher": {
+    "eligible_template_ids": [
+      "ls_electrician_v1",
+      "electrician_v3",
+      "ls_plumbing_v1",
+      "ls_landscaping_v1",
+      "ls_cleaning_v1",
+      "gn_generic_v1"
+    ],
+    "default_rank_order": [
+      "ls_electrician_v1",
+      "electrician_v3",
+      "ls_plumbing_v1",
+      "ls_landscaping_v1",
+      "ls_cleaning_v1",
+      "gn_generic_v1"
+    ]
+  },
+  "image_pack_refs": [
+    "pack_electrician_v1"
+  ],
+  "moderation": {
+    "blocked": false,
+    "notes": "Standard business — allowed"
+  }
+}

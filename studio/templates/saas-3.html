@@ -87,6 +87,12 @@
     .hero img{height:260px;}
     .hero{padding:4rem 0;}
   }
+
+  .faq{padding:5rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .faq details{border-bottom:1px solid var(--line);}
+  .faq summary{cursor:pointer;padding:1rem 0;font-weight:600;font-size:1.05rem;list-style:none;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq details p{font-size:.95rem;padding-bottom:1rem;margin:0;}
 </style>
 </head>
 <body>
@@ -100,7 +106,8 @@
       <a class="navlink" href="#pricing">Pricing</a>
       <a class="navlink" href="#contact">Contact</a>
     </div>
-    <a class="btn-main" style="padding:.55rem 1.2rem;font-size:.92rem;" href="#contact">Request a briefing</a>
+    <a class="nav-link" href="#faq">FAQ</a>
+      <a class="btn-main" style="padding:.55rem 1.2rem;font-size:.92rem;" href="#contact">Request a briefing</a>
   </div>
 </nav>
 
@@ -164,7 +171,9 @@
         <p class="eyebrow">In production at regulated firms</p>
         <blockquote class="ledger-quote">
           "Our last SOC 2 audit asked for evidence on 41 vendor decisions. The export took eleven minutes, and the auditor accepted it without a single follow-up. That has never happened before."
-          <footer>Head of Vendor Management, mid-market insurance carrier, 3,400 employees</footer>
+          
+
+<footer>Head of Vendor Management, mid-market insurance carrier, 3,400 employees</footer>
         </blockquote>
         <p class="muted mt-4" style="font-size:.97rem;">Teams in insurance, healthcare, and logistics run their vendor programmes on {{BRAND}}. Median rollout is six weeks, including ERP reconciliation and historical contract import.</p>
       </div>
@@ -225,6 +234,26 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:faq -->
+<section id="faq" style="background:var(--soft);border-top:1px solid var(--line);padding:5.5rem 0;">
+  <div class="container">
+    <p class="eyebrow">FAQ</p>
+    <h2 class="sec-title mb-4">Common questions</h2>
+    <details open>
+      <summary>Is there a free trial?</summary>
+      <p>Yes — start free and upgrade when your team is ready.</p>
+    </details>
+    <details>
+      <summary>How long does onboarding take?</summary>
+      <p>Most teams connect their first repo in under an hour.</p>
+    </details>
+    <details>
+      <summary>Do you offer annual billing?</summary>
+      <p>Annual plans include two months free — ask on signup.</p>
+    </details>
   </div>
 </section>
 

@@ -104,6 +104,12 @@
   footer a:hover{color:var(--accent)}
   footer h4{font-family:"Space Mono",monospace;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:700}
   footer .legal{border-top:1px dashed var(--line);margin-top:2.4rem;padding-top:1.2rem;font-family:"Space Mono",monospace;font-size:.76rem;color:var(--ink-55)}
+
+  .faq{padding:5rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .faq details{border-bottom:1px solid var(--line);}
+  .faq summary{cursor:pointer;padding:1rem 0;font-weight:600;font-size:1.05rem;list-style:none;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq details p{font-size:.95rem;padding-bottom:1rem;margin:0;}
 </style>
 </head>
 <body>
@@ -112,6 +118,15 @@
   <div class="container d-flex align-items-center justify-content-between">
     <a class="brand" href="#top">{{BRAND}}</a>
     <div class="d-none d-md-flex gap-4 align-items-center">
+      <a
+      class="link"
+      href="#pricing">Pricing</a>
+      <a
+      class="link"
+      href="#faq">FAQ</a>
+      <a
+      class="link"
+      href="#contact">Contact</a>
       <a class="link" href="#log">Expedition log</a>
       <a class="link" href="#plates">Field plates</a>
       <a class="link" href="#outfitting">Outfitting</a>
@@ -246,6 +261,62 @@
           <p class="sig mb-0">PASANG T. · HEAD GUIDE, 14 SEASONS</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:pricing -->
+<section class="dest" id="pricing">
+  <div class="container">
+    <p class="eyebrow mb-2">Pricing</p>
+    <h2 style="font-size:clamp(2rem,4vw,2.8rem);margin-bottom:2rem;">Trip Packages</h2>
+    <div class="row g-4">
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Holiday Packages</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Flights, stays and sights bundled.</p></div></div>
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Custom Itineraries</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Built around your pace and taste.</p></div></div>
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Visa Assistance</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Documents guided end to end.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:faq -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <p class="eyebrow mb-2">Before you pack</p>
+        <h2 style="font-size:clamp(1.9rem,3.5vw,2.6rem);font-weight:800">Questions for your first call.</h2>
+      </div>
+      <div class="col-lg-8">
+    <details open>
+      <summary>Can you customise a trip itinerary?</summary>
+      <p>Yes — we build packages around your dates, budget and interests.</p>
+    </details>
+    <details>
+      <summary>Do you handle visas and travel insurance?</summary>
+      <p>Visa guidance and insurance options are included in planning.</p>
+    </details>
+    <details>
+      <summary>What is included in your package price?</summary>
+      <p>Flights, stays and listed activities — extras are quoted upfront.</p>
+    </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:contact-info -->
+<section class="notes" id="contact">
+  <div class="container">
+    <p class="stamp mb-3">Visit Us</p>
+    <h2 class="mb-4">Find the outfitter desk</h2>
+    <div class="kit">
+      <div class="row-item"><span>Address</span><b>Main Road, Your City</b></div>
+      <div class="row-item"><span>Hours</span><b>Daily, 8:00–22:00</b></div>
+      <div class="row-item"><span>Phone</span><b><a href="tel:+910000000000">+91 00000 00000</a></b></div>
+      <div class="row-item"><span>Email</span><b><a href="mailto:hello@travel2.example">hello@travel2.example</a></b></div>
     </div>
   </div>
 </section>

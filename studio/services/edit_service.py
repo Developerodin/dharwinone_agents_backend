@@ -1,6 +1,7 @@
 """Working-html edits with safety policy."""
 
 import html as html_lib
+import json
 import logging
 import re
 
@@ -94,10 +95,137 @@ def _is_theme_request(prompt):
     return bool(_THEME_EDIT_RE.search(text)) and not _THEME_TARGETED_RE.search(text)
 
 
-def _apply_theme_edit(html, prompt):
-    pack = draft.pick_style_pack(prompt, draft.current_pack_id(html))
-    _log.info("edit_path=style-pack pack=%s", pack["id"])
-    return draft.apply_pack(html, pack)
+_THEME_CONFIDENCE_MIN = 0.5
+
+_THEME_SELECT_PROMPT = (
+    "The user wants to restyle their website. Choose the design that best fits.\n\n"
+    "User request: {prompt}\n\n"
+    "Designs (JSON):\n{options}\n\n"
+    'Reply with only JSON like {{"templateId": "<id>", "confidence": 0.0}}. '
+    "confidence is 0-1 (how well it matches). Use only a listed id."
+)
+
+
+def _theme_options(project_id, current_id):
+    """Other generated designs the user could switch to."""
+    out = []
+    for t in templates_repo.list_for_project(project_id):
+        tid = t.get("templateId")
+        if tid and tid != current_id and t.get("htmlContent"):
+            out.append(t)
+    return out
+
+
+def _keyword_pack_id(prompt):
+    low = (prompt or "").lower()
+    for pack_id, words in draft._PACK_KEYWORDS:
+        if any(w in low for w in words):
+            return pack_id
+    return None
+
+
+def _match_theme(project_id, prompt, options):
+    """Best-matching template id, or None if the request is too vague.
+
+    Fast path: an explicit style word ("dark", "elegant"...) maps straight to
+    the matching generated design. Otherwise the model picks by confidence; a
+    low score means "unclear — ask the user" rather than a blind recolor.
+    """
+    pack_id = _keyword_pack_id(prompt)
+    if pack_id:
+        for t in options:
+            if t["templateId"].endswith(pack_id):
+                return t["templateId"]
+    provider, model = _load_edit_provider()
+    if provider is None or not model or not options:
+        return None
+    payload = json.dumps(
+        [{"templateId": t["templateId"], "label": t.get("label", "")} for t in options]
+    )
+    try:
+        out = provider.generate(
+            model,
+            _THEME_SELECT_PROMPT.format(prompt=prompt, options=payload),
+            num_ctx=4096,
+            timeout_s=30,
+        )
+    except Exception:
+        return None
+    raw = re.sub(r"^```(?:json)?\s*|\s*```$", "", (out or "").strip())
+    try:
+        data = json.loads(raw)
+    except ValueError:
+        return None
+    if not isinstance(data, dict):
+        return None
+    tid = data.get("templateId")
+    try:
+        conf = float(data.get("confidence", 0))
+    except (TypeError, ValueError):
+        conf = 0.0
+    valid = {t["templateId"] for t in options}
+    if tid in valid and conf >= _THEME_CONFIDENCE_MIN:
+        return tid
+    return None
+
+
+def _theme_clarification(options):
+    base = (
+        "What look do you want? For example: dark, minimal and light, "
+        "bold and playful, elegant/premium, high-contrast, or calm and natural."
+    )
+    if options:
+        labels = ", ".join(
+            dict.fromkeys(t.get("label") or t["templateId"] for t in options)
+        )
+        return f"{base} Or pick one of your ready designs: {labels}."
+    return base
+
+
+def _record_theme_edit(project_id, prompt, summary):
+    edits_repo.append(
+        project_id,
+        source="ai",
+        user_prompt=prompt,
+        action_summary=summary,
+        change_scope="theme",
+        targets=["working-html"],
+        version_id=None,
+    )
+
+
+def _apply_theme_edit(project_id, prompt, html):
+    """Switch to the best-matching generated design, recolor, or ask.
+
+    Returns the response dict and persists itself (a design switch updates the
+    selected template + adds a version via selection_service).
+    """
+    from studio.services import selection_service
+
+    current_id = _selected_template_id(project_id)
+    options = _theme_options(project_id, current_id)
+    tid = _match_theme(project_id, prompt, options)
+
+    if tid:
+        _log.info("edit_path=theme-switch template=%s project=%s", tid, project_id)
+        result = selection_service.select_template(project_id, tid)
+        _record_theme_edit(project_id, prompt, f"Switched design to {tid}")
+        return {"html": result["html"], "changeScope": "theme", "templateId": tid}
+
+    # A concrete colour was named but no matching generated design exists:
+    # recolor the current page live so the intent still lands (keeps layout).
+    # ponytail: live pack recolor is the fallback; switching designs is preferred.
+    pack_id = _keyword_pack_id(prompt)
+    if pack_id:
+        pack = next(p for p in draft.STYLE_PACKS if p["id"] == pack_id)
+        _log.info("edit_path=theme-pack pack=%s project=%s", pack_id, project_id)
+        updated = draft.sanitize_html(draft.apply_pack(html, pack))
+        working_html_repo.put(project_id, updated, template_id=current_id)
+        _record_theme_edit(project_id, prompt, f"Recolored ({pack_id})")
+        return {"html": updated, "changeScope": "theme"}
+
+    # Vague ("do you have other themes?", "change the look"): ask, don't recolor.
+    raise EditValidationError(_theme_clarification(options))
 
 
 def _clarification_message():
@@ -264,12 +392,12 @@ def apply_edit(project_id, prompt, *, structural=False):
     if not prompt.strip():
         raise EditValidationError("prompt required")
     html = working_html_repo.require_html(project_id)
+    if not structural and _is_theme_request(prompt):
+        # Theme path persists + records itself (may switch the selected template).
+        return _apply_theme_edit(project_id, prompt, html)
     if structural:
         updated = _apply_structural_edit(html, prompt)
         scope = "structural"
-    elif _is_theme_request(prompt):
-        updated = _apply_theme_edit(html, prompt)
-        scope = "content"
     else:
         if _needs_clarification(prompt):
             raise EditValidationError(_clarification_message())

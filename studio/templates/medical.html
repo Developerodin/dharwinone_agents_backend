@@ -99,6 +99,12 @@
     .hero .lede{animation-delay:.12s;}
     @keyframes rise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
   }
+
+  .faq{padding:5rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .faq details{border-bottom:1px solid var(--line);}
+  .faq summary{cursor:pointer;padding:1rem 0;font-weight:600;font-size:1.05rem;list-style:none;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq details p{font-size:.95rem;padding-bottom:1rem;margin:0;}
 </style>
 </head>
 <body id="top">
@@ -107,6 +113,12 @@
   <div class="container">
     <a class="brand" href="#top">{{BRAND}}</a>
     <div class="d-none d-md-flex align-items-center gap-4">
+      <a
+      class="nav-link"
+      href="#pricing">Pricing</a>
+      <a
+      class="nav-link"
+      href="#contact">Contact</a>
       <a class="nav-link" href="#departments">Departments</a>
       <a class="nav-link" href="#diagnostics">Diagnostics</a>
       <a class="nav-link" href="#doctors">Doctors</a>
@@ -293,6 +305,22 @@
       <summary>What should I bring for a first visit?</summary>
       <div class="ans">Any previous prescriptions, recent reports, and a list of medicines you take daily. If you track sugar or blood pressure at home, bring those readings too.</div>
     </details>
+  </div>
+</section>
+
+<!-- dharwin-enrich:pricing -->
+<section id="pricing" style="padding:5rem 0;">
+  <div class="container">
+    <p class="eyebrow mb-2">Pricing</p>
+    <h2 style="font-size:clamp(2rem,4vw,2.8rem);margin-bottom:2rem;">Service Packages</h2>
+    <div class="row g-4">
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Deep Cleaning</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Kitchens and bathrooms, top to bottom.</p></div></div>
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Sofa & Carpet Care</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Shampooing that lifts years of use.</p></div></div>
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Handyman Jobs</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Mounting, fitting, fixing — done right.</p></div></div>
+    </div>
   </div>
 </section>
 

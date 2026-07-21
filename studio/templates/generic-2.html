@@ -105,6 +105,12 @@
   footer a{color:color-mix(in oklab, var(--bg) 75%, var(--ink));text-decoration:none;display:block;padding:.18rem 0}
   footer a:hover{color:var(--accent)}
   footer .legal{border-top:1px solid color-mix(in oklab, var(--bg) 18%, var(--ink));margin-top:2.6rem;padding-top:1.2rem;font-family:"Fragment Mono",monospace;font-size:.74rem;color:color-mix(in oklab, var(--bg) 55%, var(--ink))}
+
+  .faq{padding:5.5rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .faq details{border-top:1px solid var(--line);}
+  .faq summary{cursor:pointer;padding:1rem 0;font-weight:700;font-size:1.05rem;list-style:none;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq details p{font-size:.93rem;color:var(--ink-70);padding-bottom:1rem;margin:0;}
 </style>
 </head>
 <body id="top">
@@ -119,6 +125,8 @@
       <a class="link" href="#capabilities">01 Capabilities</a>
       <a class="link" href="#method">02 Method</a>
       <a class="link" href="#assurances">03 Assurances</a>
+      <a class="nav-link" href="#pricing">Pricing</a>
+      <a class="nav-link" href="#faq">FAQ</a>
       <a class="btn btn-stamp" href="#contact">Request a quote</a>
     </div>
   </div>
@@ -250,6 +258,54 @@
   </div>
 </section>
 
+<!-- dharwin-enrich:pricing -->
+<section class="capab" id="pricing">
+  <div class="container">
+    <p class="spec mb-2">Pricing</p>
+    <h2 class="mb-2">Service Packages</h2>
+    <div class="cap-table">
+    <div class="cap-row">
+      <span class="no">01</span>
+      <div><h3>Our Services</h3><p>Everything we do, done well.</p></div>
+      <div class="scope"><b>Includes</b>Clear estimate before work starts</div>
+      <div class="turn"><b>Quote</b>On request</div>
+    </div>
+    <div class="cap-row">
+      <span class="no">02</span>
+      <div><h3>Consultation</h3><p>Talk to us before you decide.</p></div>
+      <div class="scope"><b>Includes</b>Clear estimate before work starts</div>
+      <div class="turn"><b>Quote</b>On request</div>
+    </div>
+    <div class="cap-row">
+      <span class="no">03</span>
+      <div><h3>Support</h3><p>We're here after the job too.</p></div>
+      <div class="scope"><b>Includes</b>Clear estimate before work starts</div>
+      <div class="turn"><b>Quote</b>On request</div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:faq -->
+<section class="faq" id="faq">
+  <div class="container">
+    <p class="spec mb-2">Common questions</p>
+    <h2 style="font-size:clamp(2rem,4vw,2.8rem);margin-bottom:2rem;">Answers before you call</h2>
+    <details open>
+      <summary>How do I get started?</summary>
+      <p>Call or message us with a few details — we reply the same day.</p>
+    </details>
+    <details>
+      <summary>Which areas do you serve?</summary>
+      <p>We serve the whole city and nearby areas.</p>
+    </details>
+    <details>
+      <summary>Do you stand behind your work?</summary>
+      <p>Yes — if something isn't right, we make it right.</p>
+    </details>
+  </div>
+</section>
+
 <section class="contact" id="contact">
   <div class="container">
     <div class="row g-5 align-items-center">
@@ -261,8 +317,8 @@
       </div>
       <div class="col-lg-5">
         <div class="lines">
-          <div><span>Phone</span><span>Add your number here</span></div>
-          <div><span>Email</span><span>hello@yourdomain.com</span></div>
+          <div><span>Phone</span><span>+91 00000 00000</span></div>
+          <div><span>Email</span><span>hello@generic2generic2.example</span></div>
           <div><span>Hours</span><span>Mon to Sat, 9 to 6</span></div>
           <div><span>Area</span><span>Name the localities you serve</span></div>
         </div>
@@ -287,8 +343,8 @@
       <div class="col-6 col-lg-2">
         <h4 class="mb-3">Contact</h4>
         <a href="#contact">Request a quote</a>
-        <a href="#">hello@yourdomain.com</a>
-        <a href="#">Add your phone</a>
+        <a href="#">hello@generic2generic2.example</a>
+        <a href="#">+91 00000 00000</a>
       </div>
       <div class="col-6 col-lg-3">
         <h4 class="mb-3">Filed under</h4>

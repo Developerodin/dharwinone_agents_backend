@@ -1,0 +1,38 @@
+{
+  "id": "retail_print_shop",
+  "name": "Retail & Small Shops — Visiting-Card / Printing",
+  "category": "retail",
+  "subcategory": "print_shop",
+  "wave": 1,
+  "status": "active",
+  "default_family": "fresh_retail",
+  "keywords": [
+    "printing",
+    "visiting cards",
+    "flex",
+    "banners",
+    "xerox",
+    "stationery"
+  ],
+  "matcher": {
+    "eligible_template_ids": [
+      "rt_print_shop_v1",
+      "rt_clothing_v1",
+      "rt_clothing_v2",
+      "gn_generic_v1"
+    ],
+    "default_rank_order": [
+      "rt_print_shop_v1",
+      "rt_clothing_v1",
+      "rt_clothing_v2",
+      "gn_generic_v1"
+    ]
+  },
+  "image_pack_refs": [
+    "pack_print_shop_v1"
+  ],
+  "moderation": {
+    "blocked": false,
+    "notes": "Standard business — allowed"
+  }
+}

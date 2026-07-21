@@ -1,0 +1,39 @@
+{
+  "id": "real_estate_rental_consultant",
+  "name": "Real Estate — Rental / Property Consultant",
+  "category": "real_estate",
+  "subcategory": "rental_consultant",
+  "wave": 1,
+  "status": "active",
+  "default_family": "clean_pro",
+  "keywords": [
+    "rent",
+    "lease",
+    "tenant",
+    "PG",
+    "property management"
+  ],
+  "intents": [
+    "listing_showcase",
+    "rental"
+  ],
+  "matcher": {
+    "eligible_template_ids": [
+      "re_rental_v1",
+      "re_broker_v1",
+      "gn_generic_v1"
+    ],
+    "default_rank_order": [
+      "re_rental_v1",
+      "re_broker_v1",
+      "gn_generic_v1"
+    ]
+  },
+  "image_pack_refs": [
+    "pack_rental_consultant_v1"
+  ],
+  "moderation": {
+    "blocked": false,
+    "notes": "Standard business — allowed"
+  }
+}

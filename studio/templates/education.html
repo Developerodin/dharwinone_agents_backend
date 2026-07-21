@@ -102,6 +102,12 @@
     .hero .lede{animation-delay:.14s;}
     @keyframes settle{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
   }
+
+  .faq{padding:5rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .faq details{border-bottom:1px solid var(--line);}
+  .faq summary{cursor:pointer;padding:1rem 0;font-weight:600;font-size:1.05rem;list-style:none;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq details p{font-size:.95rem;padding-bottom:1rem;margin:0;}
 </style>
 </head>
 <body id="top">
@@ -110,6 +116,15 @@
   <div class="container">
     <a class="brand" href="#top">{{BRAND}}</a>
     <div class="d-none d-md-flex align-items-center gap-4">
+      <a
+      class="nav-link"
+      href="#pricing">Pricing</a>
+      <a
+      class="nav-link"
+      href="#faq">FAQ</a>
+      <a
+      class="nav-link"
+      href="#contact">Contact</a>
       <a class="nav-link" href="#term">This term</a>
       <a class="nav-link" href="#method">How we teach</a>
       <a class="nav-link" href="#faculty">Faculty</a>
@@ -325,6 +340,22 @@
         <a class="btn btn-marigold" href="tel:+910000000000">Call 000 000 0000</a>
         <a class="btn btn-outline-ink" href="#term">Check seat status</a>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:pricing -->
+<section id="pricing" style="padding:5rem 0;">
+  <div class="container">
+    <p class="eyebrow mb-2">Pricing</p>
+    <h2 style="font-size:clamp(2rem,4vw,2.8rem);margin-bottom:2rem;">Programmes & Fees</h2>
+    <div class="row g-4">
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Exam Coaching</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Syllabus covered, concepts cleared.</p></div></div>
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Doubt Sessions</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">No question too small.</p></div></div>
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Mock Tests</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Exam-pattern practice with analysis.</p></div></div>
     </div>
   </div>
 </section>

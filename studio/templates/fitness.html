@@ -113,6 +113,12 @@
   footer a{color:var(--dim);text-decoration:none;}
   footer a:hover{color:var(--accent);}
   .sec-title{font-size:clamp(2rem,3.6vw,2.9rem);color:var(--ink);}
+
+  .faq{padding:5.5rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .faq details{border-bottom:1px solid var(--line);}
+  .faq summary{cursor:pointer;padding:1rem 0;font-weight:600;font-size:1.1rem;list-style:none;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq details p{font-size:.95rem;padding-bottom:1rem;margin:0;color:var(--muted,var(--dim,var(--ink-65)));}
 </style>
 </head>
 <body>
@@ -121,6 +127,15 @@
   <div class="container d-flex align-items-center justify-content-between">
     <a class="brand" href="#">{{BRAND}}<i>.</i></a>
     <div class="d-none d-md-flex gap-4 align-items-center">
+      <a
+      class="navlink"
+      href="#pricing">Pricing</a>
+      <a
+      class="navlink"
+      href="#faq">FAQ</a>
+      <a
+      class="navlink"
+      href="#contact">Contact</a>
       <a class="navlink" href="#programs">Programs</a>
       <a class="navlink" href="#schedule">Schedule</a>
       <a class="navlink" href="#coaches">Coaches</a>
@@ -314,6 +329,68 @@
     <summary>Is there really no joining fee?</summary>
     <p>Really. No joining fee, no cancellation fee, no annual "maintenance" charge. If you stop coming, you stop paying, and we would rather know why.</p>
   </details>
+</section>
+
+<!-- dharwin-enrich:pricing -->
+<section id="pricing" style="padding:5rem 0;">
+  <div class="container">
+    <p class="eyebrow mb-2">Pricing</p>
+    <h2 style="font-size:clamp(2rem,4vw,2.8rem);margin-bottom:2rem;">Wash & Detailing Packages</h2>
+    <div class="row g-4">
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Foam Wash</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Deep clean without a single swirl mark.</p></div></div>
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Ceramic Coating</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Months of gloss and protection.</p></div></div>
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Interior Detailing</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Seats, carpets and vents like new.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:faq -->
+<section class="faq" id="faq" style="background:var(--soft);border-block:1px solid var(--line);padding:6rem 0;">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <p class="eyebrow mb-2">Common questions</p>
+        <h2 class="sec-title">Answers before you call</h2>
+      </div>
+      <div class="col-lg-8">
+    <details open>
+      <summary>Do you handle emergencies?</summary>
+      <p>Yes — same-day callouts when urgency demands it.</p>
+    </details>
+    <details>
+      <summary>Are estimates free?</summary>
+      <p>Quotes are free within our service area.</p>
+    </details>
+    <details>
+      <summary>Which areas do you cover?</summary>
+      <p>We cover the city and nearby neighbourhoods.</p>
+    </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:contact-info -->
+<section id="contact" style="background:var(--bg);border-block:1px solid var(--line);padding:6rem 0;">
+  <div class="container">
+    <p class="eyebrow mb-2">Book a Service Call</p>
+    <h2 class="sec-title mb-4">Find the floor</h2>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <p class="cred">Visit</p>
+        <p class="dim mb-1">Shop 12, Industrial Area, Your City</p>
+        <p class="dim mb-0">Mon–Sat, 8:00–20:00 · Emergency line 24/7</p>
+      </div>
+      <div class="col-md-6">
+        <p class="cred">Reach us</p>
+        <p class="dim mb-1"><a href="tel:+910000000000">+91 00000 00000</a></p>
+        <p class="dim mb-0"><a href="mailto:hello@fitness.example">hello@fitness.example</a></p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="cta">

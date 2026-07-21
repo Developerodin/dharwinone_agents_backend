@@ -93,6 +93,12 @@
   @media (max-width:575px){
     .hero-photo img{height:18rem;}
   }
+
+  .faq{padding:5rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .faq details{border-bottom:1px solid var(--line);}
+  .faq summary{cursor:pointer;padding:1rem 0;font-weight:600;font-size:1.05rem;list-style:none;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq details p{font-size:.95rem;padding-bottom:1rem;margin:0;}
 </style>
 </head>
 <body id="top">
@@ -104,6 +110,8 @@
       <a class="nav-link" href="#stages">Who we see</a>
       <a class="nav-link" href="#doctors">Our doctors</a>
       <a class="nav-link" href="#visit">Your visit</a>
+      <a class="nav-link" href="#pricing">Pricing</a>
+      <a class="nav-link" href="#faq">FAQ</a>
       <a class="btn btn-plum" href="#contact">Book an appointment</a>
     </div>
   </div>
@@ -275,7 +283,60 @@
   </div>
 </section>
 
-<section class="cta" id="contact">
+<!-- dharwin-enrich:pricing -->
+<section id="pricing" style="padding:5rem 0;">
+  <div class="container">
+    <p class="eyebrow mb-2">Pricing</p>
+    <h2 style="font-size:clamp(2rem,4vw,2.8rem);margin-bottom:2rem;">Consultation & Care Plans</h2>
+    <div class="row g-4">
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">General Consultation</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Walk-in and appointment slots daily.</p></div></div>
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Diagnostics</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Lab work with same-day reports.</p></div></div>
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Preventive Checkups</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Annual packages for the family.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:faq -->
+<section class="faq py-5" id="faq">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <p class="eyebrow mb-2">Patient questions</p>
+        <h2 class="section-title">Before your visit</h2>
+      </div>
+      <div class="col-lg-8">
+    <details open>
+      <summary>How do I book an appointment?</summary>
+      <p class="ans">Call us or walk in during clinic hours.</p>
+    </details>
+    <details>
+      <summary>Do you accept insurance?</summary>
+      <p class="ans">We work with major insurers — bring your card on visit.</p>
+    </details>
+    <details>
+      <summary>What are your hours?</summary>
+      <p class="ans">Mon–Sat, 9:00–20:00. Emergency line after hours.</p>
+    </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="padding:5rem 0;background:var(--soft);border-top:1px solid var(--line);">
+  <div class="container">
+    <p class="eyebrow mb-2">Contact</p>
+    <h2 class="mb-4">Visit or call the clinic</h2>
+    <div class="row g-4">
+      <div class="col-md-6"><p><strong>Address</strong><br>Ground Floor, Medical Plaza, Your City</p><p><strong>Hours</strong><br>Mon–Sat, 9:00–20:00</p></div>
+      <div class="col-md-6"><p><strong>Phone</strong><br><a href="tel:+910000000000">+91 00000 00000</a></p><p><strong>Email</strong><br><a href="mailto:hello@medical2.example">hello@medical2.example</a></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="engage">
   <div class="container">
     <div class="cta-inner">
       <div class="row align-items-center g-4">

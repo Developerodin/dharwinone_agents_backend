@@ -1,0 +1,34 @@
+{
+  "id": "local_service_insurance_agent",
+  "name": "Blue-Collar / Local Services — Insurance Agent",
+  "category": "local_service",
+  "subcategory": "insurance_agent",
+  "wave": 1,
+  "status": "active",
+  "default_family": "clean_pro",
+  "keywords": [
+    "insurance",
+    "policy",
+    "LIC",
+    "health cover",
+    "claim",
+    "premium payment"
+  ],
+  "matcher": {
+    "eligible_template_ids": [
+      "ls_insurance_v1",
+      "gn_generic_v1"
+    ],
+    "default_rank_order": [
+      "ls_insurance_v1",
+      "gn_generic_v1"
+    ]
+  },
+  "image_pack_refs": [
+    "pack_insurance_agent_v1"
+  ],
+  "moderation": {
+    "blocked": false,
+    "notes": "Standard business — allowed"
+  }
+}

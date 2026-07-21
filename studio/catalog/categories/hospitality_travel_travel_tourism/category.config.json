@@ -1,0 +1,38 @@
+{
+  "id": "hospitality_travel_travel_tourism",
+  "name": "Hospitality & Travel — Travel & Tours",
+  "category": "hospitality_travel",
+  "subcategory": "travel_tourism",
+  "wave": 2,
+  "status": "planned",
+  "default_family": "premium_dark",
+  "keywords": [
+    "travel",
+    "tours",
+    "package",
+    "trip",
+    "holiday",
+    "itinerary"
+  ],
+  "matcher": {
+    "eligible_template_ids": [
+      "ht_travel_v1",
+      "ht_travel_v2",
+      "ht_travel_v3",
+      "gn_generic_v1"
+    ],
+    "default_rank_order": [
+      "ht_travel_v1",
+      "ht_travel_v2",
+      "ht_travel_v3",
+      "gn_generic_v1"
+    ]
+  },
+  "image_pack_refs": [
+    "pack_travel_tourism_v1"
+  ],
+  "moderation": {
+    "blocked": false,
+    "notes": "Standard business — allowed"
+  }
+}

@@ -104,6 +104,12 @@
   footer a{color:rgba(233,229,219,.82);text-decoration:none;}
   footer a:hover{color:var(--soft);}
   .foot-legal{border-top:1px solid rgba(233,229,219,.18);margin-top:3rem;padding-top:1.5rem;font-size:.85rem;color:rgba(233,229,219,.6);}
+
+  .faq{padding:5rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .faq details{border-bottom:1px solid var(--line);}
+  .faq summary{cursor:pointer;padding:1rem 0;font-weight:600;font-size:1.05rem;list-style:none;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq details p{font-size:.95rem;padding-bottom:1rem;margin:0;}
 </style>
 </head>
 <body id="top">
@@ -116,6 +122,8 @@
       <a class="nav-link" href="#process">Process</a>
       <a class="nav-link" href="#projects">Projects</a>
       <a class="nav-link" href="#safety">Safety</a>
+      <a class="nav-link" href="#pricing">Pricing</a>
+      <a class="nav-link" href="#faq">FAQ</a>
       <a class="btn btn-site" href="#contact">Request a site visit</a>
     </div>
   </div>
@@ -316,7 +324,34 @@
   </div>
 </section>
 
-<section class="cta" id="contact">
+<!-- dharwin-enrich:pricing -->
+<section class="rows" id="pricing">
+  <div class="container">
+    <p class="kicker mb-2">Service packages</p>
+    <h2 style="font-size:clamp(2rem,4vw,2.8rem);margin-bottom:2rem;">Plumbing Service Packages</h2>
+    <div class="row g-4">
+      <div class="col-md-4"><div class="proj lift" style="height:100%;">
+        <div class="meta"><h5>Leak Detection & Repair</h5><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Find and fix leaks before they spread.</p></div></div></div>
+      <div class="col-md-4"><div class="proj lift" style="height:100%;">
+        <div class="meta"><h5>Bathroom Fitting</h5><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Complete fittings, neat finish, on schedule.</p></div></div></div>
+      <div class="col-md-4"><div class="proj lift" style="height:100%;">
+        <div class="meta"><h5>Emergency Callout</h5><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Rapid response when it can't wait.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="rows" id="contact" style="padding:5rem 0;background:var(--soft);border-top:1px solid var(--line);">
+  <div class="container">
+    <p class="kicker mb-2">Site office</p>
+    <h2 class="serif mb-4">Visit or call</h2>
+    <div class="row g-4">
+      <div class="col-md-6"><p><strong>Address</strong><br>Plot 7, Industrial Estate, Your City</p><p><strong>Hours</strong><br>Mon–Sat, 9:00–18:00</p></div>
+      <div class="col-md-6"><p><strong>Phone</strong><br><a href="tel:+910000000000">+91 00000 00000</a></p><p><strong>Email</strong><br><a href="mailto:hello@construction.example">hello@construction.example</a></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="engage">
   <div class="container">
     <div class="row align-items-center g-4">
       <div class="col-lg-8">

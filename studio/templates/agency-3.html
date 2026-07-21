@@ -92,6 +92,12 @@
     .poster{min-height:auto;padding:4rem 0;}
     .panel img{height:200px;}
   }
+
+  .faq{padding:5rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .faq details{border-bottom:1px solid var(--line);}
+  .faq summary{cursor:pointer;padding:1rem 0;font-weight:600;font-size:1.05rem;list-style:none;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq details p{font-size:.95rem;padding-bottom:1rem;margin:0;}
 </style>
 </head>
 <body>
@@ -105,7 +111,9 @@
       <a class="navlink" href="#studio">Studio</a>
       <a class="navlink" href="#contact">Contact</a>
     </div>
-    <a class="btn-main" style="padding:.5rem 1.2rem;font-size:.9rem;" href="#contact">Start a project</a>
+    <a class="nav-link" href="#pricing">Pricing</a>
+      <a class="nav-link" href="#faq">FAQ</a>
+      <a class="btn-main" style="padding:.5rem 1.2rem;font-size:.9rem;" href="#contact">Start a project</a>
   </div>
 </nav>
 
@@ -218,6 +226,51 @@
       <h3>Launch loud</h3>
       <p>Everything handed over in working files with a one-page usage sheet, not a 90-page brand bible nobody opens. Then we help you ship the first loud thing.</p>
     </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:pricing -->
+<section class="drop" id="pricing" style="padding-top:4rem;">
+  <div class="container">
+    <p class="eyebrow mb-3">Engagement Options</p>
+    <h2 class="mb-4">Pick a package</h2>
+    <div class="row g-4">
+      <div class="col-md-4"><div class="p-card card-lift" style="height:100%;">
+        <div class="body"><span class="badge-tag">Package</span>
+        <div class="name mt-2">Brand Strategy</div>
+        <span class="price">Quote on request</span>
+        <span class="meta">Positioning that sets you apart.</span></div></div></div>
+      <div class="col-md-4"><div class="p-card card-lift" style="height:100%;">
+        <div class="body"><span class="badge-tag">Package</span>
+        <div class="name mt-2">Campaigns</div>
+        <span class="price">Quote on request</span>
+        <span class="meta">Launches planned and executed.</span></div></div></div>
+      <div class="col-md-4"><div class="p-card card-lift" style="height:100%;">
+        <div class="body"><span class="badge-tag">Package</span>
+        <div class="name mt-2">Content & Design</div>
+        <span class="price">Quote on request</span>
+        <span class="meta">Words and visuals in one voice.</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:faq -->
+<section class="story" id="faq" style="padding:5rem 0;">
+  <div class="container">
+    <p class="eyebrow mb-3">FAQ</p>
+    <h2 class="mb-4">Questions we hear often</h2>
+    <details open style="border-bottom:1px solid var(--line);">
+      <summary style="cursor:pointer;padding:1rem 0;font-weight:700;">How does the first consultation work?</summary>
+      <p style="padding-bottom:1rem;margin:0;color:var(--ink-45);">A 45-minute call to understand scope — no obligation.</p>
+    </details>
+    <details style="border-bottom:1px solid var(--line);">
+      <summary style="cursor:pointer;padding:1rem 0;font-weight:700;">Do you work on fixed-fee engagements?</summary>
+      <p style="padding-bottom:1rem;margin:0;color:var(--ink-45);">Every project starts with a written scope and fee.</p>
+    </details>
+    <details style="border-bottom:1px solid var(--line);">
+      <summary style="cursor:pointer;padding:1rem 0;font-weight:700;">Which industries do you serve?</summary>
+      <p style="padding-bottom:1rem;margin:0;color:var(--ink-45);">We work with founders, family businesses and regional brands.</p>
+    </details>
   </div>
 </section>
 

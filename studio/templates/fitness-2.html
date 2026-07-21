@@ -92,6 +92,12 @@
     .hourrow .hr{font-size:1.3rem;}
     .hero{padding:4rem 0 4.5rem;}
   }
+
+  .faq{padding:5rem 0;border-top:1px solid var(--line);}
+  .faq details{border-bottom:1px solid var(--line);}
+  .faq summary{cursor:pointer;padding:1rem 0;font-size:1.2rem;font-weight:700;list-style:none;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq details p{color:var(--muted);font-size:.95rem;padding-bottom:1rem;margin:0;}
 </style>
 </head>
 <body>
@@ -104,7 +110,10 @@
       <a class="navlink" href="#clock">24h clock</a>
       <a class="navlink" href="#plans">Membership</a>
       <a class="navlink" href="#coaches">Coaches</a>
-    </div>
+    
+      <a class="navlink" href="#pricing">Pricing</a>
+      <a class="navlink" href="#faq">FAQ</a>
+      <a class="navlink" href="#contact">Contact</a></div>
     <a class="btn-main" style="padding:.5rem 1.2rem;font-size:.8rem;" href="#plans">Join tonight</a>
   </div>
 </nav>
@@ -225,6 +234,68 @@
       <p class="shift">Evenings · 2pm to 12am</p>
       <p>Powerlifting coach, 83kg national qualifier. Runs the after work block and the closers club at ten.</p>
     </div></div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:pricing -->
+<section id="pricing" style="padding:5rem 0;">
+  <div class="container">
+    <p class="eyebrow mb-2">Pricing</p>
+    <h2 style="font-size:clamp(2rem,4vw,2.8rem);margin-bottom:2rem;">Membership Plans</h2>
+    <div class="row g-4">
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Personal Training</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Programs built for your goals.</p></div></div>
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Group Classes</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Yoga, HIIT, Zumba and more.</p></div></div>
+      <div class="col-md-4"><div style="border:1px solid var(--line);padding:1.4rem;height:100%;background:var(--soft);">
+        <h3 style="font-size:1.35rem;">Nutrition Plans</h3><p class="mb-2"><b>Quote on request</b></p><p class="mb-0" style="font-size:.95rem;">Eat right without going hungry.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:faq -->
+<section class="faq" id="faq" style="background:var(--soft);border-block:1px solid var(--line);padding:6rem 0;">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <p class="eyebrow mb-2">Common questions</p>
+        <h2 class="sec-title">Answers before you call</h2>
+      </div>
+      <div class="col-lg-8">
+    <details open>
+      <summary>Do you offer trial sessions?</summary>
+      <p>Yes — one complimentary session before you choose a plan.</p>
+    </details>
+    <details>
+      <summary>Can I freeze my membership?</summary>
+      <p>Memberships can be paused once per term with prior notice.</p>
+    </details>
+    <details>
+      <summary>Do you provide diet guidance?</summary>
+      <p>Nutrition plans are included with personal training packages.</p>
+    </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:contact-info -->
+<section id="contact" style="background:var(--bg);border-block:1px solid var(--line);padding:6rem 0;">
+  <div class="container">
+    <p class="eyebrow mb-2">Visit or Call</p>
+    <h2 class="sec-title mb-4">Find the floor</h2>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <p class="cred">Visit</p>
+        <p class="dim mb-1">Ground Floor, Medical Plaza, Your City</p>
+        <p class="dim mb-0">Mon–Sat, 9:00–20:00 · Sun by appointment</p>
+      </div>
+      <div class="col-md-6">
+        <p class="cred">Reach us</p>
+        <p class="dim mb-1"><a href="tel:+910000000000">+91 00000 00000</a></p>
+        <p class="dim mb-0"><a href="mailto:hello@fitness2.example">hello@fitness2.example</a></p>
+      </div>
+    </div>
   </div>
 </section>
 

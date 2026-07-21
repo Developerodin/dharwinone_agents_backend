@@ -1,0 +1,40 @@
+{
+  "id": "local_service_landscaping",
+  "name": "Blue-Collar / Local Services — Landscaping",
+  "category": "local_service",
+  "subcategory": "landscaping",
+  "wave": 1,
+  "status": "active",
+  "default_family": "trust_local",
+  "keywords": [
+    "garden",
+    "lawn",
+    "landscaping",
+    "plants",
+    "outdoor",
+    "maintenance"
+  ],
+  "matcher": {
+    "eligible_template_ids": [
+      "ls_landscaping_v1",
+      "ls_plumbing_v1",
+      "ls_electrician_v1",
+      "ls_cleaning_v1",
+      "gn_generic_v1"
+    ],
+    "default_rank_order": [
+      "ls_landscaping_v1",
+      "ls_plumbing_v1",
+      "ls_electrician_v1",
+      "ls_cleaning_v1",
+      "gn_generic_v1"
+    ]
+  },
+  "image_pack_refs": [
+    "pack_landscaping_v1"
+  ],
+  "moderation": {
+    "blocked": false,
+    "notes": "Standard business — allowed"
+  }
+}

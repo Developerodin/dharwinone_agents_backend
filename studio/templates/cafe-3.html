@@ -102,6 +102,12 @@
     .hero-img img,.table-band img{transition:transform .6s ease}
     .hero-img:hover img,.table-band .photo:hover img{transform:scale(1.04)}
   }
+
+  .faq{padding:5rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .faq details{border-bottom:1px solid var(--line);}
+  .faq summary{cursor:pointer;padding:1rem 0;font-weight:600;font-size:1.05rem;list-style:none;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq details p{font-size:.95rem;padding-bottom:1rem;margin:0;}
 </style>
 </head>
 <body>
@@ -110,6 +116,15 @@
   <div class="container d-flex align-items-center justify-content-between">
     <a class="brand" href="#">{{BRAND}}<span>.</span></a>
     <div class="d-none d-md-flex gap-4 align-items-center">
+      <a
+      class="link"
+      href="#pricing">Pricing</a>
+      <a
+      class="link"
+      href="#faq">FAQ</a>
+      <a
+      class="link"
+      href="#contact">Contact</a>
       <a class="link" href="#bakes">Today's bake</a>
       <a class="link" href="#why">Our mornings</a>
       <a class="link" href="#visit">Visit</a>
@@ -214,6 +229,17 @@
       <div class="col-md-4"><div class="word-card"><p>"The quietest, brightest hour of my day. Filter coffee, rye toast, window seat, done."</p><span class="who">Marcus T., most mornings</span></div></div>
       <div class="col-md-4"><div class="word-card"><p>"They reserved a loaf for my mum every Saturday for a year. That is the whole review."</p><span class="who">Priya K., Saturday regular</span></div></div>
     </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:faq -->
+<section class="rules" id="faq">
+  <div class="container">
+    <p class="kicker mb-4">Questions we hear</p>
+    <h2 style="font-size:clamp(2rem,4vw,3rem);margin-bottom:2rem;">Before you visit</h2>
+        <div class="rule-row" style="flex-direction:column;align-items:flex-start;gap:.35rem;"><span class="k">Do you take reservations?</span><span class="v" style="text-align:left;font-size:1.05rem;font-family:inherit;">Yes — call ahead or message us for groups.</span></div>
+        <div class="rule-row" style="flex-direction:column;align-items:flex-start;gap:.35rem;"><span class="k">Do you cater events?</span><span class="v" style="text-align:left;font-size:1.05rem;font-family:inherit;">We cater office lunches and private gatherings.</span></div>
+        <div class="rule-row" style="flex-direction:column;align-items:flex-start;gap:.35rem;"><span class="k">What are your hours?</span><span class="v" style="text-align:left;font-size:1.05rem;font-family:inherit;">Open daily — see contact section for today's hours.</span></div>
   </div>
 </section>
 

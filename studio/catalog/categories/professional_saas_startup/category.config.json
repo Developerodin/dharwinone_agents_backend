@@ -1,0 +1,36 @@
+{
+  "id": "professional_saas_startup",
+  "name": "Professional Services — SaaS / Startup",
+  "category": "professional",
+  "subcategory": "saas_startup",
+  "wave": 2,
+  "status": "planned",
+  "default_family": "fresh_retail",
+  "keywords": [
+    "software",
+    "app",
+    "product",
+    "startup",
+    "SaaS",
+    "demo"
+  ],
+  "matcher": {
+    "eligible_template_ids": [
+      "pf_saas_v1",
+      "pf_saas_v2",
+      "gn_generic_v1"
+    ],
+    "default_rank_order": [
+      "pf_saas_v1",
+      "pf_saas_v2",
+      "gn_generic_v1"
+    ]
+  },
+  "image_pack_refs": [
+    "pack_saas_startup_v1"
+  ],
+  "moderation": {
+    "blocked": false,
+    "notes": "Standard business — allowed"
+  }
+}

@@ -95,6 +95,12 @@
   footer a{color:rgba(35,32,41,.78);text-decoration:none;}
   footer a:hover{color:var(--accent);}
   .foot-legal{border-top:1px solid var(--line);margin-top:3rem;padding-top:1.5rem;font-size:.85rem;color:rgba(35,32,41,.55);}
+
+  .faq{padding:5rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .faq details{border-bottom:1px solid var(--line);}
+  .faq summary{cursor:pointer;padding:1rem 0;font-weight:600;font-size:1.05rem;list-style:none;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq details p{font-size:.95rem;padding-bottom:1rem;margin:0;}
 </style>
 </head>
 <body id="top">
@@ -106,6 +112,8 @@
       <a class="nav-link" href="#practice">Practice</a>
       <a class="nav-link" href="#engage">How we work</a>
       <a class="nav-link" href="#outcomes">Outcomes</a>
+      <a class="nav-link" href="#pricing">Pricing</a>
+      <a class="nav-link" href="#faq">FAQ</a>
       <a class="btn btn-ink" href="#contact">Start a conversation</a>
     </div>
   </div>
@@ -230,7 +238,44 @@
   </div>
 </section>
 
-<section class="cta" id="contact">
+<!-- dharwin-enrich:faq -->
+<section class="engage" id="faq">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-5">
+        <p class="kicker mb-2">Common questions</p>
+        <h2 class="serif mb-0">Answers before you call</h2>
+      </div>
+      <div class="col-lg-7">
+    <details open>
+      <summary>How does the first consultation work?</summary>
+      <p>A 45-minute call to understand scope — no obligation.</p>
+    </details>
+    <details>
+      <summary>Do you work on fixed-fee engagements?</summary>
+      <p>Every project starts with a written scope and fee.</p>
+    </details>
+    <details>
+      <summary>Which industries do you serve?</summary>
+      <p>We work with founders, family businesses and regional brands.</p>
+    </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rows" id="contact" style="padding:5rem 0;background:var(--soft);border-top:1px solid var(--line);">
+  <div class="container">
+    <p class="kicker mb-2">Contact</p>
+    <h2 class="serif mb-4">Visit or call the firm</h2>
+    <div class="row g-4">
+      <div class="col-md-6"><p><strong>Address</strong><br>Your address here</p><p><strong>Hours</strong><br>Mon–Sat, 9:00–19:00</p></div>
+      <div class="col-md-6"><p><strong>Phone</strong><br><a href="tel:+910000000000">+91 00000 00000</a></p><p><strong>Email</strong><br><a href="mailto:hello@agency.example">hello@agency.example</a></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="engage">
   <div class="container">
     <div class="row align-items-center g-4">
       <div class="col-lg-8">
@@ -257,7 +302,7 @@
       </div>
       <div class="col-6 col-lg-3">
         <h6>Office</h6>
-        <ul><li>Level 4, City Centre</li><li>By appointment, Mon to Fri</li><li>hello@yourdomain.com</li></ul>
+        <ul><li>Level 4, City Centre</li><li>By appointment, Mon to Fri</li><li>hello@agencystudioagency.example</li></ul>
       </div>
       <div class="col-6 col-lg-3">
         <h6>Notes</h6>

@@ -96,6 +96,12 @@
   @media (max-width:575px){
     .hero-photo img{height:16rem;}
   }
+
+  .faq{padding:4.5rem 0;background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .faq details{border-bottom:1px solid var(--line);}
+  .faq summary{cursor:pointer;padding:1rem 0;font-weight:600;font-size:1.2rem;list-style:none;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq details p{font-size:.97rem;padding-bottom:1rem;margin:0;color:color-mix(in srgb, var(--ink) 80%, var(--bg));}
 </style>
 </head>
 <body id="top">
@@ -104,6 +110,15 @@
   <div class="container d-flex align-items-center justify-content-between gap-3">
     <a class="brand" href="#top">{{BRAND}}<span class="est">est. 1962</span></a>
     <div class="d-none d-md-flex align-items-center gap-4">
+      <a
+      class="nav-link"
+      href="#pricing">Pricing</a>
+      <a
+      class="nav-link"
+      href="#faq">FAQ</a>
+      <a
+      class="nav-link"
+      href="#contact">Contact</a>
       <a class="nav-link" href="#schools">Programmes</a>
       <a class="nav-link" href="#admissions">Admissions calendar</a>
       <a class="nav-link" href="#life">College life</a>
@@ -254,6 +269,66 @@
       <div class="col-6 col-lg-3"><b>140,000</b><span>volumes in the Wren Library, plus digital archives</span></div>
       <div class="col-6 col-lg-3"><b>22</b><span>student societies, from debating to hill trekking</span></div>
       <div class="col-6 col-lg-3"><b>94%</b><span>of last year's honours cohort placed or in graduate study</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:pricing -->
+<section class="schools" id="pricing">
+  <div class="container">
+    <p class="sc mb-2">Pricing</p>
+    <h2 class="mb-4">Programmes & Fees</h2>
+    <div class="row g-4">
+      <div class="col-md-4"><div class="school">
+        <p class="sc">Package</p>
+        <h3>Exam Coaching</h3>
+        <p>Syllabus covered, concepts cleared.</p>
+        <p style="font-weight:700;margin-top:1rem;margin-bottom:0;">Quote on request</p>
+      </div></div>
+      <div class="col-md-4"><div class="school">
+        <p class="sc">Package</p>
+        <h3>Doubt Sessions</h3>
+        <p>No question too small.</p>
+        <p style="font-weight:700;margin-top:1rem;margin-bottom:0;">Quote on request</p>
+      </div></div>
+      <div class="col-md-4"><div class="school">
+        <p class="sc">Package</p>
+        <h3>Mock Tests</h3>
+        <p>Exam-pattern practice with analysis.</p>
+        <p style="font-weight:700;margin-top:1rem;margin-bottom:0;">Quote on request</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:faq -->
+<section class="faq" id="faq">
+  <div class="container">
+    <p class="sc mb-2">Common questions</p>
+    <h2 class="mb-4">Answers before you call</h2>
+    <details open>
+      <summary>How do I enrol in a batch?</summary>
+      <p>Call or visit — we place you by level after a short assessment.</p>
+    </details>
+    <details>
+      <summary>Are study materials included?</summary>
+      <p>Yes — notes, practice sets and mock tests are part of the programme.</p>
+    </details>
+    <details>
+      <summary>Do you offer one-on-one tutoring?</summary>
+      <p>Individual slots are available outside regular batch hours.</p>
+    </details>
+  </div>
+</section>
+
+<!-- dharwin-enrich:contact-info -->
+<section class="calendar" id="contact">
+  <div class="container">
+    <p class="sc d-block mb-2">Visit or Call</p>
+    <h2 class="mb-4">Visit or call</h2>
+    <div class="row g-4">
+      <div class="col-md-6"><div class="school h-100"><p class="sc">Campus</p><h3>Address</h3><p class="mb-0">Ground Floor, Medical Plaza, Your City</p><p class="mb-0 mt-2">Mon–Sat, 9:00–20:00 · Sun by appointment</p></div></div>
+      <div class="col-md-6"><div class="school h-100"><p class="sc">Direct line</p><h3>Reach us</h3><p class="mb-0"><a href="tel:+910000000000">+91 00000 00000</a></p><p class="mb-0 mt-2"><a href="mailto:hello@education2.example">hello@education2.example</a></p></div></div>
     </div>
   </div>
 </section>

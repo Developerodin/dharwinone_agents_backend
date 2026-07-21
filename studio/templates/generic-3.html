@@ -105,6 +105,12 @@
   footer a{color:var(--paper-80);text-decoration:none;display:block;padding:.2rem 0;font-size:.95rem}
   footer a:hover{color:var(--accent)}
   footer .legal{border-top:1px solid color-mix(in oklab, var(--soft) 30%, var(--bg));margin-top:2.4rem;padding-top:1.3rem;font-size:.83rem}
+
+  .faq{background:var(--soft);padding:5.5rem 0;border-top:2px solid var(--ink);}
+  .faq details{border-bottom:2px solid var(--line);}
+  .faq summary{cursor:pointer;padding:1rem 0;font-weight:800;font-size:1.1rem;text-transform:uppercase;list-style:none;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq details p{font-size:.96rem;padding-bottom:1rem;margin:0;color:var(--ink-70);}
 </style>
 </head>
 <body id="top">
@@ -113,6 +119,15 @@
   <div class="container d-flex align-items-center justify-content-between">
     <a class="brand" href="#top">{{BRAND}}</a>
     <div class="d-none d-md-flex gap-4 align-items-center">
+      <a
+      class="link"
+      href="#pricing">Pricing</a>
+      <a
+      class="link"
+      href="#faq">FAQ</a>
+      <a
+      class="link"
+      href="#contact">Contact</a>
       <a class="link" href="#offer">What we do</a>
       <a class="link" href="#how">How it goes</a>
       <a class="link" href="#proof">Proof</a>
@@ -232,6 +247,54 @@
   </div>
 </section>
 
+<!-- dharwin-enrich:pricing -->
+<section class="offer" id="pricing">
+  <div class="container">
+    <p class="tab mb-2">Pricing</p>
+    <h2 class="mb-4">Service Packages</h2>
+    <div class="row g-4">
+      <div class="col-md-4"><div class="cell">
+        <p class="tab">Package</p>
+        <h3>Our Services</h3>
+        <p>Everything we do, done well.</p>
+        <p class="foot">Quote on request</p>
+      </div></div>
+      <div class="col-md-4"><div class="cell">
+        <p class="tab">Package</p>
+        <h3>Consultation</h3>
+        <p>Talk to us before you decide.</p>
+        <p class="foot">Quote on request</p>
+      </div></div>
+      <div class="col-md-4"><div class="cell">
+        <p class="tab">Package</p>
+        <h3>Support</h3>
+        <p>We're here after the job too.</p>
+        <p class="foot">Quote on request</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- dharwin-enrich:faq -->
+<section class="faq" id="faq">
+  <div class="container">
+    <p class="tab mb-2">Common questions</p>
+    <h2 class="mb-4">Answers before you call</h2>
+    <details open>
+      <summary>How do I get started?</summary>
+      <p>Call or message us with a few details — we reply the same day.</p>
+    </details>
+    <details>
+      <summary>Which areas do you serve?</summary>
+      <p>We serve the whole city and nearby areas.</p>
+    </details>
+    <details>
+      <summary>Do you stand behind your work?</summary>
+      <p>Yes — if something isn't right, we make it right.</p>
+    </details>
+  </div>
+</section>
+
 <section class="cta" id="start">
   <div class="container">
     <div class="row g-5 align-items-center">
@@ -243,8 +306,8 @@
       </div>
       <div class="col-lg-5">
         <div class="contact-slab">
-          <div><span>Phone</span><span>Add your number here</span></div>
-          <div><span>Email</span><span>hello@yourdomain.com</span></div>
+          <div><span>Phone</span><span>+91 00000 00000</span></div>
+          <div><span>Email</span><span>hello@generic3generic3.example</span></div>
           <div><span>Hours</span><span>Mon to Sat, 9 to 6</span></div>
           <div><span>Find us</span><span>Your street, your city</span></div>
         </div>
@@ -269,8 +332,8 @@
       <div class="col-6 col-lg-2">
         <h4 class="mb-3">Contact</h4>
         <a href="#start">Get a quote</a>
-        <a href="#">hello@yourdomain.com</a>
-        <a href="#">Add your phone</a>
+        <a href="#">hello@generic3generic3.example</a>
+        <a href="#">+91 00000 00000</a>
       </div>
       <div class="col-6 col-lg-3">
         <h4 class="mb-3">Visit</h4>

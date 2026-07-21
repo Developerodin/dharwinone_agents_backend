@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "vocabulary": [
+    "hero",
+    "services",
+    "about",
+    "gallery",
+    "testimonials",
+    "pricing",
+    "faq",
+    "contact",
+    "cta_footer",
+    "why_us"
+  ],
+  "required": [
+    "hero",
+    "services",
+    "why_us",
+    "testimonials",
+    "cta_footer"
+  ],
+  "optional": [
+    "about",
+    "gallery",
+    "pricing",
+    "faq",
+    "contact"
+  ],
+  "default_order": [
+    "hero",
+    "services",
+    "about",
+    "why_us",
+    "gallery",
+    "testimonials",
+    "pricing",
+    "faq",
+    "contact",
+    "cta_footer"
+  ],
+  "element_key_grammar": "<section>.<field> | <section>.items[n].<field> | <section>.section_title",
+  "mix_merge_rule": "Every template implements ALL required sections and only vocabulary sections, with identical section names, identical element-key grammar, identical schema field names (per section type), and CSS-var-only styling. Therefore a section component is interchangeable between templates ONLY when both templates share the same family (style_tags[0]) — same design language + same contract = lossless swap. Cross-family swaps are forbidden (visual mismatch even though the schema fits)."
+}
