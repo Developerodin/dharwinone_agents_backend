@@ -1,4 +1,4 @@
-"""S3 storage helpers for image URLs."""
+﻿"""S3 storage helpers for image URLs."""
 
 import pytest
 from studio import config

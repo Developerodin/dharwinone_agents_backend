@@ -5,20 +5,7 @@ import time
 import uuid
 
 from studio import db
-from studio.repositories.projects_repo import BuilderV2Disabled, _collection as _projects_collection
-
-_COLLECTION = "builder_versions"
-
-
-def _collection():
-    try:
-        _projects_collection()
-    except BuilderV2Disabled as exc:
-        raise exc
-    coll = db.collection(_COLLECTION)
-    if coll is None:
-        raise BuilderV2Disabled("builder-v2 database unavailable")
-    return coll
+from studio.models import Version, to_doc
 
 
 def _profile_hash(profile):
@@ -29,32 +16,41 @@ def _profile_hash(profile):
 def create(project_id, *, label, trigger, html, profile=None):
     version_id = uuid.uuid4().hex[:12]
     now = time.time()
-    doc = {
-        "versionId": version_id,
-        "projectId": project_id,
-        "label": label,
-        "trigger": trigger,
-        "createdAt": now,
-        "snapshotHtml": html,
-        "snapshotProfileHash": _profile_hash(profile),
-        "s3HtmlKey": f"projects/{project_id}/versions/{version_id}.html",
-    }
-    _collection().insert_one(doc)
-    return db.strip_id(doc)
+    row = Version(
+        versionId=version_id,
+        projectId=project_id,
+        label=label,
+        trigger=trigger,
+        createdAt=now,
+        snapshotHtml=html,
+        snapshotProfileHash=_profile_hash(profile),
+        s3HtmlKey=f"projects/{project_id}/versions/{version_id}.html",
+    )
+    with db.session() as s:
+        s.add(row)
+        s.commit()
+        return to_doc(row)
 
 
 def list_for_project(project_id):
-    items = [db.strip_id(doc) for doc in _collection().find({"projectId": project_id})]
-    items.sort(key=lambda d: d.get("createdAt", 0), reverse=True)
-    return items
+    with db.session() as s:
+        rows = (
+            s.query(Version)
+            .filter_by(projectId=project_id)
+            .order_by(Version.createdAt.desc())
+            .all()
+        )
+        return [to_doc(r) for r in rows]
 
 
 def get(project_id, version_id):
-    return db.strip_id(
-        _collection().find_one(
-            {"projectId": project_id, "versionId": version_id},
+    with db.session() as s:
+        row = (
+            s.query(Version)
+            .filter_by(projectId=project_id, versionId=version_id)
+            .first()
         )
-    )
+        return to_doc(row)
 
 
 def head(project_id):

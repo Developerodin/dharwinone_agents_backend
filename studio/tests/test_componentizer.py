@@ -1,4 +1,4 @@
-"""Componentizer extraction tests."""
+﻿"""Componentizer extraction tests."""
 
 import json
 import os

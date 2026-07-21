@@ -1,4 +1,4 @@
-"""User accounts and one-time auth tokens."""
+﻿"""User accounts and one-time auth tokens."""
 
 import time
 
@@ -9,8 +9,7 @@ from studio.repositories import users_repo
 
 @pytest.fixture(autouse=True)
 def memory_db(monkeypatch):
-    monkeypatch.setenv("STUDIO_BUILDER_V2", "true")
-    monkeypatch.setenv("STUDIO_MONGO_URI", "memory://")
+    monkeypatch.setenv("STUDIO_DATABASE_URL", "memory://")
     config.reset_for_tests()
     db.reset_for_tests()
     yield
@@ -82,15 +81,7 @@ def test_public_strips_password_fields():
     assert pub["email"] == "jane@example.com"
 
 
-def test_create_raises_email_taken_on_duplicate_key(monkeypatch):
-    from pymongo.errors import DuplicateKeyError
-
-    _make_user()
-    coll = db.collection("users")
-
-    def boom(doc):
-        raise DuplicateKeyError("E11000 duplicate key")
-
-    monkeypatch.setattr(coll, "insert_one", boom)
+def test_create_raises_email_taken_on_duplicate_email():
+    _make_user("jane@example.com")
     with pytest.raises(users_repo.EmailTaken):
         _make_user("jane@example.com")

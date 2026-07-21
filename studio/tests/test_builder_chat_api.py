@@ -1,4 +1,4 @@
-"""Builder chat API tests."""
+﻿"""Builder chat API tests."""
 
 import pytest
 from fastapi.testclient import TestClient
@@ -9,8 +9,7 @@ from studio.tests._auth_support import auth_headers
 
 @pytest.fixture(autouse=True)
 def memory_db(monkeypatch):
-    monkeypatch.setenv("STUDIO_BUILDER_V2", "true")
-    monkeypatch.setenv("STUDIO_MONGO_URI", "memory://")
+    monkeypatch.setenv("STUDIO_DATABASE_URL", "memory://")
     config.reset_for_tests()
     db.reset_for_tests()
     yield

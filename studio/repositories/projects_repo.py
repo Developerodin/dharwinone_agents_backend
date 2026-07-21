@@ -1,29 +1,15 @@
-"""CRUD for builder-v2 website projects."""
+"""CRUD for website builder projects."""
 
 import re
 import time
 
-from studio import config, db
+from sqlalchemy import nulls_last
+from sqlalchemy.exc import IntegrityError
 
-_COLLECTION = "builder_projects"
+from studio import db
+from studio.models import Project, to_doc
+
 _SLUG_RE = re.compile(r"[^a-z0-9]+")
-
-
-class BuilderV2Disabled(Exception):
-    pass
-
-
-def _require_enabled():
-    if not config.builder_v2_enabled():
-        raise BuilderV2Disabled("STUDIO_BUILDER_V2 is disabled")
-
-
-def _collection():
-    _require_enabled()
-    coll = db.collection(_COLLECTION)
-    if coll is None:
-        raise BuilderV2Disabled("builder-v2 database unavailable")
-    return coll
 
 
 def _slug(name):
@@ -31,73 +17,67 @@ def _slug(name):
     return s or "project"
 
 
-def _public(doc):
-    if not doc:
-        return None
-    clean = dict(doc)
-    clean.pop("_id", None)
-    return clean
-
-
 def _unique_id(base):
-    coll = _collection()
-    pid = base
-    n = 2
-    while coll.find_one({"projectId": pid}):
-        suffix = f"-{n}"
-        pid = (base[: 24 - len(suffix)] + suffix).strip("-")
-        n += 1
+    pid, n = base, 2
+    with db.session() as s:
+        while s.query(Project).filter_by(projectId=pid).first():
+            suffix = f"-{n}"
+            pid = (base[: 24 - len(suffix)] + suffix).strip("-")
+            n += 1
     return pid
 
 
 def create(project_name, initial_prompt=None, owner_user_id="local-user"):
-    coll = _collection()
     now = time.time()
-    project_id = _unique_id(_slug(project_name))
-    doc = {
-        "projectId": project_id,
-        "projectName": project_name,
-        "status": "onboarding",
-        "initialPrompt": initial_prompt,
-        "selectedTemplateId": None,
-        "currentVersionId": None,
-        "ownerUserId": owner_user_id,
-        "visibility": "private",
-        "collaborators": [],
-        "createdAt": now,
-        "updatedAt": now,
-    }
-    coll.insert_one(doc)
-    return _public(doc)
+    for _ in range(5):
+        row = Project(
+            projectId=_unique_id(_slug(project_name)),
+            projectName=project_name,
+            status="onboarding",
+            initialPrompt=initial_prompt,
+            selectedTemplateId=None,
+            currentVersionId=None,
+            ownerUserId=owner_user_id,
+            visibility="private",
+            collaborators=[],
+            createdAt=now,
+            updatedAt=now,
+        )
+        with db.session() as s:
+            s.add(row)
+            try:
+                s.commit()
+                return to_doc(row)
+            except IntegrityError:
+                s.rollback()
+    raise RuntimeError("could not allocate a unique projectId")
 
 
 def list_all():
-    coll = _collection()
-    docs = [_public(doc) for doc in coll.find({})]
-    docs.sort(key=lambda d: d.get("createdAt", 0), reverse=True)
-    return docs
+    with db.session() as s:
+        rows = s.query(Project).order_by(nulls_last(Project.createdAt.desc())).all()
+        return [to_doc(r) for r in rows]
 
 
 def list_for_user(user_id):
     return [
-        doc
-        for doc in list_all()
-        if doc.get("ownerUserId") == user_id
-        or any(
-            collab.get("userId") == user_id
-            for collab in doc.get("collaborators") or []
-        )
+        d
+        for d in list_all()
+        if d.get("ownerUserId") == user_id
+        or any(c.get("userId") == user_id for c in d.get("collaborators") or [])
     ]
 
 
 def get(project_id):
-    coll = _collection()
-    return _public(coll.find_one({"projectId": project_id}))
+    with db.session() as s:
+        return to_doc(s.query(Project).filter_by(projectId=project_id).first())
 
 
 def update_fields(project_id, fields):
-    coll = _collection()
-    patch = dict(fields)
+    cols = {c.name for c in Project.__table__.columns}
+    patch = {k: v for k, v in fields.items() if k in cols}
     patch["updatedAt"] = time.time()
-    coll.update_one({"projectId": project_id}, {"$set": patch})
+    with db.session() as s:
+        s.query(Project).filter_by(projectId=project_id).update(patch)
+        s.commit()
     return get(project_id)

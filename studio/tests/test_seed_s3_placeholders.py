@@ -1,4 +1,4 @@
-"""Tests for S3 image seeding and catalog resolution."""
+﻿"""Tests for S3 image seeding and catalog resolution."""
 
 import json
 from pathlib import Path

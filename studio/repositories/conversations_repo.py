@@ -3,54 +3,37 @@
 import time
 
 from studio import db
-from studio.repositories.projects_repo import (
-    BuilderV2Disabled,
-)
-from studio.repositories.projects_repo import (
-    _collection as _projects_collection,
-)
-
-
-def _collection():
-    try:
-        _projects_collection()
-    except BuilderV2Disabled as exc:
-        raise exc
-    coll = db.collection("conversations")
-    if coll is None:
-        raise BuilderV2Disabled("builder-v2 database unavailable")
-    return coll
-
-
-def _doc_id(project_id):
-    return project_id
+from studio.models import Conversation, to_doc
 
 
 def ensure(project_id):
-    coll = _collection()
-    doc = coll.find_one({"projectId": project_id})
-    if doc:
-        return doc
-    doc = {"projectId": project_id, "turns": []}
-    coll.insert_one(doc)
-    return doc
+    with db.session() as s:
+        row = s.query(Conversation).filter_by(projectId=project_id).first()
+        if row:
+            return to_doc(row)
+        row = Conversation(projectId=project_id, turns=[])
+        s.add(row)
+        s.commit()
+        return to_doc(row)
 
 
 def append_turn(project_id, role, text, meta=None):
-    coll = _collection()
     turn = {
         "role": role,
         "text": text,
         "ts": time.time(),
         "meta": meta or {},
     }
-    doc = ensure(project_id)
-    turns = list(doc.get("turns", []))
-    turns.append(turn)
-    coll.update_one(
-        {"projectId": project_id},
-        {"$set": {"turns": turns}},
-    )
+    with db.session() as s:
+        row = s.query(Conversation).filter_by(projectId=project_id).first()
+        if not row:
+            row = Conversation(projectId=project_id, turns=[])
+            s.add(row)
+            s.flush()
+        turns = list(row.turns or [])
+        turns.append(turn)
+        row.turns = turns
+        s.commit()
     return turn
 
 

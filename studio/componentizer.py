@@ -317,6 +317,12 @@ def write_outputs(outputs):
         path = os.path.join(COMPONENTS_DIR, name)
         with open(path, "w", encoding="utf-8", newline="\n") as f:
             f.write(content)
+    if os.path.isdir(COMPONENTS_DIR):
+        for name in os.listdir(COMPONENTS_DIR):
+            if name.startswith("__"):
+                continue
+            if name not in outputs:
+                os.remove(os.path.join(COMPONENTS_DIR, name))
 
 
 def check_outputs(outputs):

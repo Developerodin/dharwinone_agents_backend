@@ -1,149 +1,81 @@
-"""Mongo client lifecycle for builder-v2 metadata."""
+"""SQLAlchemy engine/session lifecycle for Studio."""
+
+import threading
+from contextlib import contextmanager
+
+from sqlalchemy import create_engine, text
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.pool import StaticPool
 
 from studio import config
+from studio.models import Base
 
-_client = None
-_database = None
-_memory = None
-
-
-class _MemoryCollection:
-    def __init__(self, name):
-        self.name = name
-        self._docs = []
-
-    def insert_one(self, doc):
-        # Mirror real Mongo: stamp a non-JSON-serializable ObjectId so leaks fail in tests too.
-        if "_id" not in doc:
-            from bson import ObjectId
-
-            doc["_id"] = ObjectId()
-        self._docs.append(dict(doc))
-        return type("Result", (), {"inserted_id": doc.get("_id")})()
-
-    def find_one(self, query):
-        for doc in self._docs:
-            if all(doc.get(k) == v for k, v in query.items()):
-                return dict(doc)
-        return None
-
-    def find(self, query=None):
-        query = query or {}
-        return [
-            dict(doc)
-            for doc in self._docs
-            if all(doc.get(k) == v for k, v in query.items())
-        ]
-
-    def update_one(self, query, update):
-        for doc in self._docs:
-            if all(doc.get(k) == v for k, v in query.items()):
-                if "$set" in update:
-                    doc.update(update["$set"])
-                return type("Result", (), {"modified_count": 1})()
-        return type("Result", (), {"modified_count": 0})()
-
-    def update_many(self, query, update):
-        modified = 0
-        for doc in self._docs:
-            if all(doc.get(k) == v for k, v in query.items()):
-                if "$set" in update:
-                    doc.update(update["$set"])
-                modified += 1
-        return type("Result", (), {"modified_count": modified})()
-
-    def delete_many(self, query):
-        before = len(self._docs)
-        self._docs = [
-            doc
-            for doc in self._docs
-            if not all(doc.get(k) == v for k, v in query.items())
-        ]
-        return type("Result", (), {"deleted_count": before - len(self._docs)})()
+_engine = None
+_Session = None
+# StaticPool shares ONE sqlite connection and sqlite connections are NOT thread-safe.
+# Serialize memory:// sessions with a lock. Postgres path unaffected.
+_sqlite_lock = None
 
 
-class _MemoryDatabase:
-    def __init__(self):
-        self._collections = {}
-
-    def __getitem__(self, name):
-        if name not in self._collections:
-            self._collections[name] = _MemoryCollection(name)
-        return self._collections[name]
-
-
-def strip_id(doc):
-    """Return a copy of a Mongo doc without the driver-level _id."""
-    if not doc:
-        return doc
-    clean = dict(doc)
-    clean.pop("_id", None)
-    return clean
+def _build_engine():
+    global _sqlite_lock
+    url = config.database_url()
+    if url == "memory://":
+        eng = create_engine(
+            "sqlite+pysqlite:///:memory:",
+            connect_args={"check_same_thread": False},
+            poolclass=StaticPool,
+        )
+        Base.metadata.create_all(eng)
+        _sqlite_lock = threading.Lock()
+        return eng
+    return create_engine(url, pool_pre_ping=True)
 
 
-def mongo_enabled():
-    return config.builder_v2_enabled() and bool(config.mongo_uri())
+def engine():
+    global _engine
+    if _engine is None:
+        _engine = _build_engine()
+    return _engine
+
+
+def _session_factory():
+    global _Session
+    if _Session is None:
+        _Session = sessionmaker(bind=engine(), expire_on_commit=False)
+    return _Session
+
+
+@contextmanager
+def session():
+    if _sqlite_lock is not None:
+        with _sqlite_lock:
+            s = _session_factory()()
+            try:
+                yield s
+            finally:
+                s.close()
+        return
+    s = _session_factory()()
+    try:
+        yield s
+    finally:
+        s.close()
 
 
 def reset_for_tests():
-    global _client, _database, _memory
-    _client = None
-    _database = None
-    _memory = None
-
-
-def _memory_database():
-    global _memory
-    if _memory is None:
-        _memory = _MemoryDatabase()
-    return _memory
-
-
-def _real_client():
-    global _client
-    if _client is None:
-        from pymongo import MongoClient
-
-        _client = MongoClient(
-            config.mongo_uri(),
-            serverSelectionTimeoutMS=2000,
-        )
-    return _client
-
-
-def get_database():
-    global _database
-    if not mongo_enabled():
-        return None
-    if _database is not None:
-        return _database
-    uri = config.mongo_uri()
-    if uri == "memory://":
-        _database = _memory_database()
-        return _database
-    _database = _real_client()[config.mongo_db_name()]
-    return _database
-
-
-def collection(name):
-    database = get_database()
-    if database is None:
-        return None
-    return database[name]
-
-
-def _real_ping():
-    client = _real_client()
-    client.admin.command("ping")
-    return True
+    global _engine, _Session, _sqlite_lock
+    if _engine is not None:
+        _engine.dispose()
+    _engine = None
+    _Session = None
+    _sqlite_lock = None
 
 
 def ping():
-    if not mongo_enabled():
-        return False
-    if config.mongo_uri() == "memory://":
-        return True
     try:
-        return _real_ping()
+        with engine().connect() as conn:
+            conn.execute(text("SELECT 1"))
+        return True
     except Exception:
         return False

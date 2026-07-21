@@ -1,4 +1,4 @@
-"""SMTP email service with console fallback."""
+﻿"""SMTP email service with console fallback."""
 
 import pytest
 

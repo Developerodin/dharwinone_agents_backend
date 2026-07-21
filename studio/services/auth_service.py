@@ -3,7 +3,7 @@
 import re
 import time
 
-from pymongo.errors import DuplicateKeyError
+from sqlalchemy.exc import IntegrityError
 
 from studio import db, security
 from studio.repositories import users_repo
@@ -119,23 +119,28 @@ def reset_password(raw_token, new_password):
 
 def _adopt_legacy_data(user_id):
     """First registered account claims everything owned by 'local-user'."""
-    coll = db.collection("meta")
-    if coll is None:
-        return
-    if coll.find_one({"_id": "legacy_adoption"}):
-        return
-    try:
-        coll.insert_one({"_id": "legacy_adoption", "userId": user_id, "at": time.time()})
-    except DuplicateKeyError:
-        return  # another registration won the race; adoption already claimed
-    except Exception as exc:
-        # Unexpected DB failure: registration must still succeed; adoption
-        # can be retried manually (the lock was not written).
-        print(f"[auth] legacy adoption lock failed unexpectedly: {exc}")
-        return
+    from studio.models import Meta
+
+    with db.session() as s:
+        if s.get(Meta, "legacy_adoption"):
+            return
+        try:
+            s.add(
+                Meta(
+                    key="legacy_adoption",
+                    value={"userId": user_id, "at": time.time()},
+                )
+            )
+            s.commit()
+        except IntegrityError:
+            s.rollback()
+            return
+        except Exception as exc:
+            print(f"[auth] legacy adoption lock failed unexpectedly: {exc}")
+            return
     try:
         _rewrite_legacy_ownership(user_id)
-    except Exception as exc:  # registration must not fail on adoption
+    except Exception as exc:
         print(f"[auth] legacy adoption rewrite failed (re-runnable): {exc}")
 
 
@@ -147,8 +152,10 @@ def _rewrite_legacy_ownership(user_id):
     The legacy studio/data/projects.json file store predates ownership and
     carries no owner field - nothing to rewrite there.
     """
-    coll = db.collection("builder_projects")
-    if coll is not None:
-        coll.update_many(
-            {"ownerUserId": "local-user"}, {"$set": {"ownerUserId": user_id}}
+    from studio.models import Project
+
+    with db.session() as s:
+        s.query(Project).filter_by(ownerUserId="local-user").update(
+            {"ownerUserId": user_id}
         )
+        s.commit()

@@ -1,14 +1,9 @@
-"""Business profile persistence for builder v2."""
+"""Business profile persistence."""
 
 import time
 
 from studio import db
-from studio.repositories.projects_repo import (
-    BuilderV2Disabled,
-)
-from studio.repositories.projects_repo import (
-    _collection as _projects_collection,
-)
+from studio.models import BusinessProfile, to_doc
 
 
 def _empty_profile(project_id):
@@ -40,34 +35,39 @@ def _empty_profile(project_id):
     }
 
 
-def _collection():
-    try:
-        _projects_collection()
-    except BuilderV2Disabled as exc:
-        raise exc
-    coll = db.collection("businessProfiles")
-    if coll is None:
-        raise BuilderV2Disabled("builder-v2 database unavailable")
-    return coll
-
-
 def get(project_id):
-    coll = _collection()
-    doc = coll.find_one({"projectId": project_id})
-    if not doc:
-        return _empty_profile(project_id)
-    return db.strip_id(doc)
+    with db.session() as s:
+        row = s.query(BusinessProfile).filter_by(projectId=project_id).first()
+        if not row:
+            return _empty_profile(project_id)
+        doc = to_doc(row)
+        defaults = _empty_profile(project_id)
+        for key in (
+            "brand",
+            "business",
+            "location",
+            "contact",
+            "design",
+            "skipped",
+            "completeness",
+        ):
+            if doc.get(key) is None:
+                doc[key] = defaults[key]
+        return doc
 
 
 def save(profile):
-    coll = _collection()
     profile = dict(profile)
     profile["updatedAt"] = time.time()
-    if coll.find_one({"projectId": profile["projectId"]}):
-        coll.update_one(
-            {"projectId": profile["projectId"]},
-            {"$set": profile},
-        )
-    else:
-        coll.insert_one(profile)
-    return db.strip_id(profile)
+    project_id = profile["projectId"]
+    cols = {c.name for c in BusinessProfile.__table__.columns}
+    fields = {k: v for k, v in profile.items() if k in cols and k != "id"}
+    with db.session() as s:
+        row = s.query(BusinessProfile).filter_by(projectId=project_id).first()
+        if row:
+            for key, value in fields.items():
+                setattr(row, key, value)
+        else:
+            s.add(BusinessProfile(**fields))
+        s.commit()
+    return get(project_id)

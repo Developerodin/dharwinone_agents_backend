@@ -1,14 +1,14 @@
-"""Builder v2 project repository tests."""
+﻿"""Builder project repository tests."""
 
 import pytest
 from studio import config, db
+from studio.models import Project
 from studio.repositories import projects_repo
 
 
 @pytest.fixture(autouse=True)
 def memory_db(monkeypatch):
-    monkeypatch.setenv("STUDIO_BUILDER_V2", "true")
-    monkeypatch.setenv("STUDIO_MONGO_URI", "memory://")
+    monkeypatch.setenv("STUDIO_DATABASE_URL", "memory://")
     config.reset_for_tests()
     db.reset_for_tests()
     yield
@@ -41,78 +41,40 @@ def test_get_missing_returns_none():
     assert projects_repo.get("missing") is None
 
 
-def test_repo_disabled_when_flag_off(monkeypatch):
-    monkeypatch.setenv("STUDIO_BUILDER_V2", "false")
-    config.reset_for_tests()
-    db.reset_for_tests()
-    with pytest.raises(projects_repo.BuilderV2Disabled):
-        projects_repo.create("X")
-
-
-def test_list_all_uses_cursor_sort_signature(monkeypatch):
-    class FakeCursor:
-        def __init__(self, docs):
-            self._docs = docs
-
-        def sort(self, field, direction):
-            reverse = direction == -1
-            ordered = sorted(
-                self._docs,
-                key=lambda d: d.get(field, 0),
-                reverse=reverse,
+def test_list_all_sorts_by_created_at_desc():
+    with db.session() as s:
+        s.add(
+            Project(
+                projectId="older",
+                projectName="Old",
+                status="onboarding",
+                createdAt=1,
+                updatedAt=1,
             )
-            return FakeCursor(ordered)
-
-        def __iter__(self):
-            return iter(self._docs)
-
-    class FakeCollection:
-        def find(self, query):
-            assert query == {}
-            return FakeCursor(
-                [
-                    {"projectId": "older", "createdAt": 1},
-                    {"projectId": "newer", "createdAt": 2},
-                ]
+        )
+        s.add(
+            Project(
+                projectId="newer",
+                projectName="New",
+                status="onboarding",
+                createdAt=2,
+                updatedAt=2,
             )
-
-    monkeypatch.setattr(projects_repo, "_collection", lambda: FakeCollection())
+        )
+        s.commit()
 
     listed = projects_repo.list_all()
-
     assert [row["projectId"] for row in listed] == ["newer", "older"]
 
 
-def test_public_docs_strip_internal_id(monkeypatch):
-    class FakeCollection:
-        def __init__(self):
-            self.docs = []
-
-        def find_one(self, query):
-            pid = query.get("projectId")
-            for doc in self.docs:
-                if doc.get("projectId") == pid:
-                    return doc
-            return None
-
-        def insert_one(self, doc):
-            doc["_id"] = object()
-            self.docs.append(dict(doc))
-
-        def find(self, query):
-            assert query == {}
-            return [dict(doc) for doc in self.docs]
-
-    fake = FakeCollection()
-    monkeypatch.setattr(projects_repo, "_collection", lambda: fake)
-
+def test_public_docs_strip_internal_id():
     created = projects_repo.create("Public Doc Test")
-    assert "_id" not in created
+    assert "id" not in created
 
     listed = projects_repo.list_all()
     assert listed
-    assert "_id" not in listed[0]
+    assert "id" not in listed[0]
 
     fetched = projects_repo.get(created["projectId"])
     assert fetched is not None
-    assert "_id" not in fetched
+    assert "id" not in fetched

@@ -1,4 +1,4 @@
-"""Edit safety tests."""
+﻿"""Edit safety tests."""
 
 import pytest
 

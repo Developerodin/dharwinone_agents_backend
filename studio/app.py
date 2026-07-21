@@ -159,12 +159,6 @@ _PUBLIC_PATHS = frozenset(
 )
 
 
-def _require_builder_v2():
-    from studio import config
-
-    if not config.builder_v2_enabled():
-        raise HTTPException(status_code=404, detail="builder v2 disabled")
-
 
 def _builder_project_or_404(project_id):
     project = projects_repo.get(project_id)
@@ -382,40 +376,27 @@ def create_app():
 
     @app.get("/builder/projects")
     def list_builder_projects(request: Request):
-        _require_builder_v2()
         uid = auth.resolve_user_id(request)
-        try:
-            return projects_repo.list_for_user(uid)
-        except projects_repo.BuilderV2Disabled:
-            raise HTTPException(status_code=404, detail="builder v2 disabled") from None
+        return projects_repo.list_for_user(uid)
 
     @app.post("/builder/projects", status_code=201)
     def post_builder_project(body: BuilderProjectCreate, request: Request):
-        _require_builder_v2()
         uid = auth.resolve_user_id(request)
-        try:
-            return projects_repo.create(
-                body.projectName,
-                initial_prompt=body.initialPrompt,
-                owner_user_id=uid,
-            )
-        except projects_repo.BuilderV2Disabled:
-            raise HTTPException(status_code=404, detail="builder v2 disabled") from None
+        return projects_repo.create(
+            body.projectName,
+            initial_prompt=body.initialPrompt,
+            owner_user_id=uid,
+        )
 
     @app.get("/builder/projects/{project_id}")
     def get_builder_project(project_id: str):
-        _require_builder_v2()
-        try:
-            doc = projects_repo.get(project_id)
-        except projects_repo.BuilderV2Disabled:
-            raise HTTPException(status_code=404, detail="builder v2 disabled") from None
+        doc = projects_repo.get(project_id)
         if not doc:
             raise HTTPException(status_code=404, detail="project not found")
         return doc
 
     @app.post("/builder/projects/{project_id}/chat")
     def post_builder_chat(project_id: str, body: BuilderChatMessage):
-        _require_builder_v2()
         if not projects_repo.get(project_id):
             raise HTTPException(status_code=404, detail="project not found")
         try:
@@ -425,24 +406,21 @@ def create_app():
 
     @app.get("/builder/projects/{project_id}/chat")
     def get_builder_chat(project_id: str):
-        _require_builder_v2()
         if not projects_repo.get(project_id):
             raise HTTPException(status_code=404, detail="project not found")
         return onboarding_service.get_chat(project_id)
 
     @app.get("/builder/projects/{project_id}/business-profile")
     def get_builder_business_profile(project_id: str):
-        _require_builder_v2()
         try:
             return profile_service.get_profile(project_id)
-        except (ValueError, profiles_repo.BuilderV2Disabled) as exc:
+        except ValueError as exc:
             raise HTTPException(status_code=404, detail=str(exc)) from exc
 
     @app.put("/builder/projects/{project_id}/business-profile")
     def put_builder_business_profile(
         project_id: str, body: BusinessProfilePatch
     ):
-        _require_builder_v2()
         try:
             return profile_service.update_profile(
                 project_id,
@@ -458,7 +436,6 @@ def create_app():
         project_id: str,
         force: bool = Query(default=False),
     ):
-        _require_builder_v2()
         if not projects_repo.get(project_id):
             raise HTTPException(status_code=404, detail="project not found")
         try:
@@ -481,7 +458,6 @@ def create_app():
 
     @app.get("/builder/projects/{project_id}/templates")
     def get_builder_templates(project_id: str):
-        _require_builder_v2()
         if not projects_repo.get(project_id):
             raise HTTPException(status_code=404, detail="project not found")
         from studio.repositories import templates_repo
@@ -494,7 +470,6 @@ def create_app():
         template_id: str,
         request: Request,
     ):
-        _require_builder_v2()
         uid = auth.resolve_user_id(request)
         _require_builder_action(project_id, uid, "edit")
         try:
@@ -504,7 +479,6 @@ def create_app():
 
     @app.get("/builder/projects/{project_id}/working-html")
     def get_builder_working_html(project_id: str):
-        _require_builder_v2()
         _builder_project_or_404(project_id)
         from studio.repositories import working_html_repo
 
@@ -519,7 +493,6 @@ def create_app():
         body: BuilderWorkingHtmlUpdate,
         request: Request,
     ):
-        _require_builder_v2()
         uid = auth.resolve_user_id(request)
         _require_builder_action(project_id, uid, "edit")
         try:
@@ -533,7 +506,6 @@ def create_app():
         body: BuilderEditRequest,
         request: Request,
     ):
-        _require_builder_v2()
         uid = auth.resolve_user_id(request)
         _require_builder_action(project_id, uid, "edit")
         try:
@@ -549,7 +521,6 @@ def create_app():
 
     @app.get("/builder/projects/{project_id}/edits")
     def get_builder_edits(project_id: str):
-        _require_builder_v2()
         _builder_project_or_404(project_id)
         from studio.repositories import edits_repo
 
@@ -557,7 +528,6 @@ def create_app():
 
     @app.get("/builder/projects/{project_id}/versions")
     def get_builder_versions(project_id: str):
-        _require_builder_v2()
         try:
             return version_service.list_versions(project_id)
         except ValueError as exc:
@@ -569,7 +539,6 @@ def create_app():
         body: RestoreVersionRequest,
         request: Request,
     ):
-        _require_builder_v2()
         uid = auth.resolve_user_id(request)
         _require_builder_action(project_id, uid, "restore")
         try:
@@ -581,7 +550,6 @@ def create_app():
 
     @app.get("/builder/projects/{project_id}/context")
     def get_builder_context(project_id: str):
-        _require_builder_v2()
         try:
             return context_service.get_context(project_id)
         except ValueError as exc:
@@ -589,7 +557,6 @@ def create_app():
 
     @app.post("/builder/projects/{project_id}/quality/run")
     def post_builder_quality(project_id: str):
-        _require_builder_v2()
         _builder_project_or_404(project_id)
         try:
             return publish_service.run_quality_gate(project_id)
@@ -598,7 +565,6 @@ def create_app():
 
     @app.get("/builder/projects/{project_id}/quality/latest")
     def get_builder_quality(project_id: str):
-        _require_builder_v2()
         _builder_project_or_404(project_id)
         result = publish_service.latest_quality(project_id)
         if not result:
@@ -611,7 +577,6 @@ def create_app():
         body: PublishRequest,
         request: Request,
     ):
-        _require_builder_v2()
         uid = auth.resolve_user_id(request)
         _require_builder_action(project_id, uid, "publish")
         try:
@@ -626,19 +591,16 @@ def create_app():
 
     @app.get("/builder/projects/{project_id}/releases")
     def get_builder_releases(project_id: str):
-        _require_builder_v2()
         _builder_project_or_404(project_id)
         return publish_service.list_releases(project_id)
 
     @app.get("/builder/projects/{project_id}/analytics")
     def get_builder_analytics(project_id: str):
-        _require_builder_v2()
         _builder_project_or_404(project_id)
         return analytics_repo.summarize(project_id)
 
     @app.post("/builder/projects/{project_id}/assets/presign")
     def post_builder_asset_presign(project_id: str, body: AssetPresignRequest):
-        _require_builder_v2()
         try:
             return asset_service.create_presign(
                 project_id,
@@ -653,7 +615,6 @@ def create_app():
 
     @app.post("/builder/projects/{project_id}/assets/confirm")
     def post_builder_asset_confirm(project_id: str, body: AssetConfirmRequest):
-        _require_builder_v2()
         try:
             return asset_service.confirm_upload(
                 project_id,
@@ -671,7 +632,6 @@ def create_app():
 
     @app.get("/builder/projects/{project_id}/assets")
     def get_builder_assets(project_id: str):
-        _require_builder_v2()
         try:
             return asset_service.list_assets(project_id)
         except ValueError as exc:

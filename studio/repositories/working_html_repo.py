@@ -3,25 +3,13 @@
 import time
 
 from studio import db
-from studio.repositories.projects_repo import BuilderV2Disabled, _collection as _projects_collection
+from studio.models import WorkingHtml, to_doc
 
-_COLLECTION = "builder_working_html"
 _MAX_BYTES = 512 * 1024
 
 
 class WorkingHtmlError(ValueError):
     pass
-
-
-def _collection():
-    try:
-        _projects_collection()
-    except BuilderV2Disabled as exc:
-        raise exc
-    coll = db.collection(_COLLECTION)
-    if coll is None:
-        raise BuilderV2Disabled("builder-v2 database unavailable")
-    return coll
 
 
 def _validate(html):
@@ -35,8 +23,9 @@ def _validate(html):
 def get(project_id):
     from studio import draft
 
-    doc = db.strip_id(_collection().find_one({"projectId": project_id}))
-    # ponytail: heal rows written before fence-stripping landed; put() sanitizes too.
+    with db.session() as s:
+        row = s.query(WorkingHtml).filter_by(projectId=project_id).first()
+        doc = to_doc(row)
     if doc and doc.get("html"):
         doc["html"] = draft.sanitize_html(doc["html"])
     return doc
@@ -48,18 +37,22 @@ def put(project_id, html, *, template_id=None):
     _validate(html)
     html = draft.sanitize_html(html)
     now = time.time()
-    doc = {
-        "projectId": project_id,
-        "html": html,
-        "selectedTemplateId": template_id,
-        "updatedAt": now,
-    }
-    coll = _collection()
-    if coll.find_one({"projectId": project_id}):
-        coll.update_one({"projectId": project_id}, {"$set": doc})
-    else:
-        coll.insert_one(doc)
-    return db.strip_id(doc)
+    with db.session() as s:
+        row = s.query(WorkingHtml).filter_by(projectId=project_id).first()
+        if row:
+            row.html = html
+            row.selectedTemplateId = template_id
+            row.updatedAt = now
+        else:
+            row = WorkingHtml(
+                projectId=project_id,
+                html=html,
+                selectedTemplateId=template_id,
+                updatedAt=now,
+            )
+            s.add(row)
+        s.commit()
+        return to_doc(row)
 
 
 def require_html(project_id):

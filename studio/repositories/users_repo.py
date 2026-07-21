@@ -4,17 +4,13 @@ import hashlib
 import secrets
 import time
 
-from pymongo.errors import DuplicateKeyError
+from sqlalchemy.exc import IntegrityError
 
 from studio import db
-
-_USERS = "users"
-_TOKENS = "auth_tokens"
+from studio.models import AuthToken, User, to_doc
 
 VERIFY_TTL_S = 24 * 3600
 RESET_TTL_S = 3600
-
-_email_index_ensured = False
 
 
 class AuthDbUnavailable(Exception):
@@ -23,29 +19,6 @@ class AuthDbUnavailable(Exception):
 
 class EmailTaken(Exception):
     pass
-
-
-def _coll(name):
-    coll = db.collection(name)
-    if coll is None:
-        raise AuthDbUnavailable("auth database unavailable")
-    return coll
-
-
-def _users():
-    """Users collection with a unique email index on real Mongo.
-
-    The memory:// fake has no create_index (and no concurrency), so the
-    service-level find_by_email pre-check covers tests; real Mongo gets the
-    index so a concurrent duplicate registration loses with DuplicateKeyError.
-    """
-    global _email_index_ensured
-    coll = _coll(_USERS)
-    if not _email_index_ensured:
-        if hasattr(coll, "create_index"):
-            coll.create_index("email", unique=True)
-        _email_index_ensured = True
-    return coll
 
 
 def _normalize_email(email):
@@ -66,64 +39,78 @@ def public(user):
 
 
 def create(name, email, password_hash, salt):
-    doc = {
-        "userId": f"usr-{secrets.token_hex(8)}",
-        "email": _normalize_email(email),
-        "name": name.strip(),
-        "passwordHash": password_hash,
-        "passwordSalt": salt,
-        "emailVerified": False,
-        "createdAt": time.time(),
-    }
-    try:
-        _users().insert_one(doc)
-    except DuplicateKeyError as exc:
-        raise EmailTaken(doc["email"]) from exc
-    return public(db.strip_id(doc))
+    doc = User(
+        userId=f"usr-{secrets.token_hex(8)}",
+        email=_normalize_email(email),
+        name=name.strip(),
+        passwordHash=password_hash,
+        passwordSalt=salt,
+        emailVerified=False,
+        createdAt=time.time(),
+    )
+    with db.session() as s:
+        s.add(doc)
+        try:
+            s.commit()
+        except IntegrityError as exc:
+            s.rollback()
+            raise EmailTaken(_normalize_email(email)) from exc
+        return public(to_doc(doc))
 
 
 def find_by_email(email):
-    return db.strip_id(_users().find_one({"email": _normalize_email(email)}))
+    with db.session() as s:
+        row = s.query(User).filter_by(email=_normalize_email(email)).first()
+        return to_doc(row)
 
 
 def find_by_id(user_id):
-    return db.strip_id(_users().find_one({"userId": user_id}))
+    with db.session() as s:
+        row = s.query(User).filter_by(userId=user_id).first()
+        return to_doc(row)
 
 
 def is_empty():
-    return _users().find_one({}) is None
+    with db.session() as s:
+        return s.query(User).first() is None
 
 
 def set_verified(user_id):
-    _users().update_one({"userId": user_id}, {"$set": {"emailVerified": True}})
+    with db.session() as s:
+        s.query(User).filter_by(userId=user_id).update({"emailVerified": True})
+        s.commit()
 
 
 def set_password(user_id, password_hash, salt):
-    _users().update_one(
-        {"userId": user_id},
-        {"$set": {"passwordHash": password_hash, "passwordSalt": salt}},
-    )
+    with db.session() as s:
+        s.query(User).filter_by(userId=user_id).update(
+            {"passwordHash": password_hash, "passwordSalt": salt}
+        )
+        s.commit()
 
 
 def issue_token(user_id, purpose, ttl_s):
     raw = secrets.token_urlsafe(32)
-    _coll(_TOKENS).insert_one(
-        {
-            "tokenHash": _token_hash(raw),
-            "userId": user_id,
-            "purpose": purpose,
-            "expiresAt": time.time() + ttl_s,
-        }
-    )
+    with db.session() as s:
+        s.add(
+            AuthToken(
+                tokenHash=_token_hash(raw),
+                userId=user_id,
+                purpose=purpose,
+                expiresAt=time.time() + ttl_s,
+            )
+        )
+        s.commit()
     return raw
 
 
 def consume_token(raw, purpose):
     hashed = _token_hash(raw or "")
-    doc = _coll(_TOKENS).find_one({"tokenHash": hashed, "purpose": purpose})
-    if not doc:
-        return None
-    _coll(_TOKENS).delete_many({"tokenHash": hashed})
-    if doc["expiresAt"] < time.time():
-        return None
-    return doc["userId"]
+    with db.session() as s:
+        row = s.query(AuthToken).filter_by(tokenHash=hashed, purpose=purpose).first()
+        if not row:
+            return None
+        expires_at, user_id = row.expiresAt, row.userId
+        s.query(AuthToken).filter_by(tokenHash=hashed).delete()
+        s.commit()
+    return user_id if expires_at >= time.time() else None

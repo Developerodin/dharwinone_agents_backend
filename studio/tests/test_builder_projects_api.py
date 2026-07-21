@@ -1,4 +1,4 @@
-"""Builder v2 project API tests."""
+﻿"""Builder project API tests."""
 
 import pytest
 from fastapi.testclient import TestClient
@@ -9,8 +9,7 @@ from studio.tests._auth_support import auth_headers
 
 @pytest.fixture
 def memory_db(monkeypatch):
-    monkeypatch.setenv("STUDIO_BUILDER_V2", "true")
-    monkeypatch.setenv("STUDIO_MONGO_URI", "memory://")
+    monkeypatch.setenv("STUDIO_DATABASE_URL", "memory://")
     config.reset_for_tests()
     db.reset_for_tests()
     yield
@@ -23,13 +22,6 @@ def client():
     c = TestClient(create_app())
     c.headers.update(auth_headers())
     return c
-
-
-def test_builder_projects_disabled_returns_404(client, monkeypatch):
-    monkeypatch.setenv("STUDIO_BUILDER_V2", "false")
-    config.reset_for_tests()
-    r = client.get("/builder/projects")
-    assert r.status_code == 404
 
 
 def test_create_list_get_builder_project(client, memory_db):

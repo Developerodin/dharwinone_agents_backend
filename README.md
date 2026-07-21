@@ -22,7 +22,7 @@ Or from repo root:
 scripts\start_backend.bat
 ```
 
-Edit `backend/.env` to change flags (e.g. `STUDIO_BUILDER_V2`, `STUDIO_MONGO_URI`, `STUDIO_PORT`). Values load automatically on startup.
+Edit `backend/.env` to change settings (e.g. `STUDIO_DATABASE_URL`, `STUDIO_PORT`). Values load automatically on startup.
 
 ## Layout
 

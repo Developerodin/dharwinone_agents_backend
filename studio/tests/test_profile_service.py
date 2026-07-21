@@ -1,4 +1,4 @@
-"""Business profile gate evaluator tests."""
+﻿"""Business profile gate evaluator tests."""
 
 import pytest
 from studio import config, db
@@ -8,8 +8,7 @@ from studio.services import profile_service
 
 @pytest.fixture(autouse=True)
 def memory_db(monkeypatch):
-    monkeypatch.setenv("STUDIO_BUILDER_V2", "true")
-    monkeypatch.setenv("STUDIO_MONGO_URI", "memory://")
+    monkeypatch.setenv("STUDIO_DATABASE_URL", "memory://")
     config.reset_for_tests()
     db.reset_for_tests()
     yield

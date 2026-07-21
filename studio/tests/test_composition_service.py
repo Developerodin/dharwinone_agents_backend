@@ -1,4 +1,4 @@
-"""Composition service tests."""
+﻿"""Composition service tests."""
 
 import re
 import time

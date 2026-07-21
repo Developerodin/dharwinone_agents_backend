@@ -1,4 +1,4 @@
-"""Onboarding service tests."""
+﻿"""Onboarding service tests."""
 
 import pytest
 from studio import config, db
@@ -8,8 +8,7 @@ from studio.services import onboarding_service
 
 @pytest.fixture(autouse=True)
 def memory_db(monkeypatch):
-    monkeypatch.setenv("STUDIO_BUILDER_V2", "true")
-    monkeypatch.setenv("STUDIO_MONGO_URI", "memory://")
+    monkeypatch.setenv("STUDIO_DATABASE_URL", "memory://")
     monkeypatch.setenv("STUDIO_ONBOARDING_LLM", "false")
     config.reset_for_tests()
     db.reset_for_tests()
@@ -27,7 +26,7 @@ def _advance_to_country(project_id: str):
     onboarding_service.handle_message(project_id, "Dharwin One")
     onboarding_service.handle_message(project_id, "Coffee, desserts")
     onboarding_service.handle_message(project_id, "A cozy cafe for local visitors")
-    # targetAudience is prefilled from the cafe genre — not asked
+    # targetAudience is prefilled from the cafe genre â€” not asked
 
 
 def _complete_profile(project_id: str):
@@ -203,7 +202,7 @@ def test_location_entities_parse_from_mixed_phrase():
     )
     profile = profiles_repo.get(project["projectId"])
     assert profile["location"]["country"] == "India"
-    # both parsed from one phrase — city question is skipped
+    # both parsed from one phrase â€” city question is skipped
     assert profile["location"]["city"] == "Jaipur"
     assert country_result["readyToGenerate"] is True
 
@@ -224,7 +223,7 @@ def test_location_extraction_uses_llm_for_space_separated_city_country(monkeypat
     country_result = onboarding_service.handle_message(project["projectId"], "Jaipur India")
     profile = profiles_repo.get(project["projectId"])
     assert profile["location"]["country"] == "India"
-    # LLM parsed both entities from one phrase — city question is skipped
+    # LLM parsed both entities from one phrase â€” city question is skipped
     assert profile["location"]["city"] == "Jaipur"
     assert country_result["readyToGenerate"] is True
 
@@ -305,11 +304,11 @@ def test_ready_state_prefers_llm_generated_phrase(monkeypatch):
     monkeypatch.setattr(
         onboarding_service,
         "_llm_phrase",
-        lambda *a, **k: "Absolutely — generating your personalized templates now.",
+        lambda *a, **k: "Absolutely â€” generating your personalized templates now.",
     )
     result = onboarding_service.handle_message(project["projectId"], "go ahead")
     assert result["readyToGenerate"] is True
-    assert result["assistantMessage"] == "Absolutely — generating your personalized templates now."
+    assert result["assistantMessage"] == "Absolutely â€” generating your personalized templates now."
 
 
 def test_style_directive_becomes_style_preference_not_description():

@@ -1,4 +1,4 @@
-"""Section marker extract/replace utilities."""
+﻿"""Section marker extract/replace utilities."""
 
 from studio import component_html
 

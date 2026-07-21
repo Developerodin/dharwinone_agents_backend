@@ -1,4 +1,4 @@
-"""Auth API: register, verify, login, resend, and first-user adoption."""
+﻿"""Auth API: register, verify, login, resend, and first-user adoption."""
 
 import re
 
@@ -11,8 +11,7 @@ from studio.services import email_service
 
 @pytest.fixture(autouse=True)
 def memory_db(monkeypatch):
-    monkeypatch.setenv("STUDIO_BUILDER_V2", "true")
-    monkeypatch.setenv("STUDIO_MONGO_URI", "memory://")
+    monkeypatch.setenv("STUDIO_DATABASE_URL", "memory://")
     config.reset_for_tests()
     db.reset_for_tests()
     yield
@@ -144,10 +143,13 @@ def test_first_user_adopts_legacy_projects(client, outbox):
     login = client.post(
         "/auth/login", json={"email": "jane@example.com", "password": "hunter2abc"}
     ).json()
+    from studio.models import Meta
+
     adopted = projects_repo.get(legacy["projectId"])
     assert adopted["ownerUserId"] == login["user"]["id"]
-    lock = db.collection("meta").find_one({"_id": "legacy_adoption"})
-    assert lock["userId"] == login["user"]["id"]
+    with db.session() as s:
+        lock = s.get(Meta, "legacy_adoption")
+    assert lock.value["userId"] == login["user"]["id"]
 
 
 def test_second_user_adopts_nothing(client, outbox):

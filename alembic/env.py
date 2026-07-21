@@ -10,21 +10,12 @@ from alembic import context
 # backend/ on sys.path so `studio` imports when alembic runs from backend/.
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+from studio import config as studio_config  # noqa: E402
 from studio.models import Base  # noqa: E402
 
-# this is the Alembic Config object, which provides
-# access to the values within the .ini file in use.
 config = context.config
 
-# TODO(plan Phase 1): switch to `from studio import config as studio_config` /
-# `studio_config.database_url()` once config.py gains that accessor.
-config.set_main_option(
-    "sqlalchemy.url",
-    os.environ.get(
-        "STUDIO_DATABASE_URL",
-        "postgresql+psycopg://studio:studio@localhost:5432/dharwin_studio",
-    ),
-)
+config.set_main_option("sqlalchemy.url", studio_config.database_url())
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.

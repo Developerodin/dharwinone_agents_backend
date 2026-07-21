@@ -4,38 +4,32 @@ import time
 import uuid
 
 from studio import db
-from studio.repositories.projects_repo import BuilderV2Disabled, _collection as _projects_collection
-
-_COLLECTION = "builder_analytics"
-
-
-def _collection():
-    try:
-        _projects_collection()
-    except BuilderV2Disabled as exc:
-        raise exc
-    coll = db.collection(_COLLECTION)
-    if coll is None:
-        raise BuilderV2Disabled("builder-v2 database unavailable")
-    return coll
+from studio.models import Analytics, to_doc
 
 
 def track(project_id, event_type, *, metadata=None):
-    doc = {
-        "eventId": uuid.uuid4().hex[:12],
-        "projectId": project_id,
-        "eventType": event_type,
-        "metadata": metadata or {},
-        "ts": time.time(),
-    }
-    _collection().insert_one(doc)
-    return db.strip_id(doc)
+    row = Analytics(
+        eventId=uuid.uuid4().hex[:12],
+        projectId=project_id,
+        eventType=event_type,
+        metadata_=metadata or {},
+        ts=time.time(),
+    )
+    with db.session() as s:
+        s.add(row)
+        s.commit()
+        return to_doc(row)
 
 
 def list_for_project(project_id):
-    items = [db.strip_id(doc) for doc in _collection().find({"projectId": project_id})]
-    items.sort(key=lambda d: d.get("ts", 0), reverse=True)
-    return items
+    with db.session() as s:
+        rows = (
+            s.query(Analytics)
+            .filter_by(projectId=project_id)
+            .order_by(Analytics.ts.desc())
+            .all()
+        )
+        return [to_doc(r) for r in rows]
 
 
 def summarize(project_id):

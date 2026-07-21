@@ -1,4 +1,4 @@
-"""Sliding-window in-memory rate limiter."""
+﻿"""Sliding-window in-memory rate limiter."""
 
 import pytest
 

@@ -1,4 +1,4 @@
-"""Builder API tests for selection, working html, edits, versions."""
+﻿"""Builder API tests for selection, working html, edits, versions."""
 
 import pytest
 from fastapi.testclient import TestClient
@@ -11,8 +11,7 @@ from studio.services import edit_service, personalization_service
 
 @pytest.fixture
 def memory_db(monkeypatch):
-    monkeypatch.setenv("STUDIO_BUILDER_V2", "true")
-    monkeypatch.setenv("STUDIO_MONGO_URI", "memory://")
+    monkeypatch.setenv("STUDIO_DATABASE_URL", "memory://")
     monkeypatch.setenv("STUDIO_S3_MOCK", "true")
     monkeypatch.setenv("STUDIO_ONBOARDING_LLM", "false")
     config.reset_for_tests()

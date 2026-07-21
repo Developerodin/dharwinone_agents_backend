@@ -1,4 +1,4 @@
-"""Template generation API tests."""
+﻿"""Template generation API tests."""
 
 import time
 
@@ -12,8 +12,7 @@ from studio.repositories import profiles_repo
 
 @pytest.fixture
 def memory_db(monkeypatch):
-    monkeypatch.setenv("STUDIO_BUILDER_V2", "true")
-    monkeypatch.setenv("STUDIO_MONGO_URI", "memory://")
+    monkeypatch.setenv("STUDIO_DATABASE_URL", "memory://")
     monkeypatch.setenv("STUDIO_S3_MOCK", "true")
     monkeypatch.setenv("STUDIO_ONBOARDING_LLM", "false")
     config.reset_for_tests()

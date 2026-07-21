@@ -4,10 +4,14 @@ Version: 0.1.0
 Requires-Python: >=3.11
 Requires-Dist: fastapi
 Requires-Dist: uvicorn[standard]
+Requires-Dist: boto3
 Requires-Dist: httpx
-Requires-Dist: pymongo
+Requires-Dist: sqlalchemy>=2.0
+Requires-Dist: alembic
+Requires-Dist: psycopg[binary]
 Requires-Dist: pyyaml
 Requires-Dist: python-dotenv
+Requires-Dist: pyjwt
 Provides-Extra: dev
 Requires-Dist: pytest; extra == "dev"
 Requires-Dist: ruff; extra == "dev"

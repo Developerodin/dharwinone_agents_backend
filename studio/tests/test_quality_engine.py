@@ -1,4 +1,4 @@
-"""Quality engine tests."""
+﻿"""Quality engine tests."""
 
 from studio.quality.engine import run_quality
 

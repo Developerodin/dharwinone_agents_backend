@@ -8,9 +8,7 @@ _DEFAULT_PORT = 8787
 
 _data_dir = None
 _port = None
-_builder_v2 = None
-_mongo_uri = None
-_mongo_db = None
+_database_url = None
 _s3_mock = None
 _s3_bucket = None
 
@@ -63,26 +61,14 @@ def heartbeat_stale_s():
     return float(os.environ.get("STUDIO_HEARTBEAT_STALE_SEC", "45"))
 
 
-def builder_v2_enabled():
-    global _builder_v2
-    if _builder_v2 is None:
-        raw = os.environ.get("STUDIO_BUILDER_V2", "").strip().lower()
-        _builder_v2 = raw in _TRUTHY
-    return _builder_v2
-
-
-def mongo_uri():
-    global _mongo_uri
-    if _mongo_uri is None:
-        _mongo_uri = os.environ.get("STUDIO_MONGO_URI", "mongodb://127.0.0.1:27017")
-    return _mongo_uri
-
-
-def mongo_db_name():
-    global _mongo_db
-    if _mongo_db is None:
-        _mongo_db = os.environ.get("STUDIO_MONGO_DB", "dharwin_studio")
-    return _mongo_db
+def database_url():
+    global _database_url
+    if _database_url is None:
+        _database_url = os.environ.get(
+            "STUDIO_DATABASE_URL",
+            "postgresql+psycopg://studio:studio@localhost:5432/dharwin_studio",
+        )
+    return _database_url
 
 
 def s3_mock_enabled():
@@ -122,11 +108,9 @@ def s3_bucket():
 
 def reset_for_tests():
     """Clear cached paths (tests only)."""
-    global _data_dir, _port, _builder_v2, _mongo_uri, _mongo_db, _s3_mock, _s3_bucket
+    global _data_dir, _port, _database_url, _s3_mock, _s3_bucket
     _data_dir = None
     _port = None
-    _builder_v2 = None
-    _mongo_uri = None
-    _mongo_db = None
+    _database_url = None
     _s3_mock = None
     _s3_bucket = None

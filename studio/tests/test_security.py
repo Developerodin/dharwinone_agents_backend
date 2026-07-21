@@ -1,4 +1,4 @@
-"""Password hashing + JWT primitives."""
+﻿"""Password hashing + JWT primitives."""
 
 import time
 

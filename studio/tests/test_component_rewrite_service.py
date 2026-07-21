@@ -1,4 +1,4 @@
-"""Parallel section copy rewrite during generation."""
+﻿"""Parallel section copy rewrite during generation."""
 
 import threading
 import time
