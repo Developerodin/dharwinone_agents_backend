@@ -1,0 +1,280 @@
+// Prisma schema aligned with backend/alembic initial migration (builder-v2 tables).
+// Phase 1 static-site tables (sites, site_versions, categories, token_packs) ship in a
+// follow-up migration once the editor/publish flow lands — see Phase1 plan §10.3.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id            Int     @id @default(autoincrement())
+  userId        String  @unique
+  email         String  @unique
+  name          String?
+  passwordHash  String?
+  passwordSalt  String?
+  emailVerified Boolean? @default(false)
+  createdAt     Float?
+  phone         String?
+  country       String?
+  category      String?
+  role          String?  @default("user")
+  disabled      Boolean? @default(false)
+  tokenBalance  Int?     @default(100)
+  planId        String?
+
+  authTokens AuthToken[]
+
+  @@map("users")
+}
+
+model AuthToken {
+  id        Int     @id @default(autoincrement())
+  tokenHash String
+  userId    String?
+  purpose   String?
+  expiresAt Float?
+
+  user User? @relation(fields: [userId], references: [userId])
+
+  @@index([tokenHash])
+  @@index([userId])
+  @@map("auth_tokens")
+}
+
+model BuilderProject {
+  id                 Int      @id @default(autoincrement())
+  projectId          String   @unique
+  projectName        String?
+  status             String?
+  initialPrompt      String?
+  selectedTemplateId String?
+  currentVersionId   String?
+  ownerUserId        String?  @default("local-user")
+  visibility         String?  @default("private")
+  collaborators      Json?    @default("[]")
+  createdAt          Float?
+  updatedAt          Float?
+
+  @@index([ownerUserId])
+  @@map("builder_projects")
+}
+
+model BuilderVersion {
+  id                  Int     @id @default(autoincrement())
+  versionId           String
+  projectId           String?
+  label               String?
+  trigger             String?
+  createdAt           Float?
+  snapshotHtml        String?
+  snapshotProfileHash String?
+  s3HtmlKey           String?
+
+  @@index([projectId])
+  @@index([versionId])
+  @@map("builder_versions")
+}
+
+model ProjectAsset {
+  id          Int     @id @default(autoincrement())
+  assetId     String
+  projectId   String?
+  assetType   String?
+  filename    String?
+  contentType String?
+  s3Key       String?
+  status      String? @default("pending")
+  sizeBytes   Int?
+  width       Int?
+  height      Int?
+  uploadedAt  Float?
+  createdAt   Float?
+  updatedAt   Float?
+
+  @@index([assetId])
+  @@index([projectId])
+  @@map("project_assets")
+}
+
+model BusinessProfile {
+  id           Int     @id @default(autoincrement())
+  projectId    String  @unique
+  brand        Json?
+  business     Json?
+  location     Json?
+  contact      Json?
+  design       Json?
+  skipped      Json?   @default("[]")
+  completeness Json?
+  updatedAt    Float?
+
+  @@map("businessProfiles")
+}
+
+model BuilderTemplate {
+  id           Int     @id @default(autoincrement())
+  templateId   String
+  projectId    String?
+  galleryIndex Int?    @default(0)
+  generatedAt  Float?
+  doc          Json?   @default("{}")
+
+  @@index([projectId])
+  @@index([templateId])
+  @@map("builder_templates")
+}
+
+model BuilderEdit {
+  id            Int     @id @default(autoincrement())
+  editId        String
+  projectId     String?
+  versionId     String?
+  ts            Float?
+  actor         String?
+  source        String?
+  userPrompt    String?
+  actionSummary String?
+  changeScope   String?
+  targets       Json?   @default("[]")
+
+  @@index([editId])
+  @@index([projectId])
+  @@map("builder_edits")
+}
+
+model Conversation {
+  id        Int    @id @default(autoincrement())
+  projectId String @unique
+  turns     Json?  @default("[]")
+
+  @@map("conversations")
+}
+
+model BuilderAnalytic {
+  id        Int     @id @default(autoincrement())
+  eventId   String
+  projectId String?
+  eventType String?
+  metadata  Json?   @map("metadata")
+  ts        Float?
+
+  @@index([eventId])
+  @@index([projectId])
+  @@map("builder_analytics")
+}
+
+model WorkingHtml {
+  id                 Int     @id @default(autoincrement())
+  projectId          String  @unique
+  html               String?
+  selectedTemplateId String?
+  updatedAt          Float?
+
+  @@map("builder_working_html")
+}
+
+model BuilderRelease {
+  id        Int     @id @default(autoincrement())
+  releaseId String
+  projectId String?
+  channel   String?
+  versionId String?
+  status    String?
+  createdAt Float?
+
+  @@index([projectId])
+  @@index([releaseId])
+  @@map("builder_releases")
+}
+
+model BuilderQuality {
+  id        Int     @id @default(autoincrement())
+  projectId String?
+  result    Json?
+  ts        Float?
+
+  @@index([projectId])
+  @@map("builder_quality")
+}
+
+model Meta {
+  key   String @id
+  value Json?
+
+  @@map("meta")
+}
+
+// Phase 1 static-site builder tables (see Phase1_Static_Website_Builder_Plan.md §10.3).
+// Run after Postgres is up: npx prisma migrate dev --name phase1_static_sites
+
+model Site {
+  id                  Int      @id @default(autoincrement())
+  siteId              String   @unique
+  userId              String
+  templateId          String?
+  templateVersion     String?
+  businessProfileJson Json?
+  contentJson         Json?
+  themeJson           Json?
+  status              String?  @default("draft")
+  subdomain           String?
+  customDomain        String?
+  createdAt           Float?
+  updatedAt           Float?
+
+  versions SiteVersion[]
+
+  @@index([userId])
+  @@index([subdomain])
+  @@map("sites")
+}
+
+model SiteVersion {
+  id          Int     @id @default(autoincrement())
+  versionId   String  @unique
+  siteId      String
+  contentJson Json?
+  themeJson   Json?
+  label       String?
+  createdAt   Float?
+
+  site Site @relation(fields: [siteId], references: [siteId])
+
+  @@index([siteId])
+  @@map("site_versions")
+}
+
+model TokenTransaction {
+  id             Int     @id @default(autoincrement())
+  transactionId  String  @unique
+  userId         String
+  actionType     String?
+  tokens         Int?
+  status         String? @default("pending")
+  idempotencyKey String?
+  siteId         String?
+  createdAt      Float?
+
+  @@index([userId])
+  @@index([siteId])
+  // Postgres allows multiple NULLs, so zero-cost actions with a null key stay unconstrained.
+  @@unique([idempotencyKey])
+  @@map("token_transactions")
+}
+
+model Category {
+  id                      Int     @id @default(autoincrement())
+  categoryId              String  @unique
+  name                    String
+  subcategoriesJson       Json?
+  questionnaireConfigJson Json?
+  imagePackRefs           Json?   @default("[]")
+
+  @@map("categories")
+}

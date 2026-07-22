@@ -1,0 +1,45 @@
+{
+  "name": "dharwin-backend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 8787",
+    "dev:8787": "next dev -p 8787",
+    "dev:8790": "next dev -p 8790",
+    "build": "next build",
+    "start": "next start -p 8787",
+    "postinstall": "prisma generate",
+    "lint": "eslint",
+    "test": "vitest run",
+    "check:next": "node scripts/check_next.mjs",
+    "telephony": "npm --prefix telephony start",
+    "studio:python": ".venv\\Scripts\\python -m studio",
+    "prisma:generate": "prisma generate",
+    "prisma:pull": "prisma db pull",
+    "seed:admin": "node scripts/seed_admin_user.mjs"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.9.0",
+    "@prisma/client": "^7.9.0",
+    "dotenv": "^17.4.2",
+    "jose": "^6.2.4",
+    "next": "16.2.7",
+    "pg": "^8.16.3",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.7",
+    "postcss": "^8.5.6",
+    "prisma": "^7.9.0",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vitest": "^3.2.4"
+  }
+}

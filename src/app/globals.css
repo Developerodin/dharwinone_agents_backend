@@ -1,0 +1,16 @@
+@import "tailwindcss";
+@import "./sites/_render/theme.css";
+
+@source "./sites/_render/**/*.tsx";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}

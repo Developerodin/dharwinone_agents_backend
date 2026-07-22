@@ -1,0 +1,107 @@
+[data-family="trust_local"] {
+  --color-ink: #26231c;
+  --color-bg: #e9e5db;
+  --color-accent: #38586e;
+  --color-soft: #f3f0e8;
+  --color-line: #d3ccbd;
+  --font-heading: "Barlow Condensed", sans-serif;
+  --font-body: "Barlow", sans-serif;
+  --btn-radius: 0;
+}
+
+[data-family="bold_convert"] {
+  --color-ink: #eef3ec;
+  --color-bg: #111814;
+  --color-accent: #f4562a;
+  --color-soft: #19221c;
+  --color-line: #28342c;
+  --font-heading: "Oswald", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --btn-radius: 0.5rem;
+}
+
+[data-family="clean_pro"] {
+  --color-ink: #232029;
+  --color-bg: #edebe5;
+  --color-accent: #7c2d3e;
+  --color-soft: #f6f4ef;
+  --color-line: #d8d4ca;
+  --font-heading: "Fraunces", serif;
+  --font-body: "Inter", sans-serif;
+  --btn-radius: 0.5rem;
+}
+
+[data-family="premium_dark"] {
+  --color-ink: #14282e;
+  --color-bg: #edf0e9;
+  --color-accent: #c9631f;
+  --color-soft: #e0e6dc;
+  --color-line: #c9d2c5;
+  --font-heading: "Bricolage Grotesque", sans-serif;
+  --font-body: "Instrument Sans", sans-serif;
+  --btn-radius: 0.5rem;
+}
+
+[data-family="warm_craft"] {
+  --color-ink: #2e1f13;
+  --color-bg: #f3ebdf;
+  --color-accent: #a9631b;
+  --color-soft: #eadfcd;
+  --color-line: #d8c6ac;
+  --font-heading: "Fraunces", serif;
+  --font-body: "Karla", sans-serif;
+  --btn-radius: 999px;
+}
+
+[data-family="fresh_retail"] {
+  --color-ink: #182433;
+  --color-bg: #f2f5f9;
+  --color-accent: #0d6e60;
+  --color-soft: #e7edf3;
+  --color-line: #d3dce6;
+  --font-heading: "Bricolage Grotesque", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --btn-radius: 0.5rem;
+}
+
+.bg-background {
+  background-color: var(--color-bg);
+}
+
+.text-foreground {
+  color: var(--color-ink);
+}
+
+.bg-primary,
+.bg-accent {
+  background-color: var(--color-accent);
+}
+
+.text-accent,
+.text-primary {
+  color: var(--color-accent);
+}
+
+.bg-card {
+  background-color: var(--color-soft);
+}
+
+.border-border {
+  border-color: var(--color-line);
+}
+
+.text-muted-foreground {
+  color: color-mix(in srgb, var(--color-ink) 65%, transparent);
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.site-btn {
+  border-radius: var(--btn-radius);
+}
