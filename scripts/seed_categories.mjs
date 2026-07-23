@@ -31,7 +31,7 @@ const SEGMENT_ORDER = Object.keys(SEGMENT_DISPLAY_NAMES);
 // Shared across all segments (source: categoriesRepo.ts SHARED_QUESTIONNAIRE).
 const SHARED_QUESTIONNAIRE = {
   required: ["business_name", "city", "services", "cta_preference"],
-  recommended: ["service_area", "tone_preference", "phone", "whatsapp_number"],
+  recommended: ["service_area", "tone_preference", "phone", "whatsapp_number", "email"],
   fields: {
     business_name: { label: "Business name", tier: "required" },
     city: { label: "Primary city", tier: "required" },
@@ -46,6 +46,11 @@ const SHARED_QUESTIONNAIRE = {
     tone_preference: { label: "Brand tone", tier: "recommended" },
     phone: { label: "Phone number", tier: "recommended" },
     whatsapp_number: { label: "WhatsApp number", tier: "recommended" },
+    email: {
+      label: "Email address",
+      tier: "optional",
+      followUp: "What email address should customers use to reach you?",
+    },
   },
 };
 

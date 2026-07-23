@@ -139,6 +139,51 @@ function businessName(businessProfile: Record<string, unknown>): string {
   return typeof name === "string" && name.trim() ? name.trim() : "Your Business";
 }
 
+function profileString(bp: Record<string, unknown>, ...keys: string[]): string {
+  for (const key of keys) {
+    const v = bp[key];
+    if (typeof v === "string" && v.trim()) return v.trim();
+  }
+  return "";
+}
+
+function formatPhoneDisplay(raw: string): string {
+  const trimmed = raw.trim();
+  const digits = trimmed.replace(/\D/g, "");
+  if (!digits) return trimmed;
+  if (trimmed.startsWith("+")) return trimmed;
+  if (digits.length === 10) return `+91 ${digits.slice(0, 5)} ${digits.slice(5)}`;
+  return `+${digits}`;
+}
+
+/** Stamp intake contact fields into content.contact so persisted JSON is complete. */
+function injectContactFromProfile(
+  content: Record<string, unknown>,
+  businessProfile: Record<string, unknown>,
+): Record<string, unknown> {
+  const existing = (content.contact as Record<string, unknown> | undefined) ?? {};
+  const contact = { ...existing };
+
+  const phone = profileString(businessProfile, "whatsapp_number", "phone", "phone_number");
+  if (phone) contact.phone = formatPhoneDisplay(phone);
+
+  const email = profileString(businessProfile, "email", "contact_email");
+  if (email) contact.email = email;
+
+  const address = profileString(
+    businessProfile,
+    "address",
+    "business_address",
+    "service_area",
+  );
+  const city = profileString(businessProfile, "city");
+  if (address) contact.address = address;
+  else if (city) contact.address = city;
+
+  if (Object.keys(contact).length > 0) content.contact = contact;
+  return content;
+}
+
 /** Per-section template default content — used to fill missing/invalid sections. */
 function defaultSection(key: string, name: string): Record<string, unknown> | null {
   switch (key) {
@@ -193,7 +238,7 @@ function assembleContent(
     }
   }
 
-  return { content: canonicalizeContent(out), usedFallback };
+  return { content: injectContactFromProfile(canonicalizeContent(out), businessProfile), usedFallback };
 }
 
 function missingSections(

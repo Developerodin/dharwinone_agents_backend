@@ -15,7 +15,7 @@ import {
 
 const LOCAL_SERVICE_QUESTIONNAIRE = {
   required: ["business_name", "city", "services", "cta_preference"],
-  recommended: ["service_area", "tone_preference", "phone", "whatsapp_number"],
+  recommended: ["service_area", "tone_preference", "phone", "whatsapp_number", "email"],
   fields: {
     business_name: {
       label: "Business name",
@@ -42,6 +42,11 @@ const LOCAL_SERVICE_QUESTIONNAIRE = {
       label: "Phone number",
       tier: "recommended",
       followUp: "What phone number should customers call? Include country code if helpful.",
+    },
+    email: {
+      label: "Email address",
+      tier: "optional",
+      followUp: "What email address should customers use to reach you?",
     },
   },
 };
@@ -165,6 +170,7 @@ describe("gap-check logic", () => {
         services: ["wiring", "AC repair"],
         cta_preference: "whatsapp",
         whatsapp_number: "+919876543210",
+        email: "hello@sharma.example",
         service_area: ["Kolkata", "Howrah"],
       },
       LOCAL_SERVICE_QUESTIONNAIRE,
@@ -228,6 +234,23 @@ describe("gap-check logic", () => {
     const phone = result.followUps.find((q) => q.field === "phone");
     expect(phone).toBeDefined();
     expect(phone?.question).toMatch(/phone number/i);
+  });
+
+  it("asks for email after whatsapp number is provided", () => {
+    const result = gapCheckForTests(
+      {
+        business_name: "Iron Leaf Fitness",
+        city: "Jaipur",
+        services: ["gym", "personal training"],
+        cta_preference: "whatsapp",
+        whatsapp_number: "8755887760",
+      },
+      LOCAL_SERVICE_QUESTIONNAIRE,
+    );
+    expect(result.complete).toBe(false);
+    const email = result.followUps.find((q) => q.field === "email");
+    expect(email).toBeDefined();
+    expect(email?.question).toMatch(/email address/i);
   });
 });
 

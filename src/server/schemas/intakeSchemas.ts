@@ -13,6 +13,7 @@ export const BusinessProfileSchema = z
     cta_preference: z.enum(["whatsapp", "phone", "form"]).optional(),
     phone: z.string().max(24).optional(),
     whatsapp_number: z.string().max(24).optional(),
+    email: z.string().max(120).optional(),
     has_reviews: z.boolean().optional(),
     language: z.string().max(8).optional(),
     logo_url: z.string().max(512).optional(),

@@ -25,7 +25,7 @@ export async function createPresign(
   }
   const assetId = randomId();
   const s3Key = s3.buildAssetKey(projectId, assetId, data.filename);
-  const signed = s3.createPresignedPut(s3Key, data.contentType);
+  const signed = await s3.createPresignedPut(s3Key, data.contentType);
   await assetsRepo.createPending(projectId, {
     assetId,
     assetType: data.assetType,

@@ -1,4 +1,20 @@
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { s3Bucket, s3MockEnabled } from "../config";
+
+let _client: S3Client | null = null;
+function client(): S3Client {
+  if (!_client) {
+    const region = (process.env.AWS_REGION ?? "").trim() || undefined;
+    const accessKeyId = (process.env.AWS_ACCESS_KEY_ID ?? "").trim();
+    const secretAccessKey = (process.env.AWS_SECRET_ACCESS_KEY ?? "").trim();
+    _client = new S3Client({
+      region,
+      credentials: accessKeyId && secretAccessKey ? { accessKeyId, secretAccessKey } : undefined,
+    });
+  }
+  return _client;
+}
 
 const ALLOWED_PREFIXES = [
   "projects/",
@@ -26,11 +42,11 @@ export function buildAssetKey(projectId: string, assetId: string, filename: stri
   return validateKey(`projects/${projectId}/assets/${assetId}/${safe}`);
 }
 
-export function createPresignedPut(
+export async function createPresignedPut(
   key: string,
   contentType: string,
   expiresS = 3600,
-): { url: string; method: string; headers: Record<string, string>; expiresAt: number } {
+): Promise<{ url: string; method: string; headers: Record<string, string>; expiresAt: number }> {
   validateKey(key);
   const expiresAt = Date.now() / 1000 + expiresS;
   if (s3MockEnabled()) {
@@ -42,7 +58,14 @@ export function createPresignedPut(
       expiresAt,
     };
   }
-  throw new Error("real S3 presign not configured in Next.js backend yet");
+  // Real SigV4 presigned PUT. ContentType is signed, so the browser PUT must send
+  // exactly this Content-Type header (uploadSiteImage forwards `headers` verbatim).
+  const url = await getSignedUrl(
+    client(),
+    new PutObjectCommand({ Bucket: s3Bucket(), Key: key, ContentType: contentType }),
+    { expiresIn: expiresS },
+  );
+  return { url, method: "PUT", headers: { "Content-Type": contentType }, expiresAt };
 }
 
 export function publicAssetUrl(key: string): string | null {

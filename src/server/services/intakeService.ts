@@ -64,6 +64,9 @@ function fieldFollowUp(
   if (field === "phone" && profile.cta_preference === "phone") {
     return "What phone number should customers call? Include country code if helpful.";
   }
+  if (field === "email") {
+    return "What email address should customers use to reach you?";
+  }
   if (field === "services") {
     return "Which specific services should we highlight on your site?";
   }
@@ -162,6 +165,22 @@ export function gapCheck(
         question: fieldFollowUp(questionnaire, "phone", businessProfile),
         tier: "recommended",
         hint: "Phone number",
+      });
+    }
+  }
+
+  if (followUps.length < 3 && isEmpty(businessProfile.email)) {
+    const hasPhone =
+      !isEmpty(businessProfile.phone) ||
+      !isEmpty(businessProfile.phone_number) ||
+      !isEmpty(businessProfile.whatsapp_number);
+    const wantsForm = businessProfile.cta_preference === "form";
+    if ((hasPhone || wantsForm) && !followUps.some((q) => q.field === "email")) {
+      followUps.push({
+        field: "email",
+        question: fieldFollowUp(questionnaire, "email", businessProfile),
+        tier: "optional",
+        hint: "Email address",
       });
     }
   }

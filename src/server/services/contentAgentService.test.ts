@@ -141,4 +141,17 @@ describe("generateSiteContent", () => {
     const testimonials = content.testimonials as { items: Record<string, unknown>[] };
     expect(testimonials.items[0].avatar).toBe("a.jpg");
   });
+
+  it("injects contact phone and address from businessProfile", async () => {
+    useProviderReturning(
+      JSON.stringify(validSection({ contact: { section_title: "Get In Touch" } })),
+    );
+    const { content } = await generateSiteContent({
+      businessProfile: { ...BUSINESS_PROFILE, whatsapp_number: "8755887760", city: "Jaipur" },
+      sectionSchema: SECTION_SCHEMA,
+    });
+    const contact = content.contact as { phone: string; address: string };
+    expect(contact.phone).toBe("+91 87558 87760");
+    expect(contact.address).toBe("Jaipur");
+  });
 });

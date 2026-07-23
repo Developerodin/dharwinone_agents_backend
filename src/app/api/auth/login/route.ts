@@ -16,10 +16,14 @@ export async function POST(request: Request) {
   if (error) return error;
   const emailKey = body.email.trim().toLowerCase();
   const ip = clientIp(request);
-  if (!rateLimit.allow(`login:email:${emailKey}`, 5, 900)) {
+  const skipRateLimit = process.env.NODE_ENV === "development";
+  if (
+    !skipRateLimit &&
+    !rateLimit.allow(`login:email:${emailKey}`, 5, 900)
+  ) {
     return rateLimitResponse(rateLimit.retryAfter(`login:email:${emailKey}`, 900));
   }
-  if (!rateLimit.allow(`login:ip:${ip}`, 20, 900)) {
+  if (!skipRateLimit && !rateLimit.allow(`login:ip:${ip}`, 20, 900)) {
     return rateLimitResponse(rateLimit.retryAfter(`login:ip:${ip}`, 900));
   }
   try {
