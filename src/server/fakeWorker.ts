@@ -1,9 +1,10 @@
-/** Port of backend/studio/tests/fake_worker.py — scripted worker for vitest/E2E. */
+/** Scripted worker for vitest/E2E (golden fixture in assets/fixtures/). */
 import fs from "node:fs";
 import path from "node:path";
 import { atomicWriteJson, journalRead, JournalWriter, packet } from "./packets";
+import { backendPath } from "./paths";
 
-const FIXTURE = path.join(process.cwd(), "studio", "tests", "fixtures", "happy_path_journal.jsonl");
+const FIXTURE = backendPath("assets/fixtures/happy_path_journal.jsonl");
 const POLL_MS = parseFloat(process.env.STUDIO_GATE_POLL ?? "250");
 
 function loadFixture(): Record<string, unknown>[] {

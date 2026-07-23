@@ -1,2 +1,0 @@
-{"event": "start", "task": "GOLD", "model": "big"}
-{"event": "shipped", "task": "GOLD", "evidence": {"paths": ["src/app.py"], "accept_with_notes": []}}

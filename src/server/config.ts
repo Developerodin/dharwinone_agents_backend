@@ -20,7 +20,7 @@ export function backendDir(): string {
 
 export function dataDir(): string {
   if (_dataDir === null) {
-    _dataDir = process.env.STUDIO_DATA || path.join(backendDir(), "studio", "data");
+    _dataDir = process.env.STUDIO_DATA || path.join(backendDir(), "data");
   }
   return _dataDir;
 }

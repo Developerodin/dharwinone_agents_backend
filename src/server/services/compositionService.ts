@@ -5,8 +5,8 @@ import path from "node:path";
 import { backendPath } from "../paths";
 import { loadOnboardingProvider } from "../llmProvider";
 
-const COMPONENTS_DIR = backendPath("studio/components");
-const TEMPLATES_DIR = backendPath("studio/templates");
+const COMPONENTS_DIR = backendPath("assets/components");
+const TEMPLATES_DIR = backendPath("assets/templates");
 
 const RECIPE = [
   "nav",

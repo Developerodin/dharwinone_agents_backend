@@ -3,7 +3,7 @@ import { backendPath } from "./paths";
 import { get, type Provider, type ProviderConfig, type StageProviderConfig } from "./providers";
 
 const TRUTHY = new Set(["1", "true", "yes", "on"]);
-const HARNESS_CFG = backendPath("harness/config.yaml");
+const HARNESS_CFG = backendPath("assets/harness/config.yaml");
 
 let disabledUntil = 0;
 let cached: { provider: Provider; model: string } | null = null;

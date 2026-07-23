@@ -55,7 +55,7 @@ export function appendEditLog(
 }
 
 function parseHarnessModels(): Record<string, string> {
-  const raw = fs.readFileSync(backendPath("harness/config.yaml"), "utf-8");
+  const raw = fs.readFileSync(backendPath("assets/harness/config.yaml"), "utf-8");
   const planner = raw.match(/^\s+planner:\s*(\S+)/m)?.[1] ?? "qwen2.5-coder:14b";
   return { planner };
 }

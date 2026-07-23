@@ -4,6 +4,7 @@ import os from "node:os";
 import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { journalRead } from "./packets";
+import { backendPath } from "./paths";
 import { runFakeWorker } from "./fakeWorker";
 import { resetWorkerRegistryForTests } from "./workerRegistry";
 
@@ -44,7 +45,7 @@ describe("fakeWorker happy path", () => {
     await runFakeWorker(runDir, false);
     const events = journalRead(path.join(runDir, "journal.jsonl")).map((e) => e.event);
     const golden = fs
-      .readFileSync(path.join(process.cwd(), "studio", "tests", "fixtures", "happy_path_journal.jsonl"), "utf8")
+      .readFileSync(backendPath("assets/fixtures/happy_path_journal.jsonl"), "utf8")
       .split(/\r?\n/)
       .filter(Boolean)
       .map((l) => (JSON.parse(l) as { event: string }).event);

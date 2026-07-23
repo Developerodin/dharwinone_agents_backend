@@ -74,7 +74,7 @@ function subcategoryDisplayName(config: CategoryConfig): string {
 }
 
 function loadConfigsFromDisk(): CategoryConfig[] {
-  const root = backendPath("studio/catalog/categories");
+  const root = backendPath("assets/categories");
   if (!fs.existsSync(root)) return [];
 
   const configs: CategoryConfig[] = [];

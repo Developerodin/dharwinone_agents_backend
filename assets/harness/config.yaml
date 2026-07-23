@@ -2,13 +2,13 @@ ollama_url: http://localhost:11434
 repo_root: C:/Users/INTEL/Desktop/DharwinOne
 worktree_root: C:/wt
 integration_branch: harness/integration
-skeptic_path: harness/skeptic.yaml
-tasks_path: harness/tasks.yaml
-generated_tasks_path: harness/generated_tasks.yaml
-journal_path: harness/journal.jsonl
-stats_path: harness/stats.json
-packets_dir: harness/packets
-report_path: harness/report.md
+skeptic_path: assets/harness/skeptic.yaml
+tasks_path: assets/harness/tasks.yaml
+generated_tasks_path: assets/harness/generated_tasks.yaml
+journal_path: data/harness/journal.jsonl
+stats_path: data/harness/stats.json
+packets_dir: data/harness/packets
+report_path: data/harness/report.md
 models:
   feature: qwen3-coder-30b-harness
   fix: qwen25-coder-14b-harness

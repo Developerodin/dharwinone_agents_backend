@@ -102,7 +102,7 @@ let cached: HarnessDefaults | null = null;
 
 export function loadHarnessDefaults(): HarnessDefaults {
   if (cached) return cached;
-  const raw = fs.readFileSync(backendPath("harness/config.yaml"), "utf8");
+  const raw = fs.readFileSync(backendPath("assets/harness/config.yaml"), "utf8");
   const modelsBlock = parseNestedMap(raw, "models");
   cached = {
     ollama_url: parseBlock(raw, "ollama_url") || "http://localhost:11434",
@@ -114,9 +114,9 @@ export function loadHarnessDefaults(): HarnessDefaults {
     },
     edit_format: parseNestedMap(raw, "edit_format"),
     limits: parseLimits(raw),
-    skeptic_path: parseBlock(raw, "skeptic_path") || "harness/skeptic.yaml",
-    tasks_path: parseBlock(raw, "tasks_path") || "harness/tasks.yaml",
-    generated_tasks_path: parseBlock(raw, "generated_tasks_path") || "harness/generated_tasks.yaml",
+    skeptic_path: parseBlock(raw, "skeptic_path") || "assets/harness/skeptic.yaml",
+    tasks_path: parseBlock(raw, "tasks_path") || "assets/harness/tasks.yaml",
+    generated_tasks_path: parseBlock(raw, "generated_tasks_path") || "assets/harness/generated_tasks.yaml",
   };
   return cached;
 }

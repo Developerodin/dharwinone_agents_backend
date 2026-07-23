@@ -187,7 +187,7 @@ export async function rewriteSection(
   return fragment ? sanitizeHtml(fragment) : null;
 }
 
-export const TEMPLATES_DIR = backendPath("studio/templates");
+export const TEMPLATES_DIR = backendPath("assets/templates");
 
 export const DEFAULT_TAGLINES: Record<string, string> = {
   cafe: "Small-batch roasts, fresh mornings, and a room worth staying in.",

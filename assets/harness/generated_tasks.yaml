@@ -1,0 +1,63 @@
+- accept: py -c "assert '# harness was here' in open('scripts/smoke_target.py').read()"
+  allow_paths: &id001
+  - scripts/
+  category: fix
+  depth: 1
+  id: LIVE-SMOKE-1.1
+  prompt: Find the file scripts/smoke_target.py in the project directory structure
+  title: Locate the smoke_target.py file
+- accept: py -c "assert '# harness was here' in open('scripts/smoke_target.py').read()"
+  allow_paths: *id001
+  category: fix
+  depth: 1
+  id: LIVE-SMOKE-1.2
+  prompt: Open and read the contents of scripts/smoke_target.py to understand its
+    current structure
+  title: Read the current file content
+- accept: py -c "assert '# harness was here' in open('scripts/smoke_target.py').read()"
+  allow_paths: *id001
+  category: fix
+  depth: 1
+  id: LIVE-SMOKE-1.3
+  prompt: Insert the comment line "# harness was here" as the very first line in scripts/smoke_target.py,
+    ensuring no other changes are made to the existing content
+  title: Add comment line at top of file
+- accept: py -c "assert '# harness was here' in open('scripts/smoke_target.py').read()"
+  allow_paths: *id001
+  category: fix
+  depth: 1
+  id: LIVE-SMOKE-1.4
+  prompt: Confirm that scripts/smoke_target.py now has "# harness was here" as its
+    first line and all other content remains unchanged
+  title: Verify file modification
+- accept: pnpm -C backend vitest run
+  allow_paths: &id001
+  - backend/
+  category: feature
+  depth: 1
+  id: A0-001.1
+  prompt: Create a function that reads and parses package.json to extract the version
+    field. This should be a reusable utility that can be imported by both the server
+    endpoint and the test.
+  requires: &id002 []
+  title: Extract version from package.json
+- accept: pnpm -C backend vitest run
+  allow_paths: *id001
+  category: feature
+  depth: 1
+  id: A0-001.2
+  prompt: Add a GET route at /version in src/server.ts that returns JSON with the
+    version field. Follow the existing patterns in the file for route definition and
+    response formatting, and use the version utility created in the first subtask.
+  requires: *id002
+  title: Implement GET /version endpoint
+- accept: pnpm -C backend vitest run
+  allow_paths: *id001
+  category: feature
+  depth: 1
+  id: A0-001.3
+  prompt: Create a test file that mocks the package.json import and tests the GET
+    /version endpoint. The test should verify that the response matches the version
+    from package.json, following the existing test patterns in the project.
+  requires: *id002
+  title: Write Vitest test for version endpoint
