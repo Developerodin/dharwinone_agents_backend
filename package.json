@@ -13,7 +13,6 @@
     "test": "vitest run",
     "check:next": "node scripts/check_next.mjs",
     "telephony": "npm --prefix telephony start",
-    "studio:python": ".venv\\Scripts\\python -m studio",
     "prisma:generate": "prisma generate",
     "prisma:pull": "prisma db pull",
     "seed:admin": "node scripts/seed_admin_user.mjs"

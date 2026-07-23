@@ -3,9 +3,8 @@ export default function HomePage() {
     <main style={{ fontFamily: "system-ui", padding: "2rem", maxWidth: "48rem" }}>
       <h1>Dharwin Backend (Next.js)</h1>
       <p>
-        Primary API: <code>npm run dev:8787</code> (port <strong>8787</strong>, FastAPI path parity via rewrites).
-        Parallel mode: <code>npm run dev</code> on <strong>8790</strong>. Python studio (
-        <code>npm run studio:python</code>) is harness-only until Phase D.
+        Primary API: <code>npm run dev:8787</code> (port <strong>8787</strong>). This Next.js app is the
+        whole backend — the legacy Python studio has been removed.
       </p>
       <ul>
         <li>
