@@ -108,4 +108,37 @@ describe("generateSiteContent", () => {
     expect((content.hero as { headline: string }).headline).toBe("Hi there");
     expect((content.seo as { title: string }).title).toBe("Sharma Electricals");
   });
+
+  it("canonicalizes model field aliases to the render schema", async () => {
+    useProviderReturning(
+      JSON.stringify(
+        validSection({
+          faq: { section_title: "FAQ", items: [{ question: "Open?", answer: "Daily" }] },
+          pricing: { section_title: "Menu", items: [{ title: "Coffee", desc: "Fresh brew", price: "50" }] },
+          cta_footer: { text: "Visit us today", cta_text: "Book" },
+          testimonials: { section_title: "Reviews", items: [{ name: "A", quote: "Great", image: "a.jpg" }] },
+        }),
+      ),
+    );
+    const { content } = await generateSiteContent({
+      businessProfile: BUSINESS_PROFILE,
+      sectionSchema: SECTION_SCHEMA,
+    });
+    const faq = content.faq as { items: Record<string, unknown>[] };
+    expect(faq.items[0].q).toBe("Open?");
+    expect(faq.items[0].a).toBe("Daily");
+    expect(faq.items[0].question).toBeUndefined();
+
+    const pricing = content.pricing as { items: Record<string, unknown>[] };
+    expect(pricing.items[0].name).toBe("Coffee");
+    expect(pricing.items[0].price).toBe("50");
+    expect(pricing.items[0].features).toContain("Fresh brew");
+    expect(pricing.items[0].title).toBeUndefined();
+
+    expect((content.cta_footer as { headline: string }).headline).toBe("Visit us today");
+    expect((content.cta_footer as Record<string, unknown>).text).toBeUndefined();
+
+    const testimonials = content.testimonials as { items: Record<string, unknown>[] };
+    expect(testimonials.items[0].avatar).toBe("a.jpg");
+  });
 });

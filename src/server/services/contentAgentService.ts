@@ -72,6 +72,59 @@ function clampValue(value: unknown, descriptor: unknown): unknown {
   return value;
 }
 
+type Item = Record<string, unknown>;
+const asItems = (v: unknown): Item[] => (Array.isArray(v) ? (v as Item[]) : []);
+
+/**
+ * Map generator field aliases onto the canonical render schema (SiteContent):
+ * faq {question,answer}->{q,a}, pricing {title,desc}->{name,features},
+ * cta_footer {text}->{headline}, testimonials {image}->{avatar}. The model picks
+ * natural names the templates don't read; this makes the persisted content
+ * canonical regardless. Alias keys are dropped so the output is clean.
+ */
+function canonicalizeSection(key: string, section: unknown): unknown {
+  if (!section || typeof section !== "object" || Array.isArray(section)) return section;
+  const s = section as Record<string, unknown>;
+
+  if (key === "faq" && Array.isArray(s.items)) {
+    return {
+      ...s,
+      items: asItems(s.items).map(({ question, answer, ...rest }) => ({
+        ...rest,
+        q: rest.q ?? question,
+        a: rest.a ?? answer,
+      })),
+    };
+  }
+  if (key === "pricing" && Array.isArray(s.items)) {
+    return {
+      ...s,
+      items: asItems(s.items).map(({ title, desc, ...rest }) => ({
+        ...rest,
+        name: rest.name ?? title,
+        features: rest.features ?? (desc != null ? [desc] : undefined),
+      })),
+    };
+  }
+  if (key === "cta_footer" && s.headline == null && s.text != null) {
+    const { text, ...rest } = s;
+    return { ...rest, headline: text };
+  }
+  if (key === "testimonials" && Array.isArray(s.items)) {
+    return {
+      ...s,
+      items: asItems(s.items).map(({ image, ...rest }) => ({ ...rest, avatar: rest.avatar ?? image })),
+    };
+  }
+  return section;
+}
+
+function canonicalizeContent(content: Record<string, unknown>): Record<string, unknown> {
+  const out: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(content)) out[key] = canonicalizeSection(key, value);
+  return out;
+}
+
 function isValidSection(value: unknown): value is Record<string, unknown> {
   return (
     !!value &&
@@ -140,7 +193,7 @@ function assembleContent(
     }
   }
 
-  return { content: out, usedFallback };
+  return { content: canonicalizeContent(out), usedFallback };
 }
 
 function missingSections(
@@ -208,7 +261,10 @@ export async function regenerateSection(input: {
     "Respond with JSON for the section object only.";
   try {
     const raw = await provider.generate(model, prompt, { jsonMode: true, timeoutS: 15 });
-    return objectSchema.parse(JSON.parse(raw));
+    return canonicalizeSection(input.sectionKey, objectSchema.parse(JSON.parse(raw))) as Record<
+      string,
+      unknown
+    >;
   } catch {
     return input.currentSection;
   }
