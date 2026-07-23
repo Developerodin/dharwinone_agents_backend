@@ -40,32 +40,47 @@ describe("categoryCatalog", () => {
     expect(local?.subcategories.some((row) => row.id === "salon")).toBe(false);
   });
 
-  it("infers restaurant text to hospitality_travel/cafe_restaurant", () => {
-    const inferred = inferTaxonomy("Restaurant website with menu, reservations, and bakery sweets");
+  it("infers restaurant text to hospitality_travel/restaurant", () => {
+    const inferred = inferTaxonomy("Fine dining restaurant with a seasonal menu and bistro seating");
     expect(inferred).toMatchObject({
       category: "hospitality_travel",
-      subcategory: "cafe_restaurant",
-      configId: "hospitality_travel_cafe_restaurant",
+      subcategory: "restaurant",
+      configId: "hospitality_travel_restaurant",
     });
     expect(inferred?.confidence).toBeGreaterThanOrEqual(2);
   });
 
-  it("returns matcher eligible templates for resolved subcategory", () => {
-    const config = getConfigBySegmentSubcategory("hospitality_travel", "cafe_restaurant");
-    expect(config?.matcher?.eligible_template_ids).toContain("ht_cafe_v1");
+  it("infers cafe text to hospitality_travel/cafe", () => {
+    const inferred = inferTaxonomy("Cozy cafe serving espresso, fresh bakery bakes and sweets");
+    expect(inferred).toMatchObject({
+      category: "hospitality_travel",
+      subcategory: "cafe",
+      configId: "hospitality_travel_cafe",
+    });
+  });
+
+  it("returns matcher eligible templates for the restaurant subcategory", () => {
+    const config = getConfigBySegmentSubcategory("hospitality_travel", "restaurant");
+    expect(config?.matcher?.eligible_template_ids).toContain("ht_restaurant_v1");
 
     const matcher = getMatcherForProfile({
       category: "hospitality_travel",
-      subcategory: "cafe_restaurant",
+      subcategory: "restaurant",
     });
+    expect(matcher?.default_rank_order[0]).toBe("ht_restaurant_v1");
+  });
+
+  it("returns matcher eligible templates for the cafe subcategory", () => {
+    const matcher = getMatcherForProfile({ category: "hospitality_travel", subcategory: "cafe" });
     expect(matcher?.default_rank_order[0]).toBe("ht_cafe_v1");
   });
 
-  it("returns image pack refs for cafe restaurant profile", () => {
-    const refs = getImagePackRefsForProfile({
-      category: "hospitality_travel",
-      subcategory: "cafe_restaurant",
-    });
-    expect(refs).toEqual(["pack_cafe_restaurant_v1"]);
+  it("returns image pack refs per hospitality subcategory", () => {
+    expect(getImagePackRefsForProfile({ category: "hospitality_travel", subcategory: "cafe" })).toEqual([
+      "pack_cafe_v1",
+    ]);
+    expect(
+      getImagePackRefsForProfile({ category: "hospitality_travel", subcategory: "restaurant" }),
+    ).toEqual(["pack_restaurant_v1"]);
   });
 });

@@ -205,7 +205,7 @@ function regexPrefill(description: string, category: string, subcategory?: strin
     .filter((p) => p.length > 3 && p.length < 60);
 
   const resolvedSubcategory = String(out.subcategory ?? "");
-  if (resolvedSubcategory === "cafe_restaurant" && !out.services) {
+  if ((resolvedSubcategory === "cafe" || resolvedSubcategory === "restaurant") && !out.services) {
     const offerings: string[] = [];
     if (/\bmenu\b/i.test(text)) offerings.push("Menu");
     if (/\breserv/i.test(text)) offerings.push("Reservations");

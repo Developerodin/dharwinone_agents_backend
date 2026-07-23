@@ -60,7 +60,7 @@ const SUBCATEGORY_ORDER: Record<string, string[]> = {
   real_estate: ["broker", "agent", "rental_consultant", "luxury"],
   local_service: ["plumbing", "electrician", "landscaping", "car_wash", "cleaning_handyman", "insurance_agent"],
   retail: ["gift_shop", "print_shop", "clothing", "boutique", "handmade"],
-  hospitality_travel: ["cafe_restaurant", "travel_tourism"],
+  hospitality_travel: ["cafe", "restaurant", "travel_tourism"],
   health_education: ["clinic_medical", "fitness_gym", "education_coaching"],
   professional: ["agency_studio", "saas_startup", "portfolio_freelancer"],
 };

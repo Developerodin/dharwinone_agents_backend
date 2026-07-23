@@ -59,25 +59,35 @@ describe("templateMatcherService", () => {
     expect(primary?.score).toBeGreaterThan(generic?.score ?? 0);
   });
 
-  it("ranks restaurant profile to ht_cafe_v1, not electrician", () => {
+  it("ranks restaurant profile to ht_restaurant_v1, not electrician", () => {
     const matches = matchTemplates({
       category: "local_service",
       business_name: "jonte",
       services: ["menu", "reservations", "location map"],
       cta_preference: "phone",
     });
-    expect(matches[0]!.templateId).toBe("ht_cafe_v1");
+    expect(matches[0]!.templateId).toBe("ht_restaurant_v1");
     expect(matches[0]!.templateId).not.toBe("electrician_bold_v1");
   });
 
-  it("ranks corrected hospitality profile to ht_cafe templates first", () => {
+  it("ranks a corrected restaurant profile to ht_restaurant_v1 first", () => {
     const matches = matchTemplates({
       category: "hospitality_travel",
-      subcategory: "cafe_restaurant",
+      subcategory: "restaurant",
       business_name: "jonte",
       services: ["menu", "reservations", "location map"],
     });
-    expect(matches[0]!.templateId).toMatch(/^ht_cafe_/);
+    expect(matches[0]!.templateId).toBe("ht_restaurant_v1");
     expect(matches[0]!.score).toBeGreaterThanOrEqual(18);
+  });
+
+  it("ranks a cafe profile to ht_cafe templates first", () => {
+    const matches = matchTemplates({
+      category: "hospitality_travel",
+      subcategory: "cafe",
+      business_name: "brew bar",
+      services: ["espresso", "bakery", "sweets"],
+    });
+    expect(matches[0]!.templateId).toMatch(/^ht_cafe_/);
   });
 });

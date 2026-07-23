@@ -21,7 +21,7 @@ describe("imageResolverService", () => {
   it("resolves cafe pack hero from catalog ref", () => {
     const hero = resolveSlot({
       slotKey: "hero",
-      packRefs: ["pack_cafe_restaurant_v1"],
+      packRefs: ["pack_cafe_v1"],
     });
     expect(hero.source).toBe("pack");
     expect(hero.url).toContain("unsplash.com");
@@ -43,9 +43,9 @@ describe("imageResolverService", () => {
   it("derives pack refs from business profile category/subcategory", () => {
     const refs = packRefsFromProfile({
       category: "hospitality_travel",
-      subcategory: "cafe_restaurant",
+      subcategory: "cafe",
     });
-    expect(refs).toContain("pack_cafe_restaurant_v1");
+    expect(refs).toContain("pack_cafe_v1");
   });
 
   it("injects hero.image from cafe pack into generated content", () => {
@@ -61,7 +61,7 @@ describe("imageResolverService", () => {
       businessProfile: {
         business_name: "Helum",
         category: "hospitality_travel",
-        subcategory: "cafe_restaurant",
+        subcategory: "cafe",
       },
     });
 
@@ -82,7 +82,7 @@ describe("imageResolverService", () => {
       theme: {},
       businessProfile: {
         category: "hospitality_travel",
-        subcategory: "cafe_restaurant",
+        subcategory: "cafe",
       },
     });
     expect((content.hero as Record<string, unknown>).image).toBe(existing);

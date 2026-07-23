@@ -152,7 +152,7 @@ describe("gap-check business name", () => {
     );
     expect(profile.business_name).toBeUndefined();
     expect(profile.category).toBe("hospitality_travel");
-    expect(profile.subcategory).toBe("cafe_restaurant");
+    expect(profile.subcategory).toBe("restaurant");
   });
 });
 

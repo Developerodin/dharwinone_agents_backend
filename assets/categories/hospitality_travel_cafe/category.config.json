@@ -1,18 +1,19 @@
 {
-  "id": "hospitality_travel_cafe_restaurant",
-  "name": "Hospitality & Travel — Café / Restaurant",
+  "id": "hospitality_travel_cafe",
+  "name": "Hospitality & Travel — Café",
   "category": "hospitality_travel",
-  "subcategory": "cafe_restaurant",
+  "subcategory": "cafe",
   "wave": 2,
   "status": "planned",
   "default_family": "warm_craft",
   "keywords": [
     "cafe",
-    "restaurant",
-    "menu",
+    "coffee",
     "bakery",
     "sweets",
-    "dining"
+    "patisserie",
+    "brew",
+    "espresso"
   ],
   "matcher": {
     "eligible_template_ids": [
@@ -27,7 +28,7 @@
     ]
   },
   "image_pack_refs": [
-    "pack_cafe_restaurant_v1"
+    "pack_cafe_v1"
   ],
   "moderation": {
     "blocked": false,

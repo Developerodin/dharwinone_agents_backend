@@ -1,0 +1,36 @@
+{
+  "id": "hospitality_travel_restaurant",
+  "name": "Hospitality & Travel — Restaurant",
+  "category": "hospitality_travel",
+  "subcategory": "restaurant",
+  "wave": 2,
+  "status": "planned",
+  "default_family": "premium_dark",
+  "keywords": [
+    "restaurant",
+    "dining",
+    "diner",
+    "eatery",
+    "bistro",
+    "menu",
+    "food",
+    "kitchen"
+  ],
+  "matcher": {
+    "eligible_template_ids": [
+      "ht_restaurant_v1",
+      "gn_generic_v1"
+    ],
+    "default_rank_order": [
+      "ht_restaurant_v1",
+      "gn_generic_v1"
+    ]
+  },
+  "image_pack_refs": [
+    "pack_restaurant_v1"
+  ],
+  "moderation": {
+    "blocked": false,
+    "notes": "Standard business — allowed"
+  }
+}

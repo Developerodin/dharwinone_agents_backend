@@ -17,11 +17,17 @@ const PACK_SLOT_DEFAULTS: Record<string, Record<string, string>> = {
     services: "/studio/placeholders/pack/local_service/services.webp",
     gallery: "/studio/placeholders/pack/local_service/services.webp",
   },
-  pack_cafe_restaurant_v1: {
+  pack_cafe_v1: {
     hero: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1600&q=70",
     about: "https://images.unsplash.com/photo-1522992319-0365e5f11656?auto=format&fit=crop&w=1200&q=70",
     services: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=900&q=70",
     gallery: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=70",
+  },
+  pack_restaurant_v1: {
+    hero: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=70",
+    about: "https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?auto=format&fit=crop&w=1200&q=70",
+    services: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=900&q=70",
+    gallery: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=70",
   },
   pack_travel_tourism_v1: {
     hero: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1600&q=70",

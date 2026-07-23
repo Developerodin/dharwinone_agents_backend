@@ -174,7 +174,7 @@
     {
       "id": "ht_cafe_v1",
       "segment": "hospitality_travel",
-      "subcategory": "cafe_restaurant",
+      "subcategory": "cafe",
       "family": "warm_craft",
       "status": "convert",
       "source": "cafe-2.html",
@@ -264,10 +264,19 @@
     {
       "id": "ht_cafe_v2",
       "segment": "hospitality_travel",
-      "subcategory": "cafe_restaurant",
+      "subcategory": "cafe",
       "family": "warm_craft",
       "status": "convert",
       "source": "cafe-3.html",
+      "wave": 2
+    },
+    {
+      "id": "ht_restaurant_v1",
+      "segment": "hospitality_travel",
+      "subcategory": "restaurant",
+      "family": "premium_dark",
+      "status": "convert",
+      "source": "cafe-2.html (re-themed for dining)",
       "wave": 2
     },
     {
