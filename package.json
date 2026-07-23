@@ -15,7 +15,8 @@
     "telephony": "npm --prefix telephony start",
     "prisma:generate": "prisma generate",
     "prisma:pull": "prisma db pull",
-    "seed:admin": "node scripts/seed_admin_user.mjs"
+    "seed:admin": "node scripts/seed_admin_user.mjs",
+    "seed:categories": "node scripts/seed_categories.mjs"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.9.0",

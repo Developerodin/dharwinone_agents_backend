@@ -49,8 +49,8 @@ function buildSeed(): CategoryDoc[] {
   }));
 }
 
-function subcategoryIds(doc: CategoryDoc): string[] {
-  const rows = doc.subcategoriesJson as Array<{ id: string }> | undefined;
+function subcategoryIds(subcategoriesJson: unknown): string[] {
+  const rows = subcategoriesJson as Array<{ id: string }> | undefined;
   return (rows ?? []).map((row) => row.id).sort();
 }
 
@@ -76,8 +76,8 @@ export async function ensureSeeded(): Promise<void> {
       continue;
     }
 
-    const existingIds = subcategoryIds({ subcategoriesJson: existing.subcategoriesJson } as CategoryDoc);
-    const seedIds = subcategoryIds(item);
+    const existingIds = subcategoryIds(existing.subcategoriesJson);
+    const seedIds = subcategoryIds(item.subcategoriesJson);
     const needsUpdate =
       existingIds.length !== seedIds.length || existingIds.some((id, index) => id !== seedIds[index]);
 
