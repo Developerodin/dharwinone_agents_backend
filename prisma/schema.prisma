@@ -25,7 +25,7 @@ model User {
   category      String?
   role          String?  @default("user")
   disabled      Boolean? @default(false)
-  tokenBalance  Int?     @default(100)
+  tokenBalance  Int?     @default(500)
   planId        String?
 
   authTokens AuthToken[]
