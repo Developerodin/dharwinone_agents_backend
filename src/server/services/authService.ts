@@ -1,5 +1,4 @@
 import { prisma } from "../db";
-import * as projectsRepo from "../repos/projectsRepo";
 import * as usersRepo from "../repos/usersRepo";
 import * as emailService from "./emailService";
 import { hashPassword, issueJwt, verifyPassword } from "../securityNode";
