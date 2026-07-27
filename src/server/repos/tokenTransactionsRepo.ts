@@ -1,18 +1,13 @@
 import { Prisma } from "@/generated/prisma/client";
 import { prisma } from "../db";
 import { toDoc } from "./doc";
+import { randomId } from "../ids";
 
 export type TokenTransactionDoc = Record<string, unknown> & {
   transactionId: string;
   userId: string;
   status?: string | null;
 };
-
-function randomId(): string {
-  const buf = new Uint8Array(6);
-  crypto.getRandomValues(buf);
-  return Array.from(buf, (b) => b.toString(16).padStart(2, "0")).join("");
-}
 
 /** True for a Prisma unique-constraint violation (P2002) — a lost idempotency-key race. */
 export function isUniqueViolation(err: unknown): boolean {

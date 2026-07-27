@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
+import { requireUserId } from "@/server/builderRoute";
 import { z } from "zod";
-import { HttpError, httpErrorResponse, parseBody, userId } from "@/server/api";
+import { HttpError, httpErrorResponse, parseBody } from "@/server/api";
 import * as sitesRepo from "@/server/repos/sitesRepo";
 
 type Params = { params: Promise<{ siteId: string }> };
@@ -8,12 +9,6 @@ type Params = { params: Promise<{ siteId: string }> };
 const RestoreRequest = z.object({
   versionId: z.string().min(4),
 });
-
-function requireUserId(request: Request): string | NextResponse {
-  const uid = userId(request);
-  if (!uid) return NextResponse.json({ detail: "authentication required" }, { status: 401 });
-  return uid;
-}
 
 async function requireOwnedSite(siteId: string, uid: string) {
   const site = await sitesRepo.get(siteId);

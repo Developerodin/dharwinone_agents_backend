@@ -1,16 +1,11 @@
 import { NextResponse } from "next/server";
+import { requireUserId } from "@/server/builderRoute";
 import { revalidateTag } from "next/cache";
-import { HttpError, httpErrorResponse, userId } from "@/server/api";
+import { HttpError, httpErrorResponse } from "@/server/api";
 import * as sitesRepo from "@/server/repos/sitesRepo";
 import * as sitePublishService from "@/server/services/sitePublishService";
 
 type Params = { params: Promise<{ siteId: string }> };
-
-function requireUserId(request: Request): string | NextResponse {
-  const uid = userId(request);
-  if (!uid) return NextResponse.json({ detail: "authentication required" }, { status: 401 });
-  return uid;
-}
 
 async function requireOwnedSite(siteId: string, uid: string) {
   const site = await sitesRepo.get(siteId);

@@ -1,14 +1,9 @@
 import { NextResponse } from "next/server";
-import { HttpError, httpErrorResponse, userId } from "@/server/api";
+import { requireUserId } from "@/server/builderRoute";
+import { HttpError, httpErrorResponse } from "@/server/api";
 import * as siteAssetService from "@/server/services/siteAssetService";
 
 type Params = { params: Promise<{ siteId: string }> };
-
-function requireUserId(request: Request): string | NextResponse {
-  const uid = userId(request);
-  if (!uid) return NextResponse.json({ detail: "authentication required" }, { status: 401 });
-  return uid;
-}
 
 export async function GET(request: Request, { params }: Params) {
   const uid = requireUserId(request);

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
+import { requireUserId } from "@/server/builderRoute";
 import { z } from "zod";
-import { HttpError, httpErrorResponse, parseBody, userId } from "@/server/api";
+import { HttpError, httpErrorResponse, parseBody } from "@/server/api";
 import * as siteAssetService from "@/server/services/siteAssetService";
 
 type Params = { params: Promise<{ siteId: string }> };
@@ -11,12 +12,6 @@ const PresignRequest = z.object({
   assetType: z.string(),
   slotKey: z.string().optional(),
 });
-
-function requireUserId(request: Request): string | NextResponse {
-  const uid = userId(request);
-  if (!uid) return NextResponse.json({ detail: "authentication required" }, { status: 401 });
-  return uid;
-}
 
 export async function POST(request: Request, { params }: Params) {
   const uid = requireUserId(request);

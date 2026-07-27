@@ -2,6 +2,7 @@ import { Prisma } from "@/generated/prisma/client";
 import { prisma } from "../db";
 import { tokenHash } from "../securityNode";
 import { toDoc } from "./doc";
+import { randomId } from "../ids";
 
 export const VERIFY_TTL_S = 24 * 3600;
 export const RESET_TTL_S = 3600;
@@ -36,7 +37,7 @@ export async function create(
   passwordHash: string,
   salt: string,
 ): Promise<UserDoc> {
-  const userId = `usr-${randomHex(8)}`;
+  const userId = `usr-${randomId(8)}`;
   try {
     const row = await prisma().user.create({
       data: {
@@ -119,12 +120,6 @@ export async function consumeToken(raw: string, purpose: string): Promise<string
   const userId = row.userId ?? "";
   await prisma().authToken.deleteMany({ where: { tokenHash: hashed } });
   return expiresAt >= Date.now() / 1000 ? userId : null;
-}
-
-function randomHex(bytes: number): string {
-  const buf = new Uint8Array(bytes);
-  crypto.getRandomValues(buf);
-  return Array.from(buf, (b) => b.toString(16).padStart(2, "0")).join("");
 }
 
 function randomUrlSafe(bytes: number): string {

@@ -1,14 +1,9 @@
 import { NextResponse } from "next/server";
-import { parseBody, userId } from "@/server/api";
+import { requireUserId } from "@/server/builderRoute";
+import { parseBody } from "@/server/api";
 import { PrefillRequestSchema } from "@/server/schemas/intakeSchemas";
 import * as intakeService from "@/server/services/intakeService";
 import * as tokenService from "@/server/services/tokenService";
-
-function requireUserId(request: Request): string | NextResponse {
-  const uid = userId(request);
-  if (!uid) return NextResponse.json({ detail: "authentication required" }, { status: 401 });
-  return uid;
-}
 
 export async function POST(request: Request) {
   const uid = requireUserId(request);

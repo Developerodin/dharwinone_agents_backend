@@ -35,9 +35,7 @@ function validateKey(key: string): string {
 export function buildAssetKey(projectId: string, assetId: string, filename: string): string {
   const safe =
     filename
-      .split("")
-      .map((c) => (c.match(/[\w.-]/) ? c : "-"))
-      .join("")
+      .replace(/[^\w.-]/g, "-")
       .replace(/^\.+|-+$/g, "") || "asset.bin";
   return validateKey(`projects/${projectId}/assets/${assetId}/${safe}`);
 }
