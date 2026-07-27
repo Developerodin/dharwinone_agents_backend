@@ -1,8 +1,5 @@
-/** Port of studio/draft.py helpers used by personalization/composition. */
+/** HTML sanitize + refine helpers used by the runs edit pipeline. */
 
-import fs from "node:fs";
-import path from "node:path";
-import { backendPath } from "./paths";
 import type { Provider } from "./providers";
 
 const SCRIPT_TAG_RE = /<script\b[^>]*>[\s\S]*?(<\/script\s*>|$)/gi;
@@ -31,18 +28,6 @@ export function sanitizeHtml(html: string): string {
   return out;
 }
 
-export function pickTemplate(hint: string): string {
-  const low = hint.toLowerCase();
-  if (/cafe|coffee|restaurant|food/.test(low)) return "cafe";
-  if (/fitness|gym|workout/.test(low)) return "fitness";
-  if (/medical|clinic|health/.test(low)) return "medical";
-  if (/portfolio|photography/.test(low)) return "portfolio";
-  if (/agency|marketing/.test(low)) return "agency";
-  if (/saas|software|app/.test(low)) return "saas";
-  if (/shop|store|e-?commerce/.test(low)) return "shop";
-  return "generic";
-}
-
 export function extractHtmlDocument(out: unknown): string | null {
   if (typeof out !== "string") return null;
   const text = stripMarkdownFences(out);
@@ -52,15 +37,6 @@ export function extractHtmlDocument(out: unknown): string | null {
   const end = low.lastIndexOf("</html>");
   if (start === -1 || end === -1 || end < start) return null;
   return text.slice(start, end + "</html>".length);
-}
-
-export function extractHtmlFragment(out: unknown): string | null {
-  if (typeof out !== "string") return null;
-  const text = stripMarkdownFences(out);
-  const low = text.toLowerCase();
-  if (low.includes("<html") || low.includes("<!doctype")) return null;
-  const trimmed = text.trim();
-  return trimmed || null;
 }
 
 function extractStyleAssets(html: string): string[] {
@@ -156,53 +132,6 @@ export async function refine(
   return sanitized;
 }
 
-export interface RewriteSectionOptions {
-  styleReferenceHtml?: string | null;
-  numCtx?: number;
-}
-
-export async function rewriteSection(
-  provider: Provider,
-  model: string,
-  sectionHtml: string,
-  sectionType: string,
-  userPrompt: string,
-  options: RewriteSectionOptions = {},
-): Promise<string | null> {
-  const { styleReferenceHtml = null, numCtx = 8192 } = options;
-  let styleBlock = "";
-  if (styleReferenceHtml) {
-    styleBlock =
-      "Surrounding page context (preserve visual language; do not copy verbatim):\n" +
-      `${styleReferenceHtml.slice(0, 4000)}\n`;
-  }
-  const prompt =
-    `You are rewriting the INNER HTML of one website section.\n\nSection type: ${sectionType}\n\n` +
-    `User intent:\n${userPrompt}\n\nRules:\n` +
-    `- Output ONLY the inner HTML for this section.\n` +
-    `- Never add <script>, inline event handlers, or javascript: URLs.\n\n` +
-    `${styleBlock}Current section inner HTML:\n${sectionHtml}`;
-  const out = await provider.generate(model, prompt, { numCtx });
-  const fragment = extractHtmlFragment(out);
-  return fragment ? sanitizeHtml(fragment) : null;
-}
-
-export const TEMPLATES_DIR = backendPath("assets/templates");
-
-export const DEFAULT_TAGLINES: Record<string, string> = {
-  cafe: "Small-batch roasts, fresh mornings, and a room worth staying in.",
-  shop: "New drops, fair prices, free returns.",
-  portfolio: "Selected work and commissions.",
-  saas: "Less busywork. More momentum.",
-  fitness: "Programs that meet you where you are.",
-  agency: "Senior work, measured outcomes.",
-  construction: "On time, on spec, on budget.",
-  medical: "Care that starts with listening.",
-  education: "Learn from people who teach for a living.",
-  travel: "Trips planned by people who have been there.",
-  generic: "What we do, and why it works.",
-};
-
 export interface StylePack {
   id: string;
   label: string;
@@ -289,100 +218,3 @@ export const STYLE_PACKS: StylePack[] = [
     font: "'Sora',sans-serif",
   },
 ];
-
-const PACK_CSS = `
-<style id="style-pack" data-pack="{id}">
-:root {
-  --accent:{accent}; --pop:{accent}; --volt:{accent}; --gold:{accent};
-  --brand:{accent};
-  --ink:{ink}; --dim:{muted};
-  --bg:{bg}; --cream:{bg}; --paper:{bg}; --soft:{surface}; --line:{surface};
-}
-body { background:{bg} !important; color:{ink} !important; }
-h1,h2,h3 { font-family:{font} !important; }
-.bg-white,.card-soft,.menu-card,.product,.feature,.service,.plan {
-  background:{surface} !important; color:{ink} !important;
-}
-.text-muted,.text-secondary,.text-white-50 { color:{muted} !important; }
-.btn-primary,.btn-accent,.btn-pop,.btn-volt,.btn-brand,.btn-ink {
-  background:{accent} !important; border-color:{accent} !important;
-  color:{bg} !important;
-}
-footer { background:{surface} !important; color:{muted} !important; }
-</style>
-`;
-
-const PACK_BLOCK_RE = /<style id="style-pack"[\s\S]*?<\/style>\s*/gi;
-const LABEL_RE = /name="design-label"\s+content="([^"]+)"/;
-
-export function templateFiles(name: string): string[] {
-  const rx = new RegExp(`^${name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(-\\d+)?\\.html$`);
-  return fs
-    .readdirSync(TEMPLATES_DIR)
-    .filter((f) => rx.test(f))
-    .sort((a, b) => (a !== `${name}.html` ? 1 : 0) - (b !== `${name}.html` ? 1 : 0) || a.localeCompare(b));
-}
-
-export function designLabel(raw: string, stem: string, base: string): string {
-  const m = LABEL_RE.exec(raw);
-  if (m) return m[1]!;
-  return stem === base ? "Classic" : stem.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-}
-
-export function applyPack(html: string, pack: StylePack): string {
-  let out = html.replace(PACK_BLOCK_RE, "");
-  if (!pack.accent) return out;
-  const css = PACK_CSS.replace(/\{id\}/g, pack.id)
-    .replace(/\{accent\}/g, pack.accent!)
-    .replace(/\{ink\}/g, pack.ink!)
-    .replace(/\{muted\}/g, pack.muted!)
-    .replace(/\{bg\}/g, pack.bg!)
-    .replace(/\{surface\}/g, pack.surface!)
-    .replace(/\{font\}/g, pack.font!);
-  return out.replace("</head>", `${css}</head>`);
-}
-
-const IMG_OK_RE = /^https?:\/\//i;
-
-export function ensureLoadableImages(html: string, _genre = "generic"): string {
-  let slot = 0;
-  return html.replace(/<img\b[^>]*>/gi, (tag) => {
-    const srcM = tag.match(/\bsrc=(["'])([^"']*)\1/i);
-    let src = srcM?.[2] ?? "";
-    if (!src || !IMG_OK_RE.test(src.trim())) {
-      slot += 1;
-      src = `https://placehold.co/800x600?text=Image+${slot}`;
-    }
-    let fixed = tag.replace(/\bsrc=(["'])[^"']*\1/i, `src="${src}"`);
-    if (!/referrerpolicy=/i.test(fixed)) {
-      fixed = fixed.replace(/\/?>$/, ' referrerpolicy="no-referrer">');
-    }
-    return fixed;
-  });
-}
-
-export function normalizeCtaAnchors(html: string): string {
-  const ids = [...html.matchAll(/\bid="([A-Za-z][\w-]*)"/g)].map((m) => m[1]!);
-  if (!ids.length) return html;
-  const idSet = new Set(ids);
-  const contact = ["contact", "visit"].find((i) => idSet.has(i)) ?? null;
-  const menu = ["menu", "list", "board", "bakes"].find((i) => idSet.has(i)) ?? null;
-  const about =
-    ["about", "story", "ritual", "process", "why", "method"].find((i) => idSet.has(i)) ?? null;
-  const primary = menu || about || ids.find((i) => !["top", "contact", "visit"].includes(i)) || ids[0]!;
-  const secondary = about || contact || primary;
-  let out = html;
-  if (idSet.has("top")) {
-    out = out.replace(
-      /(<a\b[^>]*class="[^"]*\bbrand\b[^"]*"[^>]*\b)href="#"/i,
-      '$1href="#top"',
-    );
-  }
-  let btnIdx = 0;
-  out = out.replace(/(<a\b[^>]*\bclass="[^"]*\bbtn[^"]*"[^>]*\b)href="#"/gi, (match) => {
-    const target = btnIdx === 0 ? primary : secondary;
-    btnIdx += 1;
-    return `${match}href="#${target}"`;
-  });
-  return out;
-}
