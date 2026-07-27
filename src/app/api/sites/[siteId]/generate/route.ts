@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
+import { requireUserId } from "@/server/builderRoute";
 import { z } from "zod";
-import { HttpError, httpErrorResponse, parseBody, userId } from "@/server/api";
+import { HttpError, httpErrorResponse, parseBody } from "@/server/api";
 import { enforceAiRateLimit } from "@/server/aiRateLimit";
 import * as sitesRepo from "@/server/repos/sitesRepo";
 import * as contentAgentService from "@/server/services/contentAgentService";
@@ -11,19 +12,15 @@ import {
   ModerationBlockedError,
 } from "@/server/services/moderationService";
 import * as tokenService from "@/server/services/tokenService";
+import { createGenerateSseResponse } from "./generateStreamResponse";
 
 type Params = { params: Promise<{ siteId: string }> };
 
 const GenerateRequest = z.object({
   sectionSchema: z.record(z.string(), z.unknown()),
   idempotencyKey: z.string().min(8),
+  stream: z.boolean().optional(),
 });
-
-function requireUserId(request: Request): string | NextResponse {
-  const uid = userId(request);
-  if (!uid) return NextResponse.json({ detail: "authentication required" }, { status: 401 });
-  return uid;
-}
 
 async function requireOwnedSite(siteId: string, uid: string) {
   const site = await sitesRepo.get(siteId);
@@ -50,6 +47,33 @@ export async function POST(request: Request, { params }: Params) {
     };
     const theme = (site.themeJson as Record<string, unknown> | undefined) ?? {};
     const moderation = await assertModerationAllowed(profile);
+
+    if (body.stream) {
+      // Pre-check balance before opening the SSE (avoid error-only streams for 402).
+      const balance = await tokenService.getBalance(uid);
+      const cost = tokenService.actionCost("full_generation");
+      if (balance < cost) {
+        return NextResponse.json(
+          {
+            detail: `insufficient tokens: have ${balance}, need ${cost}`,
+            balance,
+            cost,
+          },
+          { status: 402 },
+        );
+      }
+      return createGenerateSseResponse({
+        siteId,
+        userId: uid,
+        templateId: site.templateId ?? null,
+        sectionSchema: body.sectionSchema,
+        idempotencyKey: body.idempotencyKey,
+        profile,
+        theme,
+        moderation,
+      });
+    }
+
     const result = await tokenService.withTokenHold({
       userId: uid,
       actionType: "full_generation",

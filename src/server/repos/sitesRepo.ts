@@ -1,6 +1,7 @@
 import { Prisma } from "@/generated/prisma/client";
 import { prisma } from "../db";
 import { toDoc } from "./doc";
+import { randomId } from "../ids";
 
 const SITE_COLUMNS = new Set([
   "siteId",
@@ -10,6 +11,7 @@ const SITE_COLUMNS = new Set([
   "businessProfileJson",
   "contentJson",
   "themeJson",
+  "chatHistoryJson",
   "status",
   "subdomain",
   "customDomain",
@@ -45,37 +47,51 @@ async function uniqueSiteId(base: string): Promise<string> {
   return sid;
 }
 
-function randomId(): string {
-  const buf = new Uint8Array(6);
-  crypto.getRandomValues(buf);
-  return Array.from(buf, (b) => b.toString(16).padStart(2, "0")).join("");
-}
-
 export async function create(
   userId: string,
   input: {
+    siteId?: string | null;
     businessProfileJson?: Record<string, unknown> | null;
     templateId?: string | null;
     subdomain?: string | null;
+    chatHistoryJson?: unknown[] | null;
   } = {},
 ): Promise<SiteDoc> {
   const profile = input.businessProfileJson ?? {};
   const name =
     String((profile.brand as Record<string, unknown> | undefined)?.brandName ?? "") ||
     String((profile.business as Record<string, unknown> | undefined)?.type ?? "") ||
+    String((profile as Record<string, unknown>).business_name ?? "") ||
     "site";
   const now = Date.now() / 1000;
+  const chatHistory = Array.isArray(input.chatHistoryJson) ? input.chatHistoryJson : [];
+
+  // Reuse an explicit client siteId when it already exists for this user (idempotent draft).
+  const requestedId = typeof input.siteId === "string" ? input.siteId.trim() : "";
+  if (requestedId) {
+    const existing = await prisma().site.findFirst({ where: { siteId: requestedId } });
+    if (existing) {
+      if (existing.userId !== userId) {
+        throw new Error("siteId is already taken");
+      }
+      return toDoc(existing) as SiteDoc;
+    }
+  }
+
   for (let attempt = 0; attempt < 5; attempt++) {
     try {
+      const siteId =
+        requestedId && attempt === 0 ? requestedId : await uniqueSiteId(slug(name));
       const row = await prisma().site.create({
         data: {
-          siteId: await uniqueSiteId(slug(name)),
+          siteId,
           userId,
           templateId: input.templateId ?? null,
           templateVersion: null,
           businessProfileJson: (profile as Prisma.InputJsonValue) ?? {},
           contentJson: {},
           themeJson: {},
+          chatHistoryJson: chatHistory as Prisma.InputJsonValue,
           status: "draft",
           subdomain: input.subdomain ?? null,
           customDomain: null,
@@ -85,7 +101,13 @@ export async function create(
       });
       return toDoc(row) as SiteDoc;
     } catch (exc) {
-      if (exc instanceof Prisma.PrismaClientKnownRequestError && exc.code === "P2002") continue;
+      if (exc instanceof Prisma.PrismaClientKnownRequestError && exc.code === "P2002") {
+        if (requestedId) {
+          const raced = await prisma().site.findFirst({ where: { siteId: requestedId } });
+          if (raced && raced.userId === userId) return toDoc(raced) as SiteDoc;
+        }
+        continue;
+      }
       throw exc;
     }
   }

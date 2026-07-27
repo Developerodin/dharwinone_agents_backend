@@ -1,9 +1,19 @@
 import { NextResponse } from "next/server";
+import { requireUserId } from "@/server/builderRoute";
 import { z } from "zod";
-import { HttpError, httpErrorResponse, parseBody, userId } from "@/server/api";
+import { HttpError, httpErrorResponse, parseBody } from "@/server/api";
 import * as sitesRepo from "@/server/repos/sitesRepo";
 
 type Params = { params: Promise<{ siteId: string }> };
+
+const ChatMessageSchema = z
+  .object({
+    id: z.string(),
+    role: z.enum(["user", "assistant"]),
+    content: z.string(),
+    timestamp: z.string(),
+  })
+  .passthrough();
 
 const SiteUpdateRequest = z.object({
   templateId: z.string().nullable().optional(),
@@ -11,16 +21,11 @@ const SiteUpdateRequest = z.object({
   businessProfileJson: z.record(z.string(), z.unknown()).optional(),
   contentJson: z.record(z.string(), z.unknown()).optional(),
   themeJson: z.record(z.string(), z.unknown()).optional(),
+  chatHistoryJson: z.array(ChatMessageSchema).optional(),
   status: z.enum(["draft", "published"]).optional(),
   subdomain: z.string().nullable().optional(),
   customDomain: z.string().nullable().optional(),
 });
-
-function requireUserId(request: Request): string | NextResponse {
-  const uid = userId(request);
-  if (!uid) return NextResponse.json({ detail: "authentication required" }, { status: 401 });
-  return uid;
-}
 
 async function requireOwnedSite(siteId: string, uid: string): Promise<Record<string, unknown>> {
   const site = await sitesRepo.get(siteId);

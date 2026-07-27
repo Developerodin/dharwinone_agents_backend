@@ -2,8 +2,30 @@
 import * as assetsRepo from "../repos/assetsRepo";
 import * as sitesRepo from "../repos/sitesRepo";
 import * as s3 from "../storage/s3";
+import { randomId } from "../ids";
 
-const FILENAME_RE = /^[\w.\- ]{1,120}$/i;
+const FILENAME_RE = /^[\p{L}\p{N}_.\- ]{1,120}$/u;
+
+function sanitizeFilename(name: string): string {
+  const raw = (name || "").trim() || "upload.bin";
+  const lastDot = raw.lastIndexOf(".");
+  const hasExt = lastDot > 0 && lastDot < raw.length - 1;
+  const baseRaw = hasExt ? raw.slice(0, lastDot) : raw;
+  const extRaw = hasExt ? raw.slice(lastDot + 1) : "bin";
+  const base =
+    baseRaw
+      .normalize("NFKD")
+      .replace(/[^\p{L}\p{N}_.\- ]+/gu, "-")
+      .replace(/[-_\s.]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 80) || "upload";
+  const ext =
+    extRaw
+      .toLowerCase()
+      .replace(/[^\p{L}\p{N}]+/gu, "")
+      .slice(0, 8) || "bin";
+  return `${base}.${ext}`.slice(0, 120);
+}
 const LOGO_MIN_PX = 512;
 
 export class SiteAssetValidationError extends Error {}
@@ -33,12 +55,6 @@ function withPublicUrl(asset: Record<string, unknown> | null): Record<string, un
   return out;
 }
 
-function randomId(): string {
-  const buf = new Uint8Array(6);
-  crypto.getRandomValues(buf);
-  return Array.from(buf, (b) => b.toString(16).padStart(2, "0")).join("");
-}
-
 export async function createPresign(
   siteId: string,
   userId: string,
@@ -53,6 +69,9 @@ export async function createPresign(
   const allowed = new Set(assetsRepo.allowedAssetTypes());
   if (!allowed.has(data.assetType)) throw new SiteAssetValidationError("invalid asset type");
   if (!data.filename || !FILENAME_RE.test(data.filename)) {
+    data = { ...data, filename: sanitizeFilename(data.filename || "upload.bin") };
+  }
+  if (!FILENAME_RE.test(data.filename)) {
     throw new SiteAssetValidationError("invalid filename");
   }
   if (!data.contentType || !data.contentType.includes("/")) {
