@@ -1,5 +1,16 @@
 /** Deterministic image slot resolver — upload → pack default → template default. */
 import { getImagePackRefsForProfile } from "../data/categoryCatalog";
+import { publicAssetUrl } from "../storage/s3";
+
+// Placeholder slots are stored as bare S3 keys (studio/placeholders/...); resolve
+// them to the bucket's public URL at emit time. http(s) sources pass through
+// unchanged (publicAssetUrl short-circuits). Falls back to the raw key only when
+// S3 is unconfigured (mock/dev), where nothing serves it anyway.
+// ponytail: objects must be seeded once via scripts/seed_placeholders.mjs.
+function toPublicUrl(value?: string | null): string | null {
+  if (!value) return null;
+  return publicAssetUrl(value) ?? value;
+}
 
 export type ResolvedImage = {
   slotKey: string;
@@ -12,10 +23,10 @@ export type ResolvedImage = {
 /** Curated pack slot URLs — mirrors studio draft genre fallbacks until S3 packs are wired. */
 const PACK_SLOT_DEFAULTS: Record<string, Record<string, string>> = {
   "pack/local_service/default": {
-    hero: "/studio/placeholders/pack/local_service/hero.webp",
-    about: "/studio/placeholders/pack/local_service/about.webp",
-    services: "/studio/placeholders/pack/local_service/services.webp",
-    gallery: "/studio/placeholders/pack/local_service/services.webp",
+    hero: "studio/placeholders/pack/local_service/hero.webp",
+    about: "studio/placeholders/pack/local_service/about.webp",
+    services: "studio/placeholders/pack/local_service/services.webp",
+    gallery: "studio/placeholders/pack/local_service/services.webp",
   },
   pack_cafe_v1: {
     hero: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1600&q=70",
@@ -48,25 +59,25 @@ const PACK_SLOT_DEFAULTS: Record<string, Record<string, string>> = {
     gallery: "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=900&q=70",
   },
   pack_electrician_v1: {
-    hero: "/studio/placeholders/pack/local_service/hero.webp",
-    about: "/studio/placeholders/pack/local_service/about.webp",
-    services: "/studio/placeholders/pack/local_service/services.webp",
-    gallery: "/studio/placeholders/pack/local_service/services.webp",
+    hero: "studio/placeholders/pack/local_service/hero.webp",
+    about: "studio/placeholders/pack/local_service/about.webp",
+    services: "studio/placeholders/pack/local_service/services.webp",
+    gallery: "studio/placeholders/pack/local_service/services.webp",
   },
   pack_plumbing_v1: {
-    hero: "/studio/placeholders/pack/local_service/hero.webp",
-    about: "/studio/placeholders/pack/local_service/about.webp",
-    services: "/studio/placeholders/pack/local_service/services.webp",
-    gallery: "/studio/placeholders/pack/local_service/services.webp",
+    hero: "studio/placeholders/pack/local_service/hero.webp",
+    about: "studio/placeholders/pack/local_service/about.webp",
+    services: "studio/placeholders/pack/local_service/services.webp",
+    gallery: "studio/placeholders/pack/local_service/services.webp",
   },
 };
 
 const TEMPLATE_SLOT_DEFAULTS: Record<string, string> = {
-  hero: "/studio/placeholders/template/default/hero.webp",
-  about: "/studio/placeholders/template/default/about.webp",
-  logo: "/studio/placeholders/template/default/logo.webp",
-  services: "/studio/placeholders/template/default/hero.webp",
-  gallery: "/studio/placeholders/template/default/hero.webp",
+  hero: "studio/placeholders/template/default/hero.webp",
+  about: "studio/placeholders/template/default/about.webp",
+  logo: "studio/placeholders/template/default/logo.webp",
+  services: "studio/placeholders/template/default/hero.webp",
+  gallery: "studio/placeholders/template/default/hero.webp",
 };
 
 const PLACEHOLDER_RE = /\{\{|\[placeholder\]|lorem ipsum|todo:/i;
@@ -78,11 +89,11 @@ export function packRefsFromProfile(profile: Record<string, unknown>): string[] 
 export function packSlotUrls(packRefs: string[], slotKey: string): string[] {
   const urls: string[] = [];
   for (const packRef of packRefs) {
-    const url = PACK_SLOT_DEFAULTS[packRef]?.[slotKey];
+    const url = toPublicUrl(PACK_SLOT_DEFAULTS[packRef]?.[slotKey]);
     if (url) urls.push(url);
   }
   if (!urls.length && TEMPLATE_SLOT_DEFAULTS[slotKey]) {
-    urls.push(TEMPLATE_SLOT_DEFAULTS[slotKey]!);
+    urls.push(toPublicUrl(TEMPLATE_SLOT_DEFAULTS[slotKey])!);
   }
   return urls;
 }
@@ -125,14 +136,15 @@ export function resolveSlot(input: {
   }
 
   for (const packRef of input.packRefs ?? []) {
-    const packUrl = PACK_SLOT_DEFAULTS[packRef]?.[input.slotKey];
+    const packUrl = toPublicUrl(PACK_SLOT_DEFAULTS[packRef]?.[input.slotKey]);
     if (packUrl) {
       return { slotKey: input.slotKey, url: packUrl, source: "pack" };
     }
   }
 
-  const templateUrl =
-    input.templateDefaults?.[input.slotKey] ?? TEMPLATE_SLOT_DEFAULTS[input.slotKey] ?? null;
+  const templateUrl = toPublicUrl(
+    input.templateDefaults?.[input.slotKey] ?? TEMPLATE_SLOT_DEFAULTS[input.slotKey] ?? null,
+  );
   if (templateUrl) {
     return { slotKey: input.slotKey, url: templateUrl, source: "template" };
   }
@@ -158,9 +170,9 @@ export function resolveLogo(input: {
     return { slotKey: "logo", url: uploadUrl, source: "upload" };
   }
 
-  const packLogo = (input.packRefs ?? [])
-    .map((ref) => PACK_SLOT_DEFAULTS[ref]?.logo)
-    .find(Boolean);
+  const packLogo = toPublicUrl(
+    (input.packRefs ?? []).map((ref) => PACK_SLOT_DEFAULTS[ref]?.logo).find(Boolean),
+  );
   if (packLogo) {
     return { slotKey: "logo", url: packLogo, source: "pack" };
   }
