@@ -1,14 +1,16 @@
-[
-  {
-    "AllowedOrigins": [
-      "http://localhost:3000",
-      "http://127.0.0.1:3000",
-      "https://dharwinone.com",
-      "https://*.dharwinone.com"
-    ],
-    "AllowedMethods": ["PUT", "GET", "HEAD"],
-    "AllowedHeaders": ["*"],
-    "ExposeHeaders": ["ETag"],
-    "MaxAgeSeconds": 3000
-  }
-]
+{
+  "CORSRules": [
+    {
+      "AllowedOrigins": [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "https://dharwinone.com",
+        "https://*.dharwinone.com"
+      ],
+      "AllowedMethods": ["PUT", "GET", "HEAD"],
+      "AllowedHeaders": ["*"],
+      "ExposeHeaders": ["ETag"],
+      "MaxAgeSeconds": 3000
+    }
+  ]
+}

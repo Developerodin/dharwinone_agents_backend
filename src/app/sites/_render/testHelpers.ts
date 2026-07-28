@@ -8,13 +8,13 @@ export function baseSectionProps(
   overrides: Partial<SectionProps> & { content?: Record<string, unknown> } = {},
 ): SectionProps {
   const ctx = resolveTheme({
-    family: "trust_local",
+    family: "warm",
     themeJson: {},
     sectionSchemaSections: ["hero", "services", "cta_footer"],
   });
   return {
     content: {},
-    family: FAMILIES.trust_local,
+    family: FAMILIES.warm,
     ctx,
     businessProfile: { whatsapp_number: "+919876543210", cta_preference: "whatsapp" },
     resolveImage: () => null,

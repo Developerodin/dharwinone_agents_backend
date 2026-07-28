@@ -154,4 +154,22 @@ describe("generateSiteContent", () => {
     expect(contact.phone).toBe("+91 87558 87760");
     expect(contact.address).toBe("Jaipur");
   });
+
+  it("stamps portfolio hero headline from business_name when still on Jack default", async () => {
+    useProviderReturning(
+      JSON.stringify(
+        validSection({
+          hero: { headline: "Hi, i'm jack", subtext: "3D creator", cta_text: "Contact Me" },
+        }),
+      ),
+    );
+    const { content } = await generateSiteContent({
+      businessProfile: { business_name: "Maya Chen", language: "en" },
+      sectionSchema: {
+        template_id: "pf_portfolio_jack_v1",
+        schema: SECTION_SCHEMA.schema,
+      },
+    });
+    expect((content.hero as { headline: string }).headline).toBe("Hi, I'm Maya");
+  });
 });

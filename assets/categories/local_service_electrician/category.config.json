@@ -1,40 +1,100 @@
 {
   "id": "local_service_electrician",
-  "name": "Blue-Collar / Local Services — Electrician",
+  "name": "Local Services — Electrician",
+  "definition": "Wiring, AC repair, inverters, electrical safety",
   "category": "local_service",
   "subcategory": "electrician",
   "wave": 1,
   "status": "active",
-  "default_family": "trust_local",
+  "default_family": "warm",
+  "eligible_families": [
+    "warm",
+    "bold",
+    "industrial",
+    "professional"
+  ],
   "keywords": [
     "electrician",
     "wiring",
     "AC repair",
     "fan",
     "inverter",
-    "short circuit"
+    "short circuit",
+    "electrical"
   ],
   "matcher": {
     "eligible_template_ids": [
-      "ls_electrician_v1",
-      "electrician_v3",
-      "ls_plumbing_v1",
-      "ls_landscaping_v1",
-      "ls_cleaning_v1",
-      "gn_generic_v1"
+      "gn_axon_v1"
     ],
     "default_rank_order": [
-      "ls_electrician_v1",
-      "electrician_v3",
-      "ls_plumbing_v1",
-      "ls_landscaping_v1",
-      "ls_cleaning_v1",
-      "gn_generic_v1"
+      "gn_axon_v1"
     ]
   },
   "image_pack_refs": [
     "pack_electrician_v1"
   ],
+  "questionnaire": {
+    "required": [
+      "business_name",
+      "city",
+      "services",
+      "cta_preference"
+    ],
+    "recommended": [
+      "service_area",
+      "tone_preference",
+      "phone",
+      "whatsapp_number",
+      "email"
+    ],
+    "fields": {
+      "business_name": {
+        "label": "Business name",
+        "tier": "required"
+      },
+      "city": {
+        "label": "Primary city",
+        "tier": "required"
+      },
+      "services": {
+        "label": "Main services",
+        "tier": "required",
+        "type": "tags"
+      },
+      "cta_preference": {
+        "label": "Preferred CTA",
+        "tier": "required",
+        "type": "enum",
+        "options": [
+          "whatsapp",
+          "phone",
+          "form"
+        ]
+      },
+      "service_area": {
+        "label": "Service areas",
+        "tier": "recommended",
+        "type": "tags"
+      },
+      "tone_preference": {
+        "label": "Brand tone",
+        "tier": "recommended"
+      },
+      "phone": {
+        "label": "Phone number",
+        "tier": "recommended"
+      },
+      "whatsapp_number": {
+        "label": "WhatsApp number",
+        "tier": "recommended"
+      },
+      "email": {
+        "label": "Email address",
+        "tier": "optional",
+        "followUp": "What email address should customers use to reach you?"
+      }
+    }
+  },
   "moderation": {
     "blocked": false,
     "notes": "Standard business — allowed"

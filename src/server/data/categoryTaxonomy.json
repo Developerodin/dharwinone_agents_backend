@@ -1,0 +1,487 @@
+{
+  "version": 2,
+  "categories": [
+    {
+      "id": "real_estate",
+      "name": "Real Estate",
+      "definition": "Property sales, rentals, brokerage, and luxury listings",
+      "subcategories": [
+        {
+          "id": "broker",
+          "name": "Brokerage / Broker",
+          "definition": "Multi-agent firms, RERA listings, team credibility",
+          "default_family": "professional",
+          "eligible_families": ["professional", "corporate", "sleek", "premium"],
+          "keywords": ["brokerage", "firm", "RERA", "agency", "team of agents", "broker"],
+          "wave": 1
+        },
+        {
+          "id": "agent",
+          "name": "Independent Agent",
+          "definition": "Solo agents, neighbourhood specialists, personal brand",
+          "default_family": "warm",
+          "eligible_families": ["warm", "professional", "bold", "sleek"],
+          "keywords": ["independent agent", "individual", "advisor", "neighbourhood", "realtor"],
+          "wave": 1
+        },
+        {
+          "id": "rental_consultant",
+          "name": "Rental / Property Consultant",
+          "definition": "Rentals, leases, tenant placement, property management",
+          "default_family": "professional",
+          "eligible_families": ["professional", "sleek", "corporate", "minimalist"],
+          "keywords": ["rent", "lease", "tenant", "PG", "paying guest", "property management"],
+          "wave": 1
+        },
+        {
+          "id": "luxury",
+          "name": "Luxury Specialist",
+          "definition": "High-end villas, penthouses, exclusive listings",
+          "default_family": "premium",
+          "eligible_families": ["premium", "editorial", "glassmorphism", "minimalist"],
+          "keywords": ["luxury", "premium", "penthouse", "villa", "high-end", "exclusive"],
+          "wave": 1
+        }
+      ]
+    },
+    {
+      "id": "local_service",
+      "name": "Local Services",
+      "definition": "Home trades, repairs, cleaning, and on-site services",
+      "subcategories": [
+        {
+          "id": "plumbing",
+          "name": "Plumbing",
+          "definition": "Pipes, leaks, bathroom fittings, emergency call-outs",
+          "default_family": "warm",
+          "eligible_families": ["warm", "industrial", "bold", "professional"],
+          "keywords": ["plumber", "pipe", "leak", "tap", "drainage", "bathroom fitting"],
+          "wave": 1
+        },
+        {
+          "id": "electrician",
+          "name": "Electrician",
+          "definition": "Wiring, AC repair, inverters, electrical safety",
+          "default_family": "warm",
+          "eligible_families": ["warm", "bold", "industrial", "professional"],
+          "keywords": ["electrician", "wiring", "AC repair", "fan", "inverter", "short circuit", "electrical"],
+          "wave": 1
+        },
+        {
+          "id": "landscaping",
+          "name": "Landscaping",
+          "definition": "Gardens, lawns, outdoor maintenance, planting",
+          "default_family": "warm",
+          "eligible_families": ["warm", "organic", "minimalist", "professional"],
+          "keywords": ["garden", "lawn", "landscaping", "plants", "outdoor", "maintenance"],
+          "wave": 1
+        },
+        {
+          "id": "car_wash",
+          "name": "Car Wash / Detailing",
+          "definition": "Wash, polish, ceramic coating, bike detailing",
+          "default_family": "bold",
+          "eligible_families": ["bold", "sleek", "industrial", "gradient_modern"],
+          "keywords": ["car wash", "detailing", "polish", "ceramic coating", "bike wash"],
+          "wave": 1
+        },
+        {
+          "id": "cleaning_handyman",
+          "name": "Cleaning / Handyman",
+          "definition": "Deep clean, pest control, odd jobs, sofa cleaning",
+          "default_family": "warm",
+          "eligible_families": ["warm", "professional", "minimalist", "organic"],
+          "keywords": ["cleaning", "deep clean", "handyman", "pest", "sofa", "odd jobs"],
+          "wave": 1
+        },
+        {
+          "id": "insurance_agent",
+          "name": "Insurance Agent",
+          "definition": "Policies, LIC, health cover, claims guidance",
+          "default_family": "professional",
+          "eligible_families": ["professional", "corporate", "sleek", "warm"],
+          "keywords": ["insurance", "policy", "LIC", "health cover", "claim", "premium"],
+          "wave": 1
+        }
+      ]
+    },
+    {
+      "id": "retail",
+      "name": "Retail & Shops",
+      "definition": "Product stores, boutiques, and maker shops",
+      "subcategories": [
+        {
+          "id": "gift_shop",
+          "name": "Gift Shop",
+          "definition": "Hampers, souvenirs, personalised gifts, occasions",
+          "default_family": "warm",
+          "eligible_families": ["warm", "playful", "organic", "claymorphism"],
+          "keywords": ["gifts", "hampers", "souvenirs", "personalised", "occasions"],
+          "wave": 1
+        },
+        {
+          "id": "print_shop",
+          "name": "Print Shop",
+          "definition": "Visiting cards, flex, banners, xerox, stationery",
+          "default_family": "playful",
+          "eligible_families": ["playful", "sleek", "professional", "gradient_modern"],
+          "keywords": ["printing", "visiting cards", "flex", "banners", "xerox", "stationery"],
+          "wave": 1
+        },
+        {
+          "id": "clothing",
+          "name": "Clothing Store",
+          "definition": "Garments, fashion, menswear, saree, kids wear",
+          "default_family": "playful",
+          "eligible_families": ["playful", "sleek", "editorial", "minimalist"],
+          "keywords": ["clothing", "garments", "fashion", "menswear", "saree", "kids wear"],
+          "wave": 1
+        },
+        {
+          "id": "boutique",
+          "name": "Boutique",
+          "definition": "Designer wear, couture, tailoring, bridal",
+          "default_family": "premium",
+          "eligible_families": ["premium", "editorial", "minimalist", "glassmorphism"],
+          "keywords": ["boutique", "designer", "couture", "tailoring", "bridal", "bespoke"],
+          "wave": 1
+        },
+        {
+          "id": "handmade",
+          "name": "Handmade Sellers",
+          "definition": "Artisan crafts, pottery, crochet, homemade goods",
+          "default_family": "warm",
+          "eligible_families": ["warm", "organic", "claymorphism", "retro"],
+          "keywords": ["handmade", "handcrafted", "artisan", "pottery", "crochet", "homemade"],
+          "wave": 1
+        }
+      ]
+    },
+    {
+      "id": "hospitality_travel",
+      "name": "Hospitality & Travel",
+      "definition": "Cafes, restaurants, tours, and travel experiences",
+      "subcategories": [
+        {
+          "id": "cafe",
+          "name": "Cafe",
+          "definition": "Coffee shops, bakeries, casual dining, menu-led",
+          "default_family": "warm",
+          "eligible_families": ["warm", "organic", "retro", "minimalist"],
+          "keywords": ["cafe", "coffee", "bakery", "menu", "brunch", "espresso"],
+          "wave": 2
+        },
+        {
+          "id": "restaurant",
+          "name": "Restaurant",
+          "definition": "Fine dining, bistro, seasonal menus, reservations",
+          "default_family": "premium",
+          "eligible_families": ["premium", "editorial", "warm", "glassmorphism"],
+          "keywords": ["restaurant", "dining", "bistro", "chef", "reservation", "cuisine"],
+          "wave": 2
+        },
+        {
+          "id": "travel_tourism",
+          "name": "Travel & Tours",
+          "definition": "Packages, itineraries, holidays, adventure trips",
+          "default_family": "premium",
+          "eligible_families": ["premium", "editorial", "glassmorphism", "playful"],
+          "keywords": ["travel", "tours", "package", "trip", "holiday", "itinerary"],
+          "wave": 2
+        }
+      ]
+    },
+    {
+      "id": "health_education",
+      "name": "Health & Education",
+      "definition": "Clinics, fitness, coaching, and learning academies",
+      "subcategories": [
+        {
+          "id": "clinic_medical",
+          "name": "Clinic / Medical",
+          "definition": "Doctors, dental, physio, labs, appointments",
+          "default_family": "professional",
+          "eligible_families": ["professional", "minimalist", "organic", "sleek"],
+          "keywords": ["clinic", "doctor", "dental", "physio", "lab", "appointment", "hospital", "medical", "healthcare", "health"],
+          "wave": 2
+        },
+        {
+          "id": "fitness_gym",
+          "name": "Gym / Fitness",
+          "definition": "Gyms, yoga, trainers, memberships, workouts",
+          "default_family": "bold",
+          "eligible_families": ["bold", "industrial", "gradient_modern", "sleek"],
+          "keywords": ["gym", "fitness", "yoga", "trainer", "workout", "membership"],
+          "wave": 2
+        },
+        {
+          "id": "education_coaching",
+          "name": "Coaching / Academy",
+          "definition": "Tuition, courses, admissions, skill training",
+          "default_family": "professional",
+          "eligible_families": ["professional", "sleek", "minimalist", "corporate"],
+          "keywords": ["coaching", "tuition", "academy", "courses", "school", "admission"],
+          "wave": 2
+        }
+      ]
+    },
+    {
+      "id": "professional",
+      "name": "Professional Services",
+      "definition": "Agencies, SaaS products, and freelancer portfolios",
+      "subcategories": [
+        {
+          "id": "agency_studio",
+          "name": "Agency / Studio",
+          "definition": "Marketing, branding, campaigns, client work",
+          "default_family": "professional",
+          "eligible_families": ["professional", "sleek", "bold", "gradient_modern"],
+          "keywords": ["agency", "marketing", "branding", "studio", "campaigns", "clients"],
+          "wave": 2
+        },
+        {
+          "id": "saas_startup",
+          "name": "SaaS / Startup",
+          "definition": "Software products, demos, feature-led landing pages",
+          "default_family": "playful",
+          "eligible_families": ["playful", "gradient_modern", "tech", "glassmorphism"],
+          "keywords": ["software", "app", "product", "startup", "SaaS", "demo"],
+          "wave": 2
+        },
+        {
+          "id": "portfolio_freelancer",
+          "name": "Portfolio / Freelancer",
+          "definition": "Personal work showcase, hire-me pages, case studies",
+          "default_family": "warm",
+          "eligible_families": ["warm", "editorial", "minimalist", "brutalist", "gradient_modern", "glassmorphism", "tech"],
+          "keywords": ["portfolio", "freelancer", "photographer", "artist", "works", "hire"],
+          "wave": 2
+        },
+        {
+          "id": "personal_blog",
+          "name": "Personal Blog",
+          "definition": "Writing, essays, newsletters, and personal publishing sites",
+          "default_family": "editorial",
+          "eligible_families": ["editorial", "minimalist", "warm", "brutalist"],
+          "keywords": [
+            "blog",
+            "personal blog",
+            "writing",
+            "essays",
+            "newsletter",
+            "dark mode blog",
+            "personal site",
+            "personal website",
+            "journal",
+            "substack"
+          ],
+          "wave": 2
+        }
+      ]
+    },
+    {
+      "id": "events_weddings",
+      "name": "Events & Weddings",
+      "definition": "Celebrations, venues, planners, and catering",
+      "subcategories": [
+        {
+          "id": "wedding_planner",
+          "name": "Wedding Planner",
+          "definition": "Full-service planning, decor, coordination, timelines",
+          "default_family": "editorial",
+          "eligible_families": ["editorial", "premium", "warm", "glassmorphism"],
+          "keywords": ["wedding planner", "wedding", "bridal", "ceremony", "reception", "coordination"],
+          "wave": 3
+        },
+        {
+          "id": "event_venue",
+          "name": "Event Venue",
+          "definition": "Banquet halls, lawns, capacity, booking inquiries",
+          "default_family": "premium",
+          "eligible_families": ["premium", "editorial", "warm", "minimalist"],
+          "keywords": ["venue", "banquet", "hall", "event space", "capacity", "booking"],
+          "wave": 3
+        },
+        {
+          "id": "catering_service",
+          "name": "Catering Service",
+          "definition": "Menus, buffets, party catering, live counters",
+          "default_family": "warm",
+          "eligible_families": ["warm", "organic", "premium", "playful"],
+          "keywords": ["catering", "buffet", "party food", "menu", "live counter", "banquet catering"],
+          "wave": 3
+        }
+      ]
+    },
+    {
+      "id": "legal_finance",
+      "name": "Legal & Finance",
+      "definition": "Law firms, accounting, and financial advisory",
+      "subcategories": [
+        {
+          "id": "lawyer",
+          "name": "Lawyer / Law Firm",
+          "definition": "Practice areas, consultations, case credibility",
+          "default_family": "professional",
+          "eligible_families": ["professional", "corporate", "minimalist", "editorial"],
+          "keywords": ["lawyer", "law firm", "legal", "advocate", "litigation", "consultation"],
+          "wave": 3
+        },
+        {
+          "id": "accountant",
+          "name": "Accountant / CA",
+          "definition": "Tax filing, bookkeeping, audit, compliance",
+          "default_family": "corporate",
+          "eligible_families": ["corporate", "professional", "sleek", "minimalist"],
+          "keywords": ["accountant", "CA", "tax", "bookkeeping", "audit", "GST", "compliance"],
+          "wave": 3
+        },
+        {
+          "id": "financial_advisor",
+          "name": "Financial Advisor",
+          "definition": "Investments, wealth planning, insurance-linked products",
+          "default_family": "sleek",
+          "eligible_families": ["sleek", "professional", "corporate", "premium"],
+          "keywords": ["financial advisor", "investment", "wealth", "portfolio", "mutual fund", "planning"],
+          "wave": 3
+        }
+      ]
+    },
+    {
+      "id": "creative_media",
+      "name": "Creative & Media",
+      "definition": "Photography, design studios, and content creators",
+      "subcategories": [
+        {
+          "id": "photographer",
+          "name": "Photographer",
+          "definition": "Portfolios, galleries, booking, genre specialisation",
+          "default_family": "editorial",
+          "eligible_families": ["editorial", "minimalist", "premium", "brutalist"],
+          "keywords": ["photographer", "photography", "wedding photos", "portrait", "studio shoot"],
+          "wave": 3
+        },
+        {
+          "id": "design_studio",
+          "name": "Design Studio",
+          "definition": "Brand identity, UI/UX, visual systems, client roster",
+          "default_family": "sleek",
+          "eligible_families": ["sleek", "minimalist", "gradient_modern", "brutalist"],
+          "keywords": ["design studio", "graphic design", "UI", "UX", "brand identity", "visual design"],
+          "wave": 3
+        },
+        {
+          "id": "content_creator",
+          "name": "Content Creator",
+          "definition": "Social presence, sponsorships, media kits, fan engagement",
+          "default_family": "playful",
+          "eligible_families": ["playful", "gradient_modern", "bold", "glassmorphism"],
+          "keywords": ["content creator", "influencer", "YouTube", "Instagram", "creator", "media kit"],
+          "wave": 3
+        }
+      ]
+    },
+    {
+      "id": "beauty_wellness",
+      "name": "Beauty & Wellness",
+      "definition": "Salons, spas, wellness studios, and nutrition",
+      "subcategories": [
+        {
+          "id": "salon_spa",
+          "name": "Salon / Spa",
+          "definition": "Hair, skin, nails, treatments, appointments",
+          "default_family": "warm",
+          "eligible_families": ["warm", "organic", "premium", "claymorphism"],
+          "keywords": ["salon", "spa", "hair", "facial", "manicure", "beauty treatment"],
+          "wave": 3
+        },
+        {
+          "id": "wellness_studio",
+          "name": "Wellness Studio",
+          "definition": "Meditation, therapy, holistic health, retreats",
+          "default_family": "organic",
+          "eligible_families": ["organic", "minimalist", "warm", "neomorphism"],
+          "keywords": ["wellness", "meditation", "holistic", "therapy", "retreat", "mindfulness"],
+          "wave": 3
+        },
+        {
+          "id": "nutrition_coach",
+          "name": "Nutrition Coach",
+          "definition": "Diet plans, meal prep, health coaching programmes",
+          "default_family": "minimalist",
+          "eligible_families": ["minimalist", "organic", "professional", "warm"],
+          "keywords": ["nutrition", "diet", "meal plan", "health coach", "weight loss", "dietitian"],
+          "wave": 3
+        }
+      ]
+    },
+    {
+      "id": "nonprofit_community",
+      "name": "Nonprofit & Community",
+      "definition": "NGOs, faith orgs, and community groups",
+      "subcategories": [
+        {
+          "id": "nonprofit",
+          "name": "Nonprofit / NGO",
+          "definition": "Mission, donations, programmes, volunteer calls",
+          "default_family": "warm",
+          "eligible_families": ["warm", "organic", "professional", "minimalist"],
+          "keywords": ["nonprofit", "NGO", "charity", "donation", "volunteer", "foundation"],
+          "wave": 3
+        },
+        {
+          "id": "religious_org",
+          "name": "Religious Organisation",
+          "definition": "Services, community events, faith-led programmes",
+          "default_family": "professional",
+          "eligible_families": ["professional", "warm", "editorial", "minimalist"],
+          "keywords": ["church", "temple", "mosque", "parish", "congregation", "faith community"],
+          "wave": 3
+        },
+        {
+          "id": "community_group",
+          "name": "Community Group",
+          "definition": "Local clubs, associations, neighbourhood initiatives",
+          "default_family": "warm",
+          "eligible_families": ["warm", "playful", "organic", "retro"],
+          "keywords": ["community group", "club", "association", "neighbourhood", "local group", "society"],
+          "wave": 3
+        }
+      ]
+    },
+    {
+      "id": "automotive",
+      "name": "Automotive",
+      "definition": "Vehicle sales, repair, and detailing businesses",
+      "subcategories": [
+        {
+          "id": "auto_repair",
+          "name": "Auto Repair",
+          "definition": "Mechanic shop, servicing, parts, breakdown help",
+          "default_family": "industrial",
+          "eligible_families": ["industrial", "bold", "warm", "professional"],
+          "keywords": ["auto repair", "mechanic", "garage", "car service", "breakdown", "spare parts"],
+          "wave": 3
+        },
+        {
+          "id": "car_dealer",
+          "name": "Car Dealer",
+          "definition": "New and used cars, test drives, financing",
+          "default_family": "sleek",
+          "eligible_families": ["sleek", "premium", "bold", "gradient_modern"],
+          "keywords": ["car dealer", "dealership", "used cars", "new cars", "test drive", "showroom"],
+          "wave": 3
+        },
+        {
+          "id": "auto_detailing",
+          "name": "Auto Detailing",
+          "definition": "Premium wash, paint correction, interior deep clean",
+          "default_family": "bold",
+          "eligible_families": ["bold", "sleek", "premium", "gradient_modern"],
+          "keywords": ["auto detailing", "paint correction", "interior detail", "ceramic", "PPF", "detailing studio"],
+          "wave": 3
+        }
+      ]
+    }
+  ]
+}

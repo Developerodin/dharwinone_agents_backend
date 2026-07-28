@@ -1,5 +1,8 @@
-/** Phase 1 static template registry — aligned with frontend launch templates. */
-
+import {
+  BESPOKE_TEMPLATE_IDS,
+  isBespokeTemplateId,
+  isEnabledBespokeTemplateId,
+} from "./bespokeTemplateMapping";
 import catalog from "./templatesCatalog.json";
 
 export type TemplateRegistryEntry = {
@@ -120,52 +123,6 @@ function sectionSchema(templateId: string): Record<string, unknown> {
   };
 }
 
-const ELECTRICIAN_TRUST_SECTION_SCHEMA = sectionSchema("electrician_trust_v1");
-const ELECTRICIAN_BOLD_SECTION_SCHEMA = sectionSchema("electrician_bold_v1");
-const PLUMBER_SECTION_SCHEMA = sectionSchema("plumber_v1");
-
-const LAUNCH_TEMPLATES: TemplateRegistryEntry[] = [
-  {
-    id: "electrician_trust_v1",
-    name: "Trust Local Electrician",
-    category: "local_service",
-    subcategory: "electrician",
-    version: 1,
-    status: "active",
-    style_tags: ["trust_local", "split_hero", "cards", "local_trustworthy", "whatsapp_cta"],
-    description: "Split hero with trust signals for local electricians.",
-    preview_desktop_url: "/template-preview/launch/electrician_trust_v1",
-    preview_mobile_url: "/template-preview/launch/electrician_trust_v1",
-    section_schema: ELECTRICIAN_TRUST_SECTION_SCHEMA,
-  },
-  {
-    id: "electrician_bold_v1",
-    name: "Bold Electrician",
-    category: "local_service",
-    subcategory: "electrician",
-    version: 1,
-    status: "active",
-    style_tags: ["bold_convert", "fullbleed", "urgency", "professional", "dark_hero", "whatsapp_cta"],
-    description: "Full-bleed hero with urgency for high-conversion electrician sites.",
-    preview_desktop_url: "/template-preview/launch/electrician_bold_v1",
-    preview_mobile_url: "/template-preview/launch/electrician_bold_v1",
-    section_schema: ELECTRICIAN_BOLD_SECTION_SCHEMA,
-  },
-  {
-    id: "plumber_v1",
-    name: "Plumber Local",
-    category: "local_service",
-    subcategory: "plumber",
-    version: 1,
-    status: "active",
-    style_tags: ["local_trustworthy", "clean", "whatsapp_cta"],
-    description: "Clean layout for local plumbing and handyman services.",
-    preview_desktop_url: "/templates/plumber_v1/previews/desktop.webp",
-    preview_mobile_url: "/templates/plumber_v1/previews/mobile.webp",
-    section_schema: PLUMBER_SECTION_SCHEMA,
-  },
-];
-
 /**
  * Full launch catalog (templates.manifest.json), moved out of the retired Python
  * studio. Every entry maps to one of the 6 render families via style_tags[0];
@@ -179,15 +136,11 @@ type CatalogEntry = {
   intents?: string[];
 };
 
-const FAMILY_LABELS: Record<string, string> = {
-  trust_local: "Trust Local",
-  bold_convert: "Bold Convert",
-  clean_pro: "Clean Pro",
-  premium_dark: "Premium Dark",
-  warm_craft: "Warm Craft",
-  fresh_retail: "Fresh Retail",
-  generic: "Generic",
-};
+import familiesCatalog from "./familiesCatalog.json";
+
+const FAMILY_LABELS: Record<string, string> = Object.fromEntries(
+  familiesCatalog.families.map((row) => [row.id, row.name]),
+);
 
 function titleize(s: string): string {
   return s
@@ -219,20 +172,22 @@ function catalogEntryToRegistry(t: CatalogEntry): TemplateRegistryEntry {
   };
 }
 
-const LAUNCH_IDS = new Set(LAUNCH_TEMPLATES.map((t) => t.id));
-const CATALOG_TEMPLATES: TemplateRegistryEntry[] = (catalog.templates as CatalogEntry[])
-  .filter((t) => !LAUNCH_IDS.has(t.id))
-  .map(catalogEntryToRegistry);
+const CATALOG_TEMPLATES: TemplateRegistryEntry[] = (catalog.templates as CatalogEntry[]).map(
+  catalogEntryToRegistry,
+);
 
-export const TEMPLATE_REGISTRY: TemplateRegistryEntry[] = [
-  ...LAUNCH_TEMPLATES,
-  ...CATALOG_TEMPLATES,
-];
+export const TEMPLATE_REGISTRY: TemplateRegistryEntry[] = CATALOG_TEMPLATES;
 
 export function listActiveTemplates(): TemplateRegistryEntry[] {
-  return TEMPLATE_REGISTRY.filter((t) => t.status === "active");
+  return TEMPLATE_REGISTRY.filter(
+    (t) => t.status === "active" && isEnabledBespokeTemplateId(t.id),
+  );
 }
 
+/** Lookup by id — returns entry only for bespoke launch templates. */
 export function getTemplate(templateId: string): TemplateRegistryEntry | undefined {
-  return TEMPLATE_REGISTRY.find((t) => t.id === templateId && t.status === "active");
+  if (!isBespokeTemplateId(templateId)) return undefined;
+  return TEMPLATE_REGISTRY.find((t) => t.id === templateId);
 }
+
+export { BESPOKE_TEMPLATE_IDS };

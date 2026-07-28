@@ -13,7 +13,7 @@ const theme = {
 
 describe("resolveTheme", () => {
   const ctx = resolveTheme({
-    family: "trust_local",
+    family: "warm",
     themeJson: theme,
     sectionSchemaSections: ["hero", "services", "cta_footer"],
   });
@@ -36,7 +36,7 @@ describe("resolveTheme", () => {
 
   it("falls back to schema order when themeJson has no order", () => {
     const c2 = resolveTheme({
-      family: "trust_local",
+      family: "warm",
       themeJson: {},
       sectionSchemaSections: ["hero", "cta_footer"],
     });

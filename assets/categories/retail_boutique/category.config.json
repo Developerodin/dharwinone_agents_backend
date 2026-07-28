@@ -1,11 +1,18 @@
 {
   "id": "retail_boutique",
-  "name": "Retail & Small Shops — Boutique",
+  "name": "Retail & Shops — Boutique",
+  "definition": "Designer wear, couture, tailoring, bridal",
   "category": "retail",
   "subcategory": "boutique",
   "wave": 1,
   "status": "active",
-  "default_family": "premium_dark",
+  "default_family": "premium",
+  "eligible_families": [
+    "premium",
+    "editorial",
+    "minimalist",
+    "glassmorphism"
+  ],
   "keywords": [
     "boutique",
     "designer",
@@ -16,17 +23,77 @@
   ],
   "matcher": {
     "eligible_template_ids": [
-      "rt_boutique_v1",
-      "gn_generic_v1"
+      "pf_portfolio_jack_v1"
     ],
     "default_rank_order": [
-      "rt_boutique_v1",
-      "gn_generic_v1"
+      "pf_portfolio_jack_v1"
     ]
   },
   "image_pack_refs": [
     "pack_boutique_v1"
   ],
+  "questionnaire": {
+    "required": [
+      "business_name",
+      "city",
+      "services",
+      "cta_preference"
+    ],
+    "recommended": [
+      "service_area",
+      "tone_preference",
+      "phone",
+      "whatsapp_number",
+      "email"
+    ],
+    "fields": {
+      "business_name": {
+        "label": "Business name",
+        "tier": "required"
+      },
+      "city": {
+        "label": "Primary city",
+        "tier": "required"
+      },
+      "services": {
+        "label": "Main services",
+        "tier": "required",
+        "type": "tags"
+      },
+      "cta_preference": {
+        "label": "Preferred CTA",
+        "tier": "required",
+        "type": "enum",
+        "options": [
+          "whatsapp",
+          "phone",
+          "form"
+        ]
+      },
+      "service_area": {
+        "label": "Service areas",
+        "tier": "recommended",
+        "type": "tags"
+      },
+      "tone_preference": {
+        "label": "Visual style preference",
+        "tier": "recommended"
+      },
+      "phone": {
+        "label": "Phone number",
+        "tier": "recommended"
+      },
+      "whatsapp_number": {
+        "label": "WhatsApp number",
+        "tier": "recommended"
+      },
+      "email": {
+        "label": "Email address",
+        "tier": "optional",
+        "followUp": "What email address should customers use to reach you?"
+      }
+    }
+  },
   "moderation": {
     "blocked": false,
     "notes": "Standard business — allowed"

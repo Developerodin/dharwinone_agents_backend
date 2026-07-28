@@ -1,0 +1,156 @@
+{
+  "id": "professional_personal_blog",
+  "name": "Professional Services — Personal Blog",
+  "definition": "Writing, essays, newsletters, and personal publishing sites",
+  "category": "professional",
+  "subcategory": "personal_blog",
+  "wave": 2,
+  "status": "active",
+  "default_family": "editorial",
+  "eligible_families": [
+    "editorial",
+    "minimalist",
+    "warm",
+    "brutalist"
+  ],
+  "keywords": [
+    "blog",
+    "personal blog",
+    "writing",
+    "essays",
+    "newsletter",
+    "dark mode blog",
+    "personal site",
+    "personal website",
+    "journal",
+    "substack"
+  ],
+  "matcher": {
+    "eligible_template_ids": [
+      "pf_blog_scroll_v1"
+    ],
+    "default_rank_order": [
+      "pf_blog_scroll_v1"
+    ]
+  },
+  "image_pack_refs": [
+    "pack_personal_blog_v1"
+  ],
+  "questionnaire": {
+    "required": [
+      "business_name",
+      "services",
+      "tagline",
+      "tone_preference",
+      "theme_mode_preference",
+      "cta_preference"
+    ],
+    "recommended": [
+      "city",
+      "newsletter_cta",
+      "email",
+      "x_account",
+      "linkedin_id"
+    ],
+    "fields": {
+      "business_name": {
+        "label": "Blog or author name",
+        "tier": "required",
+        "entity_label": "blog",
+        "followUp": "What name should appear on your blog? For example, \"The Desk\" or \"Alex Chen\"."
+      },
+      "services": {
+        "label": "Topics or themes",
+        "tier": "required",
+        "type": "tags",
+        "followUp": "What do you write about? List a few topics or themes — for example, \"productivity\", \"essays\", or \"frontend development\"."
+      },
+      "tagline": {
+        "label": "Tagline",
+        "tier": "required",
+        "followUp": "What's a one-line tagline or description for your blog? For example, \"Notes on building software with care\"."
+      },
+      "tone_preference": {
+        "label": "Writing tone",
+        "tier": "required",
+        "type": "enum",
+        "options": [
+          "thoughtful",
+          "casual",
+          "technical",
+          "witty",
+          "personal"
+        ],
+        "option_labels": {
+          "thoughtful": "Thoughtful & reflective",
+          "casual": "Casual & conversational",
+          "technical": "Technical & precise",
+          "witty": "Witty & playful",
+          "personal": "Personal & diary-like"
+        },
+        "followUp": "What writing tone fits your blog best? Reply with thoughtful, casual, technical, witty, or personal."
+      },
+      "theme_mode_preference": {
+        "label": "Theme mode",
+        "tier": "required",
+        "type": "enum",
+        "options": [
+          "dark",
+          "light",
+          "toggle"
+        ],
+        "option_labels": {
+          "dark": "Dark mode default",
+          "light": "Light mode default",
+          "toggle": "Dark/light toggle"
+        },
+        "followUp": "Should your blog default to dark mode, light mode, or include a dark/light toggle?"
+      },
+      "cta_preference": {
+        "label": "Subscribe CTA",
+        "tier": "required",
+        "type": "enum",
+        "options": [
+          "newsletter",
+          "email",
+          "form"
+        ],
+        "option_labels": {
+          "newsletter": "Newsletter signup",
+          "email": "Email me link",
+          "form": "Contact form"
+        },
+        "followUp": "How should readers subscribe or get in touch? Reply with newsletter signup, email link, or contact form."
+      },
+      "city": {
+        "label": "Location",
+        "tier": "recommended",
+        "followUp": "Do you want to mention a city or location on your blog? (Optional — reply skip to leave blank)"
+      },
+      "newsletter_cta": {
+        "label": "Newsletter button text",
+        "tier": "recommended",
+        "followUp": "What should the subscribe button say? For example, \"Join the newsletter\" or \"Get new posts by email\". (Optional — reply skip to use a default)"
+      },
+      "email": {
+        "label": "Email address",
+        "tier": "recommended",
+        "followUp": "What email should readers use to reach you or subscribe?"
+      },
+      "x_account": {
+        "label": "X account",
+        "tier": "optional",
+        "followUp": "What's your X (Twitter) handle? (optional — reply skip to leave blank)"
+      },
+      "linkedin_id": {
+        "label": "LinkedIn profile",
+        "tier": "optional",
+        "followUp": "What's your LinkedIn profile ID or username? (optional — reply skip to leave blank)"
+      }
+    }
+  },
+  "moderation": {
+    "blocked": false,
+    "notes": "Personal publishing — allowed"
+  }
+}

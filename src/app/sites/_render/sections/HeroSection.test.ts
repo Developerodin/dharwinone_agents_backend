@@ -4,11 +4,11 @@ import { FAMILIES } from "../families";
 import { baseSectionProps, renderSection } from "../testHelpers";
 
 describe("HeroSection", () => {
-  it("renders headline and WhatsApp CTA for premium_dark", () => {
+  it("renders headline and WhatsApp CTA for premium", () => {
     const html = renderSection(
       HeroSection,
       baseSectionProps({
-        family: FAMILIES.premium_dark,
+        family: FAMILIES.premium,
         content: {
           headline: "Explore the coast",
           subtext: "Curated travel experiences",
@@ -22,11 +22,11 @@ describe("HeroSection", () => {
     expect(html).toContain('data-section="hero"');
   });
 
-  it("uses split layout for trust_local", () => {
+  it("uses split layout for warm", () => {
     const html = renderSection(
       HeroSection,
       baseSectionProps({
-        family: FAMILIES.trust_local,
+        family: FAMILIES.warm,
         content: { headline: "Trusted electricians" },
       }),
     );

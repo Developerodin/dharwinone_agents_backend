@@ -17,7 +17,8 @@ describe("site preview CSS pipeline", () => {
 
     expect(result.css).toContain(".grid");
     expect(result.css).toContain(".px-6");
+    expect(result.css).toContain(".sticky");
     expect(result.css).toContain(".bg-background");
-    expect(result.css).toContain('[data-family="trust_local"]');
+    expect(result.css).toContain('[data-family="warm"]');
   });
 });

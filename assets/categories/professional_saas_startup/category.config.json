@@ -1,36 +1,243 @@
 {
   "id": "professional_saas_startup",
   "name": "Professional Services — SaaS / Startup",
+  "definition": "Software products, demos, feature-led landing pages",
   "category": "professional",
   "subcategory": "saas_startup",
   "wave": 2,
-  "status": "planned",
-  "default_family": "fresh_retail",
+  "status": "active",
+  "default_family": "playful",
+  "eligible_families": [
+    "playful",
+    "gradient_modern",
+    "tech",
+    "glassmorphism"
+  ],
   "keywords": [
     "software",
     "app",
     "product",
     "startup",
     "SaaS",
-    "demo"
+    "demo",
+    "cybersecurity",
+    "security",
+    "devtools"
   ],
   "matcher": {
     "eligible_template_ids": [
-      "pf_saas_v1",
-      "pf_saas_v2",
-      "gn_generic_v1"
+      "gn_axon_v1",
+      "ps_securify_v1"
     ],
     "default_rank_order": [
-      "pf_saas_v1",
-      "pf_saas_v2",
-      "gn_generic_v1"
+      "gn_axon_v1",
+      "ps_securify_v1"
     ]
   },
   "image_pack_refs": [
     "pack_saas_startup_v1"
   ],
+  "questionnaire": {
+    "required": [
+      "business_name",
+      "tagline",
+      "product_type",
+      "country",
+      "services",
+      "cta_preference",
+      "tone_preference"
+    ],
+    "recommended": [
+      "service_area",
+      "email"
+    ],
+    "fields": {
+      "business_name": {
+        "label": "Product or company name",
+        "tier": "required",
+        "entity_label": "product",
+        "followUp": "What's your product or company name? For example, \"Axon\" or \"Securify\"."
+      },
+      "tagline": {
+        "label": "Value proposition",
+        "tier": "required",
+        "followUp": "What's your one-line value prop? For example, \"Ship secure APIs in minutes, not months\"."
+      },
+      "country": {
+        "label": "Country",
+        "tier": "required",
+        "followUp": "Which country does your company primarily serve or operate from?"
+      },
+      "product_type": {
+        "label": "Product category",
+        "tier": "required",
+        "type": "enum",
+        "options": [
+          "general_saas",
+          "cybersecurity",
+          "devtools",
+          "fintech",
+          "hr_tech",
+          "marketing_tech"
+        ],
+        "option_labels": {
+          "general_saas": "General SaaS / B2B software",
+          "cybersecurity": "Cybersecurity / security product",
+          "devtools": "Developer tools / infrastructure",
+          "fintech": "Fintech / payments",
+          "hr_tech": "HR / people ops software",
+          "marketing_tech": "Marketing / growth software"
+        },
+        "followUp": "What kind of product is this?"
+      },
+      "services": {
+        "label": "Key features",
+        "tier": "required",
+        "type": "service_picker"
+      },
+      "service_area": {
+        "label": "Target audience",
+        "tier": "recommended",
+        "type": "tags",
+        "followUp": "Who is your ideal customer? For example, \"startups\", \"enterprise security teams\", or \"freelance developers\"."
+      },
+      "cta_preference": {
+        "label": "Primary CTA",
+        "tier": "required",
+        "type": "enum",
+        "options": [
+          "demo",
+          "trial",
+          "form"
+        ],
+        "option_labels": {
+          "demo": "Book a demo",
+          "trial": "Start free trial",
+          "form": "Contact sales"
+        },
+        "followUp": "What should the main call-to-action be? Reply with book a demo, start free trial, or contact sales."
+      },
+      "tone_preference": {
+        "label": "Brand tone",
+        "tier": "required",
+        "type": "enum",
+        "options": [
+          "professional",
+          "technical",
+          "friendly",
+          "bold",
+          "enterprise"
+        ],
+        "option_labels": {
+          "professional": "Professional & trustworthy",
+          "technical": "Technical & precise",
+          "friendly": "Friendly & approachable",
+          "bold": "Bold & disruptive",
+          "enterprise": "Enterprise & authoritative"
+        },
+        "followUp": "What brand tone fits your product? Reply with professional, technical, friendly, bold, or enterprise."
+      },
+      "email": {
+        "label": "Contact email",
+        "tier": "recommended",
+        "followUp": "What email should prospects use for demos, trials, or sales inquiries?"
+      }
+    },
+    "service_catalog": {
+      "general_saas": {
+        "suggested_services": [
+          "Analytics Dashboard",
+          "Team Collaboration",
+          "Workflow Automation",
+          "Integrations & API",
+          "Reporting & Insights",
+          "Role-Based Access",
+          "Mobile App",
+          "Customer Support Hub"
+        ],
+        "featured_services": [
+          "Analytics Dashboard",
+          "Team Collaboration",
+          "Workflow Automation",
+          "Integrations & API"
+        ]
+      },
+      "cybersecurity": {
+        "suggested_services": [
+          "Threat Detection",
+          "Vulnerability Scanning",
+          "SOC Monitoring",
+          "Identity & Access Management",
+          "Compliance Reporting",
+          "Incident Response",
+          "Zero Trust Architecture",
+          "Security Analytics"
+        ],
+        "featured_services": [
+          "Threat Detection",
+          "Vulnerability Scanning",
+          "SOC Monitoring",
+          "Identity & Access Management"
+        ]
+      },
+      "devtools": {
+        "suggested_services": [
+          "CI/CD Pipelines",
+          "API Management",
+          "Observability & Logging",
+          "Infrastructure as Code",
+          "Developer SDKs",
+          "Deployment Automation",
+          "Testing & QA Tools",
+          "Documentation Hub"
+        ],
+        "featured_services": [
+          "CI/CD Pipelines",
+          "API Management",
+          "Observability & Logging",
+          "Developer SDKs"
+        ]
+      },
+      "fintech": {
+        "suggested_services": [
+          "Payment Processing",
+          "Invoicing & Billing",
+          "Expense Tracking",
+          "Financial Reporting",
+          "Multi-Currency Support",
+          "Fraud Detection",
+          "Bank Integrations",
+          "Subscription Billing"
+        ]
+      },
+      "hr_tech": {
+        "suggested_services": [
+          "Applicant Tracking",
+          "Onboarding Workflows",
+          "Performance Reviews",
+          "Payroll Integrations",
+          "Employee Directory",
+          "Time & Attendance",
+          "Learning Management",
+          "HR Analytics"
+        ]
+      },
+      "marketing_tech": {
+        "suggested_services": [
+          "Campaign Automation",
+          "Lead Scoring",
+          "Email Marketing",
+          "Landing Page Builder",
+          "A/B Testing",
+          "CRM Integrations",
+          "Analytics & Attribution",
+          "Audience Segmentation"
+        ]
+      }
+    }
+  },
   "moderation": {
     "blocked": false,
-    "notes": "Standard business — allowed"
+    "notes": "SaaS / startup — allowed"
   }
 }

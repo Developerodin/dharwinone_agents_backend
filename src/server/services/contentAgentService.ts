@@ -1,6 +1,11 @@
 /** Phase 1 content agent — structured JSON only, no code generation. */
 import { z } from "zod";
+import { dialCodeForCountry } from "../data/countryCodes";
 import { loadOnboardingProvider } from "../llmProvider";
+import {
+  streamContentSections,
+  type ContentStreamEvent,
+} from "./contentAgentStream";
 
 /** Sections the prompt actually requests and we guarantee in the output. */
 const REQUIRED_SECTIONS = ["hero", "services", "seo"] as const;
@@ -139,6 +144,40 @@ function businessName(businessProfile: Record<string, unknown>): string {
   return typeof name === "string" && name.trim() ? name.trim() : "Your Business";
 }
 
+const PORTFOLIO_JACK_TEMPLATE_ID = "pf_portfolio_jack_v1";
+
+function formatPortfolioHeroHeadline(name: string): string {
+  const first = name.trim().split(/\s+/)[0] ?? name.trim();
+  return `Hi, I'm ${first}`;
+}
+
+function isPlaceholderHeroHeadline(headline: unknown): boolean {
+  if (typeof headline !== "string" || !headline.trim()) return true;
+  const h = headline.trim();
+  if (/^hi,?\s*i['']?m\s+ja(?:ck)?$/i.test(h)) return true;
+  if (/trusted local service/i.test(h)) return true;
+  return false;
+}
+
+/** Stamp creator name into hero.headline for portfolio templates when still on defaults. */
+function injectHeroFromProfile(
+  content: Record<string, unknown>,
+  businessProfile: Record<string, unknown>,
+  sectionSchema: Record<string, unknown>,
+): Record<string, unknown> {
+  const templateId = sectionSchema.template_id;
+  if (templateId !== PORTFOLIO_JACK_TEMPLATE_ID) return content;
+
+  const name = businessName(businessProfile);
+  if (name === "Your Business") return content;
+
+  const hero = (content.hero as Record<string, unknown> | undefined) ?? {};
+  if (!isPlaceholderHeroHeadline(hero.headline)) return content;
+
+  content.hero = { ...hero, headline: formatPortfolioHeroHeadline(name) };
+  return content;
+}
+
 function profileString(bp: Record<string, unknown>, ...keys: string[]): string {
   for (const key of keys) {
     const v = bp[key];
@@ -147,13 +186,87 @@ function profileString(bp: Record<string, unknown>, ...keys: string[]): string {
   return "";
 }
 
-function formatPhoneDisplay(raw: string): string {
+function formatPhoneDisplay(raw: string, countryCode?: string): string {
   const trimmed = raw.trim();
   const digits = trimmed.replace(/\D/g, "");
   if (!digits) return trimmed;
   if (trimmed.startsWith("+")) return trimmed;
+
+  const dial = countryCode ? dialCodeForCountry(countryCode) : undefined;
+  if (digits.length === 10 && dial) {
+    return `+${dial} ${digits.slice(0, 5)} ${digits.slice(5)}`;
+  }
   if (digits.length === 10) return `+91 ${digits.slice(0, 5)} ${digits.slice(5)}`;
   return `+${digits}`;
+}
+
+function phoneToWhatsAppHref(phone: string, countryCode?: string): string | null {
+  const digits = phone.replace(/\D/g, "");
+  if (!digits) return null;
+  if (digits.length === 10) {
+    const dial = countryCode ? dialCodeForCountry(countryCode) : "91";
+    return `https://wa.me/${dial ?? "91"}${digits}`;
+  }
+  return `https://wa.me/${digits}`;
+}
+
+function phoneToTelHref(phone: string, countryCode?: string): string | null {
+  const digits = phone.replace(/\D/g, "");
+  if (!digits) return null;
+  const dial = countryCode ? dialCodeForCountry(countryCode) : undefined;
+  const normalized = digits.length === 10 ? `${dial ?? "91"}${digits}` : digits;
+  return `tel:+${normalized}`;
+}
+
+function buildJackFooterSocials(
+  businessProfile: Record<string, unknown>,
+): { label: string; href: string }[] {
+  const socials: { label: string; href: string }[] = [
+    { label: "Instagram", href: "https://instagram.com" },
+  ];
+
+  const ctaPref = profileString(businessProfile, "cta_preference").toLowerCase();
+  const phone = profileString(businessProfile, "whatsapp_number", "phone", "phone_number");
+  const countryCode = profileString(businessProfile, "country_code");
+
+  if (ctaPref === "whatsapp" && phone) {
+    const href = phoneToWhatsAppHref(phone, countryCode);
+    if (href) socials.push({ label: "WhatsApp", href });
+  } else if (ctaPref === "phone" && phone) {
+    const href = phoneToTelHref(phone, countryCode);
+    if (href) socials.push({ label: "Phone", href });
+  }
+
+  const linkedin = profileString(businessProfile, "linkedin_id", "linkedin");
+  if (linkedin) {
+    const id = linkedin
+      .replace(/^https?:\/\/(www\.)?linkedin\.com\/in\//i, "")
+      .replace(/\/$/, "")
+      .replace(/^@/, "");
+    if (id) socials.push({ label: "LinkedIn", href: `https://linkedin.com/in/${id}` });
+  }
+
+  const xHandle = profileString(businessProfile, "x_account", "twitter", "x_handle");
+  if (xHandle) {
+    const handle = xHandle
+      .replace(/^@/, "")
+      .replace(/^https?:\/\/(www\.)?(twitter|x)\.com\//i, "")
+      .replace(/\/$/, "");
+    if (handle) socials.push({ label: "X", href: `https://x.com/${handle}` });
+  }
+
+  return socials;
+}
+
+function injectJackSocialsFromProfile(
+  content: Record<string, unknown>,
+  businessProfile: Record<string, unknown>,
+  sectionSchema: Record<string, unknown>,
+): Record<string, unknown> {
+  if (sectionSchema.template_id !== PORTFOLIO_JACK_TEMPLATE_ID) return content;
+  const existing = (content.contact as Record<string, unknown> | undefined) ?? {};
+  content.contact = { ...existing, socials: buildJackFooterSocials(businessProfile) };
+  return content;
 }
 
 /** Stamp intake contact fields into content.contact so persisted JSON is complete. */
@@ -165,7 +278,13 @@ function injectContactFromProfile(
   const contact = { ...existing };
 
   const phone = profileString(businessProfile, "whatsapp_number", "phone", "phone_number");
-  if (phone) contact.phone = formatPhoneDisplay(phone);
+  const countryCode = profileString(businessProfile, "country_code");
+  if (phone) contact.phone = formatPhoneDisplay(phone, countryCode);
+
+  const ctaPref = profileString(businessProfile, "cta_preference").toLowerCase();
+  if (ctaPref === "whatsapp" && phone) {
+    contact.whatsapp = formatPhoneDisplay(phone, countryCode);
+  }
 
   const email = profileString(businessProfile, "email", "contact_email");
   if (email) contact.email = email;
@@ -177,8 +296,11 @@ function injectContactFromProfile(
     "service_area",
   );
   const city = profileString(businessProfile, "city");
+  const country = profileString(businessProfile, "country");
   if (address) contact.address = address;
+  else if (city && country) contact.address = `${city}, ${country}`;
   else if (city) contact.address = city;
+  else if (country) contact.address = country;
 
   if (Object.keys(contact).length > 0) content.contact = contact;
   return content;
@@ -238,7 +360,13 @@ function assembleContent(
     }
   }
 
-  return { content: injectContactFromProfile(canonicalizeContent(out), businessProfile), usedFallback };
+  const canonical = canonicalizeContent(out);
+  const withContact = injectContactFromProfile(canonical, businessProfile);
+  const withSocials = injectJackSocialsFromProfile(withContact, businessProfile, sectionSchema);
+  return {
+    content: injectHeroFromProfile(withSocials, businessProfile, sectionSchema),
+    usedFallback,
+  };
 }
 
 function missingSections(
@@ -286,6 +414,33 @@ export async function generateSiteContent(input: {
 
   // Clamp what the model gave us; fill only the still-missing sections from defaults.
   return assembleContent(bestContent, input.businessProfile, input.sectionSchema);
+}
+
+export async function* generateSiteContentStreaming(input: {
+  businessProfile: Record<string, unknown>;
+  sectionSchema: Record<string, unknown>;
+}): AsyncGenerator<ContentStreamEvent> {
+  const [provider, model] = loadOnboardingProvider();
+  if (!provider || !model) {
+    const assembled = assembleContent({}, input.businessProfile, input.sectionSchema);
+    for (const [key, value] of Object.entries(assembled.content)) {
+      if (value && typeof value === "object" && !Array.isArray(value)) {
+        yield { type: "section", key, content: value as Record<string, unknown> };
+      }
+    }
+    yield { type: "done", content: assembled.content, usedFallback: assembled.usedFallback };
+    return;
+  }
+
+  const prompt = buildPrompt(input.businessProfile, input.sectionSchema);
+  yield* streamContentSections({
+    provider,
+    model,
+    prompt,
+    sectionSchema: input.sectionSchema,
+    assemble: (modelContent) =>
+      assembleContent(modelContent, input.businessProfile, input.sectionSchema),
+  });
 }
 
 export async function regenerateSection(input: {

@@ -4,17 +4,27 @@ import {
   getMatcherForProfile,
   inferTaxonomy,
 } from "../data/categoryCatalog";
+import {
+  DEFAULT_BESPOKE_TEMPLATE_ID,
+  resolveToBespokeTemplateId,
+} from "../data/bespokeTemplateMapping";
 import { listActiveTemplates, type TemplateRegistryEntry } from "../data/templateRegistry";
 
 const TONE_STYLE_MAP: Record<string, string[]> = {
-  local_trustworthy: ["local_trustworthy", "local_trades", "clean", "trust_local", "split_hero"],
-  professional: ["professional", "dark_hero", "bold_convert", "fullbleed"],
-  bold: ["bold", "dark_hero", "bold_convert", "fullbleed", "urgency"],
-  minimal: ["clean", "minimal", "cards"],
+  warm: ["warm", "local_trustworthy", "split_hero"],
+  professional: ["professional", "corporate", "clean"],
+  bold: ["bold", "fullbleed", "urgency", "dark_hero"],
+  minimalist: ["minimalist", "minimal", "clean"],
+  premium: ["premium", "dark_hero", "editorial"],
+  playful: ["playful", "cards", "gradient_modern"],
+  sleek: ["sleek", "structured"],
+  organic: ["organic", "warm"],
+  tech: ["tech", "gradient_modern"],
 };
 
 function profileText(profile: Record<string, unknown>): string {
   const parts: string[] = [];
+  if (typeof profile.description === "string") parts.push(profile.description);
   if (typeof profile.business_name === "string") parts.push(profile.business_name);
   if (Array.isArray(profile.services)) parts.push(profile.services.map(String).join(" "));
   return parts.join(" ").toLowerCase();
@@ -142,17 +152,14 @@ export function matchTemplates(businessProfile: Record<string, unknown>): Array<
   const top = ranked.slice(0, 3);
   if (top.length >= 2) return top;
 
-  const fallback = listActiveTemplates().slice(0, 3 - top.length).map((t) => ({
-    templateId: t.id,
-    score: 1,
-    reason: "category default",
-  }));
-  const seen = new Set(top.map((t) => t.templateId));
-  for (const row of fallback) {
-    if (top.length >= 3) break;
-    if (seen.has(row.templateId)) continue;
-    top.push(row);
-    seen.add(row.templateId);
+  const fallbackId = resolveToBespokeTemplateId(null, businessProfile);
+  const fallbackEntry = listActiveTemplates().find((t) => t.id === fallbackId);
+  if (fallbackEntry && !top.some((t) => t.templateId === fallbackId)) {
+    top.push({
+      templateId: fallbackId,
+      score: 1,
+      reason: "category bespoke default",
+    });
   }
-  return top;
+  return top.slice(0, 3);
 }

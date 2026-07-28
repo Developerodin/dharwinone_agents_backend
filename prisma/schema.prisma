@@ -222,6 +222,8 @@ model Site {
   businessProfileJson Json?
   contentJson         Json?
   themeJson           Json?
+  /** Web-agent chat transcript (ChatMessage[] JSON); auth-scoped via site.userId. */
+  chatHistoryJson     Json?
   status              String?  @default("draft")
   subdomain           String?
   customDomain        String?

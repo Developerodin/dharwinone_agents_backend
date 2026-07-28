@@ -2007,6 +2007,7 @@ export const SiteScalarFieldEnum = {
   businessProfileJson: 'businessProfileJson',
   contentJson: 'contentJson',
   themeJson: 'themeJson',
+  chatHistoryJson: 'chatHistoryJson',
   status: 'status',
   subdomain: 'subdomain',
   customDomain: 'customDomain',

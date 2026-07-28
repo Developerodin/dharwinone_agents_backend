@@ -2,6 +2,7 @@
 @import "./sites/_render/theme.css";
 
 @source "./sites/_render/**/*.tsx";
+@source "./template-preview/**/*.tsx";
 
 *,
 *::before,

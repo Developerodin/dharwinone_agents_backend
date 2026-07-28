@@ -1,11 +1,18 @@
 {
   "id": "health_education_fitness_gym",
   "name": "Health & Education — Gym / Fitness",
+  "definition": "Gyms, yoga, trainers, memberships, workouts",
   "category": "health_education",
   "subcategory": "fitness_gym",
   "wave": 2,
-  "status": "planned",
-  "default_family": "bold_convert",
+  "status": "active",
+  "default_family": "bold",
+  "eligible_families": [
+    "bold",
+    "industrial",
+    "gradient_modern",
+    "sleek"
+  ],
   "keywords": [
     "gym",
     "fitness",
@@ -17,20 +24,202 @@
   "matcher": {
     "eligible_template_ids": [
       "he_fitness_v1",
-      "he_fitness_v2",
-      "gn_generic_v1"
+      "he_fitness_v2"
     ],
     "default_rank_order": [
       "he_fitness_v1",
-      "he_fitness_v2",
-      "gn_generic_v1"
+      "he_fitness_v2"
     ]
   },
   "image_pack_refs": [
     "pack_fitness_gym_v1"
   ],
+  "questionnaire": {
+    "required": [
+      "business_name",
+      "city",
+      "studio_type",
+      "country",
+      "services",
+      "cta_preference"
+    ],
+    "recommended": [
+      "tone_preference",
+      "phone",
+      "whatsapp_number",
+      "email"
+    ],
+    "fields": {
+      "business_name": {
+        "label": "Gym or studio name",
+        "tier": "required",
+        "entity_label": "gym",
+        "followUp": "What's the name of your gym or fitness studio? For example, \"Iron Leaf Fitness\" or \"Zen Yoga Studio\"."
+      },
+      "city": {
+        "label": "Location city",
+        "tier": "required",
+        "followUp": "What city is your gym or studio located in?"
+      },
+      "country": {
+        "label": "Country",
+        "tier": "required",
+        "followUp": "Which country is your gym or studio located in?"
+      },
+      "studio_type": {
+        "label": "Studio type",
+        "tier": "required",
+        "type": "enum",
+        "options": [
+          "gym",
+          "yoga_studio",
+          "crossfit_box",
+          "boutique_studio",
+          "personal_training"
+        ],
+        "option_labels": {
+          "gym": "Full-service gym",
+          "yoga_studio": "Yoga / Pilates studio",
+          "crossfit_box": "CrossFit box",
+          "boutique_studio": "Boutique fitness studio",
+          "personal_training": "Personal training studio"
+        },
+        "followUp": "What type of fitness studio do you run?"
+      },
+      "services": {
+        "label": "Classes & programs",
+        "tier": "required",
+        "type": "service_picker"
+      },
+      "cta_preference": {
+        "label": "Membership CTA",
+        "tier": "required",
+        "type": "enum",
+        "options": [
+          "form",
+          "whatsapp",
+          "phone"
+        ],
+        "option_labels": {
+          "form": "Join / sign up form",
+          "whatsapp": "WhatsApp inquiry",
+          "phone": "Call to book"
+        },
+        "followUp": "How should visitors sign up or inquire about membership? Reply with join form, WhatsApp, or call to book."
+      },
+      "tone_preference": {
+        "label": "Brand energy",
+        "tier": "recommended",
+        "type": "enum",
+        "options": [
+          "motivational",
+          "premium",
+          "community",
+          "intense",
+          "calm"
+        ],
+        "option_labels": {
+          "motivational": "Motivational & high-energy",
+          "premium": "Premium & upscale",
+          "community": "Community-focused",
+          "intense": "Intense & competitive",
+          "calm": "Calm & mindful"
+        },
+        "followUp": "What energy should your site convey? Reply with motivational, premium, community, intense, or calm."
+      },
+      "phone": {
+        "label": "Phone number",
+        "tier": "recommended",
+        "followUp": "What phone number should members call to book or inquire?"
+      },
+      "whatsapp_number": {
+        "label": "WhatsApp number",
+        "tier": "recommended",
+        "followUp": "What WhatsApp number should members use to reach you?"
+      },
+      "email": {
+        "label": "Email address",
+        "tier": "optional",
+        "followUp": "What email should members use for membership inquiries?"
+      }
+    },
+    "service_catalog": {
+      "gym": {
+        "suggested_services": [
+          "Strength Training",
+          "Cardio Equipment",
+          "Group Fitness Classes",
+          "Personal Training",
+          "HIIT Workouts",
+          "Locker Rooms & Sauna",
+          "Nutrition Coaching",
+          "Membership Plans"
+        ],
+        "featured_services": [
+          "Strength Training",
+          "Group Fitness Classes",
+          "Personal Training",
+          "HIIT Workouts"
+        ]
+      },
+      "yoga_studio": {
+        "suggested_services": [
+          "Vinyasa Yoga",
+          "Hatha Yoga",
+          "Pilates",
+          "Meditation",
+          "Breathwork",
+          "Beginner Classes",
+          "Private Sessions",
+          "Workshops & Retreats"
+        ],
+        "featured_services": [
+          "Vinyasa Yoga",
+          "Pilates",
+          "Meditation",
+          "Beginner Classes"
+        ]
+      },
+      "crossfit_box": {
+        "suggested_services": [
+          "CrossFit WODs",
+          "Olympic Lifting",
+          "Strength & Conditioning",
+          "Beginner On-Ramp",
+          "Competition Training",
+          "Open Gym",
+          "Nutrition Guidance",
+          "Community Events"
+        ]
+      },
+      "boutique_studio": {
+        "suggested_services": [
+          "Barre",
+          "Spin / Cycling",
+          "HIIT",
+          "Pilates Reformer",
+          "Dance Fitness",
+          "Small Group Training",
+          "Intro Packages",
+          "Monthly Memberships"
+        ]
+      },
+      "personal_training": {
+        "suggested_services": [
+          "1-on-1 Coaching",
+          "Custom Workout Plans",
+          "Body Composition Tracking",
+          "Nutrition Plans",
+          "Online Coaching",
+          "Small Group Sessions",
+          "Sports Performance",
+          "Injury Recovery Support"
+        ]
+      }
+    }
+  },
   "moderation": {
     "blocked": false,
-    "notes": "Standard business — allowed"
+    "notes": "Fitness / gym — allowed"
   }
 }

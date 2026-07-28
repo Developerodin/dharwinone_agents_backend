@@ -7,7 +7,7 @@ describe("SiteRenderer", () => {
   it("renders sections in sectionOrder and emits LocalBusiness JSON-LD", () => {
     const html = renderToStaticMarkup(
       React.createElement(SiteRenderer, {
-        family: "trust_local",
+        family: "warm",
         contentJson: {
           hero: { headline: "Hero title", cta_text: "Call" },
           services: { section_title: "Services", items: [{ title: "Wiring", desc: "Safe installs" }] },

@@ -1,40 +1,240 @@
 {
   "id": "health_education_clinic_medical",
   "name": "Health & Education — Clinic / Medical",
+  "definition": "Doctors, dental, physio, labs, appointments",
   "category": "health_education",
   "subcategory": "clinic_medical",
   "wave": 2,
-  "status": "planned",
-  "default_family": "clean_pro",
+  "status": "active",
+  "default_family": "professional",
+  "eligible_families": [
+    "professional",
+    "minimalist",
+    "organic",
+    "sleek"
+  ],
   "keywords": [
     "clinic",
     "doctor",
     "dental",
     "physio",
     "lab",
-    "appointment"
+    "appointment",
+    "hospital",
+    "medical",
+    "healthcare",
+    "health"
   ],
   "matcher": {
     "eligible_template_ids": [
-      "he_medical_v1",
-      "he_medical_v2",
-      "he_education_v1",
-      "he_education_v2",
-      "he_education_v3",
-      "gn_generic_v1"
+      "he_vibrant_wellness_v1"
     ],
     "default_rank_order": [
-      "he_medical_v1",
-      "he_medical_v2",
-      "he_education_v1",
-      "he_education_v2",
-      "he_education_v3",
-      "gn_generic_v1"
+      "he_vibrant_wellness_v1"
     ]
   },
   "image_pack_refs": [
     "pack_clinic_medical_v1"
   ],
+  "questionnaire": {
+    "required": [
+      "business_name",
+      "city",
+      "country",
+      "facility_type",
+      "services",
+      "cta_preference"
+    ],
+    "recommended": [
+      "service_area",
+      "tone_preference",
+      "phone",
+      "whatsapp_number",
+      "email"
+    ],
+    "fields": {
+      "business_name": {
+        "label": "Business name",
+        "tier": "required"
+      },
+      "city": {
+        "label": "Primary city",
+        "tier": "required"
+      },
+      "country": {
+        "label": "Country",
+        "tier": "required",
+        "followUp": "Which country is your clinic or hospital located in?"
+      },
+      "facility_type": {
+        "label": "Facility type",
+        "tier": "required",
+        "type": "enum",
+        "options": [
+          "general_multi_department",
+          "single_specialty",
+          "diagnostic_lab",
+          "dental_clinic",
+          "maternity_womens",
+          "day_surgery",
+          "primary_care_clinic"
+        ],
+        "option_labels": {
+          "general_multi_department": "General multi-department hospital",
+          "single_specialty": "Specialty clinic",
+          "diagnostic_lab": "Diagnostic center",
+          "dental_clinic": "Dental clinic",
+          "maternity_womens": "Maternity & women's health",
+          "day_surgery": "Day surgery center",
+          "primary_care_clinic": "Primary care clinic"
+        },
+        "followUp": "What type of facility do you run?"
+      },
+      "services": {
+        "label": "Main services",
+        "tier": "required",
+        "type": "service_picker"
+      },
+      "cta_preference": {
+        "label": "Preferred CTA",
+        "tier": "required",
+        "type": "enum",
+        "options": [
+          "whatsapp",
+          "phone",
+          "form"
+        ]
+      },
+      "service_area": {
+        "label": "Service areas",
+        "tier": "recommended",
+        "type": "tags"
+      },
+      "tone_preference": {
+        "label": "Visual style preference",
+        "tier": "recommended"
+      },
+      "phone": {
+        "label": "Phone number",
+        "tier": "recommended"
+      },
+      "whatsapp_number": {
+        "label": "WhatsApp number",
+        "tier": "recommended"
+      },
+      "email": {
+        "label": "Email address",
+        "tier": "optional",
+        "followUp": "What email address should customers use to reach you?"
+      }
+    },
+    "service_catalog": {
+      "general_multi_department": {
+        "suggested_services": [
+          "Emergency & Trauma",
+          "ICU & Critical Care",
+          "General Surgery",
+          "Diagnostics & Imaging",
+          "Maternity & NICU",
+          "Pediatrics",
+          "Cardiology",
+          "Orthopedics",
+          "Neurology",
+          "Oncology",
+          "Nephrology",
+          "Gastroenterology",
+          "ENT",
+          "Ophthalmology",
+          "Physiotherapy",
+          "Pharmacy",
+          "Ambulance",
+          "Health Checkups"
+        ],
+        "featured_services": [
+          "Emergency & Trauma",
+          "ICU & Critical Care",
+          "General Surgery",
+          "Diagnostics & Imaging",
+          "Maternity & NICU",
+          "Pediatrics",
+          "Cardiology",
+          "Orthopedics"
+        ]
+      },
+      "single_specialty": {
+        "suggested_services": [
+          "Specialist Consultation",
+          "Follow-up Care",
+          "Diagnostic Tests",
+          "Minor Procedures",
+          "Second Opinion",
+          "Teleconsultation",
+          "Health Packages",
+          "Patient Counseling"
+        ]
+      },
+      "diagnostic_lab": {
+        "suggested_services": [
+          "Blood Tests",
+          "Pathology",
+          "Radiology & X-Ray",
+          "MRI & CT Scan",
+          "Ultrasound",
+          "ECG",
+          "Health Checkup Packages",
+          "Home Sample Collection"
+        ]
+      },
+      "dental_clinic": {
+        "suggested_services": [
+          "General Dentistry",
+          "Teeth Cleaning",
+          "Root Canal",
+          "Dental Implants",
+          "Braces & Aligners",
+          "Cosmetic Dentistry",
+          "Pediatric Dentistry",
+          "Emergency Dental Care"
+        ]
+      },
+      "maternity_womens": {
+        "suggested_services": [
+          "Prenatal Care",
+          "Delivery & Labor",
+          "Postnatal Care",
+          "Gynecology",
+          "IVF & Fertility",
+          "Ultrasound",
+          "Lactation Support",
+          "Women's Wellness"
+        ]
+      },
+      "day_surgery": {
+        "suggested_services": [
+          "Minor Surgery",
+          "Cataract Surgery",
+          "Hernia Repair",
+          "Endoscopy",
+          "Laparoscopic Procedures",
+          "Same-day Discharge",
+          "Pre-op Assessment",
+          "Post-op Care"
+        ]
+      },
+      "primary_care_clinic": {
+        "suggested_services": [
+          "General Consultation",
+          "Fever & Infections",
+          "Chronic Disease Care",
+          "Vaccinations",
+          "Health Checkups",
+          "Minor Injuries",
+          "Prescriptions",
+          "Teleconsultation"
+        ]
+      }
+    }
+  },
   "moderation": {
     "blocked": false,
     "notes": "Standard business — allowed"

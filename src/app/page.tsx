@@ -14,10 +14,10 @@ export default function HomePage() {
           <a href="/api/ping">GET /api/ping</a>
         </li>
         <li>
-          <code>GET /api/projects</code> — legacy file-based projects (auth required)
+          <code>GET /api/sites</code> — Phase 1 static sites (auth required)
         </li>
         <li>
-          <code>GET /api/builder/projects</code> — Postgres builder projects (auth required)
+          <code>GET /api/builder/**</code> — retired HTML builder (410 Gone)
         </li>
       </ul>
       <p>

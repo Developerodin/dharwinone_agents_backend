@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "families": [
+    {
+      "id": "minimalist",
+      "name": "Minimalist",
+      "definition": "Sparse space, few accents, quiet type, generous negative space",
+      "surfaceStyle": "flat"
+    },
+    {
+      "id": "sleek",
+      "name": "Sleek",
+      "definition": "Tight grid, refined sans-serif, high polish, precise alignment",
+      "surfaceStyle": "flat"
+    },
+    {
+      "id": "professional",
+      "name": "Professional",
+      "definition": "Credential-forward, structured sections, corporate-clean hierarchy",
+      "surfaceStyle": "flat"
+    },
+    {
+      "id": "bold",
+      "name": "Bold",
+      "definition": "High contrast, urgency, strong single CTA, dense visual weight",
+      "surfaceStyle": "flat"
+    },
+    {
+      "id": "editorial",
+      "name": "Editorial",
+      "definition": "Magazine hierarchy, expressive display type, story-led layout",
+      "surfaceStyle": "flat"
+    },
+    {
+      "id": "premium",
+      "name": "Premium",
+      "definition": "Dark or elegant surfaces, large imagery, luxury restraint",
+      "surfaceStyle": "flat"
+    },
+    {
+      "id": "warm",
+      "name": "Warm",
+      "definition": "Soft neutrals, approachable tone, craft and human texture cues",
+      "surfaceStyle": "flat"
+    },
+    {
+      "id": "playful",
+      "name": "Playful",
+      "definition": "Colorful accents, rounded shapes, retail and product energy",
+      "surfaceStyle": "flat"
+    },
+    {
+      "id": "brutalist",
+      "name": "Brutalist",
+      "definition": "Raw type, hard edges, anti-polish, high typographic tension",
+      "surfaceStyle": "brutal"
+    },
+    {
+      "id": "glassmorphism",
+      "name": "Glassmorphism",
+      "definition": "Frosted translucent panels, blur, layered depth over imagery",
+      "surfaceStyle": "glass"
+    },
+    {
+      "id": "claymorphism",
+      "name": "Claymorphism",
+      "definition": "Soft 3D clay shadows, plump shapes, toy-like relief",
+      "surfaceStyle": "clay"
+    },
+    {
+      "id": "neomorphism",
+      "name": "Neomorphism",
+      "definition": "Soft extruded UI, low-contrast relief, inset and outset shadows",
+      "surfaceStyle": "neo"
+    },
+    {
+      "id": "retro",
+      "name": "Retro",
+      "definition": "Vintage typography, muted palettes, nostalgic print cues",
+      "surfaceStyle": "flat"
+    },
+    {
+      "id": "corporate",
+      "name": "Corporate",
+      "definition": "Enterprise grid, formal hierarchy, navy and slate discipline",
+      "surfaceStyle": "flat"
+    },
+    {
+      "id": "organic",
+      "name": "Organic",
+      "definition": "Natural textures, earth tones, soft curves, wellness calm",
+      "surfaceStyle": "flat"
+    },
+    {
+      "id": "tech",
+      "name": "Tech",
+      "definition": "Developer aesthetic, monospace accents, dark or terminal surfaces",
+      "surfaceStyle": "flat"
+    },
+    {
+      "id": "industrial",
+      "name": "Industrial",
+      "definition": "Utilitarian labels, raw materials, workshop and trade vernacular",
+      "surfaceStyle": "flat"
+    },
+    {
+      "id": "gradient_modern",
+      "name": "Gradient Modern",
+      "definition": "Vibrant gradients, startup energy, modern SaaS motion cues",
+      "surfaceStyle": "flat"
+    }
+  ]
+}

@@ -73,6 +73,7 @@ export type SiteCountAggregateOutputType = {
   businessProfileJson: number
   contentJson: number
   themeJson: number
+  chatHistoryJson: number
   status: number
   subdomain: number
   customDomain: number
@@ -129,6 +130,7 @@ export type SiteCountAggregateInputType = {
   businessProfileJson?: true
   contentJson?: true
   themeJson?: true
+  chatHistoryJson?: true
   status?: true
   subdomain?: true
   customDomain?: true
@@ -232,6 +234,7 @@ export type SiteGroupByOutputType = {
   businessProfileJson: runtime.JsonValue | null
   contentJson: runtime.JsonValue | null
   themeJson: runtime.JsonValue | null
+  chatHistoryJson: runtime.JsonValue | null
   status: string | null
   subdomain: string | null
   customDomain: string | null
@@ -271,6 +274,7 @@ export type SiteWhereInput = {
   businessProfileJson?: Prisma.JsonNullableFilter<"Site">
   contentJson?: Prisma.JsonNullableFilter<"Site">
   themeJson?: Prisma.JsonNullableFilter<"Site">
+  chatHistoryJson?: Prisma.JsonNullableFilter<"Site">
   status?: Prisma.StringNullableFilter<"Site"> | string | null
   subdomain?: Prisma.StringNullableFilter<"Site"> | string | null
   customDomain?: Prisma.StringNullableFilter<"Site"> | string | null
@@ -288,6 +292,7 @@ export type SiteOrderByWithRelationInput = {
   businessProfileJson?: Prisma.SortOrderInput | Prisma.SortOrder
   contentJson?: Prisma.SortOrderInput | Prisma.SortOrder
   themeJson?: Prisma.SortOrderInput | Prisma.SortOrder
+  chatHistoryJson?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrderInput | Prisma.SortOrder
   subdomain?: Prisma.SortOrderInput | Prisma.SortOrder
   customDomain?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -308,6 +313,7 @@ export type SiteWhereUniqueInput = Prisma.AtLeast<{
   businessProfileJson?: Prisma.JsonNullableFilter<"Site">
   contentJson?: Prisma.JsonNullableFilter<"Site">
   themeJson?: Prisma.JsonNullableFilter<"Site">
+  chatHistoryJson?: Prisma.JsonNullableFilter<"Site">
   status?: Prisma.StringNullableFilter<"Site"> | string | null
   subdomain?: Prisma.StringNullableFilter<"Site"> | string | null
   customDomain?: Prisma.StringNullableFilter<"Site"> | string | null
@@ -325,6 +331,7 @@ export type SiteOrderByWithAggregationInput = {
   businessProfileJson?: Prisma.SortOrderInput | Prisma.SortOrder
   contentJson?: Prisma.SortOrderInput | Prisma.SortOrder
   themeJson?: Prisma.SortOrderInput | Prisma.SortOrder
+  chatHistoryJson?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrderInput | Prisma.SortOrder
   subdomain?: Prisma.SortOrderInput | Prisma.SortOrder
   customDomain?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -349,6 +356,7 @@ export type SiteScalarWhereWithAggregatesInput = {
   businessProfileJson?: Prisma.JsonNullableWithAggregatesFilter<"Site">
   contentJson?: Prisma.JsonNullableWithAggregatesFilter<"Site">
   themeJson?: Prisma.JsonNullableWithAggregatesFilter<"Site">
+  chatHistoryJson?: Prisma.JsonNullableWithAggregatesFilter<"Site">
   status?: Prisma.StringNullableWithAggregatesFilter<"Site"> | string | null
   subdomain?: Prisma.StringNullableWithAggregatesFilter<"Site"> | string | null
   customDomain?: Prisma.StringNullableWithAggregatesFilter<"Site"> | string | null
@@ -364,6 +372,7 @@ export type SiteCreateInput = {
   businessProfileJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   contentJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   themeJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  chatHistoryJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: string | null
   subdomain?: string | null
   customDomain?: string | null
@@ -381,6 +390,7 @@ export type SiteUncheckedCreateInput = {
   businessProfileJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   contentJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   themeJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  chatHistoryJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: string | null
   subdomain?: string | null
   customDomain?: string | null
@@ -397,6 +407,7 @@ export type SiteUpdateInput = {
   businessProfileJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   contentJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   themeJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  chatHistoryJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subdomain?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customDomain?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -414,6 +425,7 @@ export type SiteUncheckedUpdateInput = {
   businessProfileJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   contentJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   themeJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  chatHistoryJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subdomain?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customDomain?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -431,6 +443,7 @@ export type SiteCreateManyInput = {
   businessProfileJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   contentJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   themeJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  chatHistoryJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: string | null
   subdomain?: string | null
   customDomain?: string | null
@@ -446,6 +459,7 @@ export type SiteUpdateManyMutationInput = {
   businessProfileJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   contentJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   themeJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  chatHistoryJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subdomain?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customDomain?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -462,6 +476,7 @@ export type SiteUncheckedUpdateManyInput = {
   businessProfileJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   contentJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   themeJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  chatHistoryJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subdomain?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customDomain?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -478,6 +493,7 @@ export type SiteCountOrderByAggregateInput = {
   businessProfileJson?: Prisma.SortOrder
   contentJson?: Prisma.SortOrder
   themeJson?: Prisma.SortOrder
+  chatHistoryJson?: Prisma.SortOrder
   status?: Prisma.SortOrder
   subdomain?: Prisma.SortOrder
   customDomain?: Prisma.SortOrder
@@ -550,6 +566,7 @@ export type SiteCreateWithoutVersionsInput = {
   businessProfileJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   contentJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   themeJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  chatHistoryJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: string | null
   subdomain?: string | null
   customDomain?: string | null
@@ -566,6 +583,7 @@ export type SiteUncheckedCreateWithoutVersionsInput = {
   businessProfileJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   contentJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   themeJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  chatHistoryJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: string | null
   subdomain?: string | null
   customDomain?: string | null
@@ -597,6 +615,7 @@ export type SiteUpdateWithoutVersionsInput = {
   businessProfileJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   contentJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   themeJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  chatHistoryJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subdomain?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customDomain?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -613,6 +632,7 @@ export type SiteUncheckedUpdateWithoutVersionsInput = {
   businessProfileJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   contentJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   themeJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  chatHistoryJson?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subdomain?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customDomain?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -660,6 +680,7 @@ export type SiteSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   businessProfileJson?: boolean
   contentJson?: boolean
   themeJson?: boolean
+  chatHistoryJson?: boolean
   status?: boolean
   subdomain?: boolean
   customDomain?: boolean
@@ -678,6 +699,7 @@ export type SiteSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   businessProfileJson?: boolean
   contentJson?: boolean
   themeJson?: boolean
+  chatHistoryJson?: boolean
   status?: boolean
   subdomain?: boolean
   customDomain?: boolean
@@ -694,6 +716,7 @@ export type SiteSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   businessProfileJson?: boolean
   contentJson?: boolean
   themeJson?: boolean
+  chatHistoryJson?: boolean
   status?: boolean
   subdomain?: boolean
   customDomain?: boolean
@@ -710,6 +733,7 @@ export type SiteSelectScalar = {
   businessProfileJson?: boolean
   contentJson?: boolean
   themeJson?: boolean
+  chatHistoryJson?: boolean
   status?: boolean
   subdomain?: boolean
   customDomain?: boolean
@@ -717,7 +741,7 @@ export type SiteSelectScalar = {
   updatedAt?: boolean
 }
 
-export type SiteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "siteId" | "userId" | "templateId" | "templateVersion" | "businessProfileJson" | "contentJson" | "themeJson" | "status" | "subdomain" | "customDomain" | "createdAt" | "updatedAt", ExtArgs["result"]["site"]>
+export type SiteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "siteId" | "userId" | "templateId" | "templateVersion" | "businessProfileJson" | "contentJson" | "themeJson" | "chatHistoryJson" | "status" | "subdomain" | "customDomain" | "createdAt" | "updatedAt", ExtArgs["result"]["site"]>
 export type SiteInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   versions?: boolean | Prisma.Site$versionsArgs<ExtArgs>
   _count?: boolean | Prisma.SiteCountOutputTypeDefaultArgs<ExtArgs>
@@ -739,6 +763,10 @@ export type $SitePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     businessProfileJson: runtime.JsonValue | null
     contentJson: runtime.JsonValue | null
     themeJson: runtime.JsonValue | null
+    /**
+     * * Web-agent chat transcript (ChatMessage[] JSON); auth-scoped via site.userId.
+     */
+    chatHistoryJson: runtime.JsonValue | null
     status: string | null
     subdomain: string | null
     customDomain: string | null
@@ -1176,6 +1204,7 @@ export interface SiteFieldRefs {
   readonly businessProfileJson: Prisma.FieldRef<"Site", 'Json'>
   readonly contentJson: Prisma.FieldRef<"Site", 'Json'>
   readonly themeJson: Prisma.FieldRef<"Site", 'Json'>
+  readonly chatHistoryJson: Prisma.FieldRef<"Site", 'Json'>
   readonly status: Prisma.FieldRef<"Site", 'String'>
   readonly subdomain: Prisma.FieldRef<"Site", 'String'>
   readonly customDomain: Prisma.FieldRef<"Site", 'String'>

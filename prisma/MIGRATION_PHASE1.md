@@ -24,6 +24,15 @@ Creates (if missing): `sites`, `site_versions`, `token_transactions`, `categorie
 
 Existing Alembic-mapped builder tables are unchanged.
 
+## Apply chat history column
+
+```bash
+npx prisma db execute --file prisma/migrations/site_chat_history.sql
+npx prisma generate
+```
+
+Adds nullable `sites.chatHistoryJson` (JSONB, default `[]`) for web-agent cross-device chat sync.
+
 ## Optional: baseline Prisma migrations later
 
 When ready to adopt Prisma migrate history without losing Alembic:

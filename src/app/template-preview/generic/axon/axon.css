@@ -1,0 +1,123 @@
+.axon-page,
+.axon-page *,
+.axon-page *::before,
+.axon-page *::after {
+  box-sizing: border-box;
+}
+
+.axon-page {
+  font-family: "Inter", sans-serif;
+  color: #1b133c;
+  background: transparent;
+}
+
+html:has(.axon-page) {
+  scroll-behavior: smooth;
+}
+
+html:has(.axon-page) body {
+  font-family: "Inter", sans-serif;
+  color: #1b133c;
+  margin: 0;
+  background: transparent;
+}
+
+.axon-page .axon-heading {
+  font-family: "Instrument Serif", serif;
+}
+
+.axon-site {
+  position: relative;
+  min-height: 100dvh;
+}
+
+.axon-video-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.axon-video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.axon-site-content {
+  position: relative;
+  z-index: 1;
+}
+
+.axon-main {
+  background: transparent;
+}
+
+.axon-section {
+  position: relative;
+}
+
+.axon-hero-content {
+  isolation: isolate;
+}
+
+.axon-hero-text {
+  text-shadow:
+    0 1px 2px rgba(254, 254, 254, 0.95),
+    0 0 28px rgba(254, 254, 254, 0.75);
+}
+
+.axon-focus:focus-visible {
+  outline: 2px solid #1b133c;
+  outline-offset: 3px;
+}
+
+.axon-input {
+  min-height: 44px;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(27, 19, 60, 0.12);
+  background: rgba(254, 254, 254, 0.92);
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #1b133c;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.axon-input::placeholder {
+  color: rgba(27, 19, 60, 0.4);
+}
+
+.axon-input:focus-visible {
+  outline: none;
+  border-color: rgba(27, 19, 60, 0.35);
+  box-shadow: 0 0 0 3px rgba(27, 19, 60, 0.12);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:has(.axon-page) {
+    scroll-behavior: auto;
+  }
+
+  .axon-page *,
+  .axon-page *::before,
+  .axon-page *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

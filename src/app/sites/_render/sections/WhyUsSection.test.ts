@@ -19,11 +19,11 @@ describe("WhyUsSection", () => {
     expect(html).toContain("Licensed");
   });
 
-  it("uses numbered steps for trust_local", () => {
+  it("uses numbered steps for warm", () => {
     const html = renderSection(
       WhyUsSection,
       baseSectionProps({
-        family: FAMILIES.trust_local,
+        family: FAMILIES.warm,
         content: { section_title: "Process", points: ["Call us"] },
       }),
     );

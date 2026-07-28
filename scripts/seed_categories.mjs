@@ -18,14 +18,11 @@ import pg from "pg";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 dotenv.config({ path: path.join(root, ".env") });
 
-const SEGMENT_DISPLAY_NAMES = {
-  real_estate: "Real Estate",
-  local_service: "Local service",
-  retail: "Retail & small shops",
-  hospitality_travel: "Hospitality & travel",
-  health_education: "Health & education",
-  professional: "Professional services",
-};
+const SEGMENT_DISPLAY_NAMES = Object.fromEntries(
+  JSON.parse(
+    fs.readFileSync(path.join(root, "src/server/data/categoryTaxonomy.json"), "utf-8"),
+  ).categories.map((row) => [row.id, row.name]),
+);
 const SEGMENT_ORDER = Object.keys(SEGMENT_DISPLAY_NAMES);
 
 // Shared across all segments (source: categoriesRepo.ts SHARED_QUESTIONNAIRE).
@@ -68,7 +65,7 @@ function subcategoryDisplayName(config) {
   return config.subcategory.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
-/** Read every category.config.json and fold into one row per segment. */
+/** Read live (status=active) category.config.json files and fold into segment rows. */
 function buildSeed() {
   const catalogRoot = path.join(root, "assets", "categories");
   if (!fs.existsSync(catalogRoot)) throw new Error(`missing catalog dir: ${catalogRoot}`);
@@ -79,6 +76,8 @@ function buildSeed() {
     const cfgPath = path.join(catalogRoot, dir.name, "category.config.json");
     if (!fs.existsSync(cfgPath)) continue;
     const cfg = JSON.parse(fs.readFileSync(cfgPath, "utf-8"));
+    // Only status=active configs are seeded for web-agent.
+    if ((cfg.status ?? "active") !== "active") continue;
     cfg.keywords = Array.isArray(cfg.keywords) ? cfg.keywords : [];
     const list = bySegment.get(cfg.category) ?? [];
     list.push(cfg);
@@ -93,14 +92,20 @@ function buildSeed() {
     const subcategories = configs.map((c) => ({
       id: c.subcategory,
       name: subcategoryDisplayName(c),
+      definition: c.definition ?? "",
+      default_family: c.default_family ?? "minimalist",
+      eligible_families: c.eligible_families ?? [],
       keywords: c.keywords,
     }));
     const imagePackRefs = Array.from(new Set(configs.flatMap((c) => c.image_pack_refs ?? [])));
+    const questionnaire =
+      configs.find((c) => c.questionnaire && typeof c.questionnaire === "object")?.questionnaire ??
+      SHARED_QUESTIONNAIRE;
     rows.push({
       categoryId: segmentId,
       name: SEGMENT_DISPLAY_NAMES[segmentId] ?? segmentId,
       subcategoriesJson: subcategories,
-      questionnaireConfigJson: SHARED_QUESTIONNAIRE,
+      questionnaireConfigJson: questionnaire,
       imagePackRefs: imagePackRefs.length ? imagePackRefs : [`pack/${segmentId}/default`],
     });
   }
@@ -132,22 +137,56 @@ async function seed(client, rows) {
     if (res.rows[0].inserted) created += 1;
     else updated += 1;
   }
-  return { created, updated };
+  // Drop stale segments so DB matches live disk set.
+  const liveIds = rows.map((r) => r.categoryId);
+  const del = await client.query(
+    `DELETE FROM categories WHERE NOT ("categoryId" = ANY($1::text[]))`,
+    [liveIds],
+  );
+  return { created, updated, deleted: del.rowCount ?? 0 };
 }
 
 function check(rows) {
-  // ponytail: standalone self-check — the seed is worthless if the file
-  // aggregation silently drops a segment or a segment ends up empty.
-  if (rows.length !== SEGMENT_ORDER.length) {
-    throw new Error(`expected ${SEGMENT_ORDER.length} segments, built ${rows.length}`);
+  if (!rows.length) {
+    throw new Error("expected at least one live segment from status=active configs");
+  }
+  if (rows.length < 12) {
+    throw new Error(`expected at least 12 live segments, got ${rows.length}`);
+  }
+  const required = [
+    "real_estate",
+    "local_service",
+    "retail",
+    "hospitality_travel",
+    "health_education",
+    "professional",
+    "events_weddings",
+    "legal_finance",
+    "creative_media",
+    "beauty_wellness",
+    "nonprofit_community",
+    "automotive",
+  ];
+  for (const id of required) {
+    if (!rows.some((r) => r.categoryId === id)) {
+      throw new Error(`seed must include segment ${id}`);
+    }
   }
   for (const r of rows) {
     if (!r.subcategoriesJson.length) throw new Error(`segment ${r.categoryId} has no subcategories`);
   }
+  const local = rows.find((r) => r.categoryId === "local_service");
+  if (!local?.subcategoriesJson.some((s) => s.id === "electrician")) {
+    throw new Error("seed must include local_service/electrician");
+  }
+  const professional = rows.find((r) => r.categoryId === "professional");
+  if (!professional?.subcategoriesJson.some((s) => s.id === "portfolio_freelancer")) {
+    throw new Error("seed must include professional/portfolio_freelancer");
+  }
   for (const r of rows) {
     console.log(`  ${r.categoryId} (${r.name}): ${r.subcategoriesJson.length} subcategories`);
   }
-  console.log(`seed:categories --check OK (${rows.length} segments)`);
+  console.log(`seed:categories --check OK (${rows.length} live segment(s))`);
 }
 
 async function main() {
@@ -159,8 +198,10 @@ async function main() {
   const client = new pg.Client({ connectionString: databaseUrl() });
   await client.connect();
   try {
-    const { created, updated } = await seed(client, rows);
-    console.log(`seed:categories OK — ${rows.length} segments (created=${created} updated=${updated})`);
+    const { created, updated, deleted } = await seed(client, rows);
+    console.log(
+      `seed:categories OK — ${rows.length} live segment(s) (created=${created} updated=${updated} deleted=${deleted})`,
+    );
   } finally {
     await client.end();
   }

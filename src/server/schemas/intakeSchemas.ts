@@ -4,16 +4,33 @@ import { z } from "zod";
 export const BusinessProfileSchema = z
   .object({
     business_name: z.string().max(80).optional(),
+    /** One-line blog or site description shown near the hero. */
+    tagline: z.string().max(120).optional(),
+    /** Intake copy hint — e.g. "hospital" when the user said hospital, not clinic. */
+    entity_label: z.string().max(64).optional(),
     category: z.string().max(64).optional(),
     subcategory: z.string().max(64).optional(),
     city: z.string().max(80).optional(),
+    country: z.string().max(80).optional(),
+    country_code: z.string().length(2).optional(),
     service_area: z.array(z.string().max(80)).max(12).optional(),
     services: z.array(z.string().max(80)).max(12).optional(),
+    facility_type: z.string().max(64).optional(),
+    product_type: z.string().max(64).optional(),
+    studio_type: z.string().max(64).optional(),
     tone_preference: z.string().max(64).optional(),
-    cta_preference: z.enum(["whatsapp", "phone", "form"]).optional(),
+    theme_mode_preference: z.enum(["dark", "light", "toggle"]).optional(),
+    newsletter_cta: z.string().max(80).optional(),
+    cta_preference: z
+      .enum(["whatsapp", "phone", "form", "newsletter", "email", "demo", "trial"])
+      .optional(),
     phone: z.string().max(24).optional(),
     whatsapp_number: z.string().max(24).optional(),
     email: z.string().max(120).optional(),
+    /** LinkedIn profile slug — optional, used by portfolio templates for footer socials. */
+    linkedin_id: z.string().max(80).optional(),
+    /** X (Twitter) handle — optional, used by portfolio templates for footer socials. */
+    x_account: z.string().max(80).optional(),
     has_reviews: z.boolean().optional(),
     language: z.string().max(8).optional(),
     logo_url: z.string().max(512).optional(),
@@ -70,6 +87,10 @@ export const GapQuestionSchema = z.object({
   question: z.string(),
   tier: z.enum(["required", "recommended", "optional"]),
   hint: z.string().optional(),
+  inputType: z.enum(["service_picker", "enum"]).optional(),
+  suggestedServices: z.array(z.string()).optional(),
+  options: z.array(z.string()).optional(),
+  optionLabels: z.record(z.string(), z.string()).optional(),
 });
 
 export const GapCheckResponseSchema = z.object({
@@ -91,6 +112,11 @@ export const TemplateMatchResponseSchema = z.object({
   ),
 });
 
+export type ServiceCatalogEntry = {
+  suggested_services: string[];
+  featured_services?: string[];
+};
+
 export type QuestionnaireConfig = {
   required?: string[];
   recommended?: string[];
@@ -98,10 +124,14 @@ export type QuestionnaireConfig = {
     string,
     {
       label?: string;
+      entity_label?: string;
       tier?: string;
       type?: string;
       options?: string[];
+      option_labels?: Record<string, string>;
       followUp?: string;
+      suggested_services?: string[];
     }
   >;
+  service_catalog?: Record<string, ServiceCatalogEntry>;
 };

@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "source_of_truth": "docs/superpowers/specs/2026-07-21-category-taxonomy.md",
+  "source_of_truth": "src/server/data/categoryTaxonomy.json",
   "authoring_contract": "docs/superpowers/examples/ (electrician_v3) + section-standard.json",
   "templates": [
     {
       "id": "re_broker_v1",
       "segment": "real_estate",
       "subcategory": "broker",
-      "family": "clean_pro",
+      "family": "professional",
       "intents": [
         "broker_profile"
       ],
@@ -19,7 +19,7 @@
       "id": "re_agent_v1",
       "segment": "real_estate",
       "subcategory": "agent",
-      "family": "trust_local",
+      "family": "warm",
       "intents": [
         "neighbourhood_specialist"
       ],
@@ -31,7 +31,7 @@
       "id": "re_agent_lead_v1",
       "segment": "real_estate",
       "subcategory": "agent",
-      "family": "bold_convert",
+      "family": "bold",
       "intents": [
         "lead_gen_landing"
       ],
@@ -42,7 +42,7 @@
       "id": "re_rental_v1",
       "segment": "real_estate",
       "subcategory": "rental_consultant",
-      "family": "clean_pro",
+      "family": "professional",
       "intents": [
         "rental",
         "listing_showcase"
@@ -54,7 +54,7 @@
       "id": "re_luxury_v1",
       "segment": "real_estate",
       "subcategory": "luxury",
-      "family": "premium_dark",
+      "family": "premium",
       "intents": [
         "luxury",
         "listing_showcase"
@@ -67,7 +67,7 @@
       "id": "ls_plumbing_v1",
       "segment": "local_service",
       "subcategory": "plumbing",
-      "family": "trust_local",
+      "family": "warm",
       "status": "convert",
       "source": "construction.html",
       "wave": 1
@@ -76,7 +76,7 @@
       "id": "ls_electrician_v1",
       "segment": "local_service",
       "subcategory": "electrician",
-      "family": "trust_local",
+      "family": "warm",
       "status": "convert",
       "source": "construction-2.html",
       "wave": 1
@@ -85,7 +85,7 @@
       "id": "electrician_v3",
       "segment": "local_service",
       "subcategory": "electrician",
-      "family": "trust_local",
+      "family": "warm",
       "status": "example",
       "source": "docs/superpowers/examples (legacy id)",
       "wave": 1
@@ -94,7 +94,7 @@
       "id": "ls_landscaping_v1",
       "segment": "local_service",
       "subcategory": "landscaping",
-      "family": "trust_local",
+      "family": "warm",
       "status": "convert",
       "source": "construction-3.html",
       "wave": 1
@@ -103,7 +103,7 @@
       "id": "ls_car_wash_v1",
       "segment": "local_service",
       "subcategory": "car_wash",
-      "family": "bold_convert",
+      "family": "bold",
       "status": "convert",
       "source": "fitness.html",
       "wave": 1
@@ -112,7 +112,7 @@
       "id": "ls_cleaning_v1",
       "segment": "local_service",
       "subcategory": "cleaning_handyman",
-      "family": "trust_local",
+      "family": "warm",
       "status": "convert",
       "source": "medical.html",
       "wave": 1
@@ -121,7 +121,7 @@
       "id": "ls_insurance_v1",
       "segment": "local_service",
       "subcategory": "insurance_agent",
-      "family": "clean_pro",
+      "family": "professional",
       "status": "convert",
       "source": "agency-2.html",
       "wave": 1
@@ -130,7 +130,7 @@
       "id": "rt_gift_shop_v1",
       "segment": "retail",
       "subcategory": "gift_shop",
-      "family": "warm_craft",
+      "family": "warm",
       "status": "convert",
       "source": "cafe.html",
       "wave": 1
@@ -139,7 +139,7 @@
       "id": "rt_print_shop_v1",
       "segment": "retail",
       "subcategory": "print_shop",
-      "family": "fresh_retail",
+      "family": "playful",
       "status": "convert",
       "source": "saas.html",
       "wave": 1
@@ -148,7 +148,7 @@
       "id": "rt_clothing_v1",
       "segment": "retail",
       "subcategory": "clothing",
-      "family": "fresh_retail",
+      "family": "playful",
       "status": "convert",
       "source": "shop.html",
       "wave": 1
@@ -157,7 +157,7 @@
       "id": "rt_boutique_v1",
       "segment": "retail",
       "subcategory": "boutique",
-      "family": "premium_dark",
+      "family": "premium",
       "status": "convert",
       "source": "shop-2.html (restyled dark)",
       "wave": 1
@@ -166,7 +166,7 @@
       "id": "rt_handmade_v1",
       "segment": "retail",
       "subcategory": "handmade",
-      "family": "warm_craft",
+      "family": "warm",
       "status": "convert",
       "source": "portfolio-2.html",
       "wave": 1
@@ -175,7 +175,7 @@
       "id": "ht_cafe_v1",
       "segment": "hospitality_travel",
       "subcategory": "cafe",
-      "family": "warm_craft",
+      "family": "warm",
       "status": "convert",
       "source": "cafe-2.html",
       "wave": 2
@@ -184,7 +184,7 @@
       "id": "ht_travel_v1",
       "segment": "hospitality_travel",
       "subcategory": "travel_tourism",
-      "family": "premium_dark",
+      "family": "premium",
       "status": "convert",
       "source": "travel-2.html",
       "wave": 2
@@ -193,7 +193,7 @@
       "id": "he_medical_v1",
       "segment": "health_education",
       "subcategory": "clinic_medical",
-      "family": "clean_pro",
+      "family": "professional",
       "status": "convert",
       "source": "medical-2.html",
       "wave": 2
@@ -202,7 +202,7 @@
       "id": "he_fitness_v1",
       "segment": "health_education",
       "subcategory": "fitness_gym",
-      "family": "bold_convert",
+      "family": "bold",
       "status": "convert",
       "source": "fitness-2.html",
       "wave": 2
@@ -211,7 +211,7 @@
       "id": "he_education_v1",
       "segment": "health_education",
       "subcategory": "education_coaching",
-      "family": "clean_pro",
+      "family": "professional",
       "status": "convert",
       "source": "education.html",
       "wave": 2
@@ -220,7 +220,7 @@
       "id": "pf_agency_v1",
       "segment": "professional",
       "subcategory": "agency_studio",
-      "family": "clean_pro",
+      "family": "professional",
       "status": "convert",
       "source": "agency-3.html",
       "wave": 2
@@ -229,7 +229,7 @@
       "id": "pf_saas_v1",
       "segment": "professional",
       "subcategory": "saas_startup",
-      "family": "fresh_retail",
+      "family": "playful",
       "status": "convert",
       "source": "saas-2.html",
       "wave": 2
@@ -238,7 +238,7 @@
       "id": "pf_portfolio_v1",
       "segment": "professional",
       "subcategory": "portfolio_freelancer",
-      "family": "warm_craft",
+      "family": "warm",
       "status": "convert",
       "source": "portfolio.html",
       "wave": 2
@@ -247,7 +247,7 @@
       "id": "gn_generic_v1",
       "segment": null,
       "subcategory": null,
-      "family": "generic",
+      "family": "minimalist",
       "status": "fallback",
       "source": "generic.html",
       "wave": 1
@@ -256,7 +256,7 @@
       "id": "pf_agency_v2",
       "segment": "professional",
       "subcategory": "agency_studio",
-      "family": "clean_pro",
+      "family": "professional",
       "status": "convert",
       "source": "agency.html",
       "wave": 2
@@ -265,7 +265,7 @@
       "id": "ht_cafe_v2",
       "segment": "hospitality_travel",
       "subcategory": "cafe",
-      "family": "warm_craft",
+      "family": "warm",
       "status": "convert",
       "source": "cafe-3.html",
       "wave": 2
@@ -274,7 +274,7 @@
       "id": "ht_restaurant_v1",
       "segment": "hospitality_travel",
       "subcategory": "restaurant",
-      "family": "premium_dark",
+      "family": "premium",
       "status": "convert",
       "source": "cafe-2.html (re-themed for dining)",
       "wave": 2
@@ -283,7 +283,7 @@
       "id": "he_education_v2",
       "segment": "health_education",
       "subcategory": "education_coaching",
-      "family": "clean_pro",
+      "family": "professional",
       "status": "convert",
       "source": "education-2.html",
       "wave": 2
@@ -292,7 +292,7 @@
       "id": "he_education_v3",
       "segment": "health_education",
       "subcategory": "education_coaching",
-      "family": "clean_pro",
+      "family": "professional",
       "status": "convert",
       "source": "education-3.html",
       "wave": 2
@@ -301,7 +301,7 @@
       "id": "he_fitness_v2",
       "segment": "health_education",
       "subcategory": "fitness_gym",
-      "family": "bold_convert",
+      "family": "bold",
       "status": "convert",
       "source": "fitness-3.html",
       "wave": 2
@@ -310,7 +310,7 @@
       "id": "gn_generic_v2",
       "segment": null,
       "subcategory": null,
-      "family": "generic",
+      "family": "minimalist",
       "status": "fallback",
       "source": "generic-2.html",
       "wave": 1
@@ -319,7 +319,7 @@
       "id": "gn_generic_v3",
       "segment": null,
       "subcategory": null,
-      "family": "generic",
+      "family": "minimalist",
       "status": "fallback",
       "source": "generic-3.html",
       "wave": 1
@@ -328,7 +328,7 @@
       "id": "he_medical_v2",
       "segment": "health_education",
       "subcategory": "clinic_medical",
-      "family": "clean_pro",
+      "family": "professional",
       "status": "convert",
       "source": "medical-3.html",
       "wave": 2
@@ -337,7 +337,7 @@
       "id": "pf_portfolio_v2",
       "segment": "professional",
       "subcategory": "portfolio_freelancer",
-      "family": "warm_craft",
+      "family": "warm",
       "status": "convert",
       "source": "portfolio-3.html",
       "wave": 2
@@ -346,7 +346,7 @@
       "id": "pf_saas_v2",
       "segment": "professional",
       "subcategory": "saas_startup",
-      "family": "fresh_retail",
+      "family": "playful",
       "status": "convert",
       "source": "saas-3.html",
       "wave": 2
@@ -355,7 +355,7 @@
       "id": "rt_clothing_v2",
       "segment": "retail",
       "subcategory": "clothing",
-      "family": "fresh_retail",
+      "family": "playful",
       "status": "convert",
       "source": "shop-3.html",
       "wave": 1
@@ -364,7 +364,7 @@
       "id": "ht_travel_v2",
       "segment": "hospitality_travel",
       "subcategory": "travel_tourism",
-      "family": "premium_dark",
+      "family": "premium",
       "status": "convert",
       "source": "travel.html",
       "wave": 2
@@ -373,9 +373,68 @@
       "id": "ht_travel_v3",
       "segment": "hospitality_travel",
       "subcategory": "travel_tourism",
-      "family": "premium_dark",
+      "family": "premium",
       "status": "convert",
       "source": "travel-3.html",
+      "wave": 2
+    },
+    {
+      "id": "pf_blog_scroll_v1",
+      "segment": "professional",
+      "subcategory": "personal_blog",
+      "family": "editorial",
+      "intents": [
+        "blog",
+        "scroll_world",
+        "personal_blog"
+      ],
+      "status": "new",
+      "source": "template-preview/launch/pf_blog_scroll_v1 (React scroll-world)",
+      "wave": 2
+    },
+    {
+      "id": "pf_portfolio_jack_v1",
+      "segment": "professional",
+      "subcategory": "portfolio_freelancer",
+      "family": "gradient_modern",
+      "status": "new",
+      "source": "template-preview/portfolio/jack (React)",
+      "wave": 2
+    },
+    {
+      "id": "he_vibrant_wellness_v1",
+      "segment": "health_education",
+      "subcategory": "clinic_medical",
+      "family": "organic",
+      "status": "new",
+      "source": "template-preview/health/vibrant-wellness (React)",
+      "wave": 2
+    },
+    {
+      "id": "he_dental_v1",
+      "segment": "health_education",
+      "subcategory": "clinic_medical",
+      "family": "professional",
+      "status": "new",
+      "source": "template-preview/health/dental (React)",
+      "wave": 2
+    },
+    {
+      "id": "gn_axon_v1",
+      "segment": "professional",
+      "subcategory": "saas_startup",
+      "family": "glassmorphism",
+      "status": "new",
+      "source": "template-preview/generic/axon (React)",
+      "wave": 2
+    },
+    {
+      "id": "ps_securify_v1",
+      "segment": "professional",
+      "subcategory": "saas_startup",
+      "family": "tech",
+      "status": "new",
+      "source": "template-preview/professional/securify (React)",
       "wave": 2
     }
   ],

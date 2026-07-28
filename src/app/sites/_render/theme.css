@@ -1,26 +1,26 @@
-[data-family="trust_local"] {
-  --color-ink: #26231c;
-  --color-bg: #e9e5db;
-  --color-accent: #38586e;
-  --color-soft: #f3f0e8;
-  --color-line: #d3ccbd;
-  --font-heading: "Barlow Condensed", sans-serif;
-  --font-body: "Barlow", sans-serif;
-  --btn-radius: 0;
-}
-
-[data-family="bold_convert"] {
-  --color-ink: #eef3ec;
-  --color-bg: #111814;
-  --color-accent: #f4562a;
-  --color-soft: #19221c;
-  --color-line: #28342c;
-  --font-heading: "Oswald", sans-serif;
+[data-family="minimalist"] {
+  --color-ink: #1a1a1a;
+  --color-bg: #f8f8f6;
+  --color-accent: #2563eb;
+  --color-soft: #f0f0ed;
+  --color-line: #e4e4e0;
+  --font-heading: "Inter", sans-serif;
   --font-body: "Inter", sans-serif;
-  --btn-radius: 0.5rem;
+  --btn-radius: 0.25rem;
 }
 
-[data-family="clean_pro"] {
+[data-family="sleek"] {
+  --color-ink: #0f172a;
+  --color-bg: #f0f2f5;
+  --color-accent: #0066cc;
+  --color-soft: #e8ecf1;
+  --color-line: #cbd5e1;
+  --font-heading: "Syne", sans-serif;
+  --font-body: "DM Sans", sans-serif;
+  --btn-radius: 0.375rem;
+}
+
+[data-family="professional"] {
   --color-ink: #232029;
   --color-bg: #edebe5;
   --color-accent: #7c2d3e;
@@ -31,7 +31,29 @@
   --btn-radius: 0.5rem;
 }
 
-[data-family="premium_dark"] {
+[data-family="bold"] {
+  --color-ink: #eef3ec;
+  --color-bg: #111814;
+  --color-accent: #f4562a;
+  --color-soft: #19221c;
+  --color-line: #28342c;
+  --font-heading: "Oswald", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --btn-radius: 0.5rem;
+}
+
+[data-family="editorial"] {
+  --color-ink: #1c1917;
+  --color-bg: #faf9f6;
+  --color-accent: #8b2942;
+  --color-soft: #f3f0ea;
+  --color-line: #ddd6cb;
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Source Serif 4", serif;
+  --btn-radius: 0;
+}
+
+[data-family="premium"] {
   --color-ink: #14282e;
   --color-bg: #edf0e9;
   --color-accent: #c9631f;
@@ -42,18 +64,18 @@
   --btn-radius: 0.5rem;
 }
 
-[data-family="warm_craft"] {
-  --color-ink: #2e1f13;
-  --color-bg: #f3ebdf;
-  --color-accent: #a9631b;
-  --color-soft: #eadfcd;
-  --color-line: #d8c6ac;
-  --font-heading: "Fraunces", serif;
-  --font-body: "Karla", sans-serif;
-  --btn-radius: 999px;
+[data-family="warm"] {
+  --color-ink: #26231c;
+  --color-bg: #e9e5db;
+  --color-accent: #38586e;
+  --color-soft: #f3f0e8;
+  --color-line: #d3ccbd;
+  --font-heading: "Barlow Condensed", sans-serif;
+  --font-body: "Barlow", sans-serif;
+  --btn-radius: 0;
 }
 
-[data-family="fresh_retail"] {
+[data-family="playful"] {
   --color-ink: #182433;
   --color-bg: #f2f5f9;
   --color-accent: #0d6e60;
@@ -62,6 +84,116 @@
   --font-heading: "Bricolage Grotesque", sans-serif;
   --font-body: "Inter", sans-serif;
   --btn-radius: 0.5rem;
+}
+
+[data-family="brutalist"] {
+  --color-ink: #0a0a0a;
+  --color-bg: #e8e4dc;
+  --color-accent: #000000;
+  --color-soft: #d9d4c8;
+  --color-line: #0a0a0a;
+  --font-heading: "Archivo Black", sans-serif;
+  --font-body: "Space Mono", monospace;
+  --btn-radius: 0;
+}
+
+[data-family="glassmorphism"] {
+  --color-ink: #e2e8f0;
+  --color-bg: #0f1419;
+  --color-accent: #60a5fa;
+  --color-soft: #1a2332;
+  --color-line: #334155;
+  --font-heading: "Outfit", sans-serif;
+  --font-body: "Outfit", sans-serif;
+  --btn-radius: 0.75rem;
+}
+
+[data-family="claymorphism"] {
+  --color-ink: #2d3748;
+  --color-bg: #e8eef5;
+  --color-accent: #f97316;
+  --color-soft: #dce6f2;
+  --color-line: #c5d4e8;
+  --font-heading: "Nunito", sans-serif;
+  --font-body: "Nunito", sans-serif;
+  --btn-radius: 999px;
+}
+
+[data-family="neomorphism"] {
+  --color-ink: #4a5568;
+  --color-bg: #e0e5ec;
+  --color-accent: #6366f1;
+  --color-soft: #d1d9e6;
+  --color-line: #b8c4d4;
+  --font-heading: "Manrope", sans-serif;
+  --font-body: "Manrope", sans-serif;
+  --btn-radius: 1rem;
+}
+
+[data-family="retro"] {
+  --color-ink: #3d2914;
+  --color-bg: #f5e6d3;
+  --color-accent: #c45c26;
+  --color-soft: #edd9c0;
+  --color-line: #d4b896;
+  --font-heading: "Libre Baskerville", serif;
+  --font-body: "Libre Franklin", sans-serif;
+  --btn-radius: 0.25rem;
+}
+
+[data-family="corporate"] {
+  --color-ink: #1e293b;
+  --color-bg: #f4f6f8;
+  --color-accent: #1e40af;
+  --color-soft: #e8edf3;
+  --color-line: #cbd5e1;
+  --font-heading: "IBM Plex Sans", sans-serif;
+  --font-body: "IBM Plex Sans", sans-serif;
+  --btn-radius: 0.25rem;
+}
+
+[data-family="organic"] {
+  --color-ink: #2f3e2e;
+  --color-bg: #f2efe8;
+  --color-accent: #4d7c0f;
+  --color-soft: #e8e4d9;
+  --color-line: #c9c2b0;
+  --font-heading: "Lora", serif;
+  --font-body: "Nunito Sans", sans-serif;
+  --btn-radius: 999px;
+}
+
+[data-family="tech"] {
+  --color-ink: #e6edf3;
+  --color-bg: #0d1117;
+  --color-accent: #22d3ee;
+  --color-soft: #161b22;
+  --color-line: #30363d;
+  --font-heading: "JetBrains Mono", monospace;
+  --font-body: "Inter", sans-serif;
+  --btn-radius: 0.375rem;
+}
+
+[data-family="industrial"] {
+  --color-ink: #1c1917;
+  --color-bg: #d4d4d4;
+  --color-accent: #ea580c;
+  --color-soft: #e5e5e5;
+  --color-line: #a3a3a3;
+  --font-heading: "Oswald", sans-serif;
+  --font-body: "Roboto", sans-serif;
+  --btn-radius: 0;
+}
+
+[data-family="gradient_modern"] {
+  --color-ink: #18181b;
+  --color-bg: #fafafa;
+  --color-accent: #7c3aed;
+  --color-soft: #f4f4f5;
+  --color-line: #e4e4e7;
+  --font-heading: "Plus Jakarta Sans", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --btn-radius: 0.75rem;
 }
 
 .bg-background {

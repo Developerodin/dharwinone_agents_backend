@@ -1,11 +1,21 @@
 {
   "id": "professional_portfolio_freelancer",
   "name": "Professional Services — Portfolio / Freelancer",
+  "definition": "Personal work showcase, hire-me pages, case studies",
   "category": "professional",
   "subcategory": "portfolio_freelancer",
   "wave": 2,
-  "status": "planned",
-  "default_family": "warm_craft",
+  "status": "active",
+  "default_family": "warm",
+  "eligible_families": [
+    "warm",
+    "editorial",
+    "minimalist",
+    "brutalist",
+    "gradient_modern",
+    "glassmorphism",
+    "tech"
+  ],
   "keywords": [
     "portfolio",
     "freelancer",
@@ -16,21 +26,121 @@
   ],
   "matcher": {
     "eligible_template_ids": [
-      "pf_portfolio_v1",
-      "pf_portfolio_v2",
-      "gn_generic_v1"
+      "pf_portfolio_jack_v1"
     ],
     "default_rank_order": [
-      "pf_portfolio_v1",
-      "pf_portfolio_v2",
-      "gn_generic_v1"
+      "pf_portfolio_jack_v1"
     ]
   },
   "image_pack_refs": [
     "pack_portfolio_freelancer_v1"
   ],
+  "questionnaire": {
+    "required": [
+      "business_name",
+      "services",
+      "tagline",
+      "cta_preference"
+    ],
+    "recommended": [
+      "city",
+      "tone_preference",
+      "email",
+      "linkedin_id",
+      "x_account"
+    ],
+    "fields": {
+      "business_name": {
+        "label": "Your name",
+        "tier": "required",
+        "entity_label": "name",
+        "followUp": "What name should appear on your portfolio? For example, \"Alex\" or \"Sam Rivera\"."
+      },
+      "services": {
+        "label": "Specialties & services",
+        "tier": "required",
+        "type": "service_picker",
+        "suggested_services": [
+          "Brand Identity",
+          "Web Design",
+          "UI/UX Design",
+          "3D Modeling",
+          "Photography",
+          "Video Production",
+          "Copywriting",
+          "Illustration",
+          "Motion Design",
+          "Full-Stack Development"
+        ],
+        "followUp": "What do you offer clients? Pick from the list or name your own specialties."
+      },
+      "tagline": {
+        "label": "Portfolio tagline",
+        "tier": "required",
+        "followUp": "What's a one-line tagline or headline? For example, \"3D artist crafting immersive worlds\" or \"Brand designer for startups\"."
+      },
+      "cta_preference": {
+        "label": "Hire-me CTA",
+        "tier": "required",
+        "type": "enum",
+        "options": [
+          "form",
+          "email",
+          "whatsapp",
+          "phone"
+        ],
+        "option_labels": {
+          "form": "Contact form",
+          "email": "Email me link",
+          "whatsapp": "WhatsApp",
+          "phone": "Phone call"
+        },
+        "followUp": "How should potential clients reach you? Reply with contact form, email link, WhatsApp, or phone call."
+      },
+      "city": {
+        "label": "Based in",
+        "tier": "recommended",
+        "followUp": "What city are you based in? (Optional — reply skip to leave blank)"
+      },
+      "tone_preference": {
+        "label": "Portfolio vibe",
+        "tier": "recommended",
+        "type": "enum",
+        "options": [
+          "minimal",
+          "bold",
+          "warm",
+          "technical",
+          "editorial"
+        ],
+        "option_labels": {
+          "minimal": "Minimal & clean",
+          "bold": "Bold & expressive",
+          "warm": "Warm & approachable",
+          "technical": "Technical & precise",
+          "editorial": "Editorial & refined"
+        },
+        "followUp": "What visual vibe fits your work? Reply with minimal, bold, warm, technical, or editorial."
+      },
+      "email": {
+        "label": "Email address",
+        "tier": "recommended",
+        "followUp": "What email should potential clients use to reach you?"
+      },
+      "linkedin_id": {
+        "label": "LinkedIn profile",
+        "tier": "optional",
+        "followUp": "What's your LinkedIn profile ID or username? (optional — reply skip to leave blank)"
+      },
+      "x_account": {
+        "label": "X account",
+        "tier": "optional",
+        "followUp": "What's your X (Twitter) handle? (optional — reply skip to leave blank)"
+      }
+    }
+  },
   "moderation": {
     "blocked": false,
-    "notes": "Standard business — allowed"
+    "notes": "Portfolio / freelancer — allowed"
   }
 }

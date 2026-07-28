@@ -24,6 +24,12 @@ export interface GenerateOptions {
 export interface Provider {
   generate(model: string, prompt: string, options?: GenerateOptions): Promise<string>;
   healthy(model: string, deadlineS?: number): Promise<boolean>;
+  /** Optional token stream for progressive JSON (OpenAI-compat only). */
+  generateStream?(
+    model: string,
+    prompt: string,
+    options?: GenerateOptions,
+  ): AsyncGenerator<string, void, unknown>;
 }
 
 function requireEnv(name: string): string {
@@ -148,6 +154,69 @@ class OpenAICompatProvider implements Provider {
     return choices[0]?.message?.content ?? "";
   }
 
+  /**
+   * Streams assistant text deltas from OpenAI-compatible chat completions SSE.
+   * Yields content chunks; callers accumulate for progressive JSON parse.
+   */
+  async *generateStream(
+    model: string,
+    prompt: string,
+    options: GenerateOptions = {},
+  ): AsyncGenerator<string, void, unknown> {
+    const { jsonMode = false, timeoutS = 600 } = options;
+    const headers: Record<string, string> = { "Content-Type": "application/json" };
+    if (this.authBearer) headers.Authorization = `Bearer ${requireEnv(this.apiKeyEnv)}`;
+    const body: Record<string, unknown> = {
+      model,
+      messages: [{ role: "user", content: prompt }],
+      stream: true,
+    };
+    if (jsonMode) body.response_format = { type: "json_object" };
+
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutS * 1000);
+    try {
+      const res = await fetch(`${this.baseUrl}/v1/chat/completions`, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(body),
+        signal: controller.signal,
+      });
+      if (!res.ok) {
+        throw new Error(`request to ${this.baseUrl}/v1/chat/completions failed: ${res.status} ${res.statusText}`);
+      }
+      if (!res.body) throw new Error("stream response missing body");
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let carry = "";
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        carry += decoder.decode(value, { stream: true });
+        const lines = carry.split("\n");
+        carry = lines.pop() ?? "";
+        for (const line of lines) {
+          const trimmed = line.trim();
+          if (!trimmed.startsWith("data:")) continue;
+          const payload = trimmed.slice(5).trim();
+          if (!payload || payload === "[DONE]") continue;
+          try {
+            const parsed = JSON.parse(payload) as {
+              choices?: Array<{ delta?: { content?: string } }>;
+            };
+            const delta = parsed.choices?.[0]?.delta?.content;
+            if (delta) yield delta;
+          } catch {
+            // ignore malformed SSE chunks
+          }
+        }
+      }
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
   async healthy(model: string, deadlineS = 60): Promise<boolean> {
     try {
       return Boolean(await this.generate(model, "Reply with OK", { timeoutS: deadlineS }));
@@ -205,10 +274,17 @@ const LOCAL_SEMAPHORE = new AsyncSemaphore(1);
 const CLOUD_SEMAPHORE = new AsyncSemaphore(4);
 
 function wrapSemaphore(inner: Provider, sem: AsyncSemaphore): Provider {
-  return {
+  const wrapped: Provider = {
     generate: (model, prompt, options) => sem.run(() => inner.generate(model, prompt, options)),
     healthy: (model, deadlineS) => inner.healthy(model, deadlineS),
   };
+  // Forward stream without holding the sync semaphore for the full lifetime —
+  // cloud concurrency is already capped; acquire-per-chunk would deadlock.
+  if (inner.generateStream) {
+    wrapped.generateStream = (model, prompt, options) =>
+      inner.generateStream!(model, prompt, options);
+  }
+  return wrapped;
 }
 
 const ollamaCache = new Map<string, Provider>();

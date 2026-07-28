@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import categoryTaxonomy from "./categoryTaxonomy.json";
 import { backendPath } from "../paths";
 
 export type CategoryMatcher = {
@@ -10,11 +11,13 @@ export type CategoryMatcher = {
 export type CategoryConfig = {
   id: string;
   name: string;
+  definition?: string;
   category: string;
   subcategory: string;
   wave?: number;
   status?: string;
   default_family?: string;
+  eligible_families?: string[];
   keywords: string[];
   matcher?: CategoryMatcher;
   image_pack_refs?: string[];
@@ -26,7 +29,15 @@ export type CategoryConfig = {
 export type SegmentSummary = {
   categoryId: string;
   name: string;
-  subcategories: Array<{ id: string; name: string; keywords: string[] }>;
+  definition: string;
+  subcategories: Array<{
+    id: string;
+    name: string;
+    definition: string;
+    default_family: string;
+    eligible_families: string[];
+    keywords: string[];
+  }>;
   keywords: string[];
   imagePackRefs: string[];
 };
@@ -38,32 +49,22 @@ export type TaxonomyInference = {
   confidence: number;
 };
 
-const SEGMENT_DISPLAY_NAMES: Record<string, string> = {
-  real_estate: "Real Estate",
-  local_service: "Local service",
-  retail: "Retail & small shops",
-  hospitality_travel: "Hospitality & travel",
-  health_education: "Health & education",
-  professional: "Professional services",
-};
+const SEGMENT_DISPLAY_NAMES: Record<string, string> = Object.fromEntries(
+  categoryTaxonomy.categories.map((row) => [row.id, row.name]),
+);
 
-const SEGMENT_ORDER = [
-  "real_estate",
-  "local_service",
-  "retail",
-  "hospitality_travel",
-  "health_education",
-  "professional",
-] as const;
+const SEGMENT_DEFINITIONS: Record<string, string> = Object.fromEntries(
+  categoryTaxonomy.categories.map((row) => [row.id, row.definition]),
+);
 
-const SUBCATEGORY_ORDER: Record<string, string[]> = {
-  real_estate: ["broker", "agent", "rental_consultant", "luxury"],
-  local_service: ["plumbing", "electrician", "landscaping", "car_wash", "cleaning_handyman", "insurance_agent"],
-  retail: ["gift_shop", "print_shop", "clothing", "boutique", "handmade"],
-  hospitality_travel: ["cafe", "restaurant", "travel_tourism"],
-  health_education: ["clinic_medical", "fitness_gym", "education_coaching"],
-  professional: ["agency_studio", "saas_startup", "portfolio_freelancer"],
-};
+const SEGMENT_ORDER = categoryTaxonomy.categories.map((row) => row.id);
+
+const SUBCATEGORY_ORDER: Record<string, string[]> = Object.fromEntries(
+  categoryTaxonomy.categories.map((row) => [
+    row.id,
+    row.subcategories.map((sub) => sub.id),
+  ]),
+);
 
 let cachedConfigs: CategoryConfig[] | null = null;
 
@@ -99,6 +100,11 @@ function getConfigs(): CategoryConfig[] {
   return cachedConfigs;
 }
 
+/** Live configs exposed to web-agent infer / seed / matcher (`status: "active"`). */
+function getLiveConfigs(): CategoryConfig[] {
+  return getConfigs().filter((config) => (config.status ?? "active") === "active");
+}
+
 export function resetCategoryCatalogCacheForTests(): void {
   cachedConfigs = null;
 }
@@ -107,9 +113,14 @@ export function listCategoryConfigs(): CategoryConfig[] {
   return getConfigs();
 }
 
+/** Live subcategory configs exposed to web-agent infer / seed / matcher. */
+export function listLiveCategoryConfigs(): CategoryConfig[] {
+  return getLiveConfigs();
+}
+
 export function listSegmentSummaries(): SegmentSummary[] {
   const bySegment = new Map<string, CategoryConfig[]>();
-  for (const config of getConfigs()) {
+  for (const config of getLiveConfigs()) {
     const list = bySegment.get(config.category) ?? [];
     list.push(config);
     bySegment.set(config.category, list);
@@ -124,6 +135,9 @@ export function listSegmentSummaries(): SegmentSummary[] {
       .map((config) => ({
         id: config.subcategory,
         name: subcategoryDisplayName(config),
+        definition: config.definition ?? "",
+        default_family: config.default_family ?? "minimalist",
+        eligible_families: config.eligible_families ?? [],
         keywords: config.keywords,
       }))
       .sort((a, b) => {
@@ -144,6 +158,7 @@ export function listSegmentSummaries(): SegmentSummary[] {
     summaries.push({
       categoryId: segmentId,
       name: SEGMENT_DISPLAY_NAMES[segmentId] ?? segmentId.replace(/_/g, " "),
+      definition: SEGMENT_DEFINITIONS[segmentId] ?? "",
       subcategories,
       keywords,
       imagePackRefs: imagePackRefs.length ? imagePackRefs : [`pack/${segmentId}/default`],
@@ -153,13 +168,25 @@ export function listSegmentSummaries(): SegmentSummary[] {
   return summaries;
 }
 
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function keywordMatches(haystack: string, keyword: string): boolean {
+  const needle = keyword.trim().toLowerCase();
+  if (!needle) return false;
+  // Short tokens (e.g. "CA", "lab") need word boundaries to avoid "mediCA l" false positives.
+  if (needle.length <= 3) {
+    return new RegExp(`\\b${escapeRegExp(needle)}\\b`, "i").test(haystack);
+  }
+  return haystack.includes(needle);
+}
+
 function scoreKeywords(text: string, keywords: string[]): number {
   const haystack = text.toLowerCase();
   let score = 0;
   for (const keyword of keywords) {
-    const needle = keyword.trim().toLowerCase();
-    if (!needle) continue;
-    if (haystack.includes(needle)) score += 1;
+    if (keywordMatches(haystack, keyword)) score += 1;
   }
   return score;
 }
@@ -169,7 +196,7 @@ export function inferTaxonomy(text: string): TaxonomyInference | null {
   if (!trimmed) return null;
 
   let best: TaxonomyInference | null = null;
-  for (const config of getConfigs()) {
+  for (const config of getLiveConfigs()) {
     const confidence = scoreKeywords(trimmed, config.keywords);
     if (confidence <= 0) continue;
     const candidate: TaxonomyInference = {
@@ -187,7 +214,22 @@ export function inferTaxonomy(text: string): TaxonomyInference | null {
     }
   }
 
-  return best;
+  if (best) return best;
+
+  // Personal blog / generic creator sites — no business niche required.
+  if (
+    /\b(personal\s+)?blog\b/i.test(trimmed) ||
+    /\bpersonal\s+(site|website)\b/i.test(trimmed)
+  ) {
+    return {
+      category: "professional",
+      subcategory: "portfolio_freelancer",
+      configId: "professional_portfolio_freelancer",
+      confidence: 1,
+    };
+  }
+
+  return null;
 }
 
 export function getConfigBySegmentSubcategory(

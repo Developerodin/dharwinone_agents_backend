@@ -1,11 +1,18 @@
 {
   "id": "retail_clothing",
-  "name": "Retail & Small Shops — Clothing Store",
+  "name": "Retail & Shops — Clothing Store",
+  "definition": "Garments, fashion, menswear, saree, kids wear",
   "category": "retail",
   "subcategory": "clothing",
   "wave": 1,
   "status": "active",
-  "default_family": "fresh_retail",
+  "default_family": "playful",
+  "eligible_families": [
+    "playful",
+    "sleek",
+    "editorial",
+    "minimalist"
+  ],
   "keywords": [
     "clothing",
     "garments",
@@ -16,21 +23,77 @@
   ],
   "matcher": {
     "eligible_template_ids": [
-      "rt_clothing_v1",
-      "rt_clothing_v2",
-      "rt_print_shop_v1",
-      "gn_generic_v1"
+      "pf_portfolio_jack_v1"
     ],
     "default_rank_order": [
-      "rt_clothing_v1",
-      "rt_clothing_v2",
-      "rt_print_shop_v1",
-      "gn_generic_v1"
+      "pf_portfolio_jack_v1"
     ]
   },
   "image_pack_refs": [
     "pack_clothing_v1"
   ],
+  "questionnaire": {
+    "required": [
+      "business_name",
+      "city",
+      "services",
+      "cta_preference"
+    ],
+    "recommended": [
+      "service_area",
+      "tone_preference",
+      "phone",
+      "whatsapp_number",
+      "email"
+    ],
+    "fields": {
+      "business_name": {
+        "label": "Business name",
+        "tier": "required"
+      },
+      "city": {
+        "label": "Primary city",
+        "tier": "required"
+      },
+      "services": {
+        "label": "Main services",
+        "tier": "required",
+        "type": "tags"
+      },
+      "cta_preference": {
+        "label": "Preferred CTA",
+        "tier": "required",
+        "type": "enum",
+        "options": [
+          "whatsapp",
+          "phone",
+          "form"
+        ]
+      },
+      "service_area": {
+        "label": "Service areas",
+        "tier": "recommended",
+        "type": "tags"
+      },
+      "tone_preference": {
+        "label": "Visual style preference",
+        "tier": "recommended"
+      },
+      "phone": {
+        "label": "Phone number",
+        "tier": "recommended"
+      },
+      "whatsapp_number": {
+        "label": "WhatsApp number",
+        "tier": "recommended"
+      },
+      "email": {
+        "label": "Email address",
+        "tier": "optional",
+        "followUp": "What email address should customers use to reach you?"
+      }
+    }
+  },
   "moderation": {
     "blocked": false,
     "notes": "Standard business — allowed"

@@ -1,0 +1,101 @@
+{
+  "id": "events_weddings_event_venue",
+  "name": "Events & Weddings — Event Venue",
+  "definition": "Banquet halls, lawns, capacity, booking inquiries",
+  "category": "events_weddings",
+  "subcategory": "event_venue",
+  "wave": 3,
+  "status": "active",
+  "default_family": "premium",
+  "eligible_families": [
+    "premium",
+    "editorial",
+    "warm",
+    "minimalist"
+  ],
+  "keywords": [
+    "venue",
+    "banquet",
+    "hall",
+    "event space",
+    "capacity",
+    "booking"
+  ],
+  "matcher": {
+    "eligible_template_ids": [
+      "he_vibrant_wellness_v1"
+    ],
+    "default_rank_order": [
+      "he_vibrant_wellness_v1"
+    ]
+  },
+  "image_pack_refs": [
+    "pack_event_venue_v1"
+  ],
+  "questionnaire": {
+    "required": [
+      "business_name",
+      "city",
+      "services",
+      "cta_preference"
+    ],
+    "recommended": [
+      "service_area",
+      "tone_preference",
+      "phone",
+      "whatsapp_number",
+      "email"
+    ],
+    "fields": {
+      "business_name": {
+        "label": "Business name",
+        "tier": "required"
+      },
+      "city": {
+        "label": "Primary city",
+        "tier": "required"
+      },
+      "services": {
+        "label": "Main services",
+        "tier": "required",
+        "type": "tags"
+      },
+      "cta_preference": {
+        "label": "Preferred CTA",
+        "tier": "required",
+        "type": "enum",
+        "options": [
+          "whatsapp",
+          "phone",
+          "form"
+        ]
+      },
+      "service_area": {
+        "label": "Service areas",
+        "tier": "recommended",
+        "type": "tags"
+      },
+      "tone_preference": {
+        "label": "Visual style preference",
+        "tier": "recommended"
+      },
+      "phone": {
+        "label": "Phone number",
+        "tier": "recommended"
+      },
+      "whatsapp_number": {
+        "label": "WhatsApp number",
+        "tier": "recommended"
+      },
+      "email": {
+        "label": "Email address",
+        "tier": "optional",
+        "followUp": "What email address should customers use to reach you?"
+      }
+    }
+  },
+  "moderation": {
+    "blocked": false,
+    "notes": "Standard business — allowed"
+  }
+}

@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&display=swap");
+
+html:has(.jack-portfolio),
+html:has(.jack-portfolio) body,
+html:has(.jack-portfolio) #__next,
+.jack-portfolio {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.jack-portfolio *,
+.jack-portfolio *::before,
+.jack-portfolio *::after {
+  box-sizing: border-box;
+}
+
+.jack-portfolio {
+  background: #0c0c0c;
+  font-family: "Kanit", sans-serif;
+  color: #d7e2ea;
+}
+
+html:has(.jack-portfolio) {
+  scroll-behavior: smooth;
+  background: #0c0c0c;
+}
+
+.jack-portfolio .hero-heading {
+  background: linear-gradient(180deg, #646973 0%, #bbccd7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.jack-hero-headline-wrap {
+  container-type: inline-size;
+  container-name: hero-headline;
+}
+
+.jack-hero-headline {
+  max-width: 100%;
+  text-wrap: balance;
+  overflow-wrap: normal;
+}
+
+.jack-hero-headline--inline {
+  font-size: clamp(2.25rem, var(--jack-hero-fit, 14vw), 17.5vw);
+  white-space: normal;
+}
+
+/* Email CTA borrows the brand gradient (same stops as ContactButton) on hover. */
+.jack-portfolio .jack-email:hover span {
+  background: linear-gradient(123deg, #b600a8 10%, #7621b0 55%, #be4c00 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.jack-project-card {
+  top: var(--stack-top);
+}
+
+@media (min-width: 768px) {
+  .jack-project-card {
+    top: var(--stack-top-md);
+  }
+}

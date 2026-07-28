@@ -7,7 +7,7 @@ import { resolveTheme } from "../resolveTheme";
 
 function routerProps(sectionKey: string) {
   const ctx = resolveTheme({
-    family: "trust_local",
+    family: "warm",
     themeJson: {},
     sectionSchemaSections: ["hero", "services", "cta_footer"],
   });
@@ -16,7 +16,7 @@ function routerProps(sectionKey: string) {
     contentJson: {
       hero: { headline: "Hello world" },
     },
-    family: FAMILIES.trust_local,
+    family: FAMILIES.warm,
     ctx,
     businessProfile: {},
     resolveImage: () => null,

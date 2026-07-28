@@ -1,11 +1,18 @@
 {
   "id": "local_service_car_wash",
-  "name": "Blue-Collar / Local Services — Car Wash / Detailing",
+  "name": "Local Services — Car Wash / Detailing",
+  "definition": "Wash, polish, ceramic coating, bike detailing",
   "category": "local_service",
   "subcategory": "car_wash",
   "wave": 1,
   "status": "active",
-  "default_family": "bold_convert",
+  "default_family": "bold",
+  "eligible_families": [
+    "bold",
+    "sleek",
+    "industrial",
+    "gradient_modern"
+  ],
   "keywords": [
     "car wash",
     "detailing",
@@ -15,17 +22,77 @@
   ],
   "matcher": {
     "eligible_template_ids": [
-      "ls_car_wash_v1",
-      "gn_generic_v1"
+      "gn_axon_v1"
     ],
     "default_rank_order": [
-      "ls_car_wash_v1",
-      "gn_generic_v1"
+      "gn_axon_v1"
     ]
   },
   "image_pack_refs": [
     "pack_car_wash_v1"
   ],
+  "questionnaire": {
+    "required": [
+      "business_name",
+      "city",
+      "services",
+      "cta_preference"
+    ],
+    "recommended": [
+      "service_area",
+      "tone_preference",
+      "phone",
+      "whatsapp_number",
+      "email"
+    ],
+    "fields": {
+      "business_name": {
+        "label": "Business name",
+        "tier": "required"
+      },
+      "city": {
+        "label": "Primary city",
+        "tier": "required"
+      },
+      "services": {
+        "label": "Main services",
+        "tier": "required",
+        "type": "tags"
+      },
+      "cta_preference": {
+        "label": "Preferred CTA",
+        "tier": "required",
+        "type": "enum",
+        "options": [
+          "whatsapp",
+          "phone",
+          "form"
+        ]
+      },
+      "service_area": {
+        "label": "Service areas",
+        "tier": "recommended",
+        "type": "tags"
+      },
+      "tone_preference": {
+        "label": "Visual style preference",
+        "tier": "recommended"
+      },
+      "phone": {
+        "label": "Phone number",
+        "tier": "recommended"
+      },
+      "whatsapp_number": {
+        "label": "WhatsApp number",
+        "tier": "recommended"
+      },
+      "email": {
+        "label": "Email address",
+        "tier": "optional",
+        "followUp": "What email address should customers use to reach you?"
+      }
+    }
+  },
   "moderation": {
     "blocked": false,
     "notes": "Standard business — allowed"

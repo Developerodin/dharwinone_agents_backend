@@ -1,0 +1,103 @@
+{
+  "id": "legal_finance_lawyer",
+  "name": "Legal & Finance — Lawyer / Law Firm",
+  "definition": "Practice areas, consultations, case credibility",
+  "category": "legal_finance",
+  "subcategory": "lawyer",
+  "wave": 3,
+  "status": "active",
+  "default_family": "professional",
+  "eligible_families": [
+    "professional",
+    "corporate",
+    "minimalist",
+    "editorial"
+  ],
+  "keywords": [
+    "lawyer",
+    "law firm",
+    "legal",
+    "advocate",
+    "litigation",
+    "consultation"
+  ],
+  "matcher": {
+    "eligible_template_ids": [
+      "ps_securify_v1",
+      "gn_axon_v1"
+    ],
+    "default_rank_order": [
+      "ps_securify_v1",
+      "gn_axon_v1"
+    ]
+  },
+  "image_pack_refs": [
+    "pack_lawyer_v1"
+  ],
+  "questionnaire": {
+    "required": [
+      "business_name",
+      "city",
+      "services",
+      "cta_preference"
+    ],
+    "recommended": [
+      "service_area",
+      "tone_preference",
+      "phone",
+      "whatsapp_number",
+      "email"
+    ],
+    "fields": {
+      "business_name": {
+        "label": "Business name",
+        "tier": "required"
+      },
+      "city": {
+        "label": "Primary city",
+        "tier": "required"
+      },
+      "services": {
+        "label": "Main services",
+        "tier": "required",
+        "type": "tags"
+      },
+      "cta_preference": {
+        "label": "Preferred CTA",
+        "tier": "required",
+        "type": "enum",
+        "options": [
+          "whatsapp",
+          "phone",
+          "form"
+        ]
+      },
+      "service_area": {
+        "label": "Service areas",
+        "tier": "recommended",
+        "type": "tags"
+      },
+      "tone_preference": {
+        "label": "Visual style preference",
+        "tier": "recommended"
+      },
+      "phone": {
+        "label": "Phone number",
+        "tier": "recommended"
+      },
+      "whatsapp_number": {
+        "label": "WhatsApp number",
+        "tier": "recommended"
+      },
+      "email": {
+        "label": "Email address",
+        "tier": "optional",
+        "followUp": "What email address should customers use to reach you?"
+      }
+    }
+  },
+  "moderation": {
+    "blocked": false,
+    "notes": "Standard business — allowed"
+  }
+}

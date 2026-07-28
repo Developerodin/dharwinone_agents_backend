@@ -51,4 +51,31 @@ describe("cloud providers", () => {
     );
     await expect(provider.generate("claude-3-5-haiku-latest", "ping")).resolves.toBe("ok");
   });
+
+  it("generateStream concatenates OpenAI SSE content deltas into hello", async () => {
+    process.env.OPENAI_API_KEY = "sk-test";
+    const sse =
+      'data: {"choices":[{"delta":{"content":"hel"}}]}\n\n' +
+      'data: {"choices":[{"delta":{"content":"lo"}}]}\n\n' +
+      "data: [DONE]\n\n";
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(sse, {
+        status: 200,
+        headers: { "Content-Type": "text/event-stream" },
+      }),
+    );
+    const provider = get(
+      {
+        ollamaUrl: "http://localhost:11434",
+        providers: { planner: { kind: "openai", model: "gpt-4o-mini" } },
+      },
+      "planner",
+    );
+    expect(provider.generateStream).toBeTypeOf("function");
+    let out = "";
+    for await (const chunk of provider.generateStream!("gpt-4o-mini", "ping")) {
+      out += chunk;
+    }
+    expect(out).toBe("hello");
+  });
 });

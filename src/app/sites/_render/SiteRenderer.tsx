@@ -3,8 +3,16 @@ import { buildImageMap, makeResolveImage } from "./imageMap";
 import { resolveTheme } from "./resolveTheme";
 import { SectionRouter } from "./sections/SectionRouter";
 import { asString } from "./utils";
+import { JackPortfolioShell } from "@/app/template-preview/portfolio/jack/JackPortfolioShell";
+import { AxonShell } from "@/app/template-preview/generic/axon/AxonShell";
+import { VibrantWellnessShell } from "@/app/template-preview/health/vibrant-wellness/VibrantWellnessShell";
+
+export const JACK_PORTFOLIO_TEMPLATE_ID = "pf_portfolio_jack_v1";
+export const AXON_TEMPLATE_ID = "gn_axon_v1";
+export const VIBRANT_WELLNESS_TEMPLATE_ID = "he_vibrant_wellness_v1";
 
 export interface RenderableSite {
+  templateId?: string | null;
   family: FamilyId;
   contentJson: Record<string, unknown>;
   themeJson: Record<string, unknown>;
@@ -39,6 +47,18 @@ function buildJsonLd(businessProfile: Record<string, unknown>, content: Record<s
 }
 
 export function SiteRenderer(site: RenderableSite): React.JSX.Element {
+  if (site.templateId === JACK_PORTFOLIO_TEMPLATE_ID) {
+    return <JackPortfolioShell />;
+  }
+
+  if (site.templateId === AXON_TEMPLATE_ID) {
+    return <AxonShell />;
+  }
+
+  if (site.templateId === VIBRANT_WELLNESS_TEMPLATE_ID) {
+    return <VibrantWellnessShell />;
+  }
+
   const family = FAMILIES[site.family];
   const ctx = resolveTheme({
     family: site.family,
@@ -64,7 +84,12 @@ export function SiteRenderer(site: RenderableSite): React.JSX.Element {
       ))}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd)
+            .replace(/</g, "\\u003c")
+            .replace(/\u2028/g, "\\u2028")
+            .replace(/\u2029/g, "\\u2029"),
+        }}
       />
     </main>
   );

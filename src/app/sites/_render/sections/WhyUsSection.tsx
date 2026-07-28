@@ -4,7 +4,7 @@ import { asString, asStringArray } from "../utils";
 export function WhyUsSection({ content, family, ctx, resolveImage }: SectionProps) {
   const sectionTitle = asString(content.section_title);
   const points = asStringArray(content.points);
-  const isNumbered = family.id === "trust_local";
+  const isNumbered = family.numberedSteps;
   if (!points.length) return null; // content-gated: no points, no section
   const bgImage = resolveImage("why_us.background");
   const scrim = ctx.scrimFor("why_us.background");

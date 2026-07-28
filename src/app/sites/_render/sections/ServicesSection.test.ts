@@ -19,11 +19,11 @@ describe("ServicesSection", () => {
     expect(html).toContain("Wiring");
   });
 
-  it("uses list layout for clean_pro", () => {
+  it("uses list layout for professional", () => {
     const html = renderSection(
       ServicesSection,
       baseSectionProps({
-        family: FAMILIES.clean_pro,
+        family: FAMILIES.professional,
         content: {
           section_title: "Services",
           items: [{ title: "Repairs", desc: "Fast repairs" }],
@@ -33,11 +33,11 @@ describe("ServicesSection", () => {
     expect(html).toContain("<ul");
   });
 
-  it("uses tile layout for warm_craft", () => {
+  it("uses tile layout for organic", () => {
     const html = renderSection(
       ServicesSection,
       baseSectionProps({
-        family: FAMILIES.warm_craft,
+        family: FAMILIES.organic,
         content: {
           section_title: "Services",
           items: [{ title: "Menu", desc: "Seasonal dishes" }],

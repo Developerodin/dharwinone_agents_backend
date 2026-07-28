@@ -1,11 +1,18 @@
 {
   "id": "real_estate_luxury",
   "name": "Real Estate — Luxury Specialist",
+  "definition": "High-end villas, penthouses, exclusive listings",
   "category": "real_estate",
   "subcategory": "luxury",
   "wave": 1,
   "status": "active",
-  "default_family": "premium_dark",
+  "default_family": "premium",
+  "eligible_families": [
+    "premium",
+    "editorial",
+    "glassmorphism",
+    "minimalist"
+  ],
   "keywords": [
     "luxury",
     "premium",
@@ -14,23 +21,81 @@
     "high-end",
     "exclusive"
   ],
-  "intents": [
-    "listing_showcase",
-    "luxury"
-  ],
   "matcher": {
     "eligible_template_ids": [
-      "re_luxury_v1",
-      "gn_generic_v1"
+      "gn_axon_v1",
+      "pf_portfolio_jack_v1"
     ],
     "default_rank_order": [
-      "re_luxury_v1",
-      "gn_generic_v1"
+      "gn_axon_v1",
+      "pf_portfolio_jack_v1"
     ]
   },
   "image_pack_refs": [
     "pack_luxury_v1"
   ],
+  "questionnaire": {
+    "required": [
+      "business_name",
+      "city",
+      "services",
+      "cta_preference"
+    ],
+    "recommended": [
+      "service_area",
+      "tone_preference",
+      "phone",
+      "whatsapp_number",
+      "email"
+    ],
+    "fields": {
+      "business_name": {
+        "label": "Business name",
+        "tier": "required"
+      },
+      "city": {
+        "label": "Primary city",
+        "tier": "required"
+      },
+      "services": {
+        "label": "Main services",
+        "tier": "required",
+        "type": "tags"
+      },
+      "cta_preference": {
+        "label": "Preferred CTA",
+        "tier": "required",
+        "type": "enum",
+        "options": [
+          "whatsapp",
+          "phone",
+          "form"
+        ]
+      },
+      "service_area": {
+        "label": "Service areas",
+        "tier": "recommended",
+        "type": "tags"
+      },
+      "tone_preference": {
+        "label": "Visual style preference",
+        "tier": "recommended"
+      },
+      "phone": {
+        "label": "Phone number",
+        "tier": "recommended"
+      },
+      "whatsapp_number": {
+        "label": "WhatsApp number",
+        "tier": "recommended"
+      },
+      "email": {
+        "label": "Email address",
+        "tier": "optional",
+        "followUp": "What email address should customers use to reach you?"
+      }
+    }
+  },
   "moderation": {
     "blocked": false,
     "notes": "Standard business — allowed"
